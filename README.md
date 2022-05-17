@@ -17,28 +17,26 @@ O objetivo desse projeto é criar um shell simples. Excelente para aprimorar os 
 
 ```bash
 # 1) Clone o projeto
-$ git clone https://github.com/argelcapela/42-push_swap.git 	
+$ git clone https://github.com/argelcapela/42-minishell.git	
 
 # 2) Entre na pasta app
-$ cd app	
+$ cd app
 	
 # 3) Compilar o mandatório
 $ make
 
 # 4) Executar o mandatório 
-# Insira uma sequência de números aleatórios e você recebera uma sequência
-# de instruções de pilha, que ordenará essa lista de números inserida.
-$ ./push_swap 5 3 6 9 6 7 5 8 7 5 7 6
+# Ao digitar a linha a baixo, você entrará no minishell, e poderá
+# executar vários comandos do bash.
+$ ./minishell
 	
 # 5) Compilar o bônus
 $ make bonus
 
 # 6) Executar o bônus
-# O Arquivo checker recebe como parâmetro a sequência de números desordenada, 
-# e como input recebe as instruções de Pilha que deveriam
-# ordená-las. Retorna OK se essa sequência de instruções recebida, 
-# realmente ordena a sequência de números.
-$ ARG="5 3 6 9 6 7 5 8 7 5 7 6" && ./push_swap 5 3 6 9 6 7 5 8 7 5 7 6 | ./checker $ARG
+# Ao executar a linha seguinte, o efeito será semelhante ao passo 4, a diferença é que
+# o bônus conta com uma série de comandos novos.
+$ ./minishell_b
 	
 ```
 	
@@ -93,5 +91,5 @@ $ ARG="5 3 6 9 6 7 5 8 7 5 7 6" && ./push_swap 5 3 6 9 6 7 5 8 7 5 7 6 | ./check
 </div>
 	
 <div class="col-12">
-<p>Não esqueça de dar um ⭐️ se você gostou, ou se esse repositório te ajudou de alguma maneira, isso irá me ajudar muito! Obrigado, você é top! 😁👍</p>
+<p>Não esqueça de dar um ⭐️ se você gostou, ou se esse repositório te ajudou de alguma maneira, isso irá nos ajudar muito! Obrigado, você é top! 😁👍</p>
 </div>
