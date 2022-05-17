@@ -1,6 +1,6 @@
 #include <minishell.h>
 
-int	init(t_ms *ms)
+int	ms_signals(t_ms *ms)
 {
 	return (ms->exit_status);
 }

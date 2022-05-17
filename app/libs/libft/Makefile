@@ -8,11 +8,11 @@ AR =            ar -rcs
 RM =            rm -rfd
 
 SRCS_DIR =   	srcs
-OBJS_DIR =   	.objs
+OBJS_DIR =   	$(SRCS_DIR)/.objs
 HEADER =		$(HEADERS_DIR)/libft.h
 NAME =			libft.a
 
-SRCS_FILES+=    a/ft_free_array.c
+SRCS_FILES+=    arr/ft_arr_free.c
 
 SRCS_FILES= 	chr/ft_isalnum.c \
 				chr/ft_isascii.c \
@@ -46,9 +46,10 @@ SRCS_FILES+=	lst/ft_lstadd_front.c \
 				lst/ft_lstnew.c \
 				lst/ft_lstclear.c
 
-SRCS_FILES+=	m/ft_free_matrix.c \
-				m/ft_set_matrix.c \
-				m/ft_replace_all_matrix.c
+SRCS_FILES+=	mtx/ft_mtx_free.c \
+				mtx/ft_mtx_set.c \
+				mtx/ft_mtx_replace_all.c \
+				mtx/ft_mtx_size.c
 
 SRCS_FILES+=	mem/ft_bzero.c \
 				mem/ft_memchr.c \
@@ -120,12 +121,12 @@ $(NAME):	$(OBJS_DIR) $(OBJS)
 
 $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)
-	mkdir -p $(OBJS_DIR)/a
+	mkdir -p $(OBJS_DIR)/arr
 	mkdir -p $(OBJS_DIR)/chr
 	mkdir -p $(OBJS_DIR)/cvt
 	mkdir -p $(OBJS_DIR)/dll
 	mkdir -p $(OBJS_DIR)/lst
-	mkdir -p $(OBJS_DIR)/m
+	mkdir -p $(OBJS_DIR)/mtx
 	mkdir -p $(OBJS_DIR)/mem
 	mkdir -p $(OBJS_DIR)/rw
 	mkdir -p $(OBJS_DIR)/str

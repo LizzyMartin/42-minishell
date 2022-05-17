@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_array.c                                    :+:      :+:    :+:   */
+/*   ft_arr_free.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 03:11:26 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/10 20:44:15 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/16 21:34:01 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	<libft.h>
 
-void	ft_free_array(void **array)
+void	ft_arr_free(void **array)
 {
 	int	i;
 

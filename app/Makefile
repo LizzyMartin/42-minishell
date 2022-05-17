@@ -13,7 +13,7 @@ LIBFT.A =       $(LIBFT_DIR)/libft.a
 
 SRCS_DIR =   	srcs
 OBJS_DIR =   	$(SRCS_DIR)/.objs
-HEADER_DIR =   ./srcs
+HEADER_DIR =   ./srcs/includes
 HEADER =		$(HEADER_DIR)/minishell.h
 NAME =			minishell
 
@@ -25,13 +25,13 @@ SRCS_FILES +=	builtins/ms_cd.c \
 				builtins/ms_pwd.c \
 				builtins/ms_unset.c
 
-SRCS_FILES +=	design/ms_banner.c
+SRCS_FILES +=	execute/ms_execute.c
 
-SRCS_FILES +=	execute/execute.c
+SRCS_FILES +=	init/ms_init.c
 
-SRCS_FILES +=	init/init.c
+SRCS_FILES +=	parse/ms_parse.c
 
-SRCS_FILES +=	parse/parse.c
+SRCS_FILES +=	signals/ms_signals.c
 
 SRCS_FILES +=	minishell.c \
 				main.c
@@ -51,10 +51,10 @@ $(NAME):	$(OBJS_DIR) $(OBJS) $(HEADER)
 $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)
 	mkdir -p $(OBJS_DIR)/builtins
-	mkdir -p $(OBJS_DIR)/design
 	mkdir -p $(OBJS_DIR)/execute
 	mkdir -p $(OBJS_DIR)/init
 	mkdir -p $(OBJS_DIR)/parse
+	mkdir -p $(OBJS_DIR)/signals
 
 clean:
 	$(RM) $(OBJS_DIR)

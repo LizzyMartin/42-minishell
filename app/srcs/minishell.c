@@ -3,23 +3,15 @@
 int	minishell(int argc, char **argv, char **envp)
 {
 	t_ms	*ms;
-	char	*prompt;
-	char	*line;
 
-	ms = (t_ms *) malloc(sizeof(t_ms));
-	ms->argc = argc;
-	ms->argv = argv;
-	ms->envp = envp;
-	prompt = NULL;
-	system("clear");
-	ms_banner();
+	ms = ms_init(argc, argv, envp);
 	while (1)
 	{
-		ft_printf("\033[1m\033[34m$minishell: \033[0m");
-		line = readline(prompt);
-		ms->line = line;
-		if (parse(ms) == 0)
-			execute(ms);
+		ft_printf(SHELL);
+		ms->line = readline(ms->prompt);
+		ms_signals(ms);
+		ms_parse(ms);
+		ms_execute(ms);
 	}
 	return (ms->exit_status);
 }

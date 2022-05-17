@@ -6,12 +6,17 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 20:34:46 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/14 00:17:46 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/16 22:15:17 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+
+/* readline */
+# include			<stdio.h>
+# include			<readline/readline.h>
+# include			<readline/history.h>
 
 /* write, read */
 # include <unistd.h>
@@ -28,8 +33,8 @@
 /* ft_printf resources */
 # include "rw/ft_printf/ft_printf.h"
 
-// a (array)
-void	ft_free_array(void **array);
+// arr (array)
+void	ft_arr_free(void **array);
 
 // chr (char)
 int		ft_isalnum(int c);
@@ -83,11 +88,11 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 
-// m (matrix)
-void	ft_free_matrix(void **matrix);
-char	**ft_replace_all_matrix(char **matrix, char *search, char *replace);
-void	ft_print_matrix(int **matrix, int width, int height);
-void	ft_set_matrix(int **matrix, int width, int height, int ch);
+// mtx (matrix)
+void	ft_mtx_free(void **matrix);
+char	**ft_mtx_replace_all(char **matrix, char *search, char *replace);
+void	ft_mtx_set(int **matrix, int width, int height, int ch);
+int 	ft_mtx_size(void **matrix);
 
 // mem (memory)
 void	*ft_memchr(const void *str, int c, size_t n);

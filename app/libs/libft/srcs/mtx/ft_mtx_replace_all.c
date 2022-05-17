@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_replace_all_matrix.c                            :+:      :+:    :+:   */
+/*   ft_mtx_replace_all.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 21:47:50 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/10 20:46:21 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/16 21:37:00 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	<libft.h>
 
-char	**ft_replace_all_matrix(char **matrix, char *search, char *replace)
+char	**ft_mtx_replace_all(char **matrix, char *search, char *replace)
 {
 	char	**start_of_matrix;
 	char	*tmp;

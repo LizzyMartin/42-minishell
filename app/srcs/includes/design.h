@@ -1,8 +1,8 @@
-#include <minishell.h>
+/* minishell design central */
 
-void	ms_banner()
-{
-	ft_printf ("\
+# define SHELL "\033[1m\033[34m$minishell: \033[0m"
+
+# define BANNER "\033[0;35m\
             *               MMM8&&&            * \n \
                         MMMM88&&&&&    . \n \
                         MMMM88&&&&&&& \n \
@@ -23,5 +23,4 @@ void	ms_banner()
         |  |  |  |  |  |  |  |  |  |  |  | \n \
         |  |  |  |  |  |  |  |  |  |  |  | \n \
         |  |  |  |  |  |  |  |  |  |  |  | \n\n\
-");
-}
+"

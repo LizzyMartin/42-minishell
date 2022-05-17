@@ -1,6 +1,6 @@
 #include <minishell.h>
 
-void	execute(t_ms *ms)
+void	ms_execute(t_ms *ms)
 {
 	char	*cmd;
 
@@ -20,5 +20,9 @@ void	execute(t_ms *ms)
 	else if (ft_strncmp(cmd, "exit", ft_strlen(cmd)) == 0)
 		ms_exit(ms);
 	else
-		ft_printf(": command not found\n");
+    {
+        ft_printf("\033[1m\033[34m$minishell: \033[0m");
+	    ft_printf("\033[1m\033[30m%s\033[0m: command  not found\n", cmd);
+		ms->exit_status = 1;
+    }
 }
