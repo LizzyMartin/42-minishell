@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/16 22:15:43 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/17 10:42:15 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define MINISHELL_H
 
 /* includes */
-# include			"../../libs/libft/srcs/libft.h"
+# include			"../../libs/libft/app/srcs/libft.h"
 # include			"design.h"
 # include			"structs.h"
 
