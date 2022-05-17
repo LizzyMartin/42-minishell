@@ -33,8 +33,6 @@ SRCS_FILES +=	parse/ms_parse.c
 
 SRCS_FILES +=	signals/ms_signals.c
 
-SRCS_FILES +=	utils/free_exit.c
-
 SRCS_FILES +=	minishell.c \
 				main.c
 
@@ -57,7 +55,6 @@ $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)/init
 	mkdir -p $(OBJS_DIR)/parse
 	mkdir -p $(OBJS_DIR)/signals
-	mkdir -p $(OBJS_DIR)/utils
 
 clean:
 	$(RM) $(OBJS_DIR)

@@ -9,8 +9,6 @@ int	minishell(int argc, char **argv, char **envp)
 	{
 		ft_printf(SHELL);
 		ms->line = readline(ms->prompt);
-		if (!ms->line)
-			exit (EXIT_SUCCESS);
 		ms_signals(ms);
 		ms_parse(ms);
 		ms_execute(ms);
