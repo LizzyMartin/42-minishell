@@ -45,4 +45,7 @@ int			ms_signals(t_ms *ms);
 /* ms */
 int			minishell(int argc, char **argv, char **envp);
 
+/* utils */
+void		free_exit(t_ms *ms);
+
 #endif

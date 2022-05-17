@@ -5,7 +5,9 @@ void	ms_execute(t_ms *ms)
 	char	*cmd;
 
 	cmd = ms->line_splited[0];
-	if (ft_strncmp(cmd, "echo", ft_strlen(cmd)) == 0)
+	if (cmd == NULL)
+		return ;
+	else if (ft_strncmp(cmd, "echo", ft_strlen(cmd)) == 0)
 		ms_echo(ms);
 	else if (ft_strncmp(cmd, "pwd", ft_strlen(cmd)) == 0)
 		ms_pwd(ms);
@@ -21,8 +23,8 @@ void	ms_execute(t_ms *ms)
 		ms_exit(ms);
 	else
     {
-        ft_printf("\033[1m\033[34m$minishell: \033[0m");
-	    ft_printf("\033[1m\033[30m%s\033[0m: command  not found\n", cmd);
+	    ft_putstr_fd(cmd , 2);
+		ft_putstr_fd(": command  not found\n", 2);
 		ms->exit_status = 1;
     }
 }
