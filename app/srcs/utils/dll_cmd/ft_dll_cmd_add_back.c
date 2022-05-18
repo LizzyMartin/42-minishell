@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dll_size.c                                      :+:      :+:    :+:   */
+/*   ft_dll_cmd_add_back.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 06:44:31 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/14 00:21:32 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/18 17:32:56 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include <minishell.h>
 
-int	ft_dll_size(t_dll *stack)
+void	ft_dll_cmd_add_back(t_cmd *cmd, char *name)
 {
-	int	i;
+	t_cmd	*last;
 
-	i = 1;
-	if (stack == NULL)
-		return (0);
-	while (stack->next != NULL)
+	if (cmd == NULL)
 	{
-		stack = stack->next;
-		i++;
+		cmd = (t_cmd *) malloc(sizeof(t_cmd));
+		cmd->prev = NULL;
+		cmd->next = NULL;
 	}
-	return (i);
+	else
+	{
+		last = ft_dll_cmd_last(cmd);
+		cmd->next = (t_cmd *) malloc(sizeof(t_cmd));
+		cmd->next->prev = last;
+		cmd->next->next = NULL;
+	}
+	cmd->name = name;
 }

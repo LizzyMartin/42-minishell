@@ -9,9 +9,10 @@ typedef struct s_cmd
 	char				**cmd_splited;
 	struct s_cmd		*prev;
 	struct s_cmd		*next;
-	int					exit_status;
 	int					std_in;
 	int					std_out;
+	int					exit_status;
+	char				*error_msg;
 }	t_cmd;
 
 // env

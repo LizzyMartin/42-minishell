@@ -22,6 +22,8 @@ static char	*append_path(t_cmd *current_cmd, t_ms *ms)
 			return (path_plus_command);
 		}
 	}
+	current_cmd->error_msg = "comando não encontrado";
+	current_cmd->exit_status = 1;
 	return (NULL);
 }
 
@@ -33,4 +35,5 @@ void	ms_prepare_command (t_ms *ms)
 	current_cmd = ms->p.cmds;
 	command_splited = NULL;
 	current_cmd->name_and_path = append_path(current_cmd, ms);
+
 }

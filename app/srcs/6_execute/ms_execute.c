@@ -13,10 +13,7 @@ static void	ms_execute_commands(t_ms *ms, t_cmd *current_cmd , int *tmp_fd)
 		dup2(bridge_between_processes[1], 1);
 		if (execve(current_cmd->name_and_path, ms->p.line_splited, ms->envp)
 		== -1)
-		{
-			ft_printf("Não foi possível executar");
-			exit(0);
-		}
+			perror("");
 	}
 	if ((ms->p.cmds_size - 1) == current_cmd->index)
 		waitpid(child_process_id, &current_cmd->exit_status, 0);

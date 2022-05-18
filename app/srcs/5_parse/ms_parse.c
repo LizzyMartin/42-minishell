@@ -10,7 +10,7 @@ int	ms_parse(t_ms *ms)
 	ms->p.cmds->name_and_path = NULL;
 	ms->p.cmds->cmd_splited = NULL;
 	ms->p.cmds->std_in = open(ms->p.line_splited[1], O_RDONLY);
-	ms->p.cmds->std_out = open("saida.txt", O_CREAT | O_WRONLY | O_APPEND, 0777);
+	//ms->p.cmds->std_out = open("saida.txt", O_CREAT | O_WRONLY | O_APPEND, 0777);
 	ms->p.cmds_size = 1;
 	ms_prepare_command(ms);
 	return (0);

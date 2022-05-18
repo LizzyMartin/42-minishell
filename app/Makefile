@@ -13,34 +13,37 @@ LIBFT.A =       $(LIBFT_DIR)/libft.a
 
 SRCS_DIR =   	srcs
 OBJS_DIR =   	$(SRCS_DIR)/.objs
-HEADER_DIR =   ./srcs/includes
+HEADER_DIR =   ./srcs/0_includes
 HEADER =		$(HEADER_DIR)/minishell.h
 NAME =			minishell
 
-SRCS_FILES +=	builtins/ms_cd.c \
-				builtins/ms_echo.c \
-				builtins/ms_env.c \
-				builtins/ms_exit.c \
-				builtins/ms_export.c \
-				builtins/ms_pwd.c \
-				builtins/ms_unset.c
+SRCS_FILES +=	1_design/ms_print_banner.c
 
-SRCS_FILES +=	execute/ms_execute.c \
-				execute/ms_execute_utils.c
+SRCS_FILES +=	2_init/ms_init.c \
+				2_init/ms_init_env.c
 
-SRCS_FILES +=	init/ms_init.c \
-				init/ms_init_env.c
+SRCS_FILES +=	3_read_input/ms_read_input.c \
+				3_read_input/ms_signals.c
 
-SRCS_FILES +=	parse/ms_parse.c \
-				parse/ms_prepare_command.c
+SRCS_FILES +=	4_tokenizer/ms_tokenizer.c
 
-SRCS_FILES +=	utils/ms_print_banner.c
+SRCS_FILES +=	5_parse/ms_parse.c \
+				5_parse/ms_prepare_command.c
 
-SRCS_FILES +=	signals/ms_signals.c
+SRCS_FILES +=	6_execute/ms_execute.c \
+				6_execute/ms_execute_utils.c
 
-SRCS_FILES +=	tmp/ft_cmd_add_back.c \
-				tmp/ft_cmd_last.c
+SRCS_FILES +=	6_execute/builtins/ms_cd.c \
+				6_execute/builtins/ms_echo.c \
+				6_execute/builtins/ms_env.c \
+				6_execute/builtins/ms_exit.c \
+				6_execute/builtins/ms_export.c \
+				6_execute/builtins/ms_pwd.c \
+				6_execute/builtins/ms_unset.c
 
+SRCS_FILES +=	utils/dll_cmd/ft_dll_cmd_add_back.c \
+				utils/dll_cmd/ft_dll_cmd_last.c \
+				utils/ms_clear.c
 
 SRCS_FILES +=	minishell.c \
 				main.c
@@ -59,13 +62,15 @@ $(NAME):	$(OBJS_DIR) $(OBJS) $(HEADER)
 
 $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)
-	mkdir -p $(OBJS_DIR)/builtins
-	mkdir -p $(OBJS_DIR)/execute
-	mkdir -p $(OBJS_DIR)/init
-	mkdir -p $(OBJS_DIR)/parse
-	mkdir -p $(OBJS_DIR)/signals
+	mkdir -p $(OBJS_DIR)/1_design
+	mkdir -p $(OBJS_DIR)/2_init
+	mkdir -p $(OBJS_DIR)/3_read_input
+	mkdir -p $(OBJS_DIR)/4_tokenizer
+	mkdir -p $(OBJS_DIR)/5_parse
+	mkdir -p $(OBJS_DIR)/6_execute
+	mkdir -p $(OBJS_DIR)/6_execute/builtins
 	mkdir -p $(OBJS_DIR)/utils
-	mkdir -p $(OBJS_DIR)/tmp
+	mkdir -p $(OBJS_DIR)/utils/dll_cmd
 
 clean:
 	$(RM) $(OBJS_DIR)

@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cmd_last.c                                      :+:      :+:    :+:   */
+/*   ft_dll_cmd_size.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 06:44:31 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/17 19:34:25 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/18 17:18:29 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include <libft.h>
 
-t_cmd	*ft_cmd_last(t_cmd *cmds)
+int	ft_dll_cmd_size(t_dll *stack)
 {
-	if (cmds == NULL)
-		return (cmds);
-	while (cmds->next != NULL)
-		cmds = cmds->next;
-	return (cmds);
+	int	i;
+
+	i = 1;
+	if (stack == NULL)
+		return (0);
+	while (stack->next != NULL)
+	{
+		stack = stack->next;
+		i++;
+	}
+	return (i);
 }

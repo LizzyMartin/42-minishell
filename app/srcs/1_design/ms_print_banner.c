@@ -7,7 +7,7 @@ void	print_banner(void)
 	char	*line;
 
 	i = 0;
-	fd = open("srcs/utils/banner.txt", O_RDONLY);
+	fd = open("srcs/1_design/banner.txt", O_RDONLY);
 	while (i < 17)
 	{
 		line = get_next_line(fd);
