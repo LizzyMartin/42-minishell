@@ -18,6 +18,6 @@
 # define BOLD_CYAN "\033[1;36m"
 # define BOLD_WHITE "\033[1;37m"
 
-# define SHELL_NAME "$minishell ▸ "
+# define SHELL_NAME "minishell ▸ "
 
-# define SHELL BOLD_BLUE SHELL_NAME WHITE
+# define SHELL BOLD_BLUE SHELL_NAME

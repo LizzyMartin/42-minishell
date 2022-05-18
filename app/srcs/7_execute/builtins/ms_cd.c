@@ -2,11 +2,11 @@
 
 int	ms_cd(t_ms *ms)
 {
-	char cwd[1000];
-	char	**cmd;
-	char	*dir;
+	char 		cwd[1000];
+	char		**cmd;
+	const char	*dir;
 
-	cmd = ms->p.cmds->cmd_splited;
+	cmd = ms->p.line_splited;
 	if (!cmd[1] || ft_strncmp(cmd[1], "~", ft_strlen(cmd[1])) == 0
 			|| ft_strncmp(cmd[1], "--", ft_strlen(cmd[1])) == 0)
 	{
@@ -15,11 +15,10 @@ int	ms_cd(t_ms *ms)
 	} else {
 		if (getcwd(cwd, sizeof(cwd)) != NULL)
 		{
-			// dir = ft_strlcat(cwd, cmd[1], ft_strlen(cwd));
+			dir = ft_strjoin(cwd, cmd[1]);
 			chdir(dir);
 		}
 	}
-
 	ms->p.cmds->exit_status = 0;
 	return (ms->p.cmds->exit_status);
 }

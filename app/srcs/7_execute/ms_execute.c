@@ -32,7 +32,7 @@ void		ms_execute(t_ms *ms)
 	{
 		tmp_fd = current_cmd->std_in;
 		ms_execute_commands(ms, current_cmd, &tmp_fd);
-		ft_fd_print(tmp_fd);
+//		ft_fd_print(tmp_fd);
 		current_cmd = current_cmd->next;
 	}
 }

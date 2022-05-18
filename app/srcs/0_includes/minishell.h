@@ -26,6 +26,14 @@ t_ms		*ms_init(int argc, char **argv, char **envp);
 void		ms_read_input(t_ms *ms);
 void		init_env(t_ms *ms);
 
+// env
+void		add_env(t_ms *ms, char *key, char *value);
+void		delete_env(t_ms *ms, char *key);
+char		*find_env_value(t_ms *ms, char *key);
+void		free_env(t_ms *ms);
+int			is_in_env(t_ms *ms, const char *key);
+void		parse_env(t_ms *ms);
+
 /* read_input */
 void		ms_signals(t_ms *ms);
 
