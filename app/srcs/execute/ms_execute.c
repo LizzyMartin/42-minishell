@@ -1,28 +1,41 @@
 #include <minishell.h>
 
-void	ms_execute(t_ms *ms)
+static void	ms_execute_commands(t_ms *ms, t_cmd *current_cmd , int *tmp_fd)
 {
-	char	*cmd;
+	int	bridge_between_processes[2];
+	int	child_process_id;
 
-	cmd = ms->line_splited[0];
-	if (ft_strncmp(cmd, "echo", ft_strlen(cmd)) == 0)
-		ms_echo(ms);
-	else if (ft_strncmp(cmd, "pwd", ft_strlen(cmd)) == 0)
-		ms_pwd(ms);
-	else if (ft_strncmp(cmd, "cd", ft_strlen(cmd)) == 0)
-		ms_cd(ms);
-	else if (ft_strncmp(cmd, "export", ft_strlen(cmd)) == 0)
-		ms_export(ms);
-	else if (ft_strncmp(cmd, "unset", ft_strlen(cmd)) == 0)
-		ms_unset(ms);
-	else if (ft_strncmp(cmd, "env", ft_strlen(cmd)) == 0)
-		ms_env(ms);
-	else if (ft_strncmp(cmd, "exit", ft_strlen(cmd)) == 0)
-		ms_exit(ms);
-	else
-    {
-        ft_printf("\033[1m\033[34m$minishell: \033[0m");
-	    ft_printf("\033[1m\033[30m%s\033[0m: command  not found\n", cmd);
-		ms->exit_status = 1;
-    }
+	pipe(bridge_between_processes);
+	child_process_id = fork();
+	if (child_process_id == 0)
+	{
+		dup2(*tmp_fd, 0);
+		dup2(bridge_between_processes[1], 1);
+		if (execve(current_cmd->name_and_path, ms->p.line_splited, ms->envp)
+		== -1)
+		{
+			ft_printf("Não foi possível executar");
+			exit(0);
+		}
+	}
+	if ((ms->p.cmds_size - 1) == current_cmd->index)
+		waitpid(child_process_id, &current_cmd->exit_status, 0);
+	close (*tmp_fd);
+	*tmp_fd = bridge_between_processes[0];
+	close(bridge_between_processes[1]);
+}
+
+void		ms_execute(t_ms *ms)
+{
+	t_cmd	*current_cmd;
+	int		tmp_fd;
+
+	current_cmd = ms->p.cmds;
+	while (current_cmd)
+	{
+		tmp_fd = current_cmd->std_in;
+		ms_execute_commands(ms, current_cmd, &tmp_fd);
+		ft_fd_print(tmp_fd);
+		current_cmd = current_cmd->next;
+	}
 }

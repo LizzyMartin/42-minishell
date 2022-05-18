@@ -22,26 +22,6 @@ int is_environ(t_ms *ms, char *var, char **env_var_cont)
 	return (0);
 }
 
-// int is_backslash(t_ms *ms)
-// {
-// 	if (ft_strncmp(ms->line_splited[i], "\\", ft_strlen(ms->line_splited[i]))) == 0)
-// 	{
-// 		j = 0;
-// 		while (ms->line_splited[i][j])
-// 		{
-// 			if (ft_strncmp(&ms->line_splited[i][j], "\\", 1)) == 0)
-// 				total_backslash++;
-// 			j++;
-// 		}
-// 		if (total_backslash >= 4)
-// 		{
-// 			total_backslash /= 2;
-// 			while (total_backslash--)
-// 				ft_printf("//");
-// 		}
-// 	}
-// }
-
 int	ms_echo(t_ms *ms)
 {
 	int i;
@@ -49,28 +29,28 @@ int	ms_echo(t_ms *ms)
 	int	has_flag;
 
 	i = 0;
-	if(!ms->line_splited[1])
+	if(!ms->p.line_splited[1])
 	{
 		ft_printf("\n");
 		return (0);
 	}
-	has_flag = ft_strncmp(ms->line_splited[1], "-n", ft_strlen(ms->line_splited[1]));
-	while(i++ < ms->args_size)
+	has_flag = ft_strncmp(ms->p.line_splited[1], "-n", ft_strlen(ms->p.line_splited[1]));
+	while(i++ < ms->p.cmds_size)
 	{
-		if (ms->line_splited[i] && ms->line_splited[i][0] == '$')
+		if (ms->p.line_splited[i] && ms->p.line_splited[i][0] == '$')
 		{
-			if (is_environ(ms, ms->line_splited[i], &env_var_cont) == 1)
+			if (is_environ(ms, ms->p.line_splited[i], &env_var_cont) == 1)
 				ft_printf("%s", env_var_cont);
 		}
 		else
 		{
-			ft_printf("%s", ms->line_splited[i]);
+			ft_printf("%s", ms->p.line_splited[i]);
 		}
 	}
 	if (has_flag)
 		ft_printf("\n");
-	ms->exit_status = 0;
-	return (ms->exit_status);
+	ms->p.cmds->exit_status = 0;
+	return (ms->p.cmds->exit_status);
 }
 
 /*//// echo ////

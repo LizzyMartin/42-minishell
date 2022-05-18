@@ -25,13 +25,22 @@ SRCS_FILES +=	builtins/ms_cd.c \
 				builtins/ms_pwd.c \
 				builtins/ms_unset.c
 
-SRCS_FILES +=	execute/ms_execute.c
+SRCS_FILES +=	execute/ms_execute.c \
+				execute/ms_execute_utils.c
 
-SRCS_FILES +=	init/ms_init.c
+SRCS_FILES +=	init/ms_init.c \
+				init/ms_init_env.c
 
-SRCS_FILES +=	parse/ms_parse.c
+SRCS_FILES +=	parse/ms_parse.c \
+				parse/ms_prepare_command.c
+
+SRCS_FILES +=	utils/ms_print_banner.c
 
 SRCS_FILES +=	signals/ms_signals.c
+
+SRCS_FILES +=	tmp/ft_cmd_add_back.c \
+				tmp/ft_cmd_last.c
+
 
 SRCS_FILES +=	minishell.c \
 				main.c
@@ -55,6 +64,8 @@ $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)/init
 	mkdir -p $(OBJS_DIR)/parse
 	mkdir -p $(OBJS_DIR)/signals
+	mkdir -p $(OBJS_DIR)/utils
+	mkdir -p $(OBJS_DIR)/tmp
 
 clean:
 	$(RM) $(OBJS_DIR)

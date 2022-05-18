@@ -8,8 +8,8 @@ t_ms	*ms_init(int argc, char **argv, char **envp)
 	ms->argc = argc;
 	ms->argv = argv;
 	ms->envp = envp;
-	ms->prompt = NULL;
+	init_env(ms);
 	system("clear");
-	ft_printf(BANNER);
+	print_banner();
 	return (ms);
 }
