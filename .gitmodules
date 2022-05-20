@@ -1,3 +1,0 @@
-[submodule "app/libs/libft"]
-	path = app/libs/libft
-	url = https://github.com/argelcapela/42-libft.git
