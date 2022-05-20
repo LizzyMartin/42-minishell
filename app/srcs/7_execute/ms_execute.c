@@ -28,11 +28,18 @@ void		ms_execute(t_ms *ms)
 	int		tmp_fd;
 
 	current_cmd = ms->p.cmds;
-	while (current_cmd)
+	if (is_builtin(current_cmd->name) == 1)
 	{
-		tmp_fd = current_cmd->std_in;
-		ms_execute_commands(ms, current_cmd, &tmp_fd);
-//		ft_fd_print(tmp_fd);
-		current_cmd = current_cmd->next;
+		execute_builtin(ms, current_cmd);
+	}
+	else
+	{
+		while (current_cmd)
+		{
+			tmp_fd = current_cmd->std_in;
+			ms_execute_commands(ms, current_cmd, &tmp_fd);
+			ft_fd_print(tmp_fd);
+			current_cmd = current_cmd->next;
+		}
 	}
 }

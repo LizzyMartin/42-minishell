@@ -17,13 +17,13 @@
 # include			"../../libs/libft/app/srcs/libft.h"
 # include			"../1_design/design.h"
 # include			"structs.h"
+# include			"macros.h"
 
 /* design */
 void		print_banner(void);
 
 /* init */
 t_ms		*ms_init(int argc, char **argv, char **envp);
-void		ms_read_input(t_ms *ms);
 void		init_env(t_ms *ms);
 
 // env
@@ -35,7 +35,11 @@ int			is_in_env(t_ms *ms, const char *key);
 void		parse_env(t_ms *ms);
 
 /* read_input */
+int	        ms_read_input(t_ms *ms);
 void		ms_signals(t_ms *ms);
+
+/* save history */
+void	    ms_save_history(t_ms *ms);
 
 /* tokenizer */
 void		ms_tokenizer(t_ms *ms);
@@ -46,7 +50,7 @@ void		ms_prepare_command (t_ms *ms);
 
 /* execute */
 int			is_builtin(char *cmd);
-void		execute_builtin(t_ms *ms);
+void	    execute_builtin(t_ms *ms, t_cmd *current_cmd);
 void		ms_execute(t_ms *ms);
 
 // builtins
@@ -60,10 +64,13 @@ int			ms_unset(t_ms *ms);
 
 /* utils */
 void		ms_clear(t_ms *ms);
+void		ms_free(t_ms *ms);
+void	    ms_finish(t_ms *ms);
+
 // dll_cmd
 t_cmd		*ft_dll_cmd_last(t_cmd *cmds);
 void		ft_dll_cmd_add_back(t_cmd *cmd, char *name);
-void		ms_clear(t_ms *ms);
+void	    ft_dll_cmd_free(t_ms *ms);
 
 /* ms */
 void		minishell(t_ms *ms);

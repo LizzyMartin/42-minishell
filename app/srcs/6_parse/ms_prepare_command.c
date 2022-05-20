@@ -30,10 +30,9 @@ static char	*append_path(t_cmd *current_cmd, t_ms *ms)
 void	ms_prepare_command (t_ms *ms)
 {
 	t_cmd	*current_cmd;
-	char	**command_splited;
+	//char	**command_splited;
 
 	current_cmd = ms->p.cmds;
-	command_splited = NULL;
+	//command_splited = NULL;
 	current_cmd->name_and_path = append_path(current_cmd, ms);
-
 }

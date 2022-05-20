@@ -52,7 +52,9 @@ SRCS_FILES +=	7_execute/builtins/ms_cd.c \
 
 SRCS_FILES +=	utils/dll_cmd/ft_dll_cmd_add_back.c \
 				utils/dll_cmd/ft_dll_cmd_last.c \
-				utils/ms_clear.c
+				utils/dll_cmd/ft_dll_cmd_free.c \
+				utils/ms_free.c \
+				utils/ms_finish.c
 
 SRCS_FILES +=	minishell.c \
 				main.c

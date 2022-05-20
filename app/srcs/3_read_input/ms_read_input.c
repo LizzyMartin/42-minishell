@@ -1,6 +1,6 @@
 #include <minishell.h>
 
-void	ms_read_input(t_ms *ms)
+int	ms_read_input(t_ms *ms)
 {
 	char 	cwd[PATH_MAX];
 
@@ -8,8 +8,12 @@ void	ms_read_input(t_ms *ms)
 		ft_printf("%s%s%s ▸ %s", SHELL, BOLD_CYAN, cwd, WHITE);
 	else
 		ft_printf("%s%s", SHELL, WHITE);
-	ms->p.line = readline(ms->p.rl_p);
-	if (!ms->p.line)
-		exit (EXIT_SUCCESS);
 	ms_signals(ms);
+	ms->p.line = readline(ms->p.rl_p);
+	if (ms->p.rl_p == NULL && ft_str_is_empty(ms->p.line) == 1)
+	{
+		ft_printf("\n");
+		return (1);
+	}
+	return (0);  
 }
