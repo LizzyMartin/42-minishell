@@ -2,7 +2,7 @@
 
 int ms_pwd(t_ms *ms)
 {
-	char cwd[1000];
+	char cwd[PATH_MAX];
 
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
 	{
@@ -10,8 +10,6 @@ int ms_pwd(t_ms *ms)
 		ft_printf("%s\n", cwd);
 	}
 	else
-	{
 		ms->p.cmds->exit_status = 1;
-	}
 	return (ms->p.cmds->exit_status);
 }
