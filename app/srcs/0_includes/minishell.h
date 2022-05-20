@@ -14,7 +14,7 @@
 # define MINISHELL_H
 
 /* includes */
-# include			"../../libs/libft/app/srcs/libft.h"
+# include			"../../libs/libft/srcs/libft.h"
 # include			"../1_design/design.h"
 # include			"structs.h"
 # include			"macros.h"

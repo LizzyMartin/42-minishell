@@ -6,7 +6,7 @@ RLFLAG =		-lreadline
 AR =            ar -rcs
 RM =            rm -rfd
 
-LIBFT_DIR = 	libs/libft/app
+LIBFT_DIR = 	libs/libft
 LIBFT.A =       $(LIBFT_DIR)/libft.a
 
 # Mandatory
