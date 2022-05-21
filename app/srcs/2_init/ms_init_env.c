@@ -12,7 +12,8 @@ void	init_env(t_ms *ms)
 	while (envp[i])
 	{
 		envp_splitted = ft_split(envp[i], '='); //alterar para o parse_env
-		add_env(ms, envp_splitted[0], envp_splitted[1]);
+		if (envp_splitted[0] != NULL && envp_splitted[1] != NULL)
+			add_env(ms, envp_splitted[0], envp_splitted[1]);
 		i++;
 	}
 }

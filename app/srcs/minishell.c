@@ -8,5 +8,4 @@ void	minishell(t_ms *ms)
 	ms_tokenizer(ms);
 	if (ms_parse(ms) == 0)
 		ms_execute(ms);
-	
 }

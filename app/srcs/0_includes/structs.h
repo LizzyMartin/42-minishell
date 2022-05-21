@@ -37,8 +37,10 @@ typedef struct s_prompt
 // ms
 typedef struct s_minishell
 {
+	int					exit_code;
 	int					argc;
 	char				**argv;
 	char				**envp;
+	t_cmd				*h;
 	t_p					p;
 }	t_ms;

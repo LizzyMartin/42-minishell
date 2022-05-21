@@ -7,13 +7,16 @@ static void	ms_execute_commands(t_ms *ms, t_cmd *current_cmd , int *tmp_fd)
 
 	pipe(bridge_between_processes);
 	child_process_id = fork();
+	ms_execute_command_signals();
 	if (child_process_id == 0)
 	{
 		dup2(*tmp_fd, 0);
 		dup2(bridge_between_processes[1], 1);
 		if (execve(current_cmd->name_and_path, ms->p.line_splited, ms->envp)
 		== -1)
-			perror("");
+		{
+			perror("c");
+		}
 	}
 	if ((ms->p.cmds_size - 1) == current_cmd->index)
 		waitpid(child_process_id, &current_cmd->exit_status, 0);
@@ -28,12 +31,11 @@ void		ms_execute(t_ms *ms)
 	int		tmp_fd;
 
 	current_cmd = ms->p.cmds;
+	if (current_cmd == NULL)
+		return ;
 	if (is_builtin(current_cmd->name) == 1)
-	{
 		execute_builtin(ms, current_cmd);
-	}
 	else
-	{
 		while (current_cmd)
 		{
 			tmp_fd = current_cmd->std_in;
@@ -41,5 +43,4 @@ void		ms_execute(t_ms *ms)
 			ft_fd_print(tmp_fd);
 			current_cmd = current_cmd->next;
 		}
-	}
 }

@@ -2,9 +2,9 @@
 
 int		ms_unset(t_ms *ms)
 {
-	char	*cmd;
+	char	*key;
 
-	cmd = ms->p.line_splited[1];
-	delete_env(ms, cmd);
+	key = ms->p.line_splited[1];
+	delete_env(ms, key);
 	return (ms->p.cmds->exit_status);
 }

@@ -1,23 +1,22 @@
-#include    <minishell.h>
+#include	<minishell.h>
 
-void    delete_env(t_ms *ms, char *key)
+void	delete_env(t_ms *ms, char *key)
 {
-    t_env   *aux;
-    t_env   *tmp;
+    t_env	*env;
+   // t_env	*del;
+    t_env	*before;
+    t_env	*after;
+	
+	env = ms->p.envs;
+    before = env;
+    after = env->next;
+    ft_printf("%s %s\n", env->key, key);
 
-    tmp = ms->p.envs;
-    while (tmp)
+    while (env->key != NULL && ft_strncmp(env->key, key, ft_strlen(env->key)) != 0)
     {
-        if (!ft_strncmp(tmp->key, key, ft_strlen(key)))
-        {
-            aux->next = tmp->next;
-            free(tmp->key);
-            free(tmp->value);
-            free(tmp);
-            return ;
-        }
-        else
-            aux = tmp;
-        tmp = tmp->next;
+        before = env;
+        env = env->next;
+        after = after->next;
     }
+    ft_printf("%s %s %s\n", before->key, env->key, after->key);
 }

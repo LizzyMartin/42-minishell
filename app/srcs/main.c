@@ -7,6 +7,6 @@ int main(int argc, char **argv, char **envp)
 	ms = ms_init(argc, argv, envp);
 	while (1)
 		minishell(ms);
-	ms_finish(ms);
+	//ms_finish(ms);
 	return (0);
 }

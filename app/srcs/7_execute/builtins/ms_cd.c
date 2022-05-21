@@ -10,9 +10,11 @@ int	ms_cd(t_ms *ms)
 	if (!cmd[1] || ft_strncmp(cmd[1], "~", ft_strlen(cmd[1])) == 0
 			|| ft_strncmp(cmd[1], "--", ft_strlen(cmd[1])) == 0)
 	{
-		chdir(getenv("HOME"));
+		chdir(find_env_value(ms, "HOME"));
 		ms->p.cmds->exit_status = 0;
-	} else {
+	}
+	else
+	{
 		if (getcwd(cwd, sizeof(cwd)) != NULL)
 		{
 			dir = ft_strjoin(cwd, cmd[1]);

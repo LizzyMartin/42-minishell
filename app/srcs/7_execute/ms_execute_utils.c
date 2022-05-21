@@ -28,7 +28,7 @@ void	execute_builtin(t_ms *ms, t_cmd *current_cmd)
 
 	name = current_cmd->name;
 	if (ft_strncmp(name, "echo", ft_strlen(name)) == 0)
-		ms_echo(ms);
+		ms_echo(ms, current_cmd);
 	else if (ft_strncmp(name, "pwd", ft_strlen(name)) == 0)
 		ms_pwd(ms);
 	else if (ft_strncmp(name, "cd", ft_strlen(name)) == 0)
@@ -41,4 +41,15 @@ void	execute_builtin(t_ms *ms, t_cmd *current_cmd)
 		ms_env(ms);
 	else if (ft_strncmp(name, "exit", ft_strlen(name)) == 0)
 		ms_exit(ms);
+}
+
+// show last cmd exit status
+void	last_cmd_exit_status(t_ms *ms)
+{
+	t_cmd *tmp;
+
+	tmp = ms->p.cmds;
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+	ft_printf("%d\n", tmp->exit_status);
 }

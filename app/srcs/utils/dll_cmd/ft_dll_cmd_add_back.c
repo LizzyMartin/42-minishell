@@ -12,10 +12,13 @@
 
 #include <minishell.h>
 
-void	ft_dll_cmd_add_back(t_cmd *cmd, char *name)
+void	ft_dll_cmd_add_back(t_ms *ms, char **cmd_splited)
 {
+	t_cmd	*cmd;
 	t_cmd	*last;
 
+	last = NULL;
+	cmd = ms->p.cmds;
 	if (cmd == NULL)
 	{
 		cmd = (t_cmd *) malloc(sizeof(t_cmd));
@@ -25,9 +28,13 @@ void	ft_dll_cmd_add_back(t_cmd *cmd, char *name)
 	else
 	{
 		last = ft_dll_cmd_last(cmd);
-		cmd->next = (t_cmd *) malloc(sizeof(t_cmd));
-		cmd->next->prev = last;
-		cmd->next->next = NULL;
+		last->next = (t_cmd *) malloc(sizeof(t_cmd));
+		cmd = last->next;
+		cmd->prev = last;
+		cmd->next = NULL;
 	}
-	cmd->name = name;
+	cmd->cmd_splited = cmd_splited;
+	cmd->name_and_path = NULL;
+	cmd->index = 0;
+	cmd->std_in = 0;
 }
