@@ -20,7 +20,8 @@ NAME =			minishell
 SRCS_FILES +=	1_design/ms_print_banner.c
 
 SRCS_FILES +=	2_init/ms_init.c \
-				2_init/ms_init_env.c
+				2_init/ms_init_env.c \
+				2_init/ms_init_h.c
 
 SRCS_FILES +=	2_init/env/ms_add_env.c \
 				2_init/env/ms_delete_env.c \
@@ -29,11 +30,13 @@ SRCS_FILES +=	2_init/env/ms_add_env.c \
 				2_init/env/ms_is_in_env.c \
 				2_init/env/ms_parse_env.c
 
+SRCS_FILES +=	2_init/h/ms_add_h.c \
+				2_init/h/ms_print_h.c
+				
+
 SRCS_FILES +=	3_read_input/ms_read_input.c \
 				3_read_input/ms_signals.c
 
-SRCS_FILES +=	4_save_history/ms_save_history.c \
-				4_save_history/ms_init_history.c
 
 SRCS_FILES +=	5_tokenizer/ms_tokenizer.c
 
@@ -78,8 +81,8 @@ $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)/1_design
 	mkdir -p $(OBJS_DIR)/2_init
 	mkdir -p $(OBJS_DIR)/2_init/env
+	mkdir -p $(OBJS_DIR)/2_init/h
 	mkdir -p $(OBJS_DIR)/3_read_input
-	mkdir -p $(OBJS_DIR)/4_save_history
 	mkdir -p $(OBJS_DIR)/5_tokenizer
 	mkdir -p $(OBJS_DIR)/6_parse
 	mkdir -p $(OBJS_DIR)/7_execute

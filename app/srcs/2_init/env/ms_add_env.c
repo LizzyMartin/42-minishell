@@ -11,14 +11,10 @@ void    add_env(t_ms *ms, char *key, char *value)
 		aux->key = key;
 		aux->value = value;
 		aux->next = NULL;
+		aux->prev = NULL;
 	}
 	else
 	{
-//	if (is_in_env(ms, key))
-//	{
-		// substitui o valor, pensar no caso export PATH=$PATH
-//		return ;
-//	}
 		while (aux->next) {
 			aux = aux->next;
 		}
@@ -26,5 +22,6 @@ void    add_env(t_ms *ms, char *key, char *value)
 		aux->next->key = key;
 		aux->next->value = value;
 		aux->next->next = NULL;
+		aux->next->prev = aux;
 	}
 }

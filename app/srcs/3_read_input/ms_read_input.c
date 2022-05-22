@@ -15,7 +15,7 @@ int	ms_read_input(t_ms *ms)
 	ms_print_sh_name();
 	ms_read_input_signals();
 	ms->p.line = readline(ms->p.rl_p);
-	if (!ms->p.line)
+	if (!ms->p.line || ft_strncmp(ms->p.line, "exit", 4) == 0)
 	{
 		ctrl_d_exit_shell(SIGQUIT);
 		ms->exit_code = 1;
@@ -26,6 +26,5 @@ int	ms_read_input(t_ms *ms)
 		ft_printf("\n");
 		return (1);
 	}
-	ms_print_sh_name();
 	return (0);  
 }

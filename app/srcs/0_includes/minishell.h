@@ -44,8 +44,9 @@ void	    ms_execute_command_signals(void);
 void        ctrl_d_exit_shell(int signal);
 
 /* save history */
-void	    ms_save_history(t_ms *ms);
-void	    ms_init_history(t_ms *ms);
+void	    ms_init_h(t_ms *ms);
+void        ms_add_h(t_ms *ms, char *line);
+void	    ms_print_h(t_ms *ms);
 
 /* tokenizer */
 void		ms_tokenizer(t_ms *ms);

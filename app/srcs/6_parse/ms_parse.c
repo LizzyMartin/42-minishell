@@ -12,11 +12,12 @@ int	ms_parse(t_ms *ms)
 	ms->p.cmds->cmd_splited = NULL;
 	ms->p.cmds->std_in = open(ms->p.line_splited[1], O_RDONLY);
 	ms->p.cmds_size = 1;
+	
 	ms->p.cmds->name_and_path = append_path(ms->p.cmds, ms);
-	if (ms->p.cmds->name_and_path == NULL)
-	{
-		ft_printf("%s: %s\n", ms->p.cmds->name, ms->p.cmds->error_msg);
-		return (ms->p.cmds->exit_status);
-	}
+	// if (is_builtin(ms) == 0 && ms->p.cmds->name_and_path == NULL)
+	// {
+	// 	ft_printf("%s: %s\n", ms->p.cmds->name, ms->p.cmds->error_msg);
+	// 	return (ms->p.cmds->exit_status);
+	// }
 	return (0);
 }

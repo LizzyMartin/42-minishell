@@ -9,8 +9,9 @@ t_ms	*ms_init(int argc, char **argv, char **envp)
 	ms->argc = argc;
 	ms->argv = argv;
 	ms->envp = envp;
+	ms->p.h = NULL;
 	init_env(ms);
-	ms_init_history(ms);
+	ms_init_h(ms);
 	system("clear");
 	print_banner();
 	return (ms);

@@ -21,7 +21,17 @@ typedef struct s_env
 	char				*key;
 	char				*value;
 	struct s_env		*next;
+	struct s_env		*prev;
 }	t_env;
+
+// h
+typedef struct s_h
+{
+	int						index;
+	char					*line;
+	struct s_h				*next;
+	struct s_h				*prev;
+}	t_h;
 
 // prompt
 typedef struct s_prompt
@@ -32,6 +42,7 @@ typedef struct s_prompt
 	char				**line_splited;
 	t_cmd				*cmds;
 	t_env				*envs;
+	t_h					*h;
 }	t_p;
 
 // ms
@@ -41,6 +52,5 @@ typedef struct s_minishell
 	int					argc;
 	char				**argv;
 	char				**envp;
-	t_cmd				*h;
 	t_p					p;
 }	t_ms;

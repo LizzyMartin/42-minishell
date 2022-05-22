@@ -4,6 +4,8 @@ int		is_builtin(char *current_cmd)
 {
 	if (current_cmd == NULL)
 		return (0);
+	else if (ft_strncmp(current_cmd, "exit", ft_strlen(current_cmd)) == 0)
+		return (1);
 	else if (ft_strncmp(current_cmd, "echo", ft_strlen(current_cmd)) == 0)
 		return (1);
 	else if (ft_strncmp(current_cmd, "pwd", ft_strlen(current_cmd)) == 0)
@@ -16,8 +18,6 @@ int		is_builtin(char *current_cmd)
 		return (1);
 	else if (ft_strncmp(current_cmd, "env", ft_strlen(current_cmd)) == 0)
 		return (1);
-	else if (ft_strncmp(current_cmd, "exit", ft_strlen(current_cmd)) == 0)
-		return (1);
 	else
 		return (0);
 }
@@ -27,7 +27,9 @@ void	execute_builtin(t_ms *ms, t_cmd *current_cmd)
 	char *name;
 
 	name = current_cmd->name;
-	if (ft_strncmp(name, "echo", ft_strlen(name)) == 0)
+	if (ft_strncmp(name, "exit", ft_strlen(name)) == 0)
+		ms_exit(ms);
+	else if (ft_strncmp(name, "echo", ft_strlen(name)) == 0)
 		ms_echo(ms, current_cmd);
 	else if (ft_strncmp(name, "pwd", ft_strlen(name)) == 0)
 		ms_pwd(ms);
@@ -39,8 +41,6 @@ void	execute_builtin(t_ms *ms, t_cmd *current_cmd)
 		ms_unset(ms);
 	else if (ft_strncmp(name, "env", ft_strlen(name)) == 0)
 		ms_env(ms);
-	else if (ft_strncmp(name, "exit", ft_strlen(name)) == 0)
-		ms_exit(ms);
 }
 
 // show last cmd exit status

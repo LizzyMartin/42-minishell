@@ -31,11 +31,12 @@ void		ms_execute(t_ms *ms)
 	int		tmp_fd;
 
 	current_cmd = ms->p.cmds;
-	if (current_cmd == NULL)
-		return ;
-	if (is_builtin(current_cmd->name) == 1)
+	if (ft_strncmp(current_cmd->name, "history", 7) == 0)
+		ms_print_h(ms);
+	else if (is_builtin(current_cmd->name) == 1)
 		execute_builtin(ms, current_cmd);
 	else
+	{
 		while (current_cmd)
 		{
 			tmp_fd = current_cmd->std_in;
@@ -43,4 +44,5 @@ void		ms_execute(t_ms *ms)
 			ft_fd_print(tmp_fd);
 			current_cmd = current_cmd->next;
 		}
+	}
 }

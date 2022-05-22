@@ -1,0 +1,4 @@
+cat file.txt | tr a b | grep a
+cat file.txt | tr a b | grep a > file2.txt
+cat file.txt | tr a b | grep a >> file2.txt
+<< FIM | tr a b | grep a >> file2.txt
