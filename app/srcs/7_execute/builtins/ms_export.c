@@ -45,7 +45,10 @@ void bubbleSort(t_env *start)
 
 void ms_env_sort(t_ms *ms)
 {
-	bubbleSort(ms->p.envs);
+	if (ms)
+	{
+	}
+	//bubbleSort(ms->p.envs);
 }
 
 int	ms_export(t_ms *ms)
