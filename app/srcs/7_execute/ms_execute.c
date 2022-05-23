@@ -32,7 +32,7 @@ void		ms_execute(t_ms *ms)
 
 	current_cmd = ms->p.cmds;
 	if (ft_strncmp(current_cmd->name, "history", 7) == 0)
-		ms_print_h(ms);
+		ms_print_history(ms);
 	else if (is_builtin(current_cmd->name) == 1)
 		execute_builtin(ms, current_cmd);
 	else

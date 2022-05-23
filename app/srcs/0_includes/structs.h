@@ -24,14 +24,15 @@ typedef struct s_env
 	struct s_env		*prev;
 }	t_env;
 
-// h
-typedef struct s_h
+// history
+typedef struct s_history
 {
-	int						index;
-	char					*line;
-	struct s_h				*next;
-	struct s_h				*prev;
-}	t_h;
+	int					index;
+	char				*line;
+	struct s_history	*next;
+	struct s_history	*prev;
+}	t_history;
+
 
 // prompt
 typedef struct s_prompt
@@ -42,7 +43,8 @@ typedef struct s_prompt
 	char				**line_splited;
 	t_cmd				*cmds;
 	t_env				*envs;
-	t_h					*h;
+	int					history_i;
+	t_history			*history;
 }	t_p;
 
 // ms
