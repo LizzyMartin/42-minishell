@@ -23,11 +23,10 @@ void bubbleSort(t_env *start)
     /* Checking for empty list */
     if (start == NULL)
         return;
-  
     do
     {
         swapped = 0;
-        ptr1 = start;
+        ptr1 = start->next;
   
         while (ptr1->next != lptr)
         {
@@ -45,10 +44,7 @@ void bubbleSort(t_env *start)
 
 void ms_env_sort(t_ms *ms)
 {
-	if (ms)
-	{
-	}
-	//bubbleSort(ms->p.envs);
+	bubbleSort(ms->p.envs);
 }
 
 int	ms_export(t_ms *ms)
@@ -65,7 +61,7 @@ int	ms_export(t_ms *ms)
 		while (env)
 		{
 			if (env->key != NULL && env->value != NULL)
-			ft_printf("declare -x %s=%s\n", env->key, env->value);
+				ft_printf("declare -x %s=%s\n", env->key, env->value);
 			env = env->next;
 		}
 	}
