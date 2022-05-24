@@ -44,20 +44,20 @@ void bubbleSort(t_env *start)
 
 void ms_env_sort(t_ms *ms)
 {
-	bubbleSort(ms->p.envs);
+	bubbleSort(ms->envs);
 }
 
-int	ms_export(t_ms *ms)
+void	ms_export(t_ms *ms, t_cmd *current_cmd)
 {
 	char *key;
 	char *value;
 	char **cmd_env_splitted;
 	t_env *env;
 
-	if (!ms->p.line_splited[1] || *ms->p.line_splited[1] == '\0' || *ms->p.line_splited[1] == ' ')
+	if (!current_cmd->cmd_splited_by_space[1] || *current_cmd->cmd_splited_by_space[1] == '\0' || *current_cmd->cmd_splited_by_space[1] == ' ')
 	{
 		ms_env_sort(ms);
-		env = ms->p.envs;
+		env = ms->envs;
 		while (env)
 		{
 			if (env->key != NULL && env->value != NULL)
@@ -65,28 +65,27 @@ int	ms_export(t_ms *ms)
 			env = env->next;
 		}
 	}
-	if (ft_strnstr(ms->p.line_splited[1], "=", ft_strlen(ms->p.line_splited[1])) == NULL)
+	if (ft_strnstr(current_cmd->cmd_splited_by_space[1], "=", ft_strlen(current_cmd->cmd_splited_by_space[1])) == NULL)
 	{
-		ms->p.cmds->exit_status = 0;
-		return (ms->p.cmds->exit_status);
+		ms->p.cmds->exit_code = 0;
+		return ;
 	}
-	if (ft_isdigit(ms->p.line_splited[1][0]))
+	if (ft_isdigit(current_cmd->cmd_splited_by_space[1][0]))
 	{
 		ft_putstr_fd("export: '", 2);
-		ft_putstr_fd(ms->p.line_splited[1], 2);
+		ft_putstr_fd(current_cmd->cmd_splited_by_space[1], 2);
 		ft_putstr_fd("' : not a valid identifier\n", 2);
-		ms->p.cmds->exit_status = 1;
-		return (ms->p.cmds->exit_status);
+		ms->p.cmds->exit_code = 1;
+		return ;
 	}
-	cmd_env_splitted = ft_split(ms->p.line_splited[1], '=');
+	cmd_env_splitted = ft_split(current_cmd->cmd_splited_by_space[1], '=');
 	key = cmd_env_splitted[0];
 	if (cmd_env_splitted[1] != NULL)
 		value = cmd_env_splitted[1];
 	else
 		value = "";
 	add_env(ms, key, value);
-	ms->p.cmds->exit_status = 0;
-	return (ms->p.cmds->exit_status);
+	ms->p.cmds->exit_code = 0;
 }
 
 

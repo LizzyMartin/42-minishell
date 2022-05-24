@@ -6,7 +6,7 @@ void	ms_print_history(t_ms *ms)
 	int			i;
 
 	i = 1;
-	h = ms->p.history;
+	h = ms->history;
 	while (h)
 	{
 		if (h->index != 0 && h->line != NULL)

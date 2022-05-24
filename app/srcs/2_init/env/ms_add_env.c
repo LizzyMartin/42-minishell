@@ -4,7 +4,7 @@ void    add_env(t_ms *ms, char *key, char *value)
 {
     t_env   *aux;
 
-    aux = ms->p.envs;
+    aux = ms->envs;
 	if (!aux)
 	{
 		aux = (t_env *) malloc(sizeof(struct s_env));

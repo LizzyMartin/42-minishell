@@ -145,7 +145,9 @@ char	*ft_str_replace_all(char *str, char *search, char *replace);
 int		ft_first_ocurrence(const char *str, int ch);
 int		ft_last_ocurrence(const char *str, int ch);
 char	**ft_split(char *s, char c);
+char	**ft_split_by_str(char *s, char *token);
 int		ft_indexof(const char *str, int ch);
 int		ft_str_is_empty(char *str);
+int	    ft_count_chr(char *str, char c);
 
 #endif

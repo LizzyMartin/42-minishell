@@ -5,17 +5,17 @@ void    free_env(t_ms *ms)
     t_env   *aux;
     t_env   *tmp;
 
-    aux = ms->p.envs;
+    aux = ms->envs;
     while (aux)
     {
-        if (ms->p.envs->key)
-            free(ms->p.envs->key);
-        if  (ms->p.envs->value)
-            free(ms->p.envs->value);
+        if (ms->envs->key)
+            free(ms->envs->key);
+        if  (ms->envs->value)
+            free(ms->envs->value);
         tmp = aux->next;
         free(aux);
         aux = tmp;
 
     }
-    ms->p.envs = NULL;
+    ms->envs = NULL;
 }

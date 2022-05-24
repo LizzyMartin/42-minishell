@@ -8,7 +8,7 @@ void	init_env(t_ms *ms)
 
 	i = 0;
 	envp = ms->envp;
-	ms->p.envs = malloc(sizeof(struct s_env));
+	ms->envs = malloc(sizeof(struct s_env));
 	while (envp[i])
 	{
 		envp_splitted = ft_split(envp[i], '='); //alterar para o parse_env

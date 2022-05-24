@@ -1,10 +1,9 @@
 #include <minishell.h>
 
-int		ms_unset(t_ms *ms)
+void	ms_unset(t_ms *ms, t_cmd *current_cmd)
 {
 	char	*key;
 
-	key = ms->p.line_splited[1];
+	key = current_cmd->cmd_splited_by_space[1];
 	delete_env(ms, key);
-	return (ms->p.cmds->exit_status);
 }

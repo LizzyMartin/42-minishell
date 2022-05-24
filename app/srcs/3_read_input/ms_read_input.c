@@ -14,14 +14,14 @@ int	ms_read_input(t_ms *ms)
 {
 	ms_print_sh_name();
 	ms_read_input_signals();
-	ms->p.line = readline(ms->p.rl_p);
-	if (!ms->p.line || ft_strncmp(ms->p.line, "exit", 4) == 0)
+	ms->shell_line = readline(ms->readline_var);
+	if (!ms->shell_line || ft_strncmp(ms->shell_line, "exit", 4) == 0)
 	{
 		ctrl_d_exit_shell(SIGQUIT);
 		ms->exit_code = 1;
 		exit (0);
 	}
-	else if (*(ms->p.line) == '\0')
+	else if (*(ms->shell_line) == '\0')
 	{
 		ft_printf("\n");
 		return (1);

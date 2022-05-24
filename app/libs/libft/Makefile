@@ -20,13 +20,14 @@ SRCS_FILES= 	chr/ft_isalnum.c \
 				chr/ft_isalpha.c \
 				chr/ft_isprint.c \
 				chr/ft_tolower.c \
-				chr/ft_toupper.c\
+				chr/ft_toupper.c \
+				chr/ft_count_chr.c
 
 SRCS_FILES+=	cvt/ft_atoi.c \
 				cvt/ft_itoa.c \
 				cvt/ft_chr_to_str.c \
 				cvt/ft_uitoa_base.c\
-				cvt/ft_hexatoi.c \
+				cvt/ft_hexatoi.c
 
 SRCS_FILES+=	dll/ft_dll_is_sorted.c \
 				dll/ft_dll_last.c \
@@ -90,6 +91,7 @@ SRCS_FILES+=	rw/ft_putstr_fd.c \
 				rw/ft_printf/vendor/translators/translate_to_hexadecimal.c
 
 SRCS_FILES+=	str/ft_split.c \
+				str/ft_split_by_str.c \
 				str/ft_str_is_empty.c \
 				str/ft_strchr.c \
 				str/ft_strdup.c \

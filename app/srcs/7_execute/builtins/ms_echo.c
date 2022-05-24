@@ -1,28 +1,25 @@
 #include <minishell.h>
 
-int	ms_echo(t_ms *ms, t_cmd *current_cmd)
+void	ms_echo(t_ms *ms, t_cmd *current_cmd)
 {
 	int i;
 	int has_flag;
-	char **cmd_splited = ms->p.line_splited;
+	char **cmd_splited = current_cmd->cmd_splited_by_space;
 	char *no_dolar;
 
-	if (current_cmd)
-	{
-	}
 	i = 0;
 	if(!cmd_splited[1])
 	{
 		ft_printf("\n");
-		return (0);
+		return ;
 	}
 	if (ft_strncmp(cmd_splited[1], "$?", 2) == 0)
 	{
-		last_cmd_exit_status(ms);
-		return (0);
+		last_cmd_exit_code(ms);
+		return ;
 	}
 	has_flag = ft_strncmp(cmd_splited[1], "-n", ft_strlen(cmd_splited[1]));
-	while(i++ < ms->p.cmds_size)
+	while(i++ < current_cmd->args_amount - 1)
 	{
 		if (cmd_splited[i] && cmd_splited[i][0] == '$')
 		{
@@ -35,6 +32,5 @@ int	ms_echo(t_ms *ms, t_cmd *current_cmd)
 	}
 	if (has_flag)
 		ft_printf("\n");
-	ms->p.cmds->exit_status = 0;
-	return (ms->p.cmds->exit_status);
+	ms->p.cmds->exit_code = 0;
 }

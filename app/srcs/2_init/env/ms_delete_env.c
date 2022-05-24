@@ -4,7 +4,7 @@ void	delete_env(t_ms *ms, char *key)
 {
    t_env	*env;
 
-	env = ms->p.envs;
+	env = ms->envs;
 	while (env)
 	{
 		if ((env->key != NULL && env->value != NULL))

@@ -37,6 +37,7 @@ void		parse_env(t_ms *ms);
 
 /* read_input */
 int	        ms_read_input(t_ms *ms);
+int	        ms_here_doc(t_p *p);
 
 /* signals */
 void	    ms_read_input_signals(void);
@@ -59,18 +60,19 @@ char	    *append_path(t_cmd *current_cmd, t_ms *ms);
 /* execute */
 int			is_builtin(char *cmd);
 void	    execute_builtin(t_ms *ms, t_cmd *current_cmd);
-void		ms_execute(t_ms *ms);
-void	    last_cmd_exit_status(t_ms *ms);
+void		ms_execute_commands(t_ms *ms, t_p *prompt);
+void        ms_execute(t_ms *ms);
+void	    last_cmd_exit_code(t_ms *ms);
 void	    ms_reinit(t_ms *ms);
 
 // builtins
-int			ms_cd(t_ms *ms);
-int	        ms_echo(t_ms *ms, t_cmd *current_cmd);
-int			ms_env(t_ms *ms);
+void		ms_cd(t_ms *ms, t_cmd *current_cmd);
+void	    ms_echo(t_ms *ms, t_cmd *current_cmd);
+void		ms_env(t_ms *ms);
 void		ms_exit(t_ms *ms);
-int			ms_export(t_ms *ms);
-int			ms_pwd(t_ms *ms);
-int			ms_unset(t_ms *ms);
+void	    ms_export(t_ms *ms, t_cmd *current_cmd);
+void		ms_pwd(t_ms *ms);
+void		ms_unset(t_ms *ms, t_cmd *current_cmd);
 
 /* utils */
 void		ms_clear(t_ms *ms);
@@ -78,9 +80,9 @@ void		ms_free(t_ms *ms);
 void	    ms_finish(t_ms *ms);
 
 // dll_cmd
-t_cmd		*ft_dll_cmd_last(t_cmd *cmds);
-void	    ft_dll_cmd_add_back(t_ms *ms, char **cmd_splited);
-void	    ft_dll_cmd_free(t_ms *ms);
+//t_cmd		*ft_dll_cmd_last(t_cmd *cmds);
+//void	    ft_dll_cmd_add_back(t_ms *ms, char **cmd_splited);
+//void	    ft_dll_cmd_free(t_ms *ms);
 
 /* ms */
 void		minishell(t_ms *ms);

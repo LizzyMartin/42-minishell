@@ -17,7 +17,9 @@ int ft_mtx_size(void **matrix)
 	int	size;
 
 	size = 0;
-	while(matrix[size] != NULL)
+	if (matrix == NULL)
+	    return (size);
+	while(matrix[size])
 		size++;
 	return (size);
 }

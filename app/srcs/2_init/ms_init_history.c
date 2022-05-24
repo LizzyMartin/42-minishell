@@ -6,16 +6,16 @@ void	ms_init_history(t_ms *ms)
 	char	*line;
 	char	*path;
 
-	ms->p.history_i = 1;
+	ms->history_i = 1;
 	path = ft_printf_to_var("/home/%s/.bash_history", find_env_value(ms, "USER"));
 	fd = open(path, O_RDONLY);
-	//ms->p.history = malloc(sizeof(struct s_history));
-	ms->p.history = malloc(sizeof(struct s_history));
-	ms->p.history->next = NULL;
-	ms->p.history->prev = NULL;
+	//ms->history = malloc(sizeof(struct s_history));
+	ms->history = malloc(sizeof(struct s_history));
+	ms->history->next = NULL;
+	ms->history->prev = NULL;
 	line = get_next_line(fd);
-	ms->p.history->line = line;
-	ms->p.history->index = ms->p.history_i;
+	ms->history->line = line;
+	ms->history->index = ms->history_i;
 	while (line)
 	{
 		line = get_next_line(fd);

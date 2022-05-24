@@ -4,7 +4,7 @@ char    *find_env_value(t_ms *ms, char *key)
 {
     t_env   *env;
 
-    env = ms->p.envs;
+    env = ms->envs;
 	while (env)
 	{
 		if ((ft_strncmp(env->key, key, ft_strlen(env->key)) == 0) && \

@@ -34,7 +34,8 @@ SRCS_FILES +=	2_init/history/ms_add_history.c   \
 				2_init/history/ms_print_history.c
 
 SRCS_FILES +=	3_read_input/ms_read_input.c \
-				3_read_input/ms_signals.c
+				3_read_input/ms_signals.c \
+				3_read_input/ms_here_doc.c
 
 
 SRCS_FILES +=	5_tokenizer/ms_tokenizer.c
@@ -42,8 +43,8 @@ SRCS_FILES +=	5_tokenizer/ms_tokenizer.c
 SRCS_FILES +=	6_parse/ms_parse.c \
 				6_parse/ms_prepare_command.c
 
-SRCS_FILES +=	7_execute/ms_execute.c \
-				7_execute/ms_execute_utils.c \
+SRCS_FILES +=	7_execute/ms_execute_commands.c \
+				7_execute/ms_execute_commands_utils.c \
 				7_execute/ms_reinit.c
 
 SRCS_FILES +=	7_execute/builtins/ms_cd.c \
@@ -54,10 +55,7 @@ SRCS_FILES +=	7_execute/builtins/ms_cd.c \
 				7_execute/builtins/ms_pwd.c \
 				7_execute/builtins/ms_unset.c
 
-SRCS_FILES +=	utils/dll_cmd/ft_dll_cmd_add_back.c \
-				utils/dll_cmd/ft_dll_cmd_last.c \
-				utils/dll_cmd/ft_dll_cmd_free.c \
-				utils/ms_free.c \
+SRCS_FILES +=	utils/ms_free.c \
 				utils/ms_finish.c
 
 SRCS_FILES +=	minishell.c \
