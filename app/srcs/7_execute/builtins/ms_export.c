@@ -61,7 +61,7 @@ void	ms_export(t_ms *ms, t_cmd *current_cmd)
 		while (env)
 		{
 			if (env->key != NULL && env->value != NULL)
-				ft_printf("declare -x %s=%s\n", env->key, env->value);
+				ft_printf("declare -x %s=%s\n", env->key, env->value); //deve fazer uma cópia de env ordenada e não ordenar o env
 			env = env->next;
 		}
 	}
@@ -87,34 +87,3 @@ void	ms_export(t_ms *ms, t_cmd *current_cmd)
 	add_env(ms, key, value);
 	ms->p.cmds->exit_code = 0;
 }
-
-
-// void ms_env_sort(t_ms *ms)
-// {
-// 	t_env *envs_1;
-// 	t_env *envs_2;
-// 	char* s_key;
-// 	char* s_value;
-
-// 	envs_1 = ms->p.envs;
-// 	envs_2 = ms->p.envs->next;
-// 	while (envs_1->next->next != NULL)
-// 	{
-// 		while (envs_2 != NULL)
-// 		{
-// 			if (envs_1->key != NULL && envs_1->value != NULL)
-// 				if (*(envs_1->key) > *(envs_2->next->key))
-// 				{
-// 					s_key = envs_2->key;
-// 					s_value = envs_2->value;
-// 					envs_2->key = envs_1->key;
-// 					envs_2->value = envs_1->value;
-// 					envs_1->key = s_key;
-// 					envs_1->value = s_value;
-// 				}
-// 			envs_2 = envs_2->next;	
-// 		}
-// 		envs_2 = ms->p.envs->next;				
-// 		envs_1 = envs_1->next;
-// 	}
-// }

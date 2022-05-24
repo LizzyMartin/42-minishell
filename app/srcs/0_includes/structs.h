@@ -34,7 +34,7 @@ typedef struct s_cmd
 	char				*path_and_name;
 	char				**flags; 
 	
-	int					pipe[2];
+	int					bridge_pipe[2];
 	
 	int					exit_code;
 	char				*error_msg;
@@ -49,11 +49,14 @@ typedef struct s_prompt
 	struct s_prompt			*next;
 
 	int                     has_here_doc;
+	int 					only_here_doc;
 	int						pipe_here_doc[2]; //input file or here_doc
 	char					*hd_limiter;
 
 	int						input_fd;
 	char					*input_path;
+	int						input_redirected_to_file;
+	int						only_input_redirected_to_file;
 
 	int						output_fd;   // output
 	char					*output_path;

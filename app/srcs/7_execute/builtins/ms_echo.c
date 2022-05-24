@@ -1,6 +1,6 @@
 #include <minishell.h>
 
-void	ms_echo(t_ms *ms, t_cmd *current_cmd)
+void	ms_echo(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 {
 	int i;
 	int has_flag;
@@ -10,7 +10,7 @@ void	ms_echo(t_ms *ms, t_cmd *current_cmd)
 	i = 0;
 	if(!cmd_splited[1])
 	{
-		ft_printf("\n");
+		ft_putstr_fd("\n", prompt->output_fd);
 		return ;
 	}
 	if (ft_strncmp(cmd_splited[1], "$?", 2) == 0)
@@ -25,12 +25,12 @@ void	ms_echo(t_ms *ms, t_cmd *current_cmd)
 		{
 			no_dolar = ft_substr(cmd_splited[1], 1, ft_strlen(cmd_splited[1]));
 			if (is_in_env(ms, no_dolar) == 1)
-				ft_printf("%s", find_env_value(ms, no_dolar));
+				ft_putstr_fd(find_env_value(ms, no_dolar), prompt->output_fd);
 		}
 		else
-			ft_printf("%s", cmd_splited[i]);
+			ft_putstr_fd(cmd_splited[i], prompt->output_fd);
 	}
 	if (has_flag)
-		ft_printf("\n");
+		ft_putstr_fd("\n", prompt->output_fd);
 	ms->p.cmds->exit_code = 0;
 }

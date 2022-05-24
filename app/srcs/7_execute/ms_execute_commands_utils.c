@@ -35,7 +35,7 @@ int		is_builtin(char *current_cmd)
 		return (0);
 }
 
-void	execute_builtin(t_ms *ms, t_cmd *current_cmd)
+void	execute_builtin(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 {
 	char *name;
 
@@ -43,7 +43,7 @@ void	execute_builtin(t_ms *ms, t_cmd *current_cmd)
 	if (ft_strncmp(name, "exit", ft_strlen(name)) == 0)
 		ms_exit(ms);
 	else if (ft_strncmp(name, "echo", ft_strlen(name)) == 0)
-		ms_echo(ms, current_cmd);
+		ms_echo(ms, current_cmd, prompt);
 	else if (ft_strncmp(name, "pwd", ft_strlen(name)) == 0)
 		ms_pwd(ms);
 	else if (ft_strncmp(name, "cd", ft_strlen(name)) == 0)

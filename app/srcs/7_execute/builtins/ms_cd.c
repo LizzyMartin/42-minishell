@@ -19,7 +19,6 @@ void	ms_cd(t_ms *ms, t_cmd *current_cmd)
 	char		*oldpwd;
 	char		pwd[999];
 	char		**cmd;
-	//char		*dir;
 
 	cmd = current_cmd->cmd_splited_by_space;
 	oldpwd = find_env_value(ms, "PWD");
@@ -27,7 +26,7 @@ void	ms_cd(t_ms *ms, t_cmd *current_cmd)
 	if (!is_in_env(ms, "OLDPWD"))
 		add_env(ms, "OLDPWD", find_env_value(ms, "HOME"));
 	if (!cmd[1] || !ft_strncmp(cmd[1], "~", ft_strlen(cmd[1]))
-			|| !ft_strncmp(cmd[1], "--", ft_strlen(cmd[1])))
+			|| !ft_strncmp(cmd[1], "--", 2))
 	{
 		chdir(find_env_value(ms, "HOME"));
 	}
@@ -38,9 +37,6 @@ void	ms_cd(t_ms *ms, t_cmd *current_cmd)
 	}
 	else if (oldpwd)
 	{
-		// dir = ft_strjoin(oldpwd, "/");
-		// dir = ft_strjoin(dir, cmd[1]);
-		// ft_printf("%s\n", dir);
 		if (chdir(cmd[1]) == -1)
 		{
 			ft_printf("cd: %s: No such file or directory\n", cmd[1]);
@@ -49,8 +45,7 @@ void	ms_cd(t_ms *ms, t_cmd *current_cmd)
 		else
 		{
 			getcwd(pwd, 999);
-			// if (is_in_env(ms, "OLDPWD"))
-			// 	update_env_value(ms, "OLDPWD", oldpwd);
+			update_env_value(ms, "OLDPWD", oldpwd);
 			update_env_value(ms, "PWD", pwd);
 		}
 	}

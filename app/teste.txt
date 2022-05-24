@@ -1,8 +1,0 @@
-An optional decimal digit string (with nonzero first digit)
-     specifying a minimum field width.  If the converted value has
-       fewer characters than the field width, it will be padded with
-       spaces on the left (or right, if the left-adjustment flag has
-       been given).  Instead of a decimal digit string one may write "*"
-       or "*m$" (for some decimal integer m) to specify that the field
-       width is given in the next argument, or in the m-th argument,
-       respectively, which must be of type int.  A negative field widt
