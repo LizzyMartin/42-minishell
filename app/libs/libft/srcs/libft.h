@@ -6,12 +6,16 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 20:34:46 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/16 22:15:17 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/25 15:26:56 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+
+/* opendir, readdir */
+# include 			<sys/types.h>
+# include 			<dirent.h>
 
 /* waitpid */
 # include 			<sys/types.h>
@@ -147,6 +151,7 @@ int		ft_last_ocurrence(const char *str, int ch);
 char	**ft_split(char *s, char c);
 char	**ft_split_by_str(char *s, char *token);
 int		ft_indexof(const char *str, int ch);
+int		ft_str_indexof(char *big, char *little, size_t n);
 int		ft_str_is_empty(char *str);
 int	    ft_count_chr(char *str, char c);
 

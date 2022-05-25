@@ -103,6 +103,7 @@ SRCS_FILES+=	str/ft_split.c \
 				str/ft_strmapi.c \
 				str/ft_strncmp.c \
 				str/ft_strnstr.c \
+				str/ft_str_indexof.c \
 				str/ft_strrchr.c \
 				str/ft_strtrim.c \
 				str/ft_substr.c \

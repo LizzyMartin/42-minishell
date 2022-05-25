@@ -1,7 +1,6 @@
 // constants
 
-# define PATH_MAX       200
-
+// limits library already define PATH_MAX constant
 
 // tokens
 
@@ -10,3 +9,5 @@
 # define T_PIPE        "__[BANANA2]__"
 
 # define T_SPACE       "__[BANANA3]__"
+
+# define T_WILDCARD    "__[BANANA4]__"

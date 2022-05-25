@@ -30,12 +30,12 @@ void    ms_add_history(t_ms *ms, char *line, t_cmd *cmds)
 			aux->next->line = ft_printf_to_var("%s\n", ms->shell_line);
 		aux->next->next = NULL;
 		aux->next->prev = aux;
-		//tmp = ms_dll_cmd_last(cmds);
-		//if (tmp != NULL)
+		tmp = ms_dll_cmd_last(cmds);
+		int e_code;
 		if (tmp)
-		{
-
-		}
+			e_code = tmp->exit_code;
+		else
+			e_code = 0;
+		aux->next->l_c_exit_code = e_code;
 	}
-		aux->l_c_exit_code = 127;
 }

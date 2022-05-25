@@ -2,7 +2,7 @@
 
 void	ms_print_history(t_ms *ms)
 {
-	t_history 	*h;
+	t_history	*h;
 	int			i;
 
 	i = 1;

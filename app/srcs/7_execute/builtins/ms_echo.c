@@ -5,7 +5,7 @@ void	last_cmd_exit_code(t_ms *ms)
 	t_history *code;
 
 	code = ms_last_history(ms->history);
-	ft_printf("%s", code->line);
+	ft_printf("%d\n", code->l_c_exit_code);
 }
 
 void	ms_echo(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
@@ -37,6 +37,7 @@ void	ms_echo(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 		}
 		else
 			ft_putstr_fd(cmd_splited[i], prompt->output_fd);
+		ft_putstr_fd(" ", prompt->output_fd);
 	}
 	if (has_flag)
 		ft_putstr_fd("\n", prompt->output_fd);
