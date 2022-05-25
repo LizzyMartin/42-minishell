@@ -1,18 +1,5 @@
 #include <minishell.h>
 
-void	last_cmd_exit_code(t_ms *ms)
-{
-	// t_cmd *tmp;
-
-	// tmp = ms->p.cmds;
-	// while (tmp->next != NULL)
-	// 	tmp = tmp->next;
-	// ft_printf("%d\n", tmp->exit_code);
-	if (ms)
-	{
-	}
-}
-
 int		is_builtin(char *current_cmd)
 {
 	if (current_cmd == NULL)

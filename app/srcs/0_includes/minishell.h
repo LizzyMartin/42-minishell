@@ -26,6 +26,7 @@ void	    ms_print_sh_name(void);
 /* init */
 t_ms		*ms_init(int argc, char **argv, char **envp);
 void		init_env(t_ms *ms);
+t_history   *ms_last_history(t_history *history);
 
 // env
 void		add_env(t_ms *ms, char *key, char *value);
@@ -46,7 +47,7 @@ void        ctrl_d_exit_shell(int signal);
 
 /* save history */
 void	    ms_init_history(t_ms *ms);
-void        ms_add_history(t_ms *ms, char *line);
+void        ms_add_history(t_ms *ms, char *line, t_cmd *cmds);
 void	    ms_print_history(t_ms *ms);
 
 /* tokenizer */
@@ -56,6 +57,7 @@ void		ms_tokenizer(t_ms *ms);
 int			ms_parse(t_ms *ms);
 void		ms_prepare_command (t_ms *ms);
 char	    *append_path(t_cmd *current_cmd, t_ms *ms);
+t_cmd	    *ms_dll_cmd_last(t_cmd *cmds);
 
 /* execute */
 int			is_builtin(char *cmd);

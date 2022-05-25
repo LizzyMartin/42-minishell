@@ -128,6 +128,7 @@ int	ms_parse(t_ms *ms)
 		curr_command = curr_prompt->cmds;
 		curr_command->prev = NULL;
 		curr_command->next = NULL;
+		curr_command->exit_code = 0;
 		while (c < curr_prompt->pipe_amount)
 		{
 			if (c > 0)
@@ -137,6 +138,7 @@ int	ms_parse(t_ms *ms)
 		        curr_command = curr_command->next;
 		        curr_command->next = NULL;
 			}
+			curr_command->exit_code = 0;
 			curr_command->index = c;
 			curr_command->cmd_line = curr_prompt->this_p_line_splited_by_pipe[c];
 			

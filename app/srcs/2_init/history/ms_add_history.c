@@ -1,9 +1,11 @@
 #include    <minishell.h>
 
-void    ms_add_history(t_ms *ms, char *line)
+void    ms_add_history(t_ms *ms, char *line, t_cmd *cmds)
 {
     t_history   *aux;
+	t_cmd		*tmp;
 
+	tmp = cmds;
     aux = ms->history;
 	ms->history_i++;
 	if (!aux)
@@ -13,6 +15,7 @@ void    ms_add_history(t_ms *ms, char *line)
 		aux->line = line;
 		aux->next = NULL;
 		aux->prev = NULL;
+		aux->l_c_exit_code = 0;
 	}
 	else
 	{
@@ -27,5 +30,12 @@ void    ms_add_history(t_ms *ms, char *line)
 			aux->next->line = ft_printf_to_var("%s\n", ms->shell_line);
 		aux->next->next = NULL;
 		aux->next->prev = aux;
+		//tmp = ms_dll_cmd_last(cmds);
+		//if (tmp != NULL)
+		if (tmp)
+		{
+
+		}
 	}
+		aux->l_c_exit_code = 127;
 }

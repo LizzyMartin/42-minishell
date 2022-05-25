@@ -1,5 +1,13 @@
 #include <minishell.h>
 
+void	last_cmd_exit_code(t_ms *ms)
+{
+	t_history *code;
+
+	code = ms_last_history(ms->history);
+	ft_printf("%s", code->line);
+}
+
 void	ms_echo(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 {
 	int i;

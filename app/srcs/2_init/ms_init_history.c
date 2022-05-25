@@ -16,11 +16,12 @@ void	ms_init_history(t_ms *ms)
 	line = get_next_line(fd);
 	ms->history->line = line;
 	ms->history->index = ms->history_i;
+	ms->history->l_c_exit_code = 0;
 	while (line)
 	{
 		line = get_next_line(fd);
 		if (line)
-			ms_add_history(ms, line);
+			ms_add_history(ms, line, NULL);
 		//ft_printf(" *%s* ", line);
 		//envp_splitted = ft_split(envp[i], '='); //alterar para o parse_env
 		//if (envp_splitted[0] != NULL && envp_splitted[1] != NULL)

@@ -87,6 +87,8 @@ void       ms_execute(t_ms *ms)
 	while (curr_prompt)
 	{
 		ms_execute_commands(ms, curr_prompt);
+		//ft_printf("%s", ms_dll_cmd_last(curr_prompt->cmds)->just_name);
+		ms_add_history(ms, NULL, curr_prompt->cmds);
 		curr_prompt = curr_prompt->next;
 	}
 }

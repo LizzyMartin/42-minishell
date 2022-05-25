@@ -11,12 +11,14 @@ typedef struct s_env
 }	t_env;
 
 // history
+// l_c_exit_code: exit code of last command of this command line
 typedef struct s_history
 {
 	int					index;
 	char				*line;
 	struct s_history	*next;
 	struct s_history	*prev;
+	int					l_c_exit_code;
 }	t_history;
 
 // cmds

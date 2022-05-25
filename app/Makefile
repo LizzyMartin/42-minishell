@@ -31,7 +31,8 @@ SRCS_FILES +=	2_init/env/ms_add_env.c \
 				2_init/env/ms_parse_env.c
 
 SRCS_FILES +=	2_init/history/ms_add_history.c   \
-				2_init/history/ms_print_history.c
+				2_init/history/ms_print_history.c \
+				2_init/history/ms_last_history.c
 
 SRCS_FILES +=	3_read_input/ms_read_input.c \
 				3_read_input/ms_signals.c \
@@ -41,7 +42,8 @@ SRCS_FILES +=	3_read_input/ms_read_input.c \
 SRCS_FILES +=	5_tokenizer/ms_tokenizer.c
 
 SRCS_FILES +=	6_parse/ms_parse.c \
-				6_parse/ms_prepare_command.c
+				6_parse/ms_prepare_command.c \
+				6_parse/cmd/ms_dll_cmd_last.c
 
 SRCS_FILES +=	7_execute/ms_execute_commands.c \
 				7_execute/ms_execute_commands_utils.c \
@@ -82,6 +84,7 @@ $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)/3_read_input
 	mkdir -p $(OBJS_DIR)/5_tokenizer
 	mkdir -p $(OBJS_DIR)/6_parse
+	mkdir -p $(OBJS_DIR)/6_parse/cmd
 	mkdir -p $(OBJS_DIR)/7_execute
 	mkdir -p $(OBJS_DIR)/7_execute/builtins
 	mkdir -p $(OBJS_DIR)/utils
