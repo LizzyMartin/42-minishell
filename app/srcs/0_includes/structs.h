@@ -34,10 +34,10 @@ typedef struct s_cmd
 
 	char				*just_name;
 	char				*path_and_name;
-	char				**flags; 
-	
+	char				**flags;
+
 	int					bridge_pipe[2];
-	
+
 	int					exit_code;
 	char				*error_msg;
 }	t_cmd;
@@ -60,6 +60,8 @@ typedef struct s_prompt
 	int						input_redirected_to_file;
 	int						only_input_redirected_to_file;
 
+	int						builtin_bridge[2];
+
 	int						output_fd;   // output
 	char					*output_path;
 	int                     redirect;
@@ -68,7 +70,7 @@ typedef struct s_prompt
 	t_cmd					*cmds;
 
 	int						aux_fd;
-	
+
 	char					*this_p_line;
 	char					**this_p_line_splited_by_pipe;
 	int                     args_amount;
@@ -85,12 +87,12 @@ typedef struct s_minishell
 	int					history_i;
 	t_history			*history;
 	t_env				*envs;
-	
+
 	char				*shell_line;
 	char				*shell_line_tokenized;
 	char				**slt_splited_by_connectors;
 	char				*readline_var;
-	
+
 	t_p					p;
 	int					p_amount;
 

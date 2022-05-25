@@ -54,6 +54,7 @@ void		ms_execute_commands(t_ms *ms, t_p *prompt)
 		}
 	}
 	ms_add_history(ms, NULL, prompt->cmds);
+
 }
 
 void       ms_execute(t_ms *ms)
