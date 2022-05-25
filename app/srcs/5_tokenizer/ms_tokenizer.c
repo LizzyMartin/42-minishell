@@ -96,6 +96,8 @@ char	*ms_wildcards(t_ms *ms, char *wildcard)
 
 int	ms_exist_some_file_with_this_wildcard(char *wildcard)
 {
+	if (ft_strncmp(wildcard, "*", ft_strlen(wildcard)) == 0)
+		return (1);
 	DIR 			*dr;
 	struct dirent	*de;
 	int				wd_f_o;
