@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dll_last.c                                      :+:      :+:    :+:   */
+/*   ms_last_history.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 06:44:31 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/14 00:40:54 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/26 19:58:31 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_history	*ms_last_history(t_history *history)
 {
-	t_history *tmp;
+	t_history	*tmp;
 
 	tmp = history;
 	while (tmp->next != NULL)

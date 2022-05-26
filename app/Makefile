@@ -19,43 +19,48 @@ NAME =			minishell
 
 SRCS_FILES +=	1_design/ms_print_banner.c
 
-SRCS_FILES +=	2_init/ms_init.c \
-				2_init/ms_init_env.c \
-				2_init/ms_init_history.c 
+SRCS_FILES +=	2_init/ms_init.c		
+
 
 SRCS_FILES +=	2_init/env/ms_add_env.c \
 				2_init/env/ms_delete_env.c \
 				2_init/env/ms_find_env_value.c \
 				2_init/env/ms_free_env.c \
 				2_init/env/ms_is_in_env.c \
-				2_init/env/ms_parse_env.c
+				2_init/env/ms_parse_env.c \
+				2_init/env/ms_init_env.c
 
 SRCS_FILES +=	2_init/history/ms_add_history.c   \
 				2_init/history/ms_print_history.c \
-				2_init/history/ms_last_history.c
+				2_init/history/ms_last_history.c \
+				2_init/history/ms_init_history.c
 
 SRCS_FILES +=	3_read_input/ms_read_input.c \
+				3_read_input/ms_here_doc.c \
 				3_read_input/ms_signals.c \
-				3_read_input/ms_here_doc.c
+				3_read_input/ms_signals_ctrl.c
 
+SRCS_FILES +=	4_tokenizer/ms_tokenizer.c \
+				4_tokenizer/ms_wildcard.c \
+				4_tokenizer/ms_check_quotes.c
 
-SRCS_FILES +=	5_tokenizer/ms_tokenizer.c
+SRCS_FILES +=	5_parse/ms_parse.c \
+				5_parse/ms_if_there_is_commands_prepare_them_to_be_executed.c \
+				5_parse/ms_append_path_in_front.c \
+				5_parse/ms_parse_input.c \
+				5_parse/ms_parse_output.c \
+				5_parse/cmd/ms_dll_cmd_last.c
 
-SRCS_FILES +=	6_parse/ms_parse.c \
-				6_parse/ms_prepare_command.c \
-				6_parse/cmd/ms_dll_cmd_last.c
+SRCS_FILES +=	6_execute/ms_execute_commands.c \
+				6_execute/ms_execute_commands_utils.c 
 
-SRCS_FILES +=	7_execute/ms_execute_commands.c \
-				7_execute/ms_execute_commands_utils.c \
-				7_execute/ms_reinit.c
-
-SRCS_FILES +=	7_execute/builtins/ms_cd.c \
-				7_execute/builtins/ms_echo.c \
-				7_execute/builtins/ms_env.c \
-				7_execute/builtins/ms_exit.c \
-				7_execute/builtins/ms_export.c \
-				7_execute/builtins/ms_pwd.c \
-				7_execute/builtins/ms_unset.c
+SRCS_FILES +=	6_execute/builtins/ms_cd.c \
+				6_execute/builtins/ms_echo.c \
+				6_execute/builtins/ms_env.c \
+				6_execute/builtins/ms_exit.c \
+				6_execute/builtins/ms_export.c \
+				6_execute/builtins/ms_pwd.c \
+				6_execute/builtins/ms_unset.c
 
 SRCS_FILES +=	utils/ms_free.c \
 				utils/ms_finish.c

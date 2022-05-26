@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_find_env_value.c                                :+:      :+:    :+:   */
+/*   ms_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/26 19:57:50 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/26 20:31:29 by acapela-         ###   ########.fr       */
+/*   Created: 2022/05/26 19:41:37 by acapela-          #+#    #+#             */
+/*   Updated: 2022/05/26 19:41:37 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-char	*ms_find_env_value(t_ms *ms, char *key)
+void	last_cmd_exit_code(t_ms *ms)
 {
-	t_env	*env;
+	t_history	*code;
 
-	env = ms->envs;
-	while (env)
+	code = ms_last_history(ms->history);
+	ft_putstr_fd(code->l_c_exit_code, 2);
+	ft_putstr_fd(": command not found\n", 2);
+}
+
+void	ms_error(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
+{
+	char	**cmd_splited;
+
+	cmd_splited = current_cmd->cmd_splited_by_space;
+	if (ft_strncmp(cmd_splited[1], "$?", 2) == 0)
 	{
-		if ((ft_strncmp(env->key, key, ft_strlen(env->key)) == 0)
-			&& (env->key != NULL && env->value != NULL))
-			return (env->value);
-		env = env->next;
+		last_cmd_exit_code(ms);
+		return ;
 	}
-	return (ft_strdup(""));
 }

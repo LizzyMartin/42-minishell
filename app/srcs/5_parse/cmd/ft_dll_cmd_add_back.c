@@ -1,38 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_add_env.c                                       :+:      :+:    :+:   */
+/*   ft_dll_cmd_add_back.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/26 19:57:03 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/26 20:21:16 by acapela-         ###   ########.fr       */
+/*   Created: 2022/04/09 06:44:31 by acapela-          #+#    #+#             */
+/*   Updated: 2022/05/26 20:25:09 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	ms_add_env(t_ms *ms, char *key, char *value)
+void	ft_dll_cmd_add_back(t_ms *ms, char **cmd_splited)
 {
-	t_env	*aux;
+	t_cmd	*cmd;
+	t_cmd	*last;
 
-	aux = ms->envs;
-	if (!aux)
+	last = NULL;
+	cmd = ms->p.cmds;
+	if (cmd == NULL)
 	{
-		aux = (t_env *) malloc(sizeof(struct s_env));
-		aux->key = key;
-		aux->value = value;
-		aux->next = NULL;
-		aux->prev = NULL;
+		cmd = (t_cmd *) malloc(sizeof(t_cmd));
+		cmd->prev = NULL;
+		cmd->next = NULL;
 	}
 	else
 	{
-		while (aux->next)
-			aux = aux->next;
-		aux->next = (t_env *) malloc(sizeof(struct s_env));
-		aux->next->key = key;
-		aux->next->value = value;
-		aux->next->next = NULL;
-		aux->next->prev = aux;
+		last = ft_dll_cmd_last(cmd);
+		last->next = (t_cmd *) malloc(sizeof(t_cmd));
+		cmd = last->next;
+		cmd->prev = last;
+		cmd->next = NULL;
 	}
+	cmd->cmd_splited = cmd_splited;
+	cmd->name_and_path = NULL;
+	cmd->index = 0;
+	cmd->std_in = 0;
 }

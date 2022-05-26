@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   errors.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/26 20:06:31 by acapela-          #+#    #+#             */
+/*   Updated: 2022/05/26 20:06:31 by acapela-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef ERRORS_H
 # define ERROR_H
 
@@ -17,6 +29,5 @@
 /* exit */
 # define NUMERIC_ARG ": numeric argument required\n"
 # define MANY_ARG "exit: too many arguments\n"
-
 
 #endif

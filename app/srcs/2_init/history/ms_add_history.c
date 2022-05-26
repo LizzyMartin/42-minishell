@@ -1,12 +1,45 @@
-#include    <minishell.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ms_add_history.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/26 19:55:36 by acapela-          #+#    #+#             */
+/*   Updated: 2022/05/26 21:26:01 by acapela-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void    ms_add_history(t_ms *ms, char *line, t_cmd *cmds)
+#include <minishell.h>
+
+static void	ms_add_history_aux(t_history	*aux)
 {
-    t_history   *aux;
+	while (aux->next)
+		aux = aux->next;
+	aux->next = (t_history *) malloc(sizeof(struct s_history));
+	aux->next->index = ms->history_i;
+	if (line != NULL)
+		aux->next->line = line;
+	else
+		aux->next->line = ft_printf_to_var("%s\n", ms->shell_line);
+	aux->next->next = NULL;
+	aux->next->prev = aux;
+	tmp = ms_dll_cmd_last(cmds);
+	if (tmp)
+		e_code = tmp->exit_code;
+	else
+		e_code = 0;
+	aux->next->l_c_exit_code = e_code;
+}
+
+void	ms_add_history(t_ms *ms, char *line, t_cmd *cmds)
+{
+	t_history	*aux;
 	t_cmd		*tmp;
+	int			e_code;
 
 	tmp = cmds;
-    aux = ms->history;
+	aux = ms->history;
 	ms->history_i++;
 	if (!aux)
 	{
@@ -18,24 +51,5 @@ void    ms_add_history(t_ms *ms, char *line, t_cmd *cmds)
 		aux->l_c_exit_code = 0;
 	}
 	else
-	{
-		while (aux->next) {
-			aux = aux->next;
-		}
-		aux->next = (t_history *) malloc(sizeof(struct s_history));
-		aux->next->index = ms->history_i;
-		if (line != NULL)
-			aux->next->line = line;
-		else
-			aux->next->line = ft_printf_to_var("%s\n", ms->shell_line);
-		aux->next->next = NULL;
-		aux->next->prev = aux;
-		tmp = ms_dll_cmd_last(cmds);
-		int e_code;
-		if (tmp)
-			e_code = tmp->exit_code;
-		else
-			e_code = 0;
-		aux->next->l_c_exit_code = e_code;
-	}
+		ms_add_history_aux(aux);
 }

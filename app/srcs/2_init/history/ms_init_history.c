@@ -1,32 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_print_banner.c                                  :+:      :+:    :+:   */
+/*   ms_init_history.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/26 20:06:23 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/26 20:07:48 by acapela-         ###   ########.fr       */
+/*   Created: 2022/05/26 19:55:14 by acapela-          #+#    #+#             */
+/*   Updated: 2022/05/26 20:03:29 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	print_banner(void)
+void	ms_init_history(t_ms *ms)
 {
 	int		fd;
-	int		i;
 	char	*line;
+	char	*path;
 
-	i = 0;
-	fd = open("srcs/1_design/banner.txt", O_RDONLY);
-	while (i < 12)
+	ms->history_i = 1;
+	path = ft_printf_to_var("/home/%s/.bash_history", \
+		find_env_value(ms, "USER"));
+	fd = open(path, O_RDONLY);
+	ms->history = malloc(sizeof(struct s_history));
+	ms->history->next = NULL;
+	ms->history->prev = NULL;
+	line = get_next_line(fd);
+	ms->history->line = line;
+	ms->history->index = ms->history_i;
+	ms->history->l_c_exit_code = 0;
+	while (line)
 	{
 		line = get_next_line(fd);
-		if (line != NULL)
-			ft_printf("%s%s", BOLD_PURPLE, line);
-		free(line);
-		i++;
+		if (line)
+			ms_add_history(ms, line, NULL);
 	}
-	ft_printf(WHITE);
 }

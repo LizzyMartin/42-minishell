@@ -1,4 +1,17 @@
-/* minishell design central */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   design.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/26 20:18:46 by acapela-          #+#    #+#             */
+/*   Updated: 2022/05/26 20:18:47 by acapela-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef DESIGN_H
+# define DESIGN_H
 
 # define BLACK "\033[0;30m"
 # define RED "\033[0;31m"
@@ -20,4 +33,6 @@
 
 # define SHELL_NAME "minishell ▸ "
 
-# define SHELL BOLD_BLUE SHELL_NAME
+# define SHELL SHELL_NAME
+
+#endif

@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_find_env_value.c                                :+:      :+:    :+:   */
+/*   ms_init_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/26 19:57:50 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/26 20:31:29 by acapela-         ###   ########.fr       */
+/*   Created: 2022/05/26 19:55:10 by acapela-          #+#    #+#             */
+/*   Updated: 2022/05/26 20:19:47 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-char	*ms_find_env_value(t_ms *ms, char *key)
+void	ms_init_env(t_ms *ms)
 {
-	t_env	*env;
+	int		i;
+	char	**envp;
+	char	**envp_splitted;
 
-	env = ms->envs;
-	while (env)
+	i = 0;
+	envp = ms->envp;
+	ms->envs = malloc(sizeof(struct s_env));
+	while (envp[i])
 	{
-		if ((ft_strncmp(env->key, key, ft_strlen(env->key)) == 0)
-			&& (env->key != NULL && env->value != NULL))
-			return (env->value);
-		env = env->next;
+		envp_splitted = ft_split(envp[i], '=');
+		if (envp_splitted[0] != NULL && envp_splitted[1] != NULL)
+			ms_add_env(ms, envp_splitted[0], envp_splitted[1]);
+		i++;
 	}
-	return (ft_strdup(""));
 }

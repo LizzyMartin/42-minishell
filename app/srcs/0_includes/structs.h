@@ -1,102 +1,91 @@
-/* structs */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structs.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/26 20:06:41 by acapela-          #+#    #+#             */
+/*   Updated: 2022/05/26 20:06:42 by acapela-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#ifndef STRUCTS_H
+# define STRUCTS_H
 
-// env
-typedef struct s_env
-{
-	char				*key;
-	char				*value;
-	struct s_env		*next;
-	struct s_env		*prev;
-}	t_env;
-
-// history
-// l_c_exit_code: exit code of last command of this command line
-typedef struct s_history
-{
-	int					index;
-	char				*line;
-	struct s_history	*next;
-	struct s_history	*prev;
-	int					l_c_exit_code;
-}	t_history;
-
-// cmds
 typedef struct s_cmd
 {
-	int					index;
-	struct s_cmd		*prev;
-	struct s_cmd		*next;
-
-	char                *cmd_line;
-	char				**cmd_splited_by_space;
-	int					args_amount;
-
-	char				*just_name;
-	char				*path_and_name;
-	char				**flags;
-
-	int					bridge_pipe[2];
-
-	int					exit_code;
-	char				*error_msg;
+	int						index;
+	struct s_cmd			*prev;
+	struct s_cmd			*next;
+	char					*cmd_line;
+	char					**cmd_splited_by_space;
+	int						args_amount;
+	char					*just_name;
+	char					*path_and_name;
+	char					**flags;
+	int						bridge_pipe[2];
+	int						exit_code;
+	char					*error_msg;
 }	t_cmd;
 
-
-
-/* prompt */
 typedef struct s_prompt
 {
-	struct s_prompt			*prev;       // connectors &&,||
+	struct s_prompt			*prev;
 	struct s_prompt			*next;
-
-	int                     has_here_doc;
-	int 					only_here_doc;
-	int						pipe_here_doc[2]; //input file or here_doc
+	int						has_here_doc;
+	int						only_here_doc;
+	int						pipe_here_doc[2];
 	char					*hd_limiter;
-
 	int						input_fd;
 	char					*input_path;
 	int						input_redirected_to_file;
 	int						only_input_redirected_to_file;
 	int						no_cmd_just_redirect;
-
 	int						builtin_bridge[2];
-
-	int						output_fd;   // output
+	int						output_fd;
 	char					*output_path;
-	int                     redirect;
-
-	int						pipe_amount; // commands
+	int						redirect;
+	int						pipe_amount;
 	t_cmd					*cmds;
-
 	int						aux_fd;
-
 	char					*this_p_line;
 	char					**this_p_line_splited_by_pipe;
-	int                     args_amount;
-
+	int						args_amount;
 }	t_p;
 
-// ms
 typedef struct s_minishell
 {
-	int					argc;
-	char				**argv;
-	char				**envp;
-
-	int					history_i;
-	t_history			*history;
-	t_env				*envs;
-
-	char				*shell_line;
-	char				*shell_line_tokenized;
-	char				**slt_splited_by_connectors;
-	char				*readline_var;
-
-	t_p					p;
-	int					p_amount;
-
-	int					exit_code;
-
+	int						argc;
+	char					**argv;
+	char					**envp;
+	char					*shell_line;
+	char					*shell_line_tokenized;
+	char					**slt_splited_by_connectors;
+	char					*readline_var;
+	int						p_amount;
+	t_p						p;
+	int						exit_code;
+	int						history_i;
+	t_history				*history;
+	t_env					*envs;
 }	t_ms;
+
+typedef struct s_env
+{
+	char					*key;
+	char					*value;
+	struct s_env			*next;
+	struct s_env			*prev;
+}	t_env;
+
+typedef struct s_history
+{
+	int						index;
+	char					*line;
+	struct s_history		*next;
+	struct s_history		*prev;
+	int						l_c_exit_code;
+}	t_history;
+
+#endif
