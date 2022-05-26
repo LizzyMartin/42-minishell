@@ -10,16 +10,6 @@ static char	*ms_get_home_value(t_ms *ms)
 		return ft_strdup("/home");
 }
 
-/*
- * procura por aspas duplas, se tiver terminada, troca os espaços por algo
- * e ignora as aspas duplas
- *
- * ex:
- * "oi" -> oi
- * "       oi" -> "AAAAAAAAoi"
- * "$PWD" -> /home/user
- * '$PWD' -> $PWD
- */
 void	ms_check_quotes(t_ms *ms)
 {
 	char	*line;
@@ -89,6 +79,7 @@ char	*ms_wildcards(t_ms *ms, char *wildcard)
 		(ft_strncmp(de->d_name, "..", ft_strlen(de->d_name)) == 0)))
 			continue;
 		replace = ft_strjoin(ft_strjoin(replace, " "), de->d_name);
+		replace = ft_strjoin(replace, " \0");
 	}
 	closedir(dr);
 	return (replace);
@@ -136,14 +127,14 @@ void	ms_tokenizer(t_ms *ms)
 
 	// wildcards
 	char *iterate_shell_line;
+	int start;
+	int end;
+	char *replace;
+	char *wildcard;
 
 	iterate_shell_line = ms->shell_line_tokenized;
 	while (ft_strrchr(iterate_shell_line, '*'))
 	{
-		int start;
-		int end;
-		char *replace;
-		char *wildcard;
 
 		replace = ft_strdup("");
 		start = ft_indexof(ms->shell_line, '*') + 1;

@@ -15,10 +15,11 @@ void	ms_echo(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 	char **cmd_splited = current_cmd->cmd_splited_by_space;
 	char *no_dolar;
 	int	aux;
+	int	tmp_fd[2];
 
-	pipe(prompt->builtin_bridge);
-	prompt->input_fd = prompt->builtin_bridge[0];
-	aux = prompt->builtin_bridge[1];
+	pipe(tmp_fd);
+	prompt->input_fd = tmp_fd[0];
+	aux = tmp_fd[1];
 	if (current_cmd->index == prompt->args_amount - 1)
 		aux = 1;
 	i = 0;

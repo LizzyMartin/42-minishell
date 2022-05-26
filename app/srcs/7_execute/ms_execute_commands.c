@@ -36,25 +36,24 @@ void		ms_execute_commands(t_ms *ms, t_p *prompt)
 	t_cmd	*current_cmd;
 
 	current_cmd = prompt->cmds;
-	if (ft_strncmp(current_cmd->just_name, "history", 7) == 0)
+	//prompt->aux_fd = prompt->input_fd;
+	while (current_cmd)
 	{
-		ms_add_history(ms, NULL, prompt->cmds);
-		ms_print_history(ms);
-		return ;
-	}
-	else if (is_builtin(current_cmd->just_name) == 1)
-		execute_builtin(ms, current_cmd, prompt);
-	else
-	{
-		prompt->aux_fd = prompt->input_fd;
-		while (current_cmd)
+		if (ft_strncmp(current_cmd->just_name, "history", 7) == 0)
 		{
-			ms_execute_command(prompt, current_cmd, ms->envp, &(prompt->aux_fd));
-			current_cmd = current_cmd->next;
+			ms_add_history(ms, NULL, prompt->cmds);
+			ms_print_history(ms);
+			return ;
 		}
+		else if (is_builtin(current_cmd->just_name) == 1)
+			execute_builtin(ms, current_cmd, prompt);
+		else
+		{
+			ms_execute_command(prompt, current_cmd, ms->envp, &(prompt->input_fd));
+		}
+		current_cmd = current_cmd->next;
 	}
 	ms_add_history(ms, NULL, prompt->cmds);
-
 }
 
 void       ms_execute(t_ms *ms)
@@ -69,14 +68,21 @@ void       ms_execute(t_ms *ms)
 	    curr_prompt->input_fd = ms_here_doc(curr_prompt);
 		if (o_here_doc == 1)
 		{
+			ft_printf("foi fechado");
 			close(curr_prompt->input_fd);
 			return ;
 		}
 	}
 	if (curr_prompt->only_input_redirected_to_file == 1)
 	     return ;
-
-
+	if (curr_prompt->no_cmd_just_redirect == 1)
+	{
+		ft_printf("#");
+			ft_fd_print(curr_prompt->input_fd);
+		ft_printf("#");
+		//dup2(curr_prompt->input_fd, curr_prompt->output_fd);
+	    return ;
+	}
 	while (curr_prompt)
 	{
 		ms_execute_commands(ms, curr_prompt);

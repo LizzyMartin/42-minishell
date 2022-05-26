@@ -8,9 +8,9 @@ void    ft_fd_print(int fd)
     while (tmp)
     {
         ft_printf("%s", tmp);
-        free(tmp);
+        // free(tmp);
         tmp = get_next_line(fd);
     }
-    free(tmp);
-    get_next_line(-1);
+    // free(tmp);
+    //get_next_line(-1);
 }

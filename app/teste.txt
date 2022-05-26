@@ -1,0 +1,3 @@
+[1;34mminishell ▸ [1;36m/mnt/z/ESTUDOS_DO_ARGEL/42/42-minishell/app ▸ [0;37margel
+[1;34mminishell ▸ [1;36m/mnt/z/ESTUDOS_DO_ARGEL/42/42-minishell/app ▸ [0;37mexit
+[1;34mminishell ▸ [1;36m/mnt/z/ESTUDOS_DO_ARGEL/42/42-minishell/app ▸ [0;37mexit

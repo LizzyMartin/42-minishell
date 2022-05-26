@@ -33,14 +33,14 @@ int	ms_parse(t_ms *ms)
 	else
 	{
 		ms->slt_splited_by_connectors = NULL;
-		
+
 	}
 
 	curr_prompt = &ms->p;
 	i = 0;
 	while (i < ms->p_amount)
 	{
-		
+
 	// 2 - malloc prompts
 		if (i >= 1)
 		{
@@ -53,10 +53,13 @@ int	ms_parse(t_ms *ms)
 		     curr_prompt->this_p_line = ms->slt_splited_by_connectors[i];
 		else
 		     curr_prompt->this_p_line = ms->shell_line_tokenized;
-    
+
         // split by pipe
-		curr_prompt->this_p_line_splited_by_pipe = ft_split_by_str(curr_prompt->this_p_line, T_PIPE);
-		curr_prompt->args_amount = ft_mtx_size((void **) curr_prompt->this_p_line_splited_by_pipe);
+		if (ft_strnstr(curr_prompt->this_p_line, T_PIPE, ft_strlen(T_PIPE)) == 0)
+		{
+			curr_prompt->this_p_line_splited_by_pipe = ft_split_by_str(curr_prompt->this_p_line, T_PIPE);
+			curr_prompt->args_amount = ft_mtx_size((void **) curr_prompt->this_p_line_splited_by_pipe);
+		}
 
 		/* 1. INPUT */
 		input_s_by_space = ft_split(curr_prompt->this_p_line_splited_by_pipe[0], ' ');
@@ -64,6 +67,7 @@ int	ms_parse(t_ms *ms)
 		curr_prompt->input_path = NULL;
 		curr_prompt->has_here_doc = 0;
 		curr_prompt->only_here_doc = 0;
+		curr_prompt->no_cmd_just_redirect = 0;
 
 		// here doc -> << LIMITER
 		if (ft_strnstr(input_s_by_space[0], "<<", 2))
@@ -77,7 +81,7 @@ int	ms_parse(t_ms *ms)
 		curr_prompt->input_redirected_to_file = 0;
         curr_prompt->only_input_redirected_to_file = 0;
 		if (ft_strnstr(input_s_by_space[0], "<", 1))
-		{	
+		{
 			curr_prompt->input_redirected_to_file = 1;
 			curr_prompt->input_path = ft_strdup(input_s_by_space[1]);
 			curr_prompt->input_fd = open(curr_prompt->input_path, O_RDONLY);
@@ -113,7 +117,7 @@ int	ms_parse(t_ms *ms)
 							curr_prompt->redirect = 0;
 				}
 			}
-	
+
 		/* 3 - how many commands? | */
 		int c;
 
@@ -132,7 +136,7 @@ int	ms_parse(t_ms *ms)
 		while (c < curr_prompt->pipe_amount)
 		{
 			if (c > 0)
-			{	
+			{
 		        curr_command->next = (t_cmd *) malloc (sizeof(t_cmd));
 		        curr_command->next->prev = curr_command;
 		        curr_command = curr_command->next;
@@ -141,7 +145,7 @@ int	ms_parse(t_ms *ms)
 			curr_command->exit_code = 0;
 			curr_command->index = c;
 			curr_command->cmd_line = curr_prompt->this_p_line_splited_by_pipe[c];
-			
+
 			if (curr_prompt->has_here_doc == 1)
 			{
 				aux = ft_strlen(input_s_by_space[0]) + ft_strlen(input_s_by_space[1]) + 2;
@@ -156,6 +160,7 @@ int	ms_parse(t_ms *ms)
 				curr_command->cmd_line = ft_substr(tmp, 0, ft_strlen(tmp));
 			}
 
+
 			if (c == (curr_prompt->pipe_amount - 1) && curr_prompt->redirect > 0)
 			{
 				int length = ft_mtx_size((void **) output_s_by_space);
@@ -166,26 +171,29 @@ int	ms_parse(t_ms *ms)
 				else
 					tmp = curr_command->cmd_line;
 				curr_command->cmd_line = ft_substr(tmp, 0, ft_strlen(tmp) - aux - 1);
+				if (ft_strnstr(curr_command->cmd_line, ">>", ft_strlen(curr_command->cmd_line)))
+					curr_prompt->no_cmd_just_redirect = 1;
 			}
 
 			curr_command->cmd_splited_by_space = ft_split(curr_command->cmd_line, ' ');
 			curr_command->args_amount = ft_mtx_size((void **) curr_command->cmd_splited_by_space);
 			curr_command->just_name = curr_command->cmd_splited_by_space[0];
 			curr_command->path_and_name = append_path(curr_command, ms);
-			
+
 			/* INPUT */
 			if (is_input_command(curr_command->just_name) == 1)
 			{
-				if (curr_command->args_amount < 2)
-				{
-					curr_prompt->input_fd = 0;
-					curr_prompt->input_path = NULL;
-				}
-				else
+				// {
+				// 	curr_prompt->input_fd = 0;
+				// 	curr_prompt->input_path = NULL;
+				// }
+				// else
+				if (curr_command->args_amount >= 2 && curr_command->index == 0)
 				{
 					curr_prompt->input_path = ft_strdup(curr_command->cmd_splited_by_space[1]);
 					curr_prompt->input_fd = open(curr_command->cmd_splited_by_space[1], O_RDONLY);
 				}
+				//ft_printf("#%d#", curr_command->args_amount);
 			}
         c++;
 		}

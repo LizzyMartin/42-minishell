@@ -59,6 +59,7 @@ typedef struct s_prompt
 	char					*input_path;
 	int						input_redirected_to_file;
 	int						only_input_redirected_to_file;
+	int						no_cmd_just_redirect;
 
 	int						builtin_bridge[2];
 
