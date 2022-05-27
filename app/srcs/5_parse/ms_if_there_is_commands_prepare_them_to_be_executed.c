@@ -92,6 +92,8 @@ static void	prepare_something(int c, t_cmd *curr_command, \
 		tmp = curr_command->cmd_line;
 	curr_command->cmd_line = ft_substr(tmp, 0, ft_strlen(tmp) - aux - 1);
 	if (ft_strnstr(curr_command->cmd_line, ">>", \
+		ft_strlen(curr_command->cmd_line)) \
+		|| ft_strnstr(curr_command->cmd_line, ">", \
 		ft_strlen(curr_command->cmd_line)))
 		curr_prompt->no_cmd_just_redirect = 1;
 }

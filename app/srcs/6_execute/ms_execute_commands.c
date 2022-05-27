@@ -70,10 +70,8 @@ void	ms_execute_commands(t_ms *ms, t_p *prompt)
 			execute_builtin(ms, current_cmd, prompt);
 		else
 		{
-			ft_printf("#input_fd: %d#\n", prompt->input_fd);
 				ms_execute_command(prompt, current_cmd, \
 					ms->envp, &(prompt->input_fd));
-				
 		}
 		current_cmd = current_cmd->next;
 	}
@@ -84,11 +82,8 @@ static void	print_fd_or_execute_cmd(t_ms *ms, t_p *curr_prompt)
 {
 	if (curr_prompt->only_input_redirected_to_file == 1)
 		return ;
-	else if (curr_prompt->no_cmd_just_redirect == 1)
-	{
-		ft_fd_print(curr_prompt->input_fd);
-		dup2(curr_prompt->input_fd, curr_prompt->output_fd);
-	}
+	else if(curr_prompt->no_cmd_just_redirect == 1)
+		ft_fd_dup2(curr_prompt->pipe_here_doc[0], curr_prompt->output_fd);
 	else
 	{
 		while (curr_prompt)
