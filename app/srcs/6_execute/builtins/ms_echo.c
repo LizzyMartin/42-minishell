@@ -38,7 +38,7 @@ void	last_cmd_exit_code(t_ms *ms)
 	t_history	*code;
 
 	code = ms_last_history(ms->history);
-	ft_printf("%d\n", code->l_c_exit_code);
+	ft_printf("%d", code->l_c_exit_code);
 }
 
 void	ms_echo(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
@@ -57,7 +57,10 @@ void	ms_echo(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 	if (!cmd_splited[1])
 		ft_putstr_fd("\n", aux);
 	else if (ft_strncmp(cmd_splited[1], "$?", 2) == 0)
+	{
 		last_cmd_exit_code(ms);
+		ft_putstr_fd("\n", aux);
+	}
 	else
 	{
 		has_flag = ft_strncmp(cmd_splited[1], "-n", ft_strlen(cmd_splited[1]));

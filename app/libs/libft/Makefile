@@ -72,6 +72,7 @@ SRCS_FILES+=	rw/ft_putstr_fd.c \
 				rw/ft_print_matrix.c \
 				rw/ft_printf/ft_printf.c \
 				rw/ft_printf/ft_printf_to_var.c \
+				rw/ft_printf/ft_printf_to_fd.c \
 				rw/ft_printf/vendor/base/initialize_struct.c         \
 				rw/ft_printf/vendor/base/destroy_struct.c         \
 				rw/ft_printf/vendor/base/has_visible_signal.c         \

@@ -111,10 +111,8 @@ t:	$(NAME)
 	@./minishell
 
 tv:	$(NAME)
-	@valgrind --suppressions=srcs/supression.supp --track-origins=yes ./minishell
-
-add_supp: $(NAME)
-	@valgrind --gen-suppressions=yes ./minishell
+	@valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --suppressions=./local.supp ./minishell
+	@cat val | sed 40,120d > val
 
 
 # Bonus

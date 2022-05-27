@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:15 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/26 21:47:06 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/27 07:30:22 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ char	**ms_parse_input(t_p *curr_prompt)
 		curr_prompt->input_redirected_to_file = 1;
 		curr_prompt->input_path = ft_strdup(input_s_by_space[1]);
 		curr_prompt->input_fd = open(curr_prompt->input_path, O_RDONLY);
+		if (curr_prompt->input_fd == -1)
+			ft_pf_error("bash: %s %s", curr_prompt->input_path, E_NOTDIR);
 		if (ft_mtx_size((void **) input_s_by_space) == 2)
 				curr_prompt->only_input_redirected_to_file = 1;
 	}

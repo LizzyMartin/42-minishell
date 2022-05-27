@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_if_there_is_commands_prepare_them_to_be_        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/26 22:04:18 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/27 07:17:59 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ t_cmd	*update_cmd(t_cmd *curr_command)
 	curr_command->next->prev = curr_command;
 	curr_command = curr_command->next;
 	curr_command->next = NULL;
+	curr_command->can_execute = 1;
 	return (curr_command);
 }
 
@@ -109,6 +110,7 @@ void	if_there_is_commands_prepare_them_to_be_executed(t_ms *ms, \
 	curr_command->prev = NULL;
 	curr_command->next = NULL;
 	curr_command->exit_code = 0;
+	curr_command->can_execute = 1;
 	while (c < curr_prompt->pipe_amount)
 	{
 		if (c > 0)

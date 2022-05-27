@@ -2,12 +2,8 @@
 
 void    ft_fd_print(int fd)
 {
-    char *tmp;
+    char	tmp[2];
 
-    tmp = get_next_line(fd);
-    while (tmp)
-    {
-        ft_printf("%s", tmp);
-        tmp = get_next_line(fd);
-    }
+    while (read(fd, tmp, 2) != 0)
+		write(1, tmp, 2);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:06:41 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/26 20:06:42 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/27 06:29:44 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_cmd
 	int						bridge_pipe[2];
 	int						exit_code;
 	char					*error_msg;
+	int						can_execute;
 }	t_cmd;
 
 typedef struct s_prompt

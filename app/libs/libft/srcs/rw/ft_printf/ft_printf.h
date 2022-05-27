@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 03:14:00 by acapela-          #+#    #+#             */
-/*   Updated: 2022/02/01 03:28:55 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/27 06:25:34 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,7 @@ char	*what_format_type(char type, char *fmt, t_fs_arg *arg, va_list *vl);
 /*--------------------- start --------------------------------------  */
 int		ft_printf(const char *format, ...);
 char	*ft_printf_to_var(const char *format, ...);
+int		ft_printf_to_fd(int fd, const char *format, ...);
+int		ft_pf_error(const char *format, ...);
 
 #endif

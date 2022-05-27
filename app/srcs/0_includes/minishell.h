@@ -18,6 +18,7 @@
 # include           "../1_design/design.h"
 # include           "structs.h"
 # include           "macros.h"
+# include 			"errors.h"
 
 /* design */
 void		print_banner(void);

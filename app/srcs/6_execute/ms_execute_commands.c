@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ms_execute_commands.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:42:02 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/26 21:33:43 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/27 07:23:56 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-
 
 static int	get_child_process_id(const t_p *prompt, \
 	t_cmd *current_cmd, char **envp, const int *aux_fd)
@@ -31,7 +29,7 @@ static int	get_child_process_id(const t_p *prompt, \
 		if (execve(current_cmd->path_and_name, \
 			current_cmd->cmd_splited_by_space, envp) == -1)
 		{
-			perror("erro no execve");
+			perror("bash: ");
 			current_cmd->exit_code = 1;
 		}
 	}
@@ -53,29 +51,31 @@ static void	ms_execute_command(t_p *prompt, \
 	close(prompt->pipe[1]);
 }
 
-void	ms_execute_commands(t_ms *ms, t_p *prompt)
+void	ms_execute_commands(t_ms *ms, t_p *curr_prompt)
 {
 	t_cmd	*current_cmd;
 
-	current_cmd = prompt->cmds;
+	current_cmd = curr_prompt->cmds;
 	while (current_cmd)
 	{
-		if (ft_strncmp(current_cmd->just_name, "history", 7) == 0)
-		{
-			ms_add_history(ms, NULL, prompt->cmds);
-			ms_print_history(ms);
-			return ;
-		}
-		else if (is_builtin(current_cmd->just_name) == 1)
-			execute_builtin(ms, current_cmd, prompt);
-		else
-		{
-				ms_execute_command(prompt, current_cmd, \
-					ms->envp, &(prompt->input_fd));
-		}
+			if (ft_strncmp(current_cmd->just_name, "history", 7) == 0)
+			{
+				ms_add_history(ms, NULL, curr_prompt->cmds);
+				ms_print_history(ms);
+				return ;
+			}
+			else if (is_builtin(current_cmd->just_name) == 1)
+				execute_builtin(ms, current_cmd, curr_prompt);
+			else if (current_cmd->can_execute == 1)
+			{
+					ms_execute_command(curr_prompt, current_cmd, \
+						ms->envp, &(curr_prompt->input_fd));
+			}
+			else			
+				ft_printf_to_fd(1, "bash: %s %s", current_cmd->just_name, current_cmd->error_msg);
 		current_cmd = current_cmd->next;
 	}
-	ms_add_history(ms, NULL, prompt->cmds);
+	ms_add_history(ms, NULL, curr_prompt->cmds);
 }
 
 static void	print_fd_or_execute_cmd(t_ms *ms, t_p *curr_prompt)
