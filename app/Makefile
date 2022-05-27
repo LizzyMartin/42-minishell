@@ -33,7 +33,8 @@ SRCS_FILES +=	2_init/env/ms_add_env.c \
 SRCS_FILES +=	2_init/history/ms_add_history.c   \
 				2_init/history/ms_print_history.c \
 				2_init/history/ms_last_history.c \
-				2_init/history/ms_init_history.c
+				2_init/history/ms_init_history.c \
+				2_init/history/ms_free_history.c
 
 SRCS_FILES +=	3_read_input/ms_read_input.c \
 				3_read_input/ms_here_doc.c \
@@ -49,7 +50,9 @@ SRCS_FILES +=	5_parse/ms_parse.c \
 				5_parse/ms_append_path_in_front.c \
 				5_parse/ms_parse_input.c \
 				5_parse/ms_parse_output.c \
-				5_parse/cmd/ms_dll_cmd_last.c
+				5_parse/cmd/ms_dll_cmd_last.c \
+				5_parse/cmd/ms_dll_cmd_free.c \
+				5_parse/prompt/ms_free_prompt.c
 
 SRCS_FILES +=	6_execute/ms_execute_commands.c \
 				6_execute/ms_execute_commands_utils.c 
@@ -62,7 +65,7 @@ SRCS_FILES +=	6_execute/builtins/ms_cd.c \
 				6_execute/builtins/ms_pwd.c \
 				6_execute/builtins/ms_unset.c
 
-SRCS_FILES +=	utils/ms_free.c \
+SRCS_FILES +=	utils/ms_reinit.c \
 				utils/ms_finish.c
 
 SRCS_FILES +=	minishell.c \
@@ -89,6 +92,7 @@ $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)/3_read_input
 	mkdir -p $(OBJS_DIR)/4_tokenizer
 	mkdir -p $(OBJS_DIR)/5_parse
+	mkdir -p $(OBJS_DIR)/5_parse/prompt
 	mkdir -p $(OBJS_DIR)/5_parse/cmd
 	mkdir -p $(OBJS_DIR)/6_execute
 	mkdir -p $(OBJS_DIR)/6_execute/builtins
@@ -111,7 +115,7 @@ t:	$(NAME)
 	@./minishell
 
 tv:	$(NAME)
-	@valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --suppressions=./local.supp ./minishell
+	@valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes ./minishell
 	@cat val | sed 40,120d > val
 
 

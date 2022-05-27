@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:39 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/26 20:56:34 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/27 15:37:29 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,16 @@ void	ms_exit(t_ms *ms, t_cmd *current_cmd)
 	{
 		if (!ft_isdigit((int)cmd_splited[i][0]))
 		{
-			ms->p.cmds->exit_code = 2;
+			ms->p->cmds->exit_code = 2;
 			print_error(cmd_splited, i);
 		}
 		i++;
 	}
 	if (i > 2)
 	{
-		ms->p.cmds->exit_code = 1;
+		ms->p->cmds->exit_code = 1;
 		ft_putstr_fd("exit: too many arguments\n", 2);
 		return ;
 	}
-	exit(ms->p.cmds->exit_code);
+	exit(ms->p->cmds->exit_code);
 }

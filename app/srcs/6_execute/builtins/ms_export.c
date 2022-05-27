@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:42 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/26 21:19:26 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/27 15:38:12 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static void	add_env_by_key(t_ms *ms, const t_cmd *current_cmd)
 	else
 		value = "";
 	ms_add_env(ms, key, value);
-	ms->p.cmds->exit_code = 0;
+	ms->p->cmds->exit_code = 0;
 }
 
 void	ms_export(t_ms *ms, t_cmd *current_cmd)
@@ -91,7 +91,7 @@ void	ms_export(t_ms *ms, t_cmd *current_cmd)
 	if (ft_strnstr(current_cmd->cmd_splited_by_space[1], "=", \
 		ft_strlen(current_cmd->cmd_splited_by_space[1])) == NULL)
 	{
-		ms->p.cmds->exit_code = 0;
+		ms->p->cmds->exit_code = 0;
 		return ;
 	}
 	if (ft_isdigit(current_cmd->cmd_splited_by_space[1][0]))
@@ -99,7 +99,7 @@ void	ms_export(t_ms *ms, t_cmd *current_cmd)
 		ft_putstr_fd("export: '", 2);
 		ft_putstr_fd(current_cmd->cmd_splited_by_space[1], 2);
 		ft_putstr_fd("' : not a valid identifier\n", 2);
-		ms->p.cmds->exit_code = 1;
+		ms->p->cmds->exit_code = 1;
 		return ;
 	}
 	add_env_by_key(ms, current_cmd);

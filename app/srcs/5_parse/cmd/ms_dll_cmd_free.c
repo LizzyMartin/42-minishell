@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dll_cmd_free.c                                  :+:      :+:    :+:   */
+/*   ms_dll_cmd_free.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 06:44:31 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/26 19:43:35 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/27 17:34:47 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	ft_dll_cmd_free(t_ms *ms)
+void	ms_dll_cmd_free(t_cmd *cmds)
 {
-	t_cmd	*cmds;
+	t_cmd 	*free;
 	t_cmd	*last;
 
-	cmds = ms->p.cmds;
 	if (cmds == NULL)
 		return ;
 	while (cmds->next != NULL)
@@ -25,10 +24,13 @@ void	ft_dll_cmd_free(t_ms *ms)
 	while (cmds->prev != NULL)
 	{
 		last = cmds;
-		ft_free_ptr((void *) last->name_and_path);
-		ft_free_ptr((void *) last->error_msg);
-		ft_free_ptr((void *) last->name);
-		ft_mtx_free((void **) last->cmd_splited);
+		free = last;
+		ft_free_ptr((void *) &free->path_and_name);
+		ft_free_ptr((void *) &free->error_msg);
+		ft_free_ptr((void *) &free->just_name);
+		ft_free_ptr((void *) &free->cmd_line);
+		ft_mtx_free((void **) free->cmd_splited_by_space);
 		cmds = cmds->prev;
+		ft_free_ptr((void *) &free);
 	}
 }

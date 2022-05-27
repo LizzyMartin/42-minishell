@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_finish.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:05:54 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/26 20:05:54 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/27 08:43:38 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,11 @@
 
 void	ms_finish(t_ms *ms)
 {
-	ft_free_ptr((void *) ms);
+	ms_free_history(ms);
+	ms_free_env(ms);
+	
+	ft_free_ptr((void *) ms->readline_var);
+	ft_free_ptr((void *) ms->shell_line);
+	ft_free_ptr((void *) &(ms->p));
+	ft_printf("fechou!\n");
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:25 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/26 20:50:48 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/27 15:36:15 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	ms_echo(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 		print_cmd_content(ms, current_cmd, cmd_splited, aux);
 		if (has_flag)
 			ft_putstr_fd("\n", aux);
-		ms->p.cmds->exit_code = 0;
+		ms->p->cmds->exit_code = 0;
 		if (aux != 1)
 			close(aux);
 	}

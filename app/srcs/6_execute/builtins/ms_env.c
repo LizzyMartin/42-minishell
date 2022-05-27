@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:34 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/26 19:41:34 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/27 15:36:48 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ void	ms_env(t_ms *ms)
 			ft_printf("%s=%s\n", env->key, env->value);
 		env = env->next;
 	}
-	ms->p.cmds->exit_code = EXIT_SUCCESS;
+	ms->p->cmds->exit_code = EXIT_SUCCESS;
 }

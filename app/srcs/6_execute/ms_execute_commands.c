@@ -6,7 +6,7 @@
 /*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:42:02 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/27 07:23:56 by argel            ###   ########.fr       */
+/*   Updated: 2022/05/27 15:57:59 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	ms_execute(t_ms *ms)
 	t_p	*curr_prompt;
 	int	o_here_doc;
 
-	curr_prompt = &ms->p;
+	curr_prompt = ms->p;
 	if (curr_prompt->has_here_doc == 1)
 	{
 		o_here_doc = curr_prompt->only_here_doc;

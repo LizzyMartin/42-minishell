@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:06:03 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/26 21:34:31 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/27 15:39:32 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+# include   <minishell.h>
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -19,5 +19,6 @@ int	main(int argc, char **argv, char **envp)
 	ms = ms_init(argc, argv, envp);
 	while (1)
 		minishell(ms);
+	ms_finish(ms);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:06:41 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/27 06:29:44 by argel            ###   ########.fr       */
+/*   Updated: 2022/05/27 15:28:27 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ typedef struct s_minishell
 	char					**slt_splited_by_connectors;
 	char					*readline_var;
 	int						p_amount;
-	t_p						p;
+	t_p						*p;
 	int						exit_code;
 	int						history_i;
 	t_history				*history;

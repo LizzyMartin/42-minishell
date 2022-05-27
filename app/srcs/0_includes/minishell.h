@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/26 21:37:23 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/27 17:35:11 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 /* includes */
 # include           "../../libs/libft/srcs/libft.h"
-# include           "../1_design/design.h"
-# include           "structs.h"
 # include           "macros.h"
+# include           "../1_design/design.h"
 # include 			"errors.h"
+# include           "structs.h"
 
 /* design */
 void		print_banner(void);
@@ -38,6 +38,7 @@ void		ms_parse_env(t_ms *ms);
 
 // history
 t_history	*ms_last_history(t_history *history);
+void		ms_free_history(t_ms *ms);
 
 /* read_input */
 int			ms_read_input(t_ms *ms);
@@ -72,7 +73,12 @@ void		if_there_is_commands_prepare_them_to_be_executed(t_ms *ms,
 				t_p *curr_prompt, char **output_s_by_space,
 				char **input_s_by_space);
 
+// prompt
+void		ms_free_prompt(t_ms *ms);
+
+// cmd
 t_cmd		*ms_dll_cmd_last(t_cmd *cmds);
+void		ms_dll_cmd_free(t_cmd *cmds);
 
 /* execute */
 void		ms_execute(t_ms *ms);
@@ -93,10 +99,12 @@ void		ms_pwd(t_ms *ms);
 void		ms_unset(t_ms *ms, t_cmd *current_cmd);
 
 /* utils */
-void		ms_free(t_ms *ms);
+void		ms_reinit(t_ms *ms);
 void		ms_finish(t_ms *ms);
 
 /* ms */
 void		minishell(t_ms *ms);
+
+extern int g_ms_is_being_executed;
 
 #endif

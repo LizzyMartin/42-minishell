@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ms_read_input.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:47 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/26 20:18:35 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/27 15:16:18 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include   <global.h>
 #include <minishell.h>
 
 void	ms_print_sh_name(void)

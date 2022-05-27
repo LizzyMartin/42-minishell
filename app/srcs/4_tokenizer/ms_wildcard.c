@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_wildcard.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:53:50 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/26 21:34:55 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/27 15:24:47 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static char	*ms_get_files_that_represent_wildcard(char *wildcard)
 	struct dirent	*de;
 	int				all;
 	DIR				*dr;
+	char			*tmp;
 
 	all = 0;
 	replace = ft_strdup("");
@@ -36,12 +37,15 @@ static char	*ms_get_files_that_represent_wildcard(char *wildcard)
 			de = readdir(dr);
 			continue ;
 		}
-		replace = ft_strjoin(ft_strjoin(replace, " "), de->d_name);
-		replace = ft_strjoin(replace, " \0");
+		tmp = ft_strjoin(replace, " ");
+		ft_free_ptr((void *) &replace);
+		replace = ft_strjoin(tmp, de->d_name);
+		ft_free_ptr((void *) &tmp);
+		tmp = ft_strjoin(replace, " \0");
 		de = readdir(dr);
 	}
 	closedir(dr);
-	return (replace);
+	return (tmp);
 }
 
 int	next_space_index(t_ms *ms, int after_asteristic_posi)
@@ -102,5 +106,7 @@ ft_str_replace(ms->shell_line_tokenized, wildcard, replace);
 		}
 		else
 			iterate_shell_line += start;
+		ft_free_ptr((void *) &replace);
+		ft_free_ptr((void *) &wildcard);
 	}
 }

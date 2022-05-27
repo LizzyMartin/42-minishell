@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/26 20:32:42 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/27 16:13:29 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,10 @@ int	ms_parse(t_ms *ms)
 	}
 	else
 		ms->slt_splited_by_connectors = NULL;
-	curr_prompt = &ms->p;
+	ms->p = (t_p *) malloc (sizeof(t_p));
+	ms->p->next = NULL;
+	ms->p->prev = NULL;
+	curr_prompt = ms->p;
 	i = 0;
 	while (i < ms->p_amount)
 	{
