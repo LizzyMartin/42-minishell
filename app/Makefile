@@ -87,13 +87,12 @@ $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)/2_init/env
 	mkdir -p $(OBJS_DIR)/2_init/history
 	mkdir -p $(OBJS_DIR)/3_read_input
-	mkdir -p $(OBJS_DIR)/5_tokenizer
-	mkdir -p $(OBJS_DIR)/6_parse
-	mkdir -p $(OBJS_DIR)/6_parse/cmd
-	mkdir -p $(OBJS_DIR)/7_execute
-	mkdir -p $(OBJS_DIR)/7_execute/builtins
+	mkdir -p $(OBJS_DIR)/4_tokenizer
+	mkdir -p $(OBJS_DIR)/5_parse
+	mkdir -p $(OBJS_DIR)/5_parse/cmd
+	mkdir -p $(OBJS_DIR)/6_execute
+	mkdir -p $(OBJS_DIR)/6_execute/builtins
 	mkdir -p $(OBJS_DIR)/utils
-	mkdir -p $(OBJS_DIR)/utils/dll_cmd
 
 clean:
 	$(RM) $(OBJS_DIR)

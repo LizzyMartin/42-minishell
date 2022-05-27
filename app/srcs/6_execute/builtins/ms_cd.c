@@ -12,12 +12,26 @@
 
 #include <minishell.h>
 
-void	update_env_values(t_ms *ms, t_cmd *current_cmd, \
+static void	update_env_value(t_ms *ms, char *key, char *value)
+{
+	t_env	*env;
+
+	env = ms->envs;
+	while (env)
+	{
+		if ((ft_strncmp(env->key, key, ft_strlen(env->key)) == 0) && \
+			(env->key != NULL && env->value != NULL))
+			env->value = value;
+		env = env->next;
+	}
+}
+
+static void	update_env_values(t_ms *ms, t_cmd *current_cmd, \
 	char *pwd, char *const *cmd)
 {
 	char		*oldpwd;
 
-	oldpwd = find_env_value(ms, "PWD");
+	oldpwd = ms_find_env_value(ms, "PWD");
 	if (oldpwd)
 	{
 		if (chdir(cmd[1]) == -1)
@@ -34,19 +48,6 @@ void	update_env_values(t_ms *ms, t_cmd *current_cmd, \
 	}
 }
 
-static void	update_env_value(t_ms *ms, char *key, char *value)
-{
-	t_env	*env;
-
-	env = ms->envs;
-	while (env)
-	{
-		if ((ft_strncmp(env->key, key, ft_strlen(env->key)) == 0) && \
-			(env->key != NULL && env->value != NULL))
-			env->value = value;
-		env = env->next;
-	}
-}
 
 void	ms_cd(t_ms *ms, t_cmd *current_cmd)
 {
@@ -55,17 +56,17 @@ void	ms_cd(t_ms *ms, t_cmd *current_cmd)
 
 	cmd = current_cmd->cmd_splited_by_space;
 	current_cmd->exit_code = 0;
-	if (!is_in_env(ms, "OLDPWD"))
-		add_env(ms, "OLDPWD", find_env_value(ms, "HOME"));
+	if (!ms_is_in_env(ms, "OLDPWD"))
+		ms_add_env(ms, "OLDPWD", ms_find_env_value(ms, "HOME"));
 	if (!cmd[1] || !ft_strncmp(cmd[1], "~", ft_strlen(cmd[1]))
 		|| !ft_strncmp(cmd[1], "--", 2))
 	{
-		chdir(find_env_value(ms, "HOME"));
+		chdir(ms_find_env_value(ms, "HOME"));
 	}
 	else if (!ft_strncmp(cmd[1], "-", ft_strlen(cmd[1])))
 	{
-		ft_printf("%s\n", find_env_value(ms, "OLDPWD"));
-		chdir(find_env_value(ms, "OLDPWD"));
+		ft_printf("%s\n", ms_find_env_value(ms, "OLDPWD"));
+		chdir(ms_find_env_value(ms, "OLDPWD"));
 	}
 	else
 		update_env_values(ms, current_cmd, pwd, cmd);

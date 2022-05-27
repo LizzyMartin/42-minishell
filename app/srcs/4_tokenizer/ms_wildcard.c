@@ -32,7 +32,10 @@ static char	*ms_get_files_that_represent_wildcard(char *wildcard)
 		"..", ft_strlen(de->d_name)) == 0))) || (all == 0 \
 		&& (ft_strnstr(de->d_name, wildcard + 1, \
 		ft_strlen(de->d_name)) == NULL)))
+		{
+			de = readdir(dr);
 			continue ;
+		}
 		replace = ft_strjoin(ft_strjoin(replace, " "), de->d_name);
 		replace = ft_strjoin(replace, " \0");
 		de = readdir(dr);

@@ -12,32 +12,13 @@
 
 #include <minishell.h>
 
-static void	print_fd_or_execute_cmd(t_ms *ms, t_p *curr_prompt)
-{
-	if (curr_prompt->only_input_redirected_to_file == 1)
-		return ;
-	else if (curr_prompt->no_cmd_just_redirect == 1)
-	{
-		ft_fd_print(curr_prompt->input_fd);
-		dup2(curr_prompt->input_fd, curr_prompt->output_fd);
-	}
-	else
-	{
-		while (curr_prompt)
-		{
-			ms_execute_commands(ms, curr_prompt);
-			curr_prompt = curr_prompt->next;
-		}
-	}
-}
+
 
 static int	get_child_process_id(const t_p *prompt, \
 	t_cmd *current_cmd, char **envp, const int *aux_fd)
 {
-	int	bridge_between_processes[2];
 	int	child_process_id;
 
-	pipe(bridge_between_processes);
 	child_process_id = fork();
 	ms_while_executing_commands_signals();
 	if (child_process_id == 0)
@@ -46,7 +27,7 @@ static int	get_child_process_id(const t_p *prompt, \
 		if ((prompt->pipe_amount - 1) == current_cmd->index)
 			dup2(prompt->output_fd, 1);
 		else
-			dup2(bridge_between_processes[1], 1);
+			dup2(prompt->pipe[1], 1);
 		if (execve(current_cmd->path_and_name, \
 			current_cmd->cmd_splited_by_space, envp) == -1)
 		{
@@ -60,16 +41,16 @@ static int	get_child_process_id(const t_p *prompt, \
 static void	ms_execute_command(t_p *prompt, \
 	t_cmd *current_cmd, char **envp, int *aux_fd)
 {
-	int	bridge_between_processes[2];
 	int	child_process_id;
 
+	pipe(prompt->pipe);
 	child_process_id = get_child_process_id(prompt, current_cmd, envp, aux_fd);
 	if ((prompt->pipe_amount - 1) == current_cmd->index)
 		waitpid(child_process_id, &current_cmd->exit_code, 0);
 	if (*aux_fd > 2)
 		close (*aux_fd);
-	*aux_fd = bridge_between_processes[0];
-	close(bridge_between_processes[1]);
+	*aux_fd = prompt->pipe[0];
+	close(prompt->pipe[1]);
 }
 
 void	ms_execute_commands(t_ms *ms, t_p *prompt)
@@ -89,12 +70,33 @@ void	ms_execute_commands(t_ms *ms, t_p *prompt)
 			execute_builtin(ms, current_cmd, prompt);
 		else
 		{
-			ms_execute_command(prompt, current_cmd, \
-				ms->envp, &(prompt->input_fd));
+			ft_printf("#input_fd: %d#\n", prompt->input_fd);
+				ms_execute_command(prompt, current_cmd, \
+					ms->envp, &(prompt->input_fd));
+				
 		}
 		current_cmd = current_cmd->next;
 	}
 	ms_add_history(ms, NULL, prompt->cmds);
+}
+
+static void	print_fd_or_execute_cmd(t_ms *ms, t_p *curr_prompt)
+{
+	if (curr_prompt->only_input_redirected_to_file == 1)
+		return ;
+	else if (curr_prompt->no_cmd_just_redirect == 1)
+	{
+		ft_fd_print(curr_prompt->input_fd);
+		dup2(curr_prompt->input_fd, curr_prompt->output_fd);
+	}
+	else
+	{
+		while (curr_prompt)
+		{
+			ms_execute_commands(ms, curr_prompt);
+			curr_prompt = curr_prompt->next;
+		}
+	}
 }
 
 void	ms_execute(t_ms *ms)

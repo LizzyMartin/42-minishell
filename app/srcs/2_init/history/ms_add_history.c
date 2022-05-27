@@ -12,8 +12,12 @@
 
 #include <minishell.h>
 
-static void	ms_add_history_aux(t_history	*aux)
+static void	ms_add_history_aux(t_ms *ms, t_history	*aux, char *line, t_cmd		*cmds)
 {
+	t_cmd		*tmp;
+	int			e_code;
+
+	tmp = cmds;
 	while (aux->next)
 		aux = aux->next;
 	aux->next = (t_history *) malloc(sizeof(struct s_history));
@@ -35,10 +39,7 @@ static void	ms_add_history_aux(t_history	*aux)
 void	ms_add_history(t_ms *ms, char *line, t_cmd *cmds)
 {
 	t_history	*aux;
-	t_cmd		*tmp;
-	int			e_code;
 
-	tmp = cmds;
 	aux = ms->history;
 	ms->history_i++;
 	if (!aux)
@@ -51,5 +52,5 @@ void	ms_add_history(t_ms *ms, char *line, t_cmd *cmds)
 		aux->l_c_exit_code = 0;
 	}
 	else
-		ms_add_history_aux(aux);
+		ms_add_history_aux(ms, aux, line, cmds);
 }

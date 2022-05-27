@@ -14,10 +14,10 @@
 
 static char	*ms_get_home_value(t_ms *ms)
 {
-	if (is_in_env(ms, "HOME"))
-		return (find_env_value(ms, "HOME"));
-	else if (is_in_env(ms, "USER"))
-		return (ft_printf_to_var("/home/%s", find_env_value(ms, "USER")));
+	if (ms_is_in_env(ms, "HOME"))
+		return (ms_find_env_value(ms, "HOME"));
+	else if (ms_is_in_env(ms, "USER"))
+		return (ft_printf_to_var("/home/%s", ms_find_env_value(ms, "USER")));
 	else
 		return (ft_strdup("/home"));
 }

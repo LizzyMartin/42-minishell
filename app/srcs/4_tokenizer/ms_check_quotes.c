@@ -14,6 +14,9 @@
 
 void	ms_check_quotes_2(char *line, int i, int j)
 {
+	int		quote_terminated;
+
+	quote_terminated = 0;
 	while (line[j])
 	{
 		if (line[j] == '"')
@@ -44,11 +47,9 @@ void	ms_check_quotes(t_ms *ms)
 	char	*line;
 	int		i;
 	int		j;
-	int		quote_terminated;
 
 	i = 0;
 	line = ms->shell_line;
-	quote_terminated = 0;
 	if (ft_strchr(line, '\'') == NULL)
 	{
 		while (line[i])

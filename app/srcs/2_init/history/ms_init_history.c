@@ -20,7 +20,7 @@ void	ms_init_history(t_ms *ms)
 
 	ms->history_i = 1;
 	path = ft_printf_to_var("/home/%s/.bash_history", \
-		find_env_value(ms, "USER"));
+		ms_find_env_value(ms, "USER"));
 	fd = open(path, O_RDONLY);
 	ms->history = malloc(sizeof(struct s_history));
 	ms->history->next = NULL;

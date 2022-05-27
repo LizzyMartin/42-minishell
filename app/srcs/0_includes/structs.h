@@ -13,6 +13,23 @@
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
+typedef struct s_env
+{
+	char					*key;
+	char					*value;
+	struct s_env			*next;
+	struct s_env			*prev;
+}	t_env;
+
+typedef struct s_history
+{
+	int						index;
+	char					*line;
+	struct s_history		*next;
+	struct s_history		*prev;
+	int						l_c_exit_code;
+}	t_history;
+
 typedef struct s_cmd
 {
 	int						index;
@@ -42,7 +59,7 @@ typedef struct s_prompt
 	int						input_redirected_to_file;
 	int						only_input_redirected_to_file;
 	int						no_cmd_just_redirect;
-	int						builtin_bridge[2];
+	int						pipe[2];
 	int						output_fd;
 	char					*output_path;
 	int						redirect;
@@ -71,21 +88,5 @@ typedef struct s_minishell
 	t_env					*envs;
 }	t_ms;
 
-typedef struct s_env
-{
-	char					*key;
-	char					*value;
-	struct s_env			*next;
-	struct s_env			*prev;
-}	t_env;
-
-typedef struct s_history
-{
-	int						index;
-	char					*line;
-	struct s_history		*next;
-	struct s_history		*prev;
-	int						l_c_exit_code;
-}	t_history;
 
 #endif

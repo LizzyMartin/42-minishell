@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-static void	print_cmd_content(const t_ms *ms, \
+static void	print_cmd_content(t_ms *ms, \
 	t_cmd *current_cmd, char **cmd_splited, int aux)
 {
 	char	*no_dolar;
@@ -24,8 +24,8 @@ static void	print_cmd_content(const t_ms *ms, \
 		if (cmd_splited[i] && cmd_splited[i][0] == '$')
 		{
 			no_dolar = ft_substr(cmd_splited[1], 1, ft_strlen(cmd_splited[1]));
-			if (is_in_env(ms, no_dolar) == 1)
-				ft_putstr_fd(find_env_value(ms, no_dolar), aux);
+			if (ms_is_in_env(ms, no_dolar) == 1)
+				ft_putstr_fd(ms_find_env_value(ms, no_dolar), aux);
 		}
 		else
 			ft_putstr_fd(cmd_splited[i], aux);

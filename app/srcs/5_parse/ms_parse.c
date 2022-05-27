@@ -12,8 +12,6 @@
 
 #include <minishell.h>
 
-char	**ms_parse_input(t_p *curr_prompt);
-
 t_p	*ms_get_prompt(t_ms *ms, t_p *curr_prompt, int i)
 {
 	if (i >= 1)

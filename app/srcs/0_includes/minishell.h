@@ -25,16 +25,18 @@ void		ms_print_sh_name(void);
 
 /* init */
 t_ms		*ms_init(int argc, char **argv, char **envp);
-void		init_env(t_ms *ms);
-t_history	*ms_last_history(t_history *history);
 
 // env
+void		ms_init_env(t_ms *ms);
 void		ms_add_env(t_ms *ms, char *key, char *value);
 void		ms_delete_env(t_ms *ms, char *key);
 char		*ms_find_env_value(t_ms *ms, char *key);
 void		ms_free_env(t_ms *ms);
 int			ms_is_in_env(t_ms *ms, const char *key);
 void		ms_parse_env(t_ms *ms);
+
+// history
+t_history	*ms_last_history(t_history *history);
 
 /* read_input */
 int			ms_read_input(t_ms *ms);
