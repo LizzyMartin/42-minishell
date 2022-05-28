@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:55:07 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/27 16:13:56 by argel            ###   ########.fr       */
+/*   Updated: 2022/05/27 22:02:36 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@ t_ms	*ms_init(int argc, char **argv, char **envp)
 {
 	t_ms	*ms;
 
-	ms = (t_ms *) malloc(sizeof(t_ms));
+	ms = (t_ms *) ft_calloc(1, sizeof(t_ms));
 	ms->exit_code = 0;
 	ms->argc = argc;
 	ms->argv = argv;
 	ms->envp = envp;
 	ms->history = NULL;
 	ms->p_amount = 1;
+	ms->readline_var = NULL;
 	ms_init_env(ms);
 	ms_init_history(ms);
 	system("clear");

@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:57:03 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/26 20:21:16 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/27 22:26:11 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	ms_add_env(t_ms *ms, char *key, char *value)
 	t_env	*aux;
 
 	aux = ms->envs;
-	if (!aux)
+	if (aux == NULL)
 	{
-		aux = (t_env *) malloc(sizeof(struct s_env));
+		aux = (t_env *) malloc(sizeof(t_env));
 		aux->key = key;
 		aux->value = value;
 		aux->next = NULL;
@@ -30,9 +30,12 @@ void	ms_add_env(t_ms *ms, char *key, char *value)
 		while (aux->next)
 			aux = aux->next;
 		aux->next = (t_env *) malloc(sizeof(struct s_env));
-		aux->next->key = key;
-		aux->next->value = value;
-		aux->next->next = NULL;
-		aux->next->prev = aux;
+		if (aux->next != NULL)
+		{
+			aux->next->key = key;
+			aux->next->value = value;
+			aux->next->next = NULL;
+			aux->next->prev = aux;
+		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:55:10 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/26 20:19:47 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/27 21:38:00 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,16 @@ void	ms_init_env(t_ms *ms)
 
 	i = 0;
 	envp = ms->envp;
-	ms->envs = malloc(sizeof(struct s_env));
-	while (envp[i])
+	ms->envs = NULL;
+	if (ms->envp != NULL)
 	{
-		envp_splitted = ft_split(envp[i], '=');
-		if (envp_splitted[0] != NULL && envp_splitted[1] != NULL)
-			ms_add_env(ms, envp_splitted[0], envp_splitted[1]);
-		i++;
+		while (envp[i])
+		{
+			envp_splitted = ft_split(envp[i], '=');
+			if (envp_splitted[0] != NULL && envp_splitted[1] != NULL)
+				ms_add_env(ms, envp_splitted[0], envp_splitted[1]);
+			ft_mtx_free((void **) envp_splitted);
+			i++;
+		}
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/27 17:35:11 by argel            ###   ########.fr       */
+/*   Updated: 2022/05/27 18:20:26 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void		if_there_is_commands_prepare_them_to_be_executed(t_ms *ms,
 				char **input_s_by_space);
 
 // prompt
-void		ms_free_prompt(t_ms *ms);
+void	     ms_free_prompt(t_p *curr_prompt);
 
 // cmd
 t_cmd		*ms_dll_cmd_last(t_cmd *cmds);

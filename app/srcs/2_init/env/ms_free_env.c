@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:00:23 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/26 20:24:50 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/27 22:29:30 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,18 @@
 
 void	ms_free_env(t_ms *ms)
 {
-	t_env	*aux;
-	t_env	*tmp;
+	t_env	*delete;
+    t_env   *stack;
 
-	aux = ms->envs;
-	while (aux)
+    stack = ms->envs;
+	while (stack != NULL)
 	{
-		if (ms->envs->key)
-			free(ms->envs->key);
-		if (ms->envs->value)
-			free(ms->envs->value);
-		tmp = aux->next;
-		free(aux);
-		aux = tmp;
+		delete = stack;
+		stack = stack->next;
+	 	if (delete && delete->value)e));
+		ite && delete->key);
+			ft_free_ptr((void **) &(delete->key));
+		ft_free_ptr((void **) &delete);
 	}
-	ms->envs = NULL;
+    ms->envs = NULL;
 }

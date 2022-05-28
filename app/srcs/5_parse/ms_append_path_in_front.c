@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_append_path_in_front.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:09 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/27 07:30:48 by argel            ###   ########.fr       */
+/*   Updated: 2022/05/27 22:00:05 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,15 @@ char	*ms_append_path_in_front(t_cmd *current_cmd, t_ms *ms)
 				path[i], current_cmd->just_name);
 		if (access(path_plus_command, X_OK) == 0)
 		{
+			ft_mtx_free((void **) path);
 			current_cmd->can_execute = 1;
 			return (path_plus_command);
 		}
+		ft_free_ptr((void *) &path_plus_command);
 	}
-	current_cmd->error_msg = E_CMDNOTFOUND;
+	current_cmd->error_msg = ft_strdup(E_CMDNOTFOUND);
 	current_cmd->exit_code = 127;
 	current_cmd->can_execute = 0;
+	ft_mtx_free((void **) path);
 	return (NULL);
 }

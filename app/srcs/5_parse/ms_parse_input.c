@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:15 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/27 07:30:22 by argel            ###   ########.fr       */
+/*   Updated: 2022/05/27 21:44:23 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ char	**init_current_prompt(t_p *curr_prompt)
 {
 	char	**input_s_by_space;
 
-	input_s_by_space = NULL;
-	input_s_by_space = ft_split(\
+	input_s_by_space = ft_split( \
 	curr_prompt->this_p_line_splited_by_pipe[0], ' ');
 	curr_prompt->input_fd = 0;
 	curr_prompt->input_path = NULL;

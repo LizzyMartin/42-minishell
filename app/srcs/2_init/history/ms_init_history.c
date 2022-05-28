@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:55:14 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/26 20:03:29 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/27 19:57:59 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,6 @@ void	ms_init_history(t_ms *ms)
 		if (line)
 			ms_add_history(ms, line, NULL);
 	}
+	ft_free_ptr((void *) &path);
+	get_next_line(-1);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_split_by_str.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 21:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2021/09/20 12:21:19 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/27 22:06:44 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,31 @@
 static int	ft_countwords(char *str, char *token)
 {
 	char	*tmp;
+	char	*tmp_free;
 	int		w;
 
 	w = 0;
 	tmp = ft_strdup(str);
+	tmp_free = tmp;
 	while (*tmp)
 	{
 	 	if (ft_strnstr(tmp, token, ft_strlen(token)))
 	 		w++;
 	 	tmp++;
 	}
+	ft_free_ptr((void *) &tmp_free);
 	return (w);
 }
 
 static int	ft_wordlen(char *str, char *token)
 {
 	char	*tmp;
+	char	*tmp_free;
 	int		len;
 
 	len = 0;
 	tmp = ft_strdup(str);
+	tmp_free = tmp;
 	while (*tmp)
 	{
 	 	if (ft_strnstr(tmp, token, ft_strlen(token)) == NULL)
@@ -43,23 +48,26 @@ static int	ft_wordlen(char *str, char *token)
 			return (len);
 	 	tmp++;
 	}
+	ft_free_ptr((void *) &tmp_free);
 	return (len);
 }
 
 char	**ft_tosplit(char *s, char *token, char **split)
 {
 	char *tmp;
+	char *tmp_free;
 	int	i;
 	int	j;
 
 	j = 0;
 	i = 0;
 	tmp = ft_strdup(s);
+	tmp_free = tmp;
 	while (*tmp)
 	{
 		if (ft_strnstr(tmp, token, ft_strlen(token)))
 		{
-			split[j] = (char *) malloc((i) * sizeof(char));
+			split[j] = (char *) ft_calloc ((i), sizeof(char));
 			if (split[j] != NULL)
 				ft_strlcpy (split[j], s, ft_wordlen(s, token) + 1);
 			tmp += ft_strlen(token);
@@ -69,8 +77,9 @@ char	**ft_tosplit(char *s, char *token, char **split)
 		i++;
 		tmp++;
 	}
-	split[j] = (char *) malloc((i) * sizeof(char));
+	split[j] = (char *) ft_calloc((i), sizeof(char));
 	ft_strlcpy (split[j], s, ft_strlen(s) + 1);
+	ft_free_ptr((void *) &tmp_free);
 	return (split);
 }
 
@@ -83,7 +92,7 @@ char	**ft_split_by_str(char *s, char *token)
 		return (0);
 	words = ft_countwords(s, token);
 	words++;
-	split = (char **) malloc ((words + 1) * sizeof(char **));
+	split = (char **) ft_calloc ((words + 1) , sizeof(char **));
 	if (!split)
 		return (NULL);
 	split = ft_tosplit(s, token, split);

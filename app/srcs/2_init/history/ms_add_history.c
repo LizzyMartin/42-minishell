@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:55:36 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/26 21:26:01 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/27 22:03:33 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	ms_add_history_aux(t_ms *ms, t_history	*aux, char *line, t_cmd		*cmd
 	tmp = cmds;
 	while (aux->next)
 		aux = aux->next;
-	aux->next = (t_history *) malloc(sizeof(struct s_history));
+	aux->next = (t_history *) ft_calloc(1, sizeof(struct s_history));
 	aux->next->index = ms->history_i;
 	if (line != NULL)
 		aux->next->line = line;
@@ -44,7 +44,7 @@ void	ms_add_history(t_ms *ms, char *line, t_cmd *cmds)
 	ms->history_i++;
 	if (!aux)
 	{
-		aux = (t_history *) malloc(sizeof(struct s_history));
+		aux = (t_history *) ft_calloc(1, sizeof(struct s_history));
 		aux->index = ms->history_i;
 		aux->line = line;
 		aux->next = NULL;

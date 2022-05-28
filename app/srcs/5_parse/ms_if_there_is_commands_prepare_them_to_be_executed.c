@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_if_there_is_commands_prepare_them_to_be_        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/27 07:17:59 by argel            ###   ########.fr       */
+/*   Updated: 2022/05/27 22:20:00 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,16 @@ static void	prepare_cmd_line(const t_p *curr_prompt, \
 
 t_cmd	*update_cmd(t_cmd *curr_command)
 {
-	curr_command->next = (t_cmd *) malloc(sizeof(t_cmd));
+	curr_command->next = (t_cmd *) ft_calloc(1, sizeof(t_cmd));
 	curr_command->next->prev = curr_command;
 	curr_command = curr_command->next;
 	curr_command->next = NULL;
 	curr_command->can_execute = 1;
+	curr_command->error_msg = NULL;
+	curr_command->just_name = NULL;
+	curr_command->path_and_name = NULL;
+	curr_command->cmd_line = NULL;
+	curr_command->cmd_splited_by_space = NULL;
 	return (curr_command);
 }
 
@@ -106,10 +111,16 @@ void	if_there_is_commands_prepare_them_to_be_executed(t_ms *ms, \
 	t_cmd	*curr_command;
 
 	c = 0;
+	curr_prompt->cmds = (t_cmd *) malloc (sizeof(struct s_cmd));
 	curr_command = curr_prompt->cmds;
 	curr_command->prev = NULL;
 	curr_command->next = NULL;
 	curr_command->exit_code = 0;
+	curr_command->error_msg = ft_strdup("");
+	curr_command->just_name = NULL;
+	curr_command->path_and_name = NULL;
+	curr_command->cmd_line = NULL;
+	curr_command->cmd_splited_by_space = NULL;
 	curr_command->can_execute = 1;
 	while (c < curr_prompt->pipe_amount)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/27 16:13:29 by argel            ###   ########.fr       */
+/*   Updated: 2022/05/27 22:21:03 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_p	*ms_get_prompt(t_ms *ms, t_p *curr_prompt, int i)
 {
 	if (i >= 1)
 	{
-		curr_prompt->next = (t_p *) malloc (sizeof(t_p));
+		curr_prompt->next = (t_p *) ft_calloc (1, sizeof(t_p));
 		curr_prompt->next->prev = curr_prompt;
 		curr_prompt = curr_prompt->next;
 		curr_prompt->next = NULL;
@@ -50,7 +50,7 @@ int	ms_parse(t_ms *ms)
 	}
 	else
 		ms->slt_splited_by_connectors = NULL;
-	ms->p = (t_p *) malloc (sizeof(t_p));
+	ms->p = (t_p *) ft_calloc(1, sizeof(t_p));
 	ms->p->next = NULL;
 	ms->p->prev = NULL;
 	curr_prompt = ms->p;
@@ -63,10 +63,11 @@ int	ms_parse(t_ms *ms)
 		curr_prompt->pipe_amount = 0;
 		curr_prompt->pipe_amount = ft_mtx_size((void **) \
 			curr_prompt->this_p_line_splited_by_pipe);
-		curr_prompt->cmds = (t_cmd *) malloc (sizeof(t_cmd));
 		if_there_is_commands_prepare_them_to_be_executed (ms, \
 				curr_prompt, output_s_by_space, input_s_by_space);
 		i++;
 	}
+	ft_mtx_free((void **) input_s_by_space);
+	ft_mtx_free((void **) output_s_by_space);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_dll_cmd_free.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 06:44:31 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/27 17:34:47 by argel            ###   ########.fr       */
+/*   Updated: 2022/05/27 22:18:18 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,23 @@ void	ms_dll_cmd_free(t_cmd *cmds)
 	{
 		last = cmds;
 		free = last;
-		ft_free_ptr((void *) &free->path_and_name);
-		ft_free_ptr((void *) &free->error_msg);
-		ft_free_ptr((void *) &free->just_name);
-		ft_free_ptr((void *) &free->cmd_line);
-		ft_mtx_free((void **) free->cmd_splited_by_space);
+	
+			ft_free_ptr((void *) &free->path_and_name);
+			ft_free_ptr((void *) &free->error_msg);
+			ft_free_ptr((void *) &free->just_name);
+			ft_free_ptr((void *) &free->cmd_line);
+			ft_mtx_free((void **) free->cmd_splited_by_space);
+		
 		cmds = cmds->prev;
 		ft_free_ptr((void *) &free);
 	}
+	free = cmds;
+
+		ft_free_ptr((void *) &free->path_and_name);
+		ft_free_ptr((void *) &free->error_msg);
+		ft_mtx_free((void **) free->cmd_splited_by_space);
+		ft_free_ptr((void *) &free->just_name);
+		ft_free_ptr((void *) &free->cmd_line);
+		ft_free_ptr((void *) &free);
+	cmds = NULL;
 }
