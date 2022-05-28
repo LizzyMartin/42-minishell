@@ -27,6 +27,11 @@ static void	print_cmd_content(t_ms *ms, \
 			if (ms_is_in_env(ms, no_dolar) == 1)
 				ft_putstr_fd(ms_find_env_value(ms, no_dolar), aux);
 		}
+		else if (ft_strchr(cmd_splited[i], '\''))
+		{
+			ms_remove_char(cmd_splited[i], '\'');
+			ft_putstr_fd(cmd_splited[i], aux);
+		}
 		else
 			ft_putstr_fd(cmd_splited[i], aux);
 		ft_putstr_fd(" ", aux);

@@ -20,11 +20,11 @@ void	print_banner(void)
 
 	i = 0;
 	fd = open("srcs/1_design/banner.txt", O_RDONLY);
-	while (i < 12)
+	while (i < 25)
 	{
 		line = get_next_line(fd);
 		if (line != NULL)
-			ft_printf("%s%s", BOLD_PURPLE, line);
+			ft_printf("%s%s", BOLD_YELLOW, line);
 		free(line);
 		i++;
 	}

@@ -71,7 +71,7 @@ void	ms_execute_commands(t_ms *ms, t_p *curr_prompt)
 					ms_execute_command(curr_prompt, current_cmd, \
 						ms->envp, &(curr_prompt->input_fd));
 			}
-			else			
+			else
 				ft_printf_to_fd(1, "bash: %s %s", current_cmd->just_name, current_cmd->error_msg);
 		current_cmd = current_cmd->next;
 	}

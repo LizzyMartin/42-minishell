@@ -12,55 +12,66 @@
 
 #include <minishell.h>
 
-void	ms_check_quotes_2(char *line, int i, int j)
+void	ms_remove_char(char *s, char c)
 {
-	int		quote_terminated;
+	int new;
+	int old;
 
-	quote_terminated = 0;
-	while (line[j])
+	new = 0;
+	old = 0;
+	while (s[old])
 	{
-		if (line[j] == '"')
-		{
-			quote_terminated = 1;
-			break ;
-		}
-		j++;
+		if (s[old] != c)
+			s[new++] = s[old];
+		old++;
 	}
-	j = i;
-	while (line[j])
+	s[new] = '\0';
+}
+
+static int count_char(char *s, char c)
+{
+	int i;
+	int count;
+
+	i = 0;
+	count = 0;
+	while (s[i])
 	{
-		if (quote_terminated && line[j] == '"')
-		{
-			line[j] = ' ';
-			j++;
-		}
-		if (line[j] == ' ')
-		{
-			line[j] = '-';
-		}
-		j++;
+		if (s[i] == c)
+			count++;
+		i++;
 	}
+	return (count);
 }
 
 void	ms_check_quotes(t_ms *ms)
 {
 	char	*line;
+	char 	*goal;
+	char 	**shell_line_splitted;
 	int		i;
-	int		j;
+	int 	space;
+	int 	space_index;
 
 	i = 0;
-	line = ms->shell_line;
-	if (ft_strchr(line, '\'') == NULL)
+	space = 0;
+	space_index = -1;
+	goal = ft_strdup("");
+	while (ms->shell_line[i])
 	{
-		while (line[i])
+		goal[i] = ms->shell_line[i];
+		if (ms->shell_line[i] == ' ' && !space)
 		{
-			if (line[i] == '"')
-			{
-				j = i + 1;
-				ms_check_quotes_2(line, j, i);
-				break ;
-			}
-			i++;
+			goal[i] = '-';
+			space_index = i;
+			space = 1;
 		}
+		i++;
 	}
+	line = goal + space_index + 1;
+	shell_line_splitted = ft_split(ms->shell_line, ' ');
+	if (ft_strchr(line, '"') && count_char(line, '"') % 2 == 0)
+		ms_remove_char(line, '"');
+	ms->shell_line_tokenized = ft_printf_to_var("%s %s", shell_line_splitted[0], line);
+	ms->shell_line_tokenized[space_index] = ' ';
 }

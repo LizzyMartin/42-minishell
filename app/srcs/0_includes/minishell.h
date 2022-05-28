@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/27 18:20:26 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/28 01:20:11 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 /* design */
 void		print_banner(void);
-void		ms_print_sh_name(void);
+char		*ms_print_sh_name(void);
 
 /* init */
 t_ms		*ms_init(int argc, char **argv, char **envp);
@@ -62,6 +62,7 @@ void		ms_print_history(t_ms *ms);
 void		ms_tokenizer(t_ms *ms);
 void		ms_wildcard(t_ms *ms);
 void		ms_check_quotes(t_ms *ms);
+void		ms_remove_char(char *s, char c);
 
 /* parse */
 int			ms_parse(t_ms *ms);

@@ -2,7 +2,7 @@
 
 CC =            clang
 CFLAGS = 		-Wall -Wextra -Werror -ggdb3
-RLFLAG =		-lreadline
+RLFLAG =		-lreadline -ltinfo
 AR =            ar -rcs
 RM =            rm -rfd
 

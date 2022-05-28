@@ -60,9 +60,7 @@ void	ms_cd(t_ms *ms, t_cmd *current_cmd)
 		ms_add_env(ms, "OLDPWD", ms_find_env_value(ms, "HOME"));
 	if (!cmd[1] || !ft_strncmp(cmd[1], "~", ft_strlen(cmd[1]))
 		|| !ft_strncmp(cmd[1], "--", 2))
-	{
-		chdir(ms_find_env_value(ms, "HOME"));
-	}
+		chdir(getenv("HOME"));
 	else if (!ft_strncmp(cmd[1], "-", ft_strlen(cmd[1])))
 	{
 		ft_printf("%s\n", ms_find_env_value(ms, "OLDPWD"));

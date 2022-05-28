@@ -40,7 +40,7 @@ void	ms_dll_cmd_free(t_cmd *cmds)
 		ft_free_ptr((void *) &free->path_and_name);
 		ft_free_ptr((void *) &free->error_msg);
 		ft_mtx_free((void **) free->cmd_splited_by_space);
-		ft_free_ptr((void *) &free->just_name);
+//		ft_free_ptr((void *) &free->just_name);
 		ft_free_ptr((void *) &free->cmd_line);
 		ft_free_ptr((void *) &free);
 	cmds = NULL;

@@ -25,7 +25,6 @@ t_ms	*ms_init(int argc, char **argv, char **envp)
 	ms->envp = envp;
 	ms->history = NULL;
 	ms->p_amount = 1;
-	ms->readline_var = NULL;
 	ms_init_env(ms);
 	ms_init_history(ms);
 	system("clear");
