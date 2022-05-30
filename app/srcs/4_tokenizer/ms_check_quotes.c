@@ -68,10 +68,15 @@ void	ms_check_quotes(t_ms *ms)
 		}
 		i++;
 	}
-	line = goal + space_index + 1;
-	shell_line_splitted = ft_split(ms->shell_line, ' ');
-	if (ft_strchr(line, '"') && count_char(line, '"') % 2 == 0)
-		ms_remove_char(line, '"');
-	ms->shell_line_tokenized = ft_printf_to_var("%s %s", shell_line_splitted[0], line);
-	ms->shell_line_tokenized[space_index] = ' ';
+	if (space_index != -1)
+	{
+		line = goal + space_index + 1;
+		shell_line_splitted = ft_split(ms->shell_line, ' ');
+		if (ft_strchr(line, '"') && count_char(line, '"') % 2 == 0)
+			ms_remove_char(line, '"');
+		ms->shell_line_tokenized = ft_printf_to_var("%s %s", shell_line_splitted[0], line);
+		ms->shell_line_tokenized[space_index] = ' ';
+		return ;
+	}
+	ms->shell_line_tokenized = ms->shell_line;
 }
