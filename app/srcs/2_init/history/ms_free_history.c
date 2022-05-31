@@ -13,7 +13,7 @@ void	ms_free_history(t_ms *ms)
 		ft_free_ptr((void *) &(delete->line));
 		ft_free_ptr((void *) &delete);
 	}
-//	ft_free_ptr((void *) &(delete->line));
+	ft_free_ptr((void *) &(delete->line));
 	ft_free_ptr((void *) &delete);
     ms->history = NULL;
 }

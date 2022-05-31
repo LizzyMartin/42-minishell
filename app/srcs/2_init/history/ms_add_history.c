@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_add_history.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:55:36 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/28 01:46:53 by argel            ###   ########.fr       */
+/*   Updated: 2022/05/30 23:14:00 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	ms_add_history_aux(t_ms *ms, t_history	*aux, char *line, t_cmd		*cmd
 	aux->next = (t_history *) ft_calloc(1, sizeof(struct s_history));
 	aux->next->index = ms->history_i;
 	if (line != NULL)
-		aux->next->line = line;
+		aux->next->line = ft_strdup(line);
 	else
 	{
 		tmp2 =  ft_strdup(ms->shell_line);

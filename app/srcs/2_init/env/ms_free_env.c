@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_free_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:00:23 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/30 22:43:58 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/30 23:18:34 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ void	ms_free_env(t_ms *ms)
 	}
 	//ft_free_ptr((void *) &(delete->value));
 //	ft_free_ptr((void *) &(delete->key));
-	ft_free_ptr((void *) &delete);
+	// ft_free_ptr((void *) &delete);
     ms->envs = NULL;
 }

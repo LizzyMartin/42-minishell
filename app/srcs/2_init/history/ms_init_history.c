@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_init_history.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:55:14 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/30 22:08:19 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/30 23:23:03 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,12 @@ void	ms_init_history(t_ms *ms)
 	{
 		trim = ft_strtrim(line, "\n");
 		add_history(trim);
-		free(trim);
+		ft_free_ptr((void *) &trim);
 		ms_add_history(ms, line, NULL);
+		ft_free_ptr((void *) &line);
 		line = get_next_line(fd);
 	}
 	ft_free_ptr((void *) &path);
-	ft_free_ptr((void *) &line);
+	// ft_free_ptr((void *) &line);
 	get_next_line(-1);
 }
