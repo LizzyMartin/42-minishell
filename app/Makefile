@@ -115,7 +115,7 @@ t:	$(NAME)
 	@./minishell
 
 tv:	$(NAME)
-	@valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes ./minishell
+	@valgrind --suppressions=./local.supp --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes ./minishell
 	@cat val | sed 40,120d > val
 
 
