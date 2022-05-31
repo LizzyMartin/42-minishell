@@ -15,14 +15,16 @@
 char	**init_current_prompt(t_p *curr_prompt)
 {
 	char	**input_s_by_space;
+	char 	*strdup;
 
-	input_s_by_space = ft_split( \
-	curr_prompt->this_p_line_splited_by_pipe[0], ' ');
+	strdup = ft_strdup(curr_prompt->this_p_line_splited_by_pipe[0]);
+	input_s_by_space = ft_split( strdup, ' ');
 	curr_prompt->input_fd = 0;
 	curr_prompt->input_path = NULL;
 	curr_prompt->has_here_doc = 0;
 	curr_prompt->only_here_doc = 0;
 	curr_prompt->no_cmd_just_redirect = 0;
+	ft_free_ptr((void **) &strdup);
 	return (input_s_by_space);
 }
 

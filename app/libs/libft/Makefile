@@ -2,7 +2,7 @@
 
 CC =            clang
 HEADERS_DIR =   ./srcs
-CFLAGS =		-I$(HEADERS_DIR) -Wall -Wextra -Werror
+CFLAGS =		-I$(HEADERS_DIR) -Wall -Wextra -Werror -ggdb3
 #-ggdb3
 AR =            ar -rcs
 RM =            rm -rfd
@@ -53,7 +53,8 @@ SRCS_FILES+=	lst/ft_lstadd_front.c \
 SRCS_FILES+=	mtx/ft_mtx_free.c \
 				mtx/ft_mtx_set.c \
 				mtx/ft_mtx_replace_all.c \
-				mtx/ft_mtx_size.c
+				mtx/ft_mtx_size.c \
+				mtx/ft_mtx_dup.c
 
 SRCS_FILES+=	mem/ft_bzero.c \
 				mem/ft_memchr.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_init_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:55:10 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/28 01:17:49 by argel            ###   ########.fr       */
+/*   Updated: 2022/05/30 20:58:50 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ms_init_env(t_ms *ms)
 	i = 0;
 	envp = ms->envp;
 	ms->envs = (t_env *) malloc(sizeof(t_env));
+	ms->envs->key = NULL;
 	if (ms->envp != NULL)
 	{
 		while (envp[i])

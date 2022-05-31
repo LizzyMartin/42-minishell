@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/28 01:20:11 by argel            ###   ########.fr       */
+/*   Updated: 2022/05/30 20:24:44 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void		print_banner(void);
 char		*ms_print_sh_name(void);
 
 /* init */
-t_ms		*ms_init(int argc, char **argv, char **envp);
+void		ms_init(t_ms **ms, int argc, char **argv, char **envp);
 
 // env
 void		ms_init_env(t_ms *ms);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 20:34:46 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/25 15:26:56 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/30 21:38:41 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void	ft_mtx_free(void **matrix);
 char	**ft_mtx_replace_all(char **matrix, char *search, char *replace);
 void	ft_mtx_set(int **matrix, int width, int height, int ch);
 int 	ft_mtx_size(void **matrix);
+char	**ft_mtx_dup(char **duped_mtx);
 
 // mem (memory)
 void	*ft_memchr(const void *str, int c, size_t n);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_if_there_is_commands_prepare_them_to_be_        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/28 00:54:38 by argel            ###   ########.fr       */
+/*   Updated: 2022/05/30 20:50:58 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ void	if_there_is_commands_prepare_them_to_be_executed(t_ms *ms, \
 			curr_command = update_cmd(curr_command);
 		curr_command->exit_code = 0;
 		curr_command->index = c;
-		curr_command->cmd_line = curr_prompt->this_p_line_splited_by_pipe[c];
+		curr_command->cmd_line = ft_strdup(curr_prompt->this_p_line_splited_by_pipe[c]);
 		prepare_cmd_line(curr_prompt, input_s_by_space, c, curr_command);
 		if (c == (curr_prompt->pipe_amount - 1) && curr_prompt->redirect > 0)
 			prepare_something(c, curr_command, curr_prompt, output_s_by_space);

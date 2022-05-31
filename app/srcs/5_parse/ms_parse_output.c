@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:19 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/26 21:45:40 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/30 22:23:25 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,21 @@ char	**ms_parse_output(t_p *curr_prompt)
 {
 	int		aux;
 	char	**output_s_by_space;
+	char	**dup;
+	char	*strdup;
+	int		mtx_size;
 
-	output_s_by_space = NULL;
-	output_s_by_space = ft_split(\
-		curr_prompt->this_p_line_splited_by_pipe[ft_mtx_size(\
-			(void **)curr_prompt->this_p_line_splited_by_pipe) - 1], ' ');
+	mtx_size = 0;
+	dup = NULL;
+	dup = ft_mtx_dup(curr_prompt->this_p_line_splited_by_pipe);
+	mtx_size = ft_mtx_size((void **) dup);
+	strdup = ft_strdup(curr_prompt->this_p_line_splited_by_pipe[mtx_size - 1]);
+	output_s_by_space = ft_split(strdup, ' ');
 	aux = ft_mtx_size((void **) output_s_by_space);
 	curr_prompt->redirect = 0;
 	curr_prompt->output_fd = 1;
 	curr_prompt->output_path = NULL;
 	update_current_prompt(curr_prompt, aux, output_s_by_space);
+	ft_mtx_free((void **) dup);
 	return (output_s_by_space);
 }

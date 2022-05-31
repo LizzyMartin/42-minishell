@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_free_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:00:23 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/28 01:32:56 by argel            ###   ########.fr       */
+/*   Updated: 2022/05/30 22:43:58 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,13 @@ void	ms_free_env(t_ms *ms)
 	while (stack != NULL)
 	{
 		delete = stack;
-		//ft_free_ptr((void *) &(delete->value));
-		//ft_free_ptr((void *) &(delete->key));
+		ft_free_ptr((void *) &(delete->value));
+		ft_free_ptr((void *) &(delete->key));
 		ft_free_ptr((void *) &delete);
 		stack = stack->next;
 	}
+	//ft_free_ptr((void *) &(delete->value));
+//	ft_free_ptr((void *) &(delete->key));
+	ft_free_ptr((void *) &delete);
     ms->envs = NULL;
 }

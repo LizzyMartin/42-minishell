@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 21:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/27 22:06:44 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/30 21:59:36 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	**ft_tosplit(char *s, char *token, char **split)
 	{
 		if (ft_strnstr(tmp, token, ft_strlen(token)))
 		{
-			split[j] = (char *) ft_calloc ((i), sizeof(char));
+			split[j] = (char *) ft_calloc (i + 1, sizeof(char));
 			if (split[j] != NULL)
 				ft_strlcpy (split[j], s, ft_wordlen(s, token) + 1);
 			tmp += ft_strlen(token);
@@ -77,7 +77,7 @@ char	**ft_tosplit(char *s, char *token, char **split)
 		i++;
 		tmp++;
 	}
-	split[j] = (char *) ft_calloc((i), sizeof(char));
+	split[j] = (char *) ft_calloc((i + 1), sizeof(char));
 	ft_strlcpy (split[j], s, ft_strlen(s) + 1);
 	ft_free_ptr((void *) &tmp_free);
 	return (split);

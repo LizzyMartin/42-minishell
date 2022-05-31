@@ -36,6 +36,7 @@ static void	print_cmd_content(t_ms *ms, \
 			ft_putstr_fd(cmd_splited[i], aux);
 		ft_putstr_fd(" ", aux);
 	}
+	ft_free_ptr((void **) &no_dolar);
 }
 
 void	last_cmd_exit_code(t_ms *ms)
