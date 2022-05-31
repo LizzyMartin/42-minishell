@@ -6,7 +6,7 @@
 /*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:55:14 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/31 15:15:14 by argel            ###   ########.fr       */
+/*   Updated: 2022/05/31 17:34:08 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ void	ms_init_history(t_ms *ms)
 	{
 		add_history(trim);		
 		ms_add_history(ms, trim, NULL);	
-		if (line != NULL)
-			ft_free_ptr((void *) &line);
-		if (trim != NULL)
-			ft_free_ptr((void *) &trim);
+		// if (line != NULL)
+		// 	ft_free_ptr((void *) &line);
+		// if (trim != NULL)
+		// 	ft_free_ptr((void *) &trim);
 		line = get_next_line(fd);
 		trim = ft_strtrim(line, "\n");	
 	}
