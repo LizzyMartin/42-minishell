@@ -57,7 +57,7 @@ void	ms_add_history(t_ms *ms, char *line, t_cmd *cmds)
 	{
 		aux = (t_history *) ft_calloc(1, sizeof(struct s_history));
 		aux->index = ms->history_i;
-		aux->line = line;
+		aux->line = ft_strdup(line);
 		aux->next = NULL;
 		aux->prev = NULL;
 		aux->l_c_exit_code = 0;

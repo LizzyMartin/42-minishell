@@ -23,11 +23,9 @@ void	ms_free_env(t_ms *ms)
 		delete = stack;
 		ft_free_ptr((void *) &(delete->value));
 		ft_free_ptr((void *) &(delete->key));
+		stack = delete->next;
 		ft_free_ptr((void *) &delete);
-		stack = stack->next;
 	}
-	//ft_free_ptr((void *) &(delete->value));
-//	ft_free_ptr((void *) &(delete->key));
-	// ft_free_ptr((void *) &delete);
+	ft_free_ptr((void *) &delete);
     ms->envs = NULL;
 }

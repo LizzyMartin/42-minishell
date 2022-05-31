@@ -56,6 +56,7 @@ char	**ms_parse_output(t_p *curr_prompt)
 	mtx_size = ft_mtx_size((void **) dup);
 	strdup = ft_strdup(curr_prompt->this_p_line_splited_by_pipe[mtx_size - 1]);
 	output_s_by_space = ft_split(strdup, ' ');
+	ft_free_ptr((void **) &strdup);
 	aux = ft_mtx_size((void **) output_s_by_space);
 	curr_prompt->redirect = 0;
 	curr_prompt->output_fd = 1;

@@ -9,11 +9,10 @@ void	ms_free_history(t_ms *ms)
 	while (stack != NULL)
 	{
 		delete = stack;
-		stack = stack->next;
 		ft_free_ptr((void *) &(delete->line));
+		stack = delete->next;
 		ft_free_ptr((void *) &delete);
 	}
-	ft_free_ptr((void *) &(delete->line));
 	ft_free_ptr((void *) &delete);
     ms->history = NULL;
 }

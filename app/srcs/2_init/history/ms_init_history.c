@@ -41,6 +41,5 @@ void	ms_init_history(t_ms *ms)
 		line = get_next_line(fd);
 	}
 	ft_free_ptr((void *) &path);
-	// ft_free_ptr((void *) &line);
 	get_next_line(-1);
 }
