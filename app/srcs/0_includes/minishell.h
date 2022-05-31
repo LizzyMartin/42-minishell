@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/30 20:24:44 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/31 15:21:09 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,6 @@ void		ms_finish(t_ms *ms);
 /* ms */
 void		minishell(t_ms *ms);
 
-extern int g_ms_is_being_executed;
+extern t_ms *g_ms;
 
 #endif

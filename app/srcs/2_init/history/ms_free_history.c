@@ -2,17 +2,17 @@
 
 void	ms_free_history(t_ms *ms)
 {
-	t_history	*delete;
-    t_history   *stack;
+	t_history *head;
 
-    stack = ms->history;
-	while (stack != NULL)
+	head = ms->history;
+	while (head->next != NULL)
+		head = head->next;
+	while (head->prev != NULL)
 	{
-		delete = stack;
-		ft_free_ptr((void *) &(delete->line));
-		stack = delete->next;
-		ft_free_ptr((void *) &delete);
+		head = head->prev;
+		if (head->next != NULL)
+			ft_free_ptr((void *) &head->next);
 	}
-	ft_free_ptr((void *) &delete);
-    ms->history = NULL;
+	if (head != NULL)
+		ft_free_ptr((void *) &head);
 }

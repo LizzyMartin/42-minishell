@@ -3,20 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ms_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:55:07 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/30 20:26:34 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/31 15:22:31 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int g_ms_is_being_executed = 1;
+t_ms *g_ms = NULL;
 
 void	ms_init(t_ms **ms, int argc, char **argv, char **envp)
 {
 	(*ms) = (t_ms *) ft_calloc(1, sizeof(t_ms));
+	g_ms = (*ms);
 	(*ms)->argc = argc;
 	(*ms)->argv = argv;
 	(*ms)->envp = envp;

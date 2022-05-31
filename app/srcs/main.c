@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:06:03 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/30 23:11:46 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/31 15:19:31 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv, char **envp)
 
 	ms = NULL;
 	ms_init(&ms, argc, argv, envp);
-	//while (1)
+	while (1)
 		minishell(ms);
 	ms_finish(ms);
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_init_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:55:10 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/30 20:58:50 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/31 15:11:50 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,18 @@ void	ms_init_env(t_ms *ms)
 
 	i = 0;
 	envp = ms->envp;
-	ms->envs = (t_env *) malloc(sizeof(t_env));
-	ms->envs->key = NULL;
+	envp_splitted = NULL;
 	if (ms->envp != NULL)
 	{
+		envp_splitted = ft_split(envp[i], '=');
 		while (envp[i])
 		{
-			envp_splitted = ft_split(envp[i], '=');
 			if (envp_splitted[0] != NULL && envp_splitted[1] != NULL)
 				ms_add_env(ms, envp_splitted[0], envp_splitted[1]);
-			ft_mtx_free((void **) envp_splitted);
 			i++;
+			ft_mtx_free((void **) envp_splitted);
+			envp_splitted = ft_split(envp[i], '=');
 		}
 	}
+	ft_mtx_free((void **) envp_splitted);
 }

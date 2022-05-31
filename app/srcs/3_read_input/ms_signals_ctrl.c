@@ -6,7 +6,7 @@
 /*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:37:54 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/27 15:20:14 by argel            ###   ########.fr       */
+/*   Updated: 2022/05/31 15:23:26 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,19 @@ void	ctrl_c_redisplay_prompt(int signal)
 void	ctrl_c_interrupt_process(int signal)
 {
 	(void)signal;
-	g_ms_is_being_executed = 0;
 	ft_putstr_fd("\n", 1);
 }
 
 void	ctrl_d_exit_shell(int signal)
 {
 	(void)signal;
-	g_ms_is_being_executed = 0;
+	ms_finish(g_ms);
 	ft_printf("exit\n");
 }
 
 void	ctrl_d_quit_process(int signal)
 {
 	(void)signal;
-	g_ms_is_being_executed = 0;
+
 	ft_putstr_fd("Quit (Core Dumped)\n", 1);
 }

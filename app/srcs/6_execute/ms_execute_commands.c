@@ -6,7 +6,7 @@
 /*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:42:02 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/27 15:57:59 by argel            ###   ########.fr       */
+/*   Updated: 2022/05/31 13:33:52 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,10 @@ void	ms_execute_commands(t_ms *ms, t_p *curr_prompt)
 		current_cmd = current_cmd->next;
 	}
 	ms_add_history(ms, NULL, curr_prompt->cmds);
+	if (curr_prompt->input_fd > 0)
+		close(curr_prompt->input_fd);
+	if (curr_prompt->output_fd > 1)
+		close(curr_prompt->output_fd);
 }
 
 static void	print_fd_or_execute_cmd(t_ms *ms, t_p *curr_prompt)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_read_input.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:47 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/30 22:37:50 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/31 15:29:11 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	ms_read_input(t_ms *ms) {
 	//ms->shell_line = get_next_line(0);
 	if (!ms->shell_line || ft_strncmp(ms->shell_line, "exit", 4) == 0) {
 		ctrl_d_exit_shell(SIGQUIT);
-		ms->exit_code = 1;
 		exit(0);
 	} else if (*(ms->shell_line) == '\0') {
 		ft_printf("\n");

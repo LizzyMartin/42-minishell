@@ -6,7 +6,7 @@
 /*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:26 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/28 00:55:53 by argel            ###   ########.fr       */
+/*   Updated: 2022/05/31 15:13:31 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	ms_tokenizer(t_ms *ms)
 	tmp2 = ms_get_home_value(ms);
 	tmp = ft_str_replace_all(ms->shell_line_tokenized, chr_tmp, tmp2);
 	ft_free_ptr((void *) &chr_tmp);
-//	ft_free_ptr((void *) &tmp2);
+	//if (tmp2 != NULL)
+		//ft_free_ptr((void *) &tmp2);
 	ms->shell_line_tokenized = tmp;
 	ms_wildcard(ms);
 }
