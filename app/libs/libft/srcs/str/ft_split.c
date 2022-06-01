@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 21:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/30 20:49:13 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/01 01:39:33 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,14 @@ static int	ft_wordsize(char const *str, char c)
 	return (i);
 }
 
+static void	init_vars(int	*len, int	*con, int *i, int	*j)
+{
+	*j = 0;
+	*i = 0;
+	*len = 0;
+	*con = 0;
+}
+
 static char	**ft_tosplit(const char *s, char c, char **split)
 {
 	int	len;
@@ -56,10 +64,7 @@ static char	**ft_tosplit(const char *s, char c, char **split)
 	int	i;
 	int	j;
 
-	j = 0;
-	i = 0;
-	len = 0;
-	con = 0;
+	init_vars(&len, &con, &i, &j);
 	while (s[i])
 	{
 		if (s[i] != c && con == 0)
@@ -78,7 +83,6 @@ static char	**ft_tosplit(const char *s, char c, char **split)
 			con = 0;
 		i++;
 	}
-
 	return (split);
 }
 

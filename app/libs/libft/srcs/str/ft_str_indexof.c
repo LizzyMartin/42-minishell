@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_str_indexof.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/01 01:21:14 by argel             #+#    #+#             */
+/*   Updated: 2022/06/01 01:21:36 by argel            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <libft.h>
 
-int		ft_str_indexof(char *big, char *little, size_t n)
+int	ft_str_indexof(char *big, char *little, size_t n)
 {
 	size_t		i;
 	size_t		j;

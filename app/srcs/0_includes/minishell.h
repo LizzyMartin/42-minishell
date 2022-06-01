@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/31 22:29:52 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/01 01:51:01 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include           "../1_design/design.h"
 # include           "errors.h"
 # include           "structs.h"
-# include			<stdbool.h>
+# include           <stdbool.h>
 
 /*
 ** GLOBAL VARIABLE: pointer to ms struct, so we can
@@ -82,9 +82,11 @@ int			ms_parse(t_ms *ms);
 char		**ms_parse_input(t_p *curr_prompt);
 char		**ms_parse_output(t_p *curr_prompt);
 char		*ms_append_path_in_front(t_cmd *current_cmd, t_ms *ms);
-void		if_there_is_commands_prepare_them_to_be_executed(t_ms *ms,
+void		ms_parse_commands(t_ms *ms,
 				t_p *curr_prompt, char **output_s_by_space,
 				char **input_s_by_space);
+void		reset_cmd(t_cmd **curr_command);
+t_cmd		*update_cmd(t_cmd *curr_command);
 
 // prompt
 void		ms_free_prompt(t_p *curr_prompt);
@@ -99,7 +101,7 @@ void		ms_execute_commands(t_ms *ms, t_p *prompt);
 
 int			is_builtin(char *cmd);
 void		execute_builtin(t_ms *ms, t_cmd *current_cmd, t_p *prompt);
-
+void		ms_close_fds(t_p *curr_prompt);
 void		last_cmd_exit_code(t_ms *ms);
 
 // builtins
@@ -108,6 +110,8 @@ void		ms_echo(t_ms *ms, t_cmd *current_cmd, t_p *prompt);
 void		ms_env(t_ms *ms);
 void		ms_exit(t_ms *ms, t_cmd *current_cmd);
 void		ms_export(t_ms *ms, t_cmd *current_cmd);
+void		quicksort(t_qs *qs, int left, int right, int (*comp)(void*, void*));
+int			cmpstr(void *v1, void *v2);
 void		ms_pwd(t_ms *ms);
 void		ms_unset(t_ms *ms, t_cmd *current_cmd);
 

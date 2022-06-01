@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_dll_cmd_free.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 06:44:31 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/31 22:21:06 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/31 22:52:33 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ms_dll_cmd_free(t_cmd *cmds)
 
 	if (cmds == NULL)
 		return ;
-	cmds = ft_dll_cmd_last(cmds);
+	cmds = ms_dll_cmd_last(cmds);
 	while (cmds->prev != NULL)
 	{
 		last = cmds;

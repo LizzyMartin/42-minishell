@@ -6,7 +6,7 @@
 /*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:00 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/27 07:31:14 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/01 00:22:00 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,12 @@ void	execute_builtin(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 		ms_unset(ms, current_cmd);
 	else if (ft_strncmp(name, "env", ft_strlen(name)) == 0)
 		ms_env(ms);
+}
+
+void	ms_close_fds(t_p *curr_prompt)
+{
+	if (curr_prompt->input_fd > 0)
+		close(curr_prompt->input_fd);
+	if (curr_prompt->output_fd > 1)
+		close(curr_prompt->output_fd);
 }

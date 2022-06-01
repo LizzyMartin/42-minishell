@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/31 22:31:59 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/01 00:03:38 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void reset_prompt(t_p **curr_prompt)
+void	reset_prompt(t_p **curr_prompt)
 {
-	(*curr_prompt) = curr_prompt->next;
+	(*curr_prompt) = (*curr_prompt)->next;
 	(*curr_prompt)->next = NULL;
 	(*curr_prompt)->has_here_doc = 0;
 	(*curr_prompt)->only_here_doc = 0;
@@ -24,7 +24,7 @@ void reset_prompt(t_p **curr_prompt)
 	(*curr_prompt)->input_redirected_to_file = 0;
 	(*curr_prompt)->only_input_redirected_to_file = 0;
 	(*curr_prompt)->no_cmd_just_redirect = 0;
-	(*curr_prompt)->prompt->output_fd = 1;
+	(*curr_prompt)->output_fd = 1;
 	(*curr_prompt)->output_path = NULL;
 	(*curr_prompt)->redirect = 0;
 	(*curr_prompt)->pipe_amount = 0;
@@ -41,7 +41,7 @@ t_p	*ms_get_prompt(t_ms *ms, t_p *curr_prompt, int i)
 	{
 		curr_prompt->next = (t_p *) ft_calloc (1, sizeof(t_p));
 		curr_prompt->next->prev = curr_prompt;
-		reset_prompt(&curr_prompt); 
+		reset_prompt(&curr_prompt);
 	}
 	if (ms->slt_splited_by_connectors)
 		curr_prompt->this_p_line = ms->slt_splited_by_connectors[i];
@@ -54,9 +54,8 @@ t_p	*ms_get_prompt(t_ms *ms, t_p *curr_prompt, int i)
 	return (curr_prompt);
 }
 
-static void get_prompts(t_ms *ms)
+t_p	*parse_prompts(t_ms *ms)
 {
-	
 	if (ft_strnstr(ms->shell_line_tokenized, \
 		T_CONNECTOR_AND, ft_strlen(ms->shell_line_tokenized)))
 	{
@@ -69,6 +68,7 @@ static void get_prompts(t_ms *ms)
 	ms->p = (t_p *) ft_calloc(1, sizeof(t_p));
 	ms->p->next = NULL;
 	ms->p->prev = NULL;
+	return (ms->p);
 }
 
 int	ms_parse(t_ms *ms)
@@ -78,21 +78,19 @@ int	ms_parse(t_ms *ms)
 	char	**input_s_by_space;
 	char	**output_s_by_space;
 
-	curr_prompt = NULL;
 	input_s_by_space = NULL;
 	output_s_by_space = NULL;
-	get_prompts(ms);
+	curr_prompt = parse_prompts(ms);
 	i = 0;
 	while (i < ms->p_amount)
 	{
 		curr_prompt = ms_get_prompt(ms, curr_prompt, i);
 		input_s_by_space = ms_parse_input(curr_prompt);
 		output_s_by_space = ms_parse_output(curr_prompt);
-		curr_prompt->pipe_amount = 0;
 		curr_prompt->pipe_amount = ft_mtx_size((void **) \
 			curr_prompt->this_p_line_splited_by_pipe);
-		if_there_is_commands_prepare_them_to_be_executed (ms, \
-				curr_prompt, output_s_by_space, input_s_by_space);
+		ms_parse_commands (ms, curr_prompt, \
+		output_s_by_space, input_s_by_space);
 		ft_mtx_free((void **) curr_prompt->this_p_line_splited_by_pipe);
 		ft_mtx_free((void **) input_s_by_space);
 		i++;

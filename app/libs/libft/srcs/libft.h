@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 20:34:46 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/30 21:38:41 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/01 01:36:06 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 # define LIBFT_H
 
 /* opendir, readdir */
-# include 			<sys/types.h>
-# include 			<dirent.h>
+# include           <sys/types.h>
+# include           <dirent.h>
 
 /* waitpid */
-# include 			<sys/types.h>
-# include 			<sys/wait.h>
+# include           <sys/types.h>
+# include           <sys/wait.h>
 
 /* readline */
-# include			<stdio.h>
-# include			<readline/readline.h>
-# include			<readline/history.h>
+# include           <stdio.h>
+# include           <readline/readline.h>
+# include           <readline/history.h>
 
 /* write, read */
 # include <unistd.h>
@@ -80,8 +80,8 @@ int		ft_dll_biggest(t_dll *stack);
 int		ft_dll_prev_index(t_dll *a, t_dll *a_iterator);
 
 // fd
-void    ft_fd_print(int fd);
-void    ft_fd_dup2(int read_from, int write_in);
+void	ft_fd_print(int fd);
+void	ft_fd_dup2(int read_from, int write_in);
 
 // lst (list)
 typedef struct s_list
@@ -104,7 +104,7 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 void	ft_mtx_free(void **matrix);
 char	**ft_mtx_replace_all(char **matrix, char *search, char *replace);
 void	ft_mtx_set(int **matrix, int width, int height, int ch);
-int 	ft_mtx_size(void **matrix);
+int		ft_mtx_size(void **matrix);
 char	**ft_mtx_dup(char **duped_mtx);
 
 // mem (memory)
@@ -155,6 +155,6 @@ char	**ft_split_by_str(char *s, char *token);
 int		ft_indexof(const char *str, int ch);
 int		ft_str_indexof(char *big, char *little, size_t n);
 int		ft_str_is_empty(char *str);
-int	    ft_count_chr(char *str, char c);
+int		ft_count_chr(char *str, char c);
 
 #endif

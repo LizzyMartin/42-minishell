@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_execute_commands.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:42:02 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/31 21:39:48 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/01 00:14:12 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,7 @@ void	ms_execute_commands(t_ms *ms, t_p *curr_prompt)
 		current_cmd = current_cmd->next;
 	}
 	ms_add_history(ms, NULL, curr_prompt->cmds);
-	if (curr_prompt->input_fd > 0)
-		close(curr_prompt->input_fd);
-	if (curr_prompt->output_fd > 1)
-		close(curr_prompt->output_fd);
+	ms_close_fds(curr_prompt);
 }
 
 static void	print_fd_or_execute_cmd(t_ms *ms, t_p *curr_prompt)

@@ -3,15 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:06:41 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/31 21:16:31 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/01 01:49:52 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+typedef struct s_qs
+{
+	void	*vt;
+	void	*v3;
+	void	*vr;
+	void	*vl;
+	int		last;
+	int		mid;
+	void	*v;
+	int		size;
+	int		left;
+	int		right;
+}	t_qs;
 
 typedef struct s_env
 {

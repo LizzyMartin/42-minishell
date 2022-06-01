@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_if_there_is_commands_prepare_them_to_be_        :+:      :+:    :+:   */
+/*   ms_parse_commands.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/31 21:58:11 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/31 23:58:31 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,6 @@ static void	prepare_cmd_line(const t_p *curr_prompt, \
 		tmp = curr_prompt->this_p_line_splited_by_pipe[c] + aux;
 		curr_command->cmd_line = ft_substr(tmp, 0, ft_strlen(tmp));
 	}
-}
-
-t_cmd	*update_cmd(t_cmd *curr_command)
-{
-	curr_command->next = (t_cmd *) ft_calloc(1, sizeof(t_cmd));
-	curr_command->next->prev = curr_command;
-	curr_command = curr_command->next;
-	curr_command->next = NULL;
-	curr_command->can_execute = 1;
-	curr_command->error_msg = NULL;
-	curr_command->just_name = NULL;
-	curr_command->path_and_name = NULL;
-	curr_command->cmd_line = NULL;
-	curr_command->cmd_splited_by_space = NULL;
-	return (curr_command);
 }
 
 static void	prepare_path_and_fd(t_ms *ms, t_p *curr_prompt, t_cmd *curr_command)
@@ -104,7 +89,7 @@ static void	prepare_something(int c, t_cmd *curr_command, \
 		curr_prompt->no_cmd_just_redirect = 1;
 }
 
-void	if_there_is_commands_prepare_them_to_be_executed(t_ms *ms, \
+void	ms_parse_commands(t_ms *ms, \
 	t_p *curr_prompt, char **output_s_by_space, char **input_s_by_space)
 {
 	int		c;
@@ -113,15 +98,7 @@ void	if_there_is_commands_prepare_them_to_be_executed(t_ms *ms, \
 	c = 0;
 	curr_prompt->cmds = (t_cmd *) malloc (sizeof(struct s_cmd));
 	curr_command = curr_prompt->cmds;
-	curr_command->prev = NULL;
-	curr_command->next = NULL;
-	curr_command->exit_code = 0;
-	curr_command->error_msg = NULL;
-	curr_command->just_name = NULL;
-	curr_command->path_and_name = NULL;
-	curr_command->cmd_line = NULL;
-	curr_command->cmd_splited_by_space = NULL;
-	curr_command->can_execute = 1;
+	reset_cmd(&curr_command);
 	while (c < curr_prompt->pipe_amount)
 	{
 		if (c > 0)

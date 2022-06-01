@@ -48,7 +48,8 @@ SRCS_FILES +=	4_tokenizer/ms_tokenizer.c \
 				4_tokenizer/ms_sintax.c
 
 SRCS_FILES +=	5_parse/ms_parse.c \
-				5_parse/ms_if_there_is_commands_prepare_them_to_be_executed.c \
+				5_parse/ms_parse_commands.c \
+				5_parse/ms_parse_commands_utils.c \
 				5_parse/ms_append_path_in_front.c \
 				5_parse/ms_parse_input.c \
 				5_parse/ms_parse_output.c \
@@ -64,6 +65,7 @@ SRCS_FILES +=	6_execute/builtins/ms_cd.c \
 				6_execute/builtins/ms_env.c \
 				6_execute/builtins/ms_exit.c \
 				6_execute/builtins/ms_export.c \
+				6_execute/builtins/ms_export_utils.c \
 				6_execute/builtins/ms_pwd.c \
 				6_execute/builtins/ms_unset.c
 
