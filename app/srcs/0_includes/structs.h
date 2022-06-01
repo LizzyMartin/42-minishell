@@ -6,7 +6,7 @@
 /*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:06:41 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/01 01:49:52 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/01 19:59:22 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_cmd
 	int						bridge_pipe[2];
 	int						exit_code;
 	char					*error_msg;
+	int						cmd_is_path_but_invalid;
 	int						can_execute;
 }	t_cmd;
 
