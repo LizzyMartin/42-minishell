@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:06:41 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/27 15:28:27 by argel            ###   ########.fr       */
+/*   Updated: 2022/05/31 21:16:31 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,5 @@ typedef struct s_minishell
 	t_history				*history;
 	t_env					*envs;
 }	t_ms;
-
 
 #endif

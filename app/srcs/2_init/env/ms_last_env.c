@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_reinit.c                                        :+:      :+:    :+:   */
+/*   ms_last_env                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/26 20:05:57 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/31 22:00:05 by acapela-         ###   ########.fr       */
+/*   Created: 2022/04/09 06:44:31 by acapela-          #+#    #+#             */
+/*   Updated: 2022/05/31 21:30:30 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	ms_reinit(t_ms *ms)
+t_env	*ms_last_env(t_env *env)
 {
-	ms->p_amount = 1;
-	ms_free_prompt(ms->p);
-	ft_free_ptr((void *) &ms->readline_var);
-	ft_free_ptr((void *) &ms->shell_line_tokenized);
-	ft_mtx_free((void **) ms->slt_splited_by_connectors);
+	t_env	*tmp;
+
+	tmp = env;
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+	return (tmp);
 }

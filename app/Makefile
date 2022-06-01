@@ -21,12 +21,12 @@ SRCS_FILES +=	1_design/ms_print_banner.c
 
 SRCS_FILES +=	2_init/ms_init.c		
 
-
 SRCS_FILES +=	2_init/env/ms_add_env.c \
 				2_init/env/ms_delete_env.c \
 				2_init/env/ms_find_env_value.c \
 				2_init/env/ms_free_env.c \
 				2_init/env/ms_is_in_env.c \
+				2_init/env/ms_last_env.c \
 				2_init/env/ms_parse_env.c \
 				2_init/env/ms_init_env.c
 
@@ -43,7 +43,9 @@ SRCS_FILES +=	3_read_input/ms_read_input.c \
 
 SRCS_FILES +=	4_tokenizer/ms_tokenizer.c \
 				4_tokenizer/ms_wildcard.c \
-				4_tokenizer/ms_check_quotes.c
+				4_tokenizer/ms_wildcard_utils.c \
+				4_tokenizer/ms_check_quotes.c \
+				4_tokenizer/ms_sintax.c
 
 SRCS_FILES +=	5_parse/ms_parse.c \
 				5_parse/ms_if_there_is_commands_prepare_them_to_be_executed.c \

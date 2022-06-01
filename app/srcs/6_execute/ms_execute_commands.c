@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_execute_commands.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:42:02 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/31 13:33:52 by argel            ###   ########.fr       */
+/*   Updated: 2022/05/31 21:39:48 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	get_child_process_id(const t_p *prompt, \
 		if (execve(current_cmd->path_and_name, \
 			current_cmd->cmd_splited_by_space, envp) == -1)
 		{
-			perror("bash: ");
+			perror("miniheaven: ");
 			current_cmd->exit_code = 1;
 		}
 	}
@@ -58,21 +58,22 @@ void	ms_execute_commands(t_ms *ms, t_p *curr_prompt)
 	current_cmd = curr_prompt->cmds;
 	while (current_cmd)
 	{
-			if (ft_strncmp(current_cmd->just_name, "history", 7) == 0)
-			{
-				ms_add_history(ms, NULL, curr_prompt->cmds);
-				ms_print_history(ms);
-				return ;
-			}
-			else if (is_builtin(current_cmd->just_name) == 1)
-				execute_builtin(ms, current_cmd, curr_prompt);
-			else if (current_cmd->can_execute == 1)
-			{
-					ms_execute_command(curr_prompt, current_cmd, \
-						ms->envp, &(curr_prompt->input_fd));
-			}
-			else
-				ft_printf_to_fd(1, "bash: %s %s", current_cmd->just_name, current_cmd->error_msg);
+		if (ft_strncmp(current_cmd->just_name, "history", 7) == 0)
+		{
+			ms_add_history(ms, NULL, curr_prompt->cmds);
+			ms_print_history(ms);
+			return ;
+		}
+		else if (is_builtin(current_cmd->just_name) == 1)
+			execute_builtin(ms, current_cmd, curr_prompt);
+		else if (current_cmd->can_execute == 1)
+		{
+			ms_execute_command(curr_prompt, current_cmd, \
+				ms->envp, &(curr_prompt->input_fd));
+		}
+		else
+			ft_printf_to_fd(1, "miniheaven: %s %s", \
+				current_cmd->just_name, current_cmd->error_msg);
 		current_cmd = current_cmd->next;
 	}
 	ms_add_history(ms, NULL, curr_prompt->cmds);
@@ -86,7 +87,7 @@ static void	print_fd_or_execute_cmd(t_ms *ms, t_p *curr_prompt)
 {
 	if (curr_prompt->only_input_redirected_to_file == 1)
 		return ;
-	else if(curr_prompt->no_cmd_just_redirect == 1)
+	else if (curr_prompt->no_cmd_just_redirect == 1)
 		ft_fd_dup2(curr_prompt->pipe_here_doc[0], curr_prompt->output_fd);
 	else
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:06:31 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/27 07:33:19 by argel            ###   ########.fr       */
+/*   Updated: 2022/05/31 18:54:02 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 /* all */
 # define E_CMDNOTFOUND ": command not found\n"
-# define E_BADSINTAX ": syntax error near unexpected token "
+# define E_BADSINTAX " syntax error near unexpected token "
 # define E_NOTDIR ": No such file or directory\n"
 
 /* cd */

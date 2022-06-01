@@ -3,19 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ms_check_quotes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:26 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/31 17:24:55 by argel            ###   ########.fr       */
+/*   Updated: 2022/05/31 22:30:46 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
+static int	get_goal(const t_ms *ms, char *goal, int i, int space)
+{
+	int	space_index;
+
+	while (ms->shell_line[i])
+	{
+		goal[i] = ms->shell_line[i];
+		if (ms->shell_line[i] == ' ' && !space)
+		{
+			goal[i] = '-';
+			space_index = i;
+			space = 1;
+		}
+		i++;
+	}
+	return (space_index);
+}
+
 void	ms_remove_char(char *s, char c)
 {
-	int new;
-	int old;
+	int	new;
+	int	old;
 
 	new = 0;
 	old = 0;
@@ -28,10 +46,10 @@ void	ms_remove_char(char *s, char c)
 	s[new] = '\0';
 }
 
-static int count_char(char *s, char c)
+static int	count_char(char *s, char c)
 {
-	int i;
-	int count;
+	int	i;
+	int	count;
 
 	i = 0;
 	count = 0;
@@ -44,41 +62,40 @@ static int count_char(char *s, char c)
 	return (count);
 }
 
-void	ms_check_quotes(t_ms *ms)
+static void	threat_quotes(t_ms *ms, char *goal, int space_index)
 {
 	char	*line;
-	char 	*goal;
-	char 	**shell_line_splitted;
+	char	**shell_line_splitted;
+
+	line = goal + space_index + 1;
+	shell_line_splitted = ft_split(ms->shell_line, ' ');
+	if (line[0] != '"' && line[1] != '\'')
+	{
+		if (line[0] != '\'' && ft_strchr(line, '"') \
+			&& count_char(line, '"') % 2 == 0)
+			ms_remove_char(line, '"');
+	}
+	ms->shell_line_tokenized = ft_printf_to_var("%s %s", \
+		shell_line_splitted[0], line);
+	ms->shell_line_tokenized[space_index] = ' ';
+	ft_mtx_free((void **) shell_line_splitted);
+}
+
+void	ms_check_quotes(t_ms *ms)
+{
+	char	*goal;
 	int		i;
-	int 	space;
-	int 	space_index;
+	int		space;
+	int		space_index;
 
 	i = 0;
 	space = 0;
 	space_index = -1;
 	goal = ft_calloc(ft_strlen(ms->shell_line), sizeof (char *));
-	while (ms->shell_line[i])
-	{
-		goal[i] = ms->shell_line[i];
-		if (ms->shell_line[i] == ' ' && !space)
-		{
-			goal[i] = '-';
-			space_index = i;
-			space = 1;
-		}
-		i++;
-	}
+	space_index = get_goal(ms, goal, i, space);
 	if (space_index != -1)
 	{
-		line = goal + space_index + 1;
-		shell_line_splitted = ft_split(ms->shell_line, ' ');
-		if (ft_strchr(line, '"') && count_char(line, '"') % 2 == 0)
-			ms_remove_char(line, '"');
-		ms->shell_line_tokenized = ft_printf_to_var("%s %s", shell_line_splitted[0], line);
-		ms->shell_line_tokenized[space_index] = ' ';
-		ft_free_ptr((void **) &goal);
-		ft_free_ptr((void **) &line);
-		ft_mtx_free((void **) shell_line_splitted);
+		threat_quotes(ms, goal, space_index);
 		return ;
 	}
 	ft_free_ptr((void **) &goal);

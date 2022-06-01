@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_wildcard.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:53:50 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/27 15:24:47 by argel            ###   ########.fr       */
+/*   Updated: 2022/05/31 22:29:17 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,12 @@ static char	*ms_get_files_that_represent_wildcard(char *wildcard)
 	de = readdir(dr);
 	while (de != NULL)
 	{
-		if ((all == 1 && ((ft_strncmp(de->d_name, ".", \
-		ft_strlen(de->d_name)) == 0) || (ft_strncmp(de->d_name, \
-		"..", ft_strlen(de->d_name)) == 0))) || (all == 0 \
-		&& (ft_strnstr(de->d_name, wildcard + 1, \
-		ft_strlen(de->d_name)) == NULL)))
+		if (get_boolean(wildcard, de, all))
 		{
 			de = readdir(dr);
 			continue ;
 		}
-		tmp = ft_strjoin(replace, " ");
-		ft_free_ptr((void *) &replace);
-		replace = ft_strjoin(tmp, de->d_name);
-		ft_free_ptr((void *) &tmp);
-		tmp = ft_strjoin(replace, " \0");
-		de = readdir(dr);
+		update_tmp(&replace, dr, &de, &tmp);
 	}
 	closedir(dr);
 	return (tmp);

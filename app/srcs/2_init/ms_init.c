@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ms_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:55:07 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/31 15:22:31 by argel            ###   ########.fr       */
+/*   Updated: 2022/05/31 21:27:03 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-t_ms *g_ms = NULL;
+t_ms	*g_ms = NULL;
 
 void	ms_init(t_ms **ms, int argc, char **argv, char **envp)
 {
@@ -31,26 +31,8 @@ void	ms_init(t_ms **ms, int argc, char **argv, char **envp)
 	(*ms)->slt_splited_by_connectors = NULL;
 	(*ms)->readline_var = NULL;
 	(*ms)->p = NULL;
-	
 	ms_init_env(*ms);
 	ms_init_history(*ms);
 	system("clear");
 	print_banner();
 }
-
-/*typedef struct s_minishell
-{
-	int						argc;
-	char					**argv;
-	char					**envp;
-	char					*shell_line;
-	char					*shell_line_tokenized;
-	char					**slt_splited_by_connectors;
-	char					*readline_var;
-	int						p_amount;
-	t_p						*p;
-	int						exit_code;
-	int						history_i;
-	t_history				*history;
-	t_env					*envs;
-}	t_ms;*/

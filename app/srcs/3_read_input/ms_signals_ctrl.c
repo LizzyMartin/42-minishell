@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_signals_ctrl.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:37:54 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/31 15:23:26 by argel            ###   ########.fr       */
+/*   Updated: 2022/05/31 21:47:29 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,5 @@ void	ctrl_d_exit_shell(int signal)
 void	ctrl_d_quit_process(int signal)
 {
 	(void)signal;
-
 	ft_putstr_fd("Quit (Core Dumped)\n", 1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:06:06 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/28 01:36:48 by argel            ###   ########.fr       */
+/*   Updated: 2022/05/31 20:00:09 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	minishell(t_ms *ms)
 {
 	if (ms_read_input(ms) == 1)
 		return ;
-	ms_tokenizer(ms);
+	if (ms_tokenizer(ms) == 1)
+		return ;
 	ms_parse(ms);
 	ms_execute(ms);
 	ms_reinit(ms);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:25 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/27 15:36:15 by argel            ###   ########.fr       */
+/*   Updated: 2022/05/31 21:40:47 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,19 @@ static void	print_cmd_content(t_ms *ms, \
 			no_dolar = ft_substr(cmd_splited[1], 1, ft_strlen(cmd_splited[1]));
 			if (ms_is_in_env(ms, no_dolar) == 1)
 				ft_putstr_fd(ms_find_env_value(ms, no_dolar), aux);
+		}
+		else if (cmd_splited[i][0] == '"' && \
+			cmd_splited[i][1] == '\'' && cmd_splited[i][2] == '$')
+		{
+			ms_remove_char(cmd_splited[i], '"');
+			no_dolar = ft_substr(cmd_splited[i] + 1, \
+				1, ft_strlen(cmd_splited[i]));
+			if (ms_is_in_env(ms, no_dolar) == 1)
+			{
+				ft_putstr_fd("\'", aux);
+				ft_putstr_fd(ms_find_env_value(ms, no_dolar), aux);
+				ft_putstr_fd("\'", aux);
+			}
 		}
 		else if (ft_strchr(cmd_splited[i], '\''))
 		{

@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:07 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/26 20:54:28 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/05/31 21:41:18 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static void	update_env_values(t_ms *ms, t_cmd *current_cmd, \
 		}
 	}
 }
-
 
 void	ms_cd(t_ms *ms, t_cmd *current_cmd)
 {
