@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/01 23:26:29 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/02 16:21:25 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,9 @@ int			is_builtin(char *cmd);
 void		execute_builtin(t_ms *ms, t_cmd *current_cmd, t_p *prompt);
 void		ms_close_fds(t_p *curr_prompt);
 void		last_cmd_exit_code(t_ms *ms);
+
+// special cases
+void		ms_empty_cat_sc(t_cmd *current_cmd, t_p *current_prompt);
 
 // builtins
 void		ms_cd(t_ms *ms, t_cmd *current_cmd);

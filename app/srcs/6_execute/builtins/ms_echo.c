@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:25 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/01 23:13:46 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/02 16:12:02 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 static void	print_cmd_content(t_ms *ms, \
 	t_cmd *current_cmd, char **cmd_splited, int aux)
 {
-	int		i;
+	int	i;
+	int	has_flag;
 
 	i = 0;
-	int has_flag = ft_strncmp(cmd_splited[1], "-n", ft_strlen(cmd_splited[1]));
+	has_flag = ft_strncmp(cmd_splited[1], "-n", ft_strlen(cmd_splited[1]));
 	if (!has_flag)
 		i = 1;
 	while (i++ < current_cmd->args_amount - 1)
@@ -30,7 +31,6 @@ static void	print_cmd_content(t_ms *ms, \
 		if (has_flag)
 			ft_putstr_fd(" ", aux);
 	}
-	// ft_free_ptr((void **) &no_dolar);
 }
 
 void	last_cmd_exit_code(t_ms *ms)

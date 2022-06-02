@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:42 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/01 23:28:05 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/02 16:13:24 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ static void	add_env_by_key(t_ms *ms, const t_cmd *current_cmd)
 	char	*value;
 	int		equal_index;
 
-	equal_index = ft_str_indexof(current_cmd->cmd_splited_by_space[1], "=", ft_strlen(current_cmd->cmd_splited_by_space[1]));
+	equal_index = ft_str_indexof(current_cmd->cmd_splited_by_space[1], \
+	"=", ft_strlen(current_cmd->cmd_splited_by_space[1]));
 	key = ft_substr(current_cmd->cmd_splited_by_space[1], 0, equal_index);
 	value = current_cmd->cmd_splited_by_space[1] + equal_index + 1;
 	ft_printf("%s %s\n", key, value);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse_commands.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/01 21:17:38 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/02 16:19:50 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,67 +49,41 @@ static void	prepare_cmd_line(const t_p *curr_prompt, \
 
 char	*get_just_name(char *path)
 {
-	int i;
+	int	i;
 
 	i = ft_strlen(path);
 	while (i > 0)
 	{
 		if (path[i] == '/')
-			break;
+			break ;
 		i--;
 	}
 	return (ft_substr(path, i + 1, ft_strlen(path)));
 }
 
-// static int	exist_in_path(t_ms *ms, t_cmd *current_cmd)
-// {
-// 	char	**path;
-// 	int		i;
-// 	char	*result;
-
-// 	i = -1;
-// 	while (*(ms->envp))
-// 		if (ft_strnstr(*(ms->envp), "PATH=", sizeof(*(ms->envp))))
-// 			break ;
-// 	else
-// 			ms->envp++;
-// 	path = ft_split(*(ms->envp), ':');
-// 	while (path[++i])
-// 	{
-// 		result = check_path(i, current_cmd, path);
-// 		if (result != NULL)
-// 			return (1);
-// 	}
-// 	return (0);
-// }
-
 static void	prepare_path_and_fd(t_ms *ms, t_p *curr_prompt, t_cmd *curr_command)
 {
-	if (ms)
-	{}
-	char *tmp;
-	
+	char	*tmp;
+
 	curr_command->cmd_splited_by_space = \
 		ft_split(curr_command->cmd_line, ' ');
 	curr_command->args_amount = \
-		ft_mtx_size((void **) curr_command->cmd_splited_by_space);	
+		ft_mtx_size((void **) curr_command->cmd_splited_by_space);
 	curr_command->just_name = curr_command->cmd_splited_by_space[0];
 	tmp = ft_strdup(curr_command->just_name);
-	//////////////////////////////////////////////////////////////////
 	if (ft_strnstr(tmp, "/", ft_strlen(tmp)) != NULL)
 	{
 		curr_command->just_name = get_just_name(tmp);
 		curr_command->path_and_name = tmp;
-		if (access(tmp, X_OK) == 0)		
+		if (access(tmp, X_OK) == 0)
 			curr_command->cmd_is_path_but_invalid = 0;
-		else 
+		else
 			curr_command->cmd_is_path_but_invalid = 1;
 	}
 	else
 	{
 		curr_command->path_and_name = ms_append_path_in_front(curr_command, ms);
 	}
-	//////////////////////////////////////////////////////////////////
 	if (is_input_command(curr_command->just_name) == 1)
 	{
 		if (curr_command->args_amount >= 2 && curr_command->index == 0)

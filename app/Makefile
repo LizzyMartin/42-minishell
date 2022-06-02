@@ -67,7 +67,8 @@ SRCS_FILES +=	6_execute/builtins/ms_cd.c \
 				6_execute/builtins/ms_export.c \
 				6_execute/builtins/ms_export_utils.c \
 				6_execute/builtins/ms_pwd.c \
-				6_execute/builtins/ms_unset.c
+				6_execute/builtins/ms_unset.c \
+				6_execute/special_cases/special_cases_1.c 
 
 SRCS_FILES +=	utils/ms_reinit.c \
 				utils/ms_finish.c
@@ -100,6 +101,7 @@ $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)/5_parse/cmd
 	mkdir -p $(OBJS_DIR)/6_execute
 	mkdir -p $(OBJS_DIR)/6_execute/builtins
+	mkdir -p $(OBJS_DIR)/6_execute/special_cases
 	mkdir -p $(OBJS_DIR)/utils
 
 clean:
@@ -119,10 +121,10 @@ t:	$(NAME)
 	@./minishell
 
 tv:	$(NAME)
-	@valgrind --suppressions=./local.supp --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes ./minishell
+	@valgrind  --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes ./minishell
 	@cat val | sed 40,120d > val
 
-
+#--suppressions=./local.supp
 # Bonus
 
 # SRCS_B_DIR =   	srcs_b
