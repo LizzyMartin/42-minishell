@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/01 01:51:01 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/01 23:26:29 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void		ms_delete_env(t_ms *ms, char *key);
 char		*ms_find_env_value(t_ms *ms, char *key);
 void		ms_free_env(t_ms *ms);
 int			ms_is_in_env(t_ms *ms, const char *key);
+void		update_env_value(t_ms *ms, char *key, char *value);
 void		ms_parse_env(t_ms *ms);
 t_env		*ms_last_env(t_env *env);
 
@@ -87,6 +88,7 @@ void		ms_parse_commands(t_ms *ms,
 				char **input_s_by_space);
 void		reset_cmd(t_cmd **curr_command);
 t_cmd		*update_cmd(t_cmd *curr_command);
+char		*check_path(int i, t_cmd *current_cmd, char **path);
 
 // prompt
 void		ms_free_prompt(t_p *curr_prompt);

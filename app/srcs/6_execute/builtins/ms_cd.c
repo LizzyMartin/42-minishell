@@ -6,13 +6,13 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:07 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/31 21:41:18 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/01 23:26:15 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	update_env_value(t_ms *ms, char *key, char *value)
+void	update_env_value(t_ms *ms, char *key, char *value)
 {
 	t_env	*env;
 

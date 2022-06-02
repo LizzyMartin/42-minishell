@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_execute_commands.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:42:02 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/01 20:04:40 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/01 20:58:02 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ static int	get_child_process_id(const t_p *prompt, \
 		if (execve(current_cmd->path_and_name, \
 			current_cmd->cmd_splited_by_space, envp) == -1)
 		{
-			// if (current_cmd->cmd_is_path_but_invalid == 1)
-			// 	ft_pf_error("miniheaven: %s %s", current_cmd->path_and_name, E_NOTDIR);
-			// else
+			if (current_cmd->cmd_is_path_but_invalid == 1)
+				ft_pf_error("miniheaven: %s %s", current_cmd->path_and_name, E_NOTDIR);
+			else
 				perror("miniheaven: ");
 			current_cmd->exit_code = 1;
 		}

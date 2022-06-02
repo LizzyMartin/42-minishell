@@ -12,10 +12,10 @@ echo $USER
 echo -n $USER
 echo "$USER"
 echo '$USER'
-echo '"$USER"'
 echo '"$USER"'	
 echo "'$USER'"
 echo hi "hi '$USER' bye" bye
+echo -n hi "hi '$USER' bye" bye
 echo hi 'hi "$USER" bye' bye
 
 exit

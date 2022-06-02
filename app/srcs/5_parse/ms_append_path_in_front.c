@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ms_append_path_in_front.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:09 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/01 00:10:08 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/01 21:11:01 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static char	*check_path(int i, t_cmd *current_cmd, char **path)
+char	*check_path(int i, t_cmd *current_cmd, char **path)
 {
 	char	*path_plus_command;
 
@@ -31,16 +31,13 @@ static char	*check_path(int i, t_cmd *current_cmd, char **path)
 char	*ms_append_path_in_front(t_cmd *current_cmd, t_ms *ms)
 {
 	char	**path;
+	char	*env_path;
 	int		i;
 	char	*result;
 
 	i = -1;
-	while (*(ms->envp))
-		if (ft_strnstr(*(ms->envp), "PATH=", sizeof(*(ms->envp))))
-			break ;
-	else
-			ms->envp++;
-	path = ft_split(*(ms->envp), ':');
+	env_path = ms_find_env_value(ms, "PATH");
+	path = ft_split(env_path, ':');
 	while (path[++i])
 	{
 		result = check_path(i, current_cmd, path);

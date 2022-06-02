@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:26 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/31 22:30:46 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/01 23:14:20 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,23 +62,34 @@ static int	count_char(char *s, char c)
 	return (count);
 }
 
-static void	threat_quotes(t_ms *ms, char *goal, int space_index)
+static void	threat_quotes(t_ms *ms, char *beggin, char *goal, int space_index)
 {
 	char	*line;
-	char	**shell_line_splitted;
+	char	*line_inside_quotes;
+	int		first_i_d;
+	int		first_i_s;
+	int		last_i;
 
 	line = goal + space_index + 1;
-	shell_line_splitted = ft_split(ms->shell_line, ' ');
-	if (line[0] != '"' && line[1] != '\'')
+	first_i_d = ft_str_indexof(line, ft_chr_to_str('"', 1), ft_strlen(line) - 1);
+	first_i_s = ft_str_indexof(line, ft_chr_to_str('\'', 1), ft_strlen(line) - 1);
+	last_i = ft_str_indexof(line + first_i_d + 1, ft_chr_to_str('"', 1), ft_strlen(line) - 1);
+	line_inside_quotes = ft_substr(line, first_i_d + 1, last_i);
+	if (first_i_s > first_i_d && ft_strchr(line, '"') && count_char(line, '"') % 2 == 0)
 	{
-		if (line[0] != '\'' && ft_strchr(line, '"') \
-			&& count_char(line, '"') % 2 == 0)
-			ms_remove_char(line, '"');
+		if (!ft_strchr(line, ' '))
+		{
+			ms_remove_char(ms->shell_line_tokenized, '"');
+			return ;
+		}
+		ms->has_double_quotes = 1;
+		ms->shell_line_tokenized = ft_printf_to_var("%s %s%s%s", beggin, ft_substr(line, 0, first_i_d), ft_str_replace_all(line_inside_quotes, " ", T_SPACE), ft_substr(line, last_i + first_i_d + 2, ft_strlen(line) - 1));
 	}
-	ms->shell_line_tokenized = ft_printf_to_var("%s %s", \
-		shell_line_splitted[0], line);
-	ms->shell_line_tokenized[space_index] = ' ';
-	ft_mtx_free((void **) shell_line_splitted);
+	else if (ft_strchr(line, '\'') && count_char(line, '\'') % 2 == 0)
+	{
+		ms->has_single_quotes = 1;
+		return ;
+	}
 }
 
 void	ms_check_quotes(t_ms *ms)
@@ -93,11 +104,11 @@ void	ms_check_quotes(t_ms *ms)
 	space_index = -1;
 	goal = ft_calloc(ft_strlen(ms->shell_line), sizeof (char *));
 	space_index = get_goal(ms, goal, i, space);
+	ms->shell_line_tokenized = ft_strdup(ms->shell_line);
 	if (space_index != -1)
 	{
-		threat_quotes(ms, goal, space_index);
+		threat_quotes(ms, ft_split(ms->shell_line, ' ')[0], goal, space_index);
 		return ;
 	}
 	ft_free_ptr((void **) &goal);
-	ms->shell_line_tokenized = ms->shell_line;
 }

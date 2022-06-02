@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:55:07 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/31 21:27:03 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/01 21:49:51 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	ms_init(t_ms **ms, int argc, char **argv, char **envp)
 	(*ms)->history_i = 0;
 	(*ms)->shell_line = NULL;
 	(*ms)->shell_line_tokenized = NULL;
+	(*ms)->has_double_quotes = 0;
+	(*ms)->has_single_quotes = 0;
 	(*ms)->slt_splited_by_connectors = NULL;
 	(*ms)->readline_var = NULL;
 	(*ms)->p = NULL;

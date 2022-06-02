@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:42 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/01 01:20:07 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/01 23:28:05 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,16 @@ static void	add_env_by_key(t_ms *ms, const t_cmd *current_cmd)
 {
 	char	*key;
 	char	*value;
-	char	**cmd_env_splitted;
+	int		equal_index;
 
-	cmd_env_splitted = ft_split(current_cmd->cmd_splited_by_space[1], '=');
-	key = cmd_env_splitted[0];
-	if (cmd_env_splitted[1] != NULL)
-		value = cmd_env_splitted[1];
+	equal_index = ft_str_indexof(current_cmd->cmd_splited_by_space[1], "=", ft_strlen(current_cmd->cmd_splited_by_space[1]));
+	key = ft_substr(current_cmd->cmd_splited_by_space[1], 0, equal_index);
+	value = current_cmd->cmd_splited_by_space[1] + equal_index + 1;
+	ft_printf("%s %s\n", key, value);
+	if (ms_is_in_env(ms, key))
+		update_env_value(ms, key, value);
 	else
-		value = "";
-	ms_add_env(ms, key, value);
+		ms_add_env(ms, key, value);
 	ms->p->cmds->exit_code = 0;
 }
 
