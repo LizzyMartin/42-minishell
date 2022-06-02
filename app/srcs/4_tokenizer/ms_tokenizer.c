@@ -6,7 +6,7 @@
 /*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:43:28 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/02 15:54:26 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/02 18:03:14 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	ms_has_single_quotes(t_ms *ms, char *dolar_cmd, char *line)
 {	
 	char	*no_dolar;
 	char	*value;
+
 
 	no_dolar = ft_substr(dolar_cmd, 1, ft_strlen(dolar_cmd));
 	if (ms_is_in_env(ms, no_dolar))
@@ -54,9 +55,13 @@ void	ms_expand_dolar(t_ms *ms)
 				T_SPACE, ft_strlen(line + i) - 1) - 1);
 			}
 			else
-				dolar_cmd = ft_substr(line + i, 0, ft_strlen(line));
+				dolar_cmd = ft_substr(line + i, 0, ft_strlen(line) - 1);
+			
 			if (ms->has_single_quotes == 0)
+			{
+
 				ms_has_single_quotes(ms, dolar_cmd, line);
+			}
 		}
 		i++;
 	}
