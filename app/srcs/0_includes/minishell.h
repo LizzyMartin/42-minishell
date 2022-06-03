@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/02 20:05:55 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/03 01:17:34 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 */
 
 extern t_ms	*g_ms;
+
 
 /* design */
 void		print_banner(void);
@@ -57,7 +58,6 @@ int			ms_here_doc(t_p *p);
 // signals
 void		ms_read_input_signals(void);
 void		ms_while_executing_commands_signals(void);
-
 void		ctrl_c_redisplay_prompt(int signal);
 void		ctrl_c_interrupt_process(int signal);
 void		ctrl_d_exit_shell(int signal);
@@ -73,13 +73,12 @@ int			ms_sintax(t_ms *ms);
 int			ms_tokenizer(t_ms *ms);
 void		ms_wildcard(t_ms *ms);
 void		ms_check_quotes(t_ms *ms);
-void		ms_remove_char(char *s, char c);
 bool		get_boolean(const char *wildcard, const struct dirent *de, int all);
 void		update_tmp(char **replace, DIR *dr, struct dirent **de, char **tmp);
+void		ms_expand_dolar(t_ms *ms);
 
 /* parse */
 int			ms_parse(t_ms *ms);
-
 char		**ms_parse_input(t_p *curr_prompt);
 char		**ms_parse_output(t_p *curr_prompt);
 char		*ms_append_path_in_front(t_cmd *current_cmd, t_ms *ms);
@@ -105,9 +104,6 @@ int			is_builtin(char *cmd);
 void		execute_builtin(t_ms *ms, t_cmd *current_cmd, t_p *prompt);
 void		ms_close_fds(t_p *curr_prompt);
 void		last_cmd_exit_code(t_ms *ms);
-
-// special cases
-void		ms_empty_cat_sc(t_cmd *current_cmd, t_p *current_prompt);
 
 // builtins
 void		ms_cd(t_ms *ms, t_cmd *current_cmd);

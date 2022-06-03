@@ -3,117 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   ms_check_quotes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:26 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/02 21:26:19 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/03 00:58:22 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static int	get_goal(const t_ms *ms, char *goal, int i, int space)
-{
-	int	space_index;
-
-	while (ms->shell_line[i])
-	{
-		goal[i] = ms->shell_line[i];
-		if (ms->shell_line[i] == ' ' && !space)
-		{
-			goal[i] = '-';
-			space_index = i;
-			space = 1;
-		}
-		i++;
-	}
-	return (space_index);
-}
-
-void	ms_remove_char(char *s, char c)
-{
-	int	new;
-	int	old;
-
-	new = 0;
-	old = 0;
-	while (s[old])
-	{
-		if (s[old] != c)
-			s[new++] = s[old];
-		old++;
-	}
-	s[new] = '\0';
-}
-
-// static int	count_char(char *s, char c)
-// {
-// 	int	i;
-// 	int	count;
-
-// 	i = 0;
-// 	count = 0;
-// 	while (s[i])
-// 	{
-// 		if (s[i] == c)
-// 			count++;
-// 		i++;
-// 	}
-// 	return (count);
-// }
-
-static void	threat_quotes(t_ms *ms, char *beggin, char *goal, int space_index)
-{
-	char	*line;
-	char	*line_inside_quotes;
-	int		first_i_d;
-	int		first_i_s;
-	int		last_i;
-
-	line = goal + space_index + 1;
-	first_i_d = ft_str_indexof(line, ft_chr_to_str('"', \
-	1), ft_strlen(line) - 1);
-	first_i_s = ft_str_indexof(line, ft_chr_to_str('\'', \
-	1), ft_strlen(line) - 1);
-	last_i = ft_str_indexof(line + first_i_d + 1, \
-	ft_chr_to_str('"', 1), ft_strlen(line) - 1);
-	line_inside_quotes = ft_substr(line, first_i_d + 1, \
-	last_i);
-	if (first_i_s > first_i_d)
-	{
-		ms->has_double_quotes = 1;
-		ms->shell_line_tokenized = ft_printf_to_var("%s %s%s%s", \
-		beggin, ft_substr(line, 0, first_i_d), \
-		ft_str_replace_all(line_inside_quotes, " ", T_SPACE), \
-		ft_substr(line, last_i + first_i_d + 2, ft_strlen(line) - 1));
-		return ;
-	}
-	else if (first_i_s != -1)
-	{
-		ms->has_single_quotes = 1;
-		return ;
-	}
-}
-
 void	ms_check_quotes(t_ms *ms)
 {
-	char	*goal;
-	int		i;
-	int		space;
-	int		space_index;
+	if (ft_strchr(ms->shell_line_tokenized, '\'') || 
+		ft_strchr(ms->shell_line_tokenized, '"'))
+	{		
+		int size = ft_strlen(ms->shell_line) - 1;
+		char **cmdd = ft_split(ms->shell_line, ' ');
+		ms->shell_line_tokenized = cmdd[0];
+		int i = ft_str_indexof(ms->shell_line, ft_chr_to_str(' ', 1), size);
+		while (ms->shell_line[i])
+		{
+			if (ms->shell_line[i] == '"' || ms->shell_line[i] == '\'')
+			{
+				char *delimiter = ft_chr_to_str(ms->shell_line[i], 1);
+				int first = i;
+				int second = ft_str_indexof(ms->shell_line + first + 1, ft_chr_to_str(ms->shell_line[i], 1), size - i);
 
-	i = 0;
-	space = 0;
-	space_index = -1;
-	goal = ft_calloc(ft_strlen(ms->shell_line), sizeof (char *));
-	space_index = get_goal(ms, goal, i, space);
-	ms->shell_line_tokenized = ft_strdup(ms->shell_line);
-	if (space_index != -1)
-	{
-		threat_quotes(ms, ft_split(ms->shell_line, ' ')[0], goal, space_index);
-		if (!ms->has_single_quotes)
-			ms_remove_char(ms->shell_line_tokenized, '"');
-		return ;
+				char *line_inside_quotes = ft_substr(ms->shell_line, first + 1, second);
+				ms->shell_line_tokenized = ft_printf_to_var("%s %c%s%c", ms->shell_line_tokenized, ms->shell_line[i], ft_str_replace_all(line_inside_quotes, " ", T_SPACE), ms->shell_line[i]);
+				i += second + 1;
+
+				int final = ft_str_indexof(ms->shell_line + i + 1, delimiter, size);
+				char *semnome = ft_substr(ms->shell_line, i + 1, final);
+				ms->shell_line_tokenized = ft_printf_to_var("%s %s", ms->shell_line_tokenized, semnome);
+			}
+			i++;
+		}
 	}
-	ft_free_ptr((void **) &goal);
 }

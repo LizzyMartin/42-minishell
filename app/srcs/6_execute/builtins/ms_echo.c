@@ -6,7 +6,7 @@
 /*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:25 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/02 16:12:02 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/03 01:16:13 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	print_cmd_content(t_ms *ms, \
 	while (i++ < current_cmd->args_amount - 1)
 	{
 		if (ms->has_single_quotes)
-			ms_remove_char(cmd_splited[i], '\'');
+			ft_remove_char(cmd_splited[i], '\'');
 		cmd_splited[i] = ft_str_replace_all(cmd_splited[i], T_SPACE, " ");
 		ft_putstr_fd(cmd_splited[i], aux);
 		if (has_flag)

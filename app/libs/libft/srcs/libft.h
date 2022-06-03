@@ -6,7 +6,7 @@
 /*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 20:34:46 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/01 01:36:06 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/03 00:59:14 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int		ft_isdigit(int c);
 int		ft_isprint(int c);
 int		ft_tolower(int c);
 char	ft_toupper(int c);
+void	ft_remove_char(char *s, char c);
 
 // cvt (convert)
 int		ft_atoi(const char *str);

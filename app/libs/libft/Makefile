@@ -21,7 +21,8 @@ SRCS_FILES= 	chr/ft_isalnum.c \
 				chr/ft_isprint.c \
 				chr/ft_tolower.c \
 				chr/ft_toupper.c \
-				chr/ft_count_chr.c
+				chr/ft_count_chr.c \
+				chr/ft_remove_char.c
 
 SRCS_FILES+=	cvt/ft_atoi.c \
 				cvt/ft_itoa.c \

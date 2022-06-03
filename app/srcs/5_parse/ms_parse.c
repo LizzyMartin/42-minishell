@@ -6,7 +6,7 @@
 /*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/02 13:15:17 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/03 02:49:45 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ int	ms_parse(t_ms *ms)
 		output_s_by_space = ms_parse_output(curr_prompt);
 		curr_prompt->pipe_amount = ft_mtx_size((void **) \
 			curr_prompt->this_p_line_splited_by_pipe);
+		if (curr_prompt->only_here_doc == 0 
+		&& curr_prompt->only_input_redirected_to_file == 0)
 		ms_parse_commands (ms, curr_prompt, \
 		output_s_by_space, input_s_by_space);
 		ft_mtx_free((void **) curr_prompt->this_p_line_splited_by_pipe);
