@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse_commands.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/02 18:42:08 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/03 17:31:57 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static void	prepare_path_and_fd(t_ms *ms, t_p *curr_prompt, t_cmd *curr_command)
 	}
 }
 
-static void	prepare_something(int c, t_cmd *curr_command, \
+static void	prepare_something(t_cmd *curr_command, \
 	t_p *curr_prompt, char **output_s_by_space)
 {
 	char	*tmp;
@@ -106,10 +106,7 @@ static void	prepare_something(int c, t_cmd *curr_command, \
 	length = ft_mtx_size((void **) output_s_by_space);
 	aux = ft_strlen(output_s_by_space[length - 2])
 		+ ft_strlen(output_s_by_space[length - 1]) + 1;
-	if (curr_prompt->has_here_doc == 0)
-		tmp = curr_prompt->this_p_line_splited_by_pipe[c];
-	else
-		tmp = curr_command->cmd_line;
+	tmp = curr_command->cmd_line;
 	curr_command->cmd_line = ft_substr(tmp, 0, ft_strlen(tmp) - aux - 1);
 	if (ft_strnstr(curr_command->cmd_line, ">>", \
 		ft_strlen(curr_command->cmd_line)) \
@@ -138,7 +135,7 @@ void	ms_parse_commands(t_ms *ms, \
 		ft_strdup(curr_prompt->this_p_line_splited_by_pipe[c]);
 		prepare_cmd_line(curr_prompt, input_s_by_space, c, curr_command);
 		if (c == (curr_prompt->pipe_amount - 1) && curr_prompt->redirect > 0)
-			prepare_something(c, curr_command, curr_prompt, output_s_by_space);
+			prepare_something(curr_command, curr_prompt, output_s_by_space);
 		prepare_path_and_fd(ms, curr_prompt, curr_command);
 		c++;
 	}
