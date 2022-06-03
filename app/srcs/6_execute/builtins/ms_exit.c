@@ -3,46 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   ms_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:39 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/27 15:37:29 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/02 20:18:04 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	print_error(char *const *cmd_splited, int i)
+void	ms_exit(t_cmd *current_cmd)
 {
-	ft_putstr_fd("exit\nminishell: exit: ", 2);
-	ft_putstr_fd(cmd_splited[i], 2);
-	ft_putstr_fd(": numeric argument required\n", 2);
-	exit(1);
-}
+	int i;
 
-void	ms_exit(t_ms *ms, t_cmd *current_cmd)
-{
-	char	**cmd_splited;
-	int		i;
-
-	i = 1;
-	cmd_splited = current_cmd->cmd_splited_by_space;
-	if (!cmd_splited[1])
-		exit(0);
-	while (cmd_splited[i])
+	i = 0;
+	current_cmd->exit_code = 0;
+	if (current_cmd->args_amount > 2)
 	{
-		if (!ft_isdigit((int)cmd_splited[i][0]))
-		{
-			ms->p->cmds->exit_code = 2;
-			print_error(cmd_splited, i);
-		}
-		i++;
-	}
-	if (i > 2)
-	{
-		ms->p->cmds->exit_code = 1;
-		ft_putstr_fd("exit: too many arguments\n", 2);
+		ft_putstr_fd("exit\n", 2);
+		ft_putstr_fd("miniheaven: exit: too many arguments\n", 2);
+		current_cmd->exit_code = 127;
 		return ;
 	}
-	exit(ms->p->cmds->exit_code);
+	else if (current_cmd->args_amount == 2)
+	{
+		while (current_cmd->cmd_splited_by_space[1][i])
+		{
+			if (!ft_isdigit(current_cmd->cmd_splited_by_space[1][i]))
+			{
+				ft_pf_error("exit\nminiheaven: exit: %s: numeric argument required\n", current_cmd->cmd_splited_by_space[1]);
+				exit(current_cmd->exit_code);
+			}
+			i++;
+		}
+		ctrl_d_exit_shell(SIGQUIT);
+	}
+	else
+	{
+		ctrl_d_exit_shell(SIGQUIT);
+	}
+	exit(current_cmd->exit_code);
 }
+	

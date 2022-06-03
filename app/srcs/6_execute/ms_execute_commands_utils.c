@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_execute_commands_utils.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:00 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/01 00:22:00 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/02 20:08:03 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	execute_builtin(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 		ft_putstr_fd(E_CMDNOTFOUND, 1);
 	}
 	else if (ft_strncmp(name, "exit", ft_strlen(name)) == 0)
-		ms_exit(ms, current_cmd);
+		ms_exit(current_cmd);
 	else if (ft_strncmp(name, "echo", ft_strlen(name)) == 0)
 		ms_echo(ms, current_cmd, prompt);
 	else if (ft_strncmp(name, "pwd", ft_strlen(name)) == 0)

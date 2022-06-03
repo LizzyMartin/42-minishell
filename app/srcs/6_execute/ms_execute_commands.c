@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_execute_commands.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:42:02 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/02 16:10:17 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/02 18:39:52 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	ms_execute_commands(t_ms *ms, t_p *curr_prompt)
 		else
 			ft_printf_to_fd(1, "miniheaven: %s %s", \
 				current_cmd->just_name, current_cmd->error_msg);
+
 		current_cmd = current_cmd->next;
 	}
 	ms_add_history(ms, NULL, curr_prompt->cmds);

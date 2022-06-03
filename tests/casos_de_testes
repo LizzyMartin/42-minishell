@@ -13,10 +13,12 @@ echo -n $USER
 echo "$USER"
 echo '$USER'
 echo '"$USER"'	
-echo "'$USER'"
+echo "'$USER'" #KO
 echo hi "hi '$USER' bye" bye
-echo -n hi "hi '$USER' bye" bye
+echo -n hi "hi '$USER' bye" bye #KO
 echo hi 'hi "$USER" bye' bye
+
+
 
 exit
 exit 1 2 3
@@ -27,6 +29,7 @@ echo $?
 $? + $?
 
 echo "cat lol.c | cat > lol.c"
+echo "hi hi '$USER'" oi oi "bye '$PWD' aaaa" hi
 
 export
 export gato

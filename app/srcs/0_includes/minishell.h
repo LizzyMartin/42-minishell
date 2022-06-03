@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/02 16:21:25 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/02 20:05:55 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void		ms_empty_cat_sc(t_cmd *current_cmd, t_p *current_prompt);
 void		ms_cd(t_ms *ms, t_cmd *current_cmd);
 void		ms_echo(t_ms *ms, t_cmd *current_cmd, t_p *prompt);
 void		ms_env(t_ms *ms);
-void		ms_exit(t_ms *ms, t_cmd *current_cmd);
+void		ms_exit(t_cmd *current_cmd);
 void		ms_export(t_ms *ms, t_cmd *current_cmd);
 void		quicksort(t_qs *qs, int left, int right, int (*comp)(void*, void*));
 int			cmpstr(void *v1, void *v2);
