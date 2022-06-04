@@ -44,6 +44,17 @@ static void ms_basic_replaces(t_ms *ms)
 int ms_tokenizer(t_ms *ms)
 {
 	ms->shell_line_tokenized = ft_strdup(ms->shell_line);
+
+	// lidando com casos gato==miau
+	if (ft_strchr(ms->shell_line_tokenized, ' ') == NULL)
+	{
+		char **splitted = ft_split(ms->shell_line_tokenized, '=');
+		if (ft_mtx_size((void **) splitted) == 2)
+		{
+			ms_add_env(&ms->aux_envs, splitted[0], splitted[1]);
+			return (1);
+		}
+	}
 	if (ms_sintax(ms) == 1)
 		return (1);
 	ms_check_quotes(ms);

@@ -27,7 +27,7 @@ void	ms_init_env(t_ms *ms)
 		while (envp[i])
 		{
 			if (envp_splitted[0] != NULL && envp_splitted[1] != NULL)
-				ms_add_env(ms, envp_splitted[0], envp_splitted[1]);
+				ms_add_env(&ms->envs, envp_splitted[0], envp_splitted[1]);
 			i++;
 			ft_mtx_free((void **) envp_splitted);
 			envp_splitted = ft_split(envp[i], '=');

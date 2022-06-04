@@ -107,11 +107,11 @@ int		ms_execute_commands(t_ms *ms, t_p *curr_prompt)
 	current_cmd = curr_prompt->cmds;
 	while (current_cmd)
 	{
-		if (current_cmd->can_execute == 0)
-		{
-			current_cmd = current_cmd->next;
-			continue;
-		}
+//		if (current_cmd->can_execute == 0)
+//		{
+//			current_cmd = current_cmd->next;
+//			continue;
+//		}
 		if (ft_strncmp(current_cmd->just_name, "history", 7) == 0)
 		{
 			ms_add_history(ms, NULL, curr_prompt->cmds);

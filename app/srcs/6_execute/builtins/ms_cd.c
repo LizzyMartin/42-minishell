@@ -66,7 +66,7 @@ void	ms_cd(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 		aux = 1;
 	current_cmd->exit_code = 0;
 	if (!ms_is_in_env(ms, "OLDPWD"))
-		ms_add_env(ms, "OLDPWD", ms_find_env_value(ms, "HOME"));
+		ms_add_env(&ms->envs, "OLDPWD", ms_find_env_value(ms, "HOME"));
 	if (!cmd[1] || !ft_strncmp(cmd[1], "~", ft_strlen(cmd[1]))
 		|| !ft_strncmp(cmd[1], "--", 2))
 		chdir(getenv("HOME"));

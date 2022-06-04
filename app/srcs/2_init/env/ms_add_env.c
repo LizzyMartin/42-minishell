@@ -12,11 +12,11 @@
 
 #include <minishell.h>
 
-void	ms_add_env(t_ms *ms, char *key, char *value)
+void	ms_add_env(t_env **env, char *key, char *value)
 {
-	t_env	*head;
+	t_env *head;
 
-	head = ms->envs;
+	head = *env;
 	if (head == NULL)
 	{
 		head = malloc (sizeof(t_env));
@@ -24,7 +24,7 @@ void	ms_add_env(t_ms *ms, char *key, char *value)
 		head->value = ft_strdup(value);
 		head->next = NULL;
 		head->prev = NULL;
-		ms->envs = head;
+		*env = head;
 	}
 	else
 	{

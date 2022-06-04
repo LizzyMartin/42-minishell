@@ -38,7 +38,7 @@ void		ms_init(t_ms **ms, int argc, char **argv, char **envp);
 
 // env
 void		ms_init_env(t_ms *ms);
-void		ms_add_env(t_ms *ms, char *key, char *value);
+void		ms_add_env(t_env **env, char *key, char *value);
 void		ms_delete_env(t_ms *ms, char *key);
 char		*ms_find_env_value(t_ms *ms, char *key);
 void		ms_free_env(t_ms *ms);

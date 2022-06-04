@@ -12,11 +12,6 @@
 
 #include	<minishell.h>
 
-/*
-	validar se tem mais de um =
-	pensar no caso: export FOO===BAR
-	a key deverá ser FOO e o value ==BAR (somente o primeiro = é válido)
-*/
 void	ms_parse_env(t_ms *ms)
 {
 	ms->envs = NULL;

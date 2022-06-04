@@ -16,19 +16,14 @@ static void	print_cmd_content(t_ms *ms, \
 	t_cmd *current_cmd, char **cmd_splited, int aux)
 {
 	int	i;
-	int	has_flag;
 
 	i = 0;
-	has_flag = 0;
 	if (ft_strncmp(cmd_splited[1], "-n", ft_strlen(cmd_splited[1])) == 0)
 		i = 1;
 	while (!ft_strncmp(cmd_splited[i], "-n", ft_strlen(cmd_splited[i])))
 		++i;
 	if (i != 0)
-	{
-		has_flag = 1;
 		i--;
-	}
 	while (i++ < current_cmd->args_amount - 1)
 	{
 		if (ms->has_single_quotes)
