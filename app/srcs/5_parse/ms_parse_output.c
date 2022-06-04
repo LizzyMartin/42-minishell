@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:19 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/03 17:01:28 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/03 17:49:11 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ void	update_current_prompt(t_p *curr_prompt, int aux, \
 	char *const *output_s_by_space)
 {
 	curr_prompt->output_path = ft_strdup(output_s_by_space[aux - 1]);
-	if (ft_strnstr(output_s_by_space[aux - 2], ">>", 2) != NULL)
+	if (aux >= 3 && ft_strnstr(output_s_by_space[aux - 2], ">>", 2) != NULL)
 	{
 		curr_prompt->redirect = 1;
 		curr_prompt->output_fd = \
 			open(curr_prompt->output_path, O_CREAT | \
 				O_WRONLY | O_APPEND, 0777);
 	}
-	else if (ft_strnstr(output_s_by_space[aux - 2], ">", 2) != NULL)
+	else if (aux >= 3 && ft_strnstr(output_s_by_space[aux - 2], ">", 2) != NULL)
 	{
 		curr_prompt->redirect = 2;
 		curr_prompt->output_fd = \

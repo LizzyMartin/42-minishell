@@ -19,7 +19,7 @@ NAME =			minishell
 
 SRCS_FILES +=	1_design/ms_print_banner.c
 
-SRCS_FILES +=	2_init/ms_init.c		
+SRCS_FILES +=	2_init/ms_init.c
 
 SRCS_FILES +=	2_init/env/ms_add_env.c \
 				2_init/env/ms_delete_env.c \
@@ -59,7 +59,7 @@ SRCS_FILES +=	5_parse/ms_parse.c \
 				5_parse/prompt/ms_free_prompt.c
 
 SRCS_FILES +=	6_execute/ms_execute_commands.c \
-				6_execute/ms_execute_commands_utils.c 
+				6_execute/ms_execute_commands_utils.c
 
 SRCS_FILES +=	6_execute/builtins/ms_cd.c \
 				6_execute/builtins/ms_echo.c \
@@ -120,5 +120,5 @@ t:	$(NAME)
 	@./minishell
 
 tv:	$(NAME)
-	@valgrind  --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes ./minishell
+	@valgrind  --suppressions=./local.supp --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes ./minishell
 	@cat val | sed 40,120d > val

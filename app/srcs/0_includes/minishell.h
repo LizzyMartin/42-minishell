@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/03 01:17:34 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/03 20:48:17 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void		ms_dll_cmd_free(t_cmd *cmds);
 
 /* execute */
 void		ms_execute(t_ms *ms);
-void		ms_execute_commands(t_ms *ms, t_p *prompt);
+int			ms_execute_commands(t_ms *ms, t_p *curr_prompt);
 
 int			is_builtin(char *cmd);
 void		execute_builtin(t_ms *ms, t_cmd *current_cmd, t_p *prompt);
@@ -106,14 +106,14 @@ void		ms_close_fds(t_p *curr_prompt);
 void		last_cmd_exit_code(t_ms *ms);
 
 // builtins
-void		ms_cd(t_ms *ms, t_cmd *current_cmd);
+void		ms_cd(t_ms *ms, t_cmd *current_cmd, t_p *prompt);
 void		ms_echo(t_ms *ms, t_cmd *current_cmd, t_p *prompt);
-void		ms_env(t_ms *ms);
-void		ms_exit(t_cmd *current_cmd);
-void		ms_export(t_ms *ms, t_cmd *current_cmd);
+void		ms_env(t_ms *ms, t_cmd *current_cmd, t_p *prompt);
+void		ms_exit(t_cmd *current_cmd, t_p *prompt);
+void		ms_export(t_ms *ms, t_cmd *current_cmd, t_p *prompt);
 void		quicksort(t_qs *qs, int left, int right, int (*comp)(void*, void*));
 int			cmpstr(void *v1, void *v2);
-void		ms_pwd(t_ms *ms);
+void		ms_pwd(t_ms *ms, t_cmd *current_cmd, t_p *prompt);
 void		ms_unset(t_ms *ms, t_cmd *current_cmd);
 
 /* utils */

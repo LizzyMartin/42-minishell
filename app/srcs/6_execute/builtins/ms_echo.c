@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:25 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/03 01:16:13 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/03 18:24:09 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,23 @@ static void	print_cmd_content(t_ms *ms, \
 	int	has_flag;
 
 	i = 0;
-	has_flag = ft_strncmp(cmd_splited[1], "-n", ft_strlen(cmd_splited[1]));
-	if (!has_flag)
+	has_flag = 0;
+	if (ft_strncmp(cmd_splited[1], "-n", ft_strlen(cmd_splited[1])) == 0)
 		i = 1;
+	while (!ft_strncmp(cmd_splited[i], "-n", ft_strlen(cmd_splited[i])))
+		++i;
+	if (i != 0)
+	{
+		has_flag = 1;
+		i--;
+	}
 	while (i++ < current_cmd->args_amount - 1)
 	{
 		if (ms->has_single_quotes)
 			ft_remove_char(cmd_splited[i], '\'');
 		cmd_splited[i] = ft_str_replace_all(cmd_splited[i], T_SPACE, " ");
 		ft_putstr_fd(cmd_splited[i], aux);
-		if (has_flag)
-			ft_putstr_fd(" ", aux);
+		ft_putstr_fd(" ", aux);
 	}
 }
 

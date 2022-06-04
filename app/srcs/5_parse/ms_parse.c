@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/03 17:25:29 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/03 21:00:35 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,32 @@ t_p	*ms_get_prompt(t_ms *ms, t_p *curr_prompt, int i)
 
 t_p	*parse_prompts(t_ms *ms)
 {
+	int	i;
+	int	z;
+
+	i = 0;
+	z = 0;
 	if (ft_strnstr(ms->shell_line_tokenized, \
-		T_CONNECTOR_AND, ft_strlen(ms->shell_line_tokenized)))
+		T_CONNECTOR, ft_strlen(ms->shell_line_tokenized)))
 	{
 		ms->slt_splited_by_connectors = \
-			ft_split_by_str(ms->shell_line_tokenized, T_CONNECTOR_AND);
+			ft_split_by_str(ms->shell_line_tokenized, T_CONNECTOR);
 		ms->p_amount = ft_mtx_size((void **) ms->slt_splited_by_connectors);
+		ms->connectors_order = ft_calloc ((ms->p_amount) + 1, sizeof(int));
+		while (ms->shell_line[i])
+		{
+			if (ft_strncmp((ms->shell_line + i), "&&", 2) == 0)
+				ms->connectors_order[z++] = 1;
+			else if (ft_strncmp((ms->shell_line + i), "||", 2) == 0)
+				ms->connectors_order[z++] = 2;
+			i++;
+		}
 	}
 	else
+	{
 		ms->slt_splited_by_connectors = NULL;
+		ms->connectors_order = NULL;
+	}
 	ms->p = (t_p *) ft_calloc(1, sizeof(t_p));
 	ms->p->next = NULL;
 	ms->p->prev = NULL;
@@ -89,7 +106,6 @@ int	ms_parse(t_ms *ms)
 		output_s_by_space = ms_parse_output(curr_prompt);
 		curr_prompt->pipe_amount = ft_mtx_size((void **) \
 			curr_prompt->this_p_line_splited_by_pipe);
-
 		if (curr_prompt->only_here_doc == 0
 		&& curr_prompt->only_input_redirected_to_file == 0)
 		{
@@ -98,7 +114,6 @@ int	ms_parse(t_ms *ms)
 		}
 		ft_mtx_free((void **) curr_prompt->this_p_line_splited_by_pipe);
 		ft_mtx_free((void **) input_s_by_space);
-
 		i++;
 	}
 	ft_mtx_free((void **) output_s_by_space);

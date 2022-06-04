@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:06:34 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/31 21:43:46 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/03 19:38:24 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 /*
 ** TOKENS:
 */
+
+# define T_CONNECTOR    "__[BANANA0]__"
 
 # define T_CONNECTOR_AND    "__[BANANA1]__"
 

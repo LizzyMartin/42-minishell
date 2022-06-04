@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/03 17:31:57 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/03 20:36:43 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,17 @@ int	is_input_command(char *name)
 		ft_strnstr(name, "wc", ft_strlen(name)) || \
 		ft_strnstr(name, "touch", ft_strlen(name))
 	)
+		return (1);
+	return (0);
+}
+
+int	is_input_command_alone(char *cmd_line)
+{
+	char **split;
+
+	split = ft_split(cmd_line, ' ');
+	if (is_input_command(split[0])
+		&& ft_mtx_size((void **) split) == 1)
 		return (1);
 	return (0);
 }
@@ -106,7 +117,7 @@ static void	prepare_something(t_cmd *curr_command, \
 	length = ft_mtx_size((void **) output_s_by_space);
 	aux = ft_strlen(output_s_by_space[length - 2])
 		+ ft_strlen(output_s_by_space[length - 1]) + 1;
-	tmp = curr_command->cmd_line;
+	tmp = ft_strdup(curr_command->cmd_line);
 	curr_command->cmd_line = ft_substr(tmp, 0, ft_strlen(tmp) - aux - 1);
 	if (ft_strnstr(curr_command->cmd_line, ">>", \
 		ft_strlen(curr_command->cmd_line)) \
@@ -137,6 +148,10 @@ void	ms_parse_commands(t_ms *ms, \
 		if (c == (curr_prompt->pipe_amount - 1) && curr_prompt->redirect > 0)
 			prepare_something(curr_command, curr_prompt, output_s_by_space);
 		prepare_path_and_fd(ms, curr_prompt, curr_command);
+		if(is_input_command_alone(curr_command->cmd_line) && \
+		curr_prompt->args_amount == 1)
+			curr_command->can_execute = 0;
+		// ft_printf("%d", curr_prompt->args_amount);
 		c++;
 	}
 }

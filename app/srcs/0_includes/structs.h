@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:06:41 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/02 21:19:01 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/03 19:39:32 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ typedef struct s_minishell
 	int						argc;
 	char					**argv;
 	char					**envp;
+	int						*connectors_order;
 	char					*shell_line;
 	char					*shell_line_tokenized;
 	char					**slt_splited_by_connectors;

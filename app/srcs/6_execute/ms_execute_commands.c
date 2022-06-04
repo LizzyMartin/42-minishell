@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_execute_commands.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:42:02 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/03 03:15:24 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/03 21:17:13 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static int	get_child_process_id(const t_p *prompt, \
 	t_cmd *current_cmd, char **envp, const int *aux_fd)
 {
 	int	child_process_id;
-
 	child_process_id = fork();
 	ms_while_executing_commands_signals();
 	if (child_process_id == 0)
@@ -60,18 +59,64 @@ static void	ms_execute_command(t_p *prompt, \
 	close(prompt->pipe[1]);
 }
 
-void	ms_execute_commands(t_ms *ms, t_p *curr_prompt)
+// static char* clean_spaces(char *str)
+// {
+// 	char	*trim;
+
+// 	while (ft_strchr(str, ' '))
+// 		trim = ft_strtrim(str, " ");
+// 	return (trim);
+// }
+
+void cat_ls_sc(t_p * curr_prompt)
+{
+		t_cmd *tmp;
+		int	is_cat_sequence = 0;
+		int cat = 0;
+		char *trim;
+
+		tmp = curr_prompt->cmds;
+		trim = ft_strtrim(tmp->cmd_line, " ");
+		while (tmp->next != NULL)
+		{
+			trim = ft_strtrim(tmp->cmd_line, " ");
+			if (ft_strncmp(trim, "cat",
+				ft_strlen(trim)) == 0)
+				is_cat_sequence = 1;
+			if (is_cat_sequence)
+			{
+				while (tmp->next != NULL &&
+				ft_strncmp(trim, "cat", ft_strlen(trim)) == 0)
+				{
+					cat++;
+					tmp = tmp->next;
+				}
+				is_cat_sequence = 0;
+				break;
+			}
+			tmp = tmp->next;
+		}
+		while (cat-- > 0)
+			get_next_line(0);
+}
+
+int		ms_execute_commands(t_ms *ms, t_p *curr_prompt)
 {
 	t_cmd	*current_cmd;
 
 	current_cmd = curr_prompt->cmds;
 	while (current_cmd)
 	{
+		if (current_cmd->can_execute == 0)
+		{
+			current_cmd = current_cmd->next;
+			continue;
+		}
 		if (ft_strncmp(current_cmd->just_name, "history", 7) == 0)
 		{
 			ms_add_history(ms, NULL, curr_prompt->cmds);
 			ms_print_history(ms);
-			return ;
+			return (0);
 		}
 		else if (is_builtin(current_cmd->just_name) == 1)
 			execute_builtin(ms, current_cmd, curr_prompt);
@@ -83,15 +128,21 @@ void	ms_execute_commands(t_ms *ms, t_p *curr_prompt)
 		else
 			ft_printf_to_fd(1, "miniheaven: %s %s", \
 				current_cmd->just_name, current_cmd->error_msg);
-
 		current_cmd = current_cmd->next;
 	}
+	cat_ls_sc(curr_prompt);
 	ms_add_history(ms, NULL, curr_prompt->cmds);
 	ms_close_fds(curr_prompt);
+	current_cmd = ms_dll_cmd_last(curr_prompt->cmds);
+	return (current_cmd->exit_code);
 }
 
 static void	print_fd_or_execute_cmd(t_ms *ms, t_p *curr_prompt)
 {
+	int	i;
+	int	exit_code;
+
+	i = 0;
 	if (curr_prompt->only_input_redirected_to_file == 1)
 		return ;
 	else if (curr_prompt->no_cmd_just_redirect == 1)
@@ -100,7 +151,15 @@ static void	print_fd_or_execute_cmd(t_ms *ms, t_p *curr_prompt)
 	{
 		while (curr_prompt)
 		{
-			ms_execute_commands(ms, curr_prompt);
+			exit_code = ms_execute_commands(ms, curr_prompt);
+			if (ms->connectors_order != NULL)
+			{
+				if (ms->connectors_order[i] == 1 && exit_code != 0)
+					break;
+				else if (ms->connectors_order[i] == 2 && exit_code == 0)
+					break;
+			}
+			i++;
 			curr_prompt = curr_prompt->next;
 		}
 	}

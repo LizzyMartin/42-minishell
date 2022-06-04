@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_execute_commands_utils.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:00 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/02 20:08:03 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/03 20:04:15 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,19 @@ void	execute_builtin(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 		ft_putstr_fd(E_CMDNOTFOUND, 1);
 	}
 	else if (ft_strncmp(name, "exit", ft_strlen(name)) == 0)
-		ms_exit(current_cmd);
+		ms_exit(current_cmd, prompt);
 	else if (ft_strncmp(name, "echo", ft_strlen(name)) == 0)
 		ms_echo(ms, current_cmd, prompt);
 	else if (ft_strncmp(name, "pwd", ft_strlen(name)) == 0)
-		ms_pwd(ms);
+		ms_pwd(ms, current_cmd, prompt);
 	else if (ft_strncmp(name, "cd", ft_strlen(name)) == 0)
-		ms_cd(ms, current_cmd);
+		ms_cd(ms, current_cmd, prompt);
 	else if (ft_strncmp(name, "export", ft_strlen(name)) == 0)
-		ms_export(ms, current_cmd);
+		ms_export(ms, current_cmd, prompt);
 	else if (ft_strncmp(name, "unset", ft_strlen(name)) == 0)
 		ms_unset(ms, current_cmd);
 	else if (ft_strncmp(name, "env", ft_strlen(name)) == 0)
-		ms_env(ms);
+		ms_env(ms, current_cmd, prompt);
 }
 
 void	ms_close_fds(t_p *curr_prompt)

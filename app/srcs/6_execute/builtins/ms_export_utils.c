@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ms_export_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:25 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/01 01:19:52 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/03 19:45:02 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-// typedef struct s_qs
-// {
-// 	void	*vt;
-// 	void	*v3;
-// 	void	*vr;
-// 	void	*vl;
-// 	int		last;
-// 	int		mid;
-// }	t_qs;
 
 int	cmpstr(void *v1, void *v2)
 {
