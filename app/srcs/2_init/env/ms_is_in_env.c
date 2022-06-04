@@ -26,7 +26,7 @@ int	ms_is_in_env(t_ms *ms, const char *key)
 	aux = ms->aux_envs;
 	while (aux)
 	{
-		if (!ft_strncmp(aux->key, key, ft_strlen(aux->key)))
+		if (!ft_strncmp(ft_strtrim(aux->key, " "), key, ft_strlen(aux->key)))
 			return (1);
 		aux = aux->next;
 	}

@@ -44,21 +44,25 @@ static void ms_basic_replaces(t_ms *ms)
 int ms_tokenizer(t_ms *ms)
 {
 	ms->shell_line_tokenized = ft_strdup(ms->shell_line);
-
-	// lidando com casos gato==miau
-	if (ft_strchr(ms->shell_line_tokenized, ' ') == NULL)
-	{
-		char **splitted = ft_split(ms->shell_line_tokenized, '=');
-		if (ft_mtx_size((void **) splitted) == 2)
-		{
-			ms_add_env(&ms->aux_envs, splitted[0], splitted[1]);
-			return (1);
-		}
-	}
+	ms->is_aux_env = 0;
+	int equal_index = ft_str_indexof(ms->shell_line_tokenized, "=", ft_strlen(ms->shell_line_tokenized));
+	int space_index = ft_str_indexof(ms->shell_line_tokenized, " ", ft_strlen(ms->shell_line_tokenized));
+	if (equal_index != -1 && ms->shell_line_tokenized[equal_index - 1] != ' ')
+		ms->is_aux_env = 1;
+	if (space_index != -1 && space_index < equal_index)
+		ms->is_aux_env = 0;
 	if (ms_sintax(ms) == 1)
 		return (1);
 	ms_check_quotes(ms);
 	ms_expand_dolar(ms);
+	// lidando com casos gato==miau
+	if (ms->is_aux_env)
+	{
+		char *key = ft_substr(ms->shell_line_tokenized, 0, equal_index + 1);
+		char *value = ft_substr(ms->shell_line_tokenized, equal_index + 2, ft_strlen(ms->shell_line_tokenized));
+		ms_add_env(&ms->aux_envs, key, value);
+		return (1);
+	}
 	ms_basic_replaces(ms);
 	ms_home_value(ms);
 	ms_wildcard(ms);

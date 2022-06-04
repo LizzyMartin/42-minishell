@@ -30,6 +30,7 @@ void	ms_init(t_ms **ms, int argc, char **argv, char **envp)
 	(*ms)->shell_line_tokenized = NULL;
 	(*ms)->has_double_quotes = 0;
 	(*ms)->has_single_quotes = 0;
+	(*ms)->is_aux_env = 0;
 	(*ms)->slt_splited_by_connectors = NULL;
 	(*ms)->readline_var = NULL;
 	(*ms)->p = NULL;

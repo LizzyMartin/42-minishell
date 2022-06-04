@@ -28,7 +28,7 @@ char	*ms_find_env_value(t_ms *ms, char *key)
 	}
 	while (aux_envs)
 	{
-		if ((ft_strncmp(aux_envs->key, key, ft_strlen(aux_envs->key)) == 0)
+		if ((ft_strncmp(ft_strtrim(aux_envs->key, " "), key, ft_strlen(aux_envs->key)) == 0)
 			&& (aux_envs->key != NULL && aux_envs->value != NULL))
 			return (aux_envs->value);
 		aux_envs = aux_envs->next;

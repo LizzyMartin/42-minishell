@@ -14,13 +14,20 @@
 
 void	ms_check_quotes(t_ms *ms)
 {
+	int i;
+
 	if (ft_strchr(ms->shell_line_tokenized, '\'') ||
 		ft_strchr(ms->shell_line_tokenized, '"'))
 	{
-		int size = ft_strlen(ms->shell_line) - 1;
-		char **cmd = ft_split(ms->shell_line, ' ');
-		ms->shell_line_tokenized = cmd[0];
-		int i = ft_str_indexof(ms->shell_line, ft_chr_to_str(' ', 1), size);
+		int size = (int) ft_strlen(ms->shell_line) - 1;
+		if (ms->is_aux_env)
+			i = 0;
+		else
+		{
+			char **cmd = ft_split(ms->shell_line, ' ');
+			ms->shell_line_tokenized = cmd[0];
+			i = ft_str_indexof(ms->shell_line, ft_chr_to_str(' ', 1), size);
+		}
 		while (ms->shell_line[i])
 		{
 			if (ms->shell_line[i] == '"' || ms->shell_line[i] == '\'')

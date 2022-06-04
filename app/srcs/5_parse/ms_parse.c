@@ -47,10 +47,19 @@ t_p	*ms_get_prompt(t_ms *ms, t_p *curr_prompt, int i)
 		curr_prompt->this_p_line = ms->slt_splited_by_connectors[i];
 	else
 		curr_prompt->this_p_line = ms->shell_line_tokenized;
-	curr_prompt->this_p_line_splited_by_pipe = \
-		ft_split_by_str(curr_prompt->this_p_line, T_PIPE);
-	curr_prompt->args_amount = ft_mtx_size((void **) \
-		curr_prompt->this_p_line_splited_by_pipe);
+	if (ft_strnstr(curr_prompt->this_p_line, T_SPACE, ft_strlen(curr_prompt->this_p_line)) == NULL) {
+		curr_prompt->this_p_line_splited_by_pipe = \
+            ft_split_by_str(curr_prompt->this_p_line, T_PIPE);
+		curr_prompt->args_amount = ft_mtx_size((void **) \
+        curr_prompt->this_p_line_splited_by_pipe);
+	}
+	else
+	{
+		curr_prompt->this_p_line_splited_by_pipe = \
+            ft_split_by_str(ft_str_replace_all(curr_prompt->this_p_line, T_PIPE, "|"), "audklahdakjnfdakjbfak");
+		curr_prompt->args_amount = ft_mtx_size((void **) \
+        curr_prompt->this_p_line_splited_by_pipe);
+	}
 	return (curr_prompt);
 }
 
