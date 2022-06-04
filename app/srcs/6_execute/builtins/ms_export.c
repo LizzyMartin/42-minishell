@@ -42,10 +42,11 @@ static void	add_env_by_key(t_ms *ms, const t_cmd *current_cmd)
 	while (key[i])
 	{
 		if (!ft_isalpha(key[i])) {
-			ft_printf_to_fd(1, "bash: export: `%s': not a valid identifier", key);
+			ft_printf_to_fd(2, "bash: export: `%s': not a valid identifier", key);
 			ms->p->cmds->exit_code = 1;
 			return ;
 		}
+		i++;
 	}
 	if (ms_is_in_env(ms, key))
 		update_env_value(ms, key, value);

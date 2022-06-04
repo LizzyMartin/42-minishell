@@ -1,7 +1,7 @@
-echo test tout #OK
-echo test      tout #OK
-echo -n test tout #OK
-echo -n -n -n test tout #OK
+echo test tout
+echo test      tout
+echo -n test tout
+echo -n -n -n test tout
 
 cd .. && pwd #OK
 cd /Users && pwd #OK
