@@ -42,7 +42,7 @@ static void	add_env_by_key(t_ms *ms, const t_cmd *current_cmd)
 	while (key[i])
 	{
 		if (!ft_isalpha(key[i])) {
-			ft_printf_to_fd(2, "bash: export: `%s': not a valid identifier", key);
+			ft_printf_to_fd(2, "miniheaven: export: `%s': not a valid identifier", key);
 			ms->p->cmds->exit_code = 1;
 			return ;
 		}
@@ -101,6 +101,11 @@ void	ms_export(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 	if (ft_strnstr(current_cmd->cmd_splited_by_space[1], "=",
 			ft_strlen(current_cmd->cmd_splited_by_space[1])) == NULL)
 	{
+		if (!ft_isalpha(current_cmd->cmd_splited_by_space[1][0])) {
+			ft_printf_to_fd(2, "miniheaven: export: not an identifier: %s\n", current_cmd->cmd_splited_by_space[1]);
+			ms->p->cmds->exit_code = 1;
+			return ;
+		}
 		ms->p->cmds->exit_code = 0;
 		return ;
 	}
