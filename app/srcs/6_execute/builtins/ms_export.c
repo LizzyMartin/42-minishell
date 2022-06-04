@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:42 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/03 19:56:26 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/04 11:35:26 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ static void	print_sorted_env(t_ms *ms, int aux)
 	}
 }
 
+
+
 void	ms_export(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 {
 	char	*line;
@@ -92,31 +94,35 @@ void	ms_export(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 	pipe(tmp_fd);
 	prompt->input_fd = tmp_fd[0];
 	aux = tmp_fd[1];
-	if (current_cmd->index == prompt->args_amount - 1)
+	if ((current_cmd->index == (prompt->args_amount - 1)) && prompt->redirect <= 0)
 		aux = 1;
+	else
+	 	aux = prompt->output_fd;
 	if (!current_cmd->cmd_splited_by_space[1]
 		|| *current_cmd->cmd_splited_by_space[1] == '\0'
 		|| *current_cmd->cmd_splited_by_space[1] == ' ')
 		print_sorted_env(ms, aux);
-	if (ft_strnstr(current_cmd->cmd_splited_by_space[1], "=",
-			ft_strlen(current_cmd->cmd_splited_by_space[1])) == NULL)
+	else
 	{
-		if (!ft_isalpha(current_cmd->cmd_splited_by_space[1][0])) {
-			ft_printf_to_fd(2, "miniheaven: export: not an identifier: %s\n", current_cmd->cmd_splited_by_space[1]);
+		if (ft_isdigit(current_cmd->cmd_splited_by_space[1][0]))
+		{
+			line = ft_printf_to_var("miniheaven: export: `%s` not a valid identifier\n", current_cmd->cmd_splited_by_space[1]);
+			ft_putstr_fd(line, aux);
 			ms->p->cmds->exit_code = 1;
 			return ;
 		}
+		if (current_cmd->cmd_splited_by_space[1][0] == '$')
+		{
+			
+		}
+		else 
+		{
+		
+		}	
+		add_env_by_key(ms, current_cmd);
 		ms->p->cmds->exit_code = 0;
 		return ;
 	}
-	if (ft_isdigit(current_cmd->cmd_splited_by_space[1][0]))
-	{
-		line = ft_printf_to_var("export: `%s` : not a valid identifier\n", current_cmd->cmd_splited_by_space[1]);
-		ft_putstr_fd(line, aux);
-		ms->p->cmds->exit_code = 1;
-		return ;
-	}
-	add_env_by_key(ms, current_cmd);
 	if (aux != 1)
 		close(aux);
 }

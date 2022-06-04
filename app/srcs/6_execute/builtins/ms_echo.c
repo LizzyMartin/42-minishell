@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:25 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/03 18:24:09 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/04 04:17:30 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,10 @@ void	ms_echo(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 	pipe(tmp_fd);
 	prompt->input_fd = tmp_fd[0];
 	aux = tmp_fd[1];
-	if (current_cmd->index == prompt->args_amount - 1)
+	if ((current_cmd->index == (prompt->args_amount - 1)) && prompt->redirect <= 0)
 		aux = 1;
+	else
+	 	aux = prompt->output_fd;
 	if (!cmd_splited[1])
 		ft_putstr_fd("\n", aux);
 	else if (ft_strncmp(cmd_splited[1], "$?", 2) == 0)

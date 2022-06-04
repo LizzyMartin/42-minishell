@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_sintax.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 06:14:16 by argel             #+#    #+#             */
-/*   Updated: 2022/05/31 21:46:04 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/04 11:55:02 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,19 @@ static int	connectors_are_wrong(t_ms *ms)
 	return (0);
 }
 
+static int crazy_mode(t_ms *ms)
+{
+	if (ms)
+	{
+	}
+	return (0);	
+}
+
 int	ms_sintax(t_ms *ms)
 {
-	return (connectors_are_wrong(ms));
+	if (connectors_are_wrong(ms) 
+	|| crazy_mode(ms))
+		return (1);
+	return (0);
 }
+

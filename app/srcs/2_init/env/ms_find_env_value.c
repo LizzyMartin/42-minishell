@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_find_env_value.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:57:50 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/26 20:31:29 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/04 11:42:06 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ char	*ms_find_env_value(t_ms *ms, char *key)
 			return (aux_envs->value);
 		aux_envs = aux_envs->next;
 	}
-	return (ft_strdup(""));
+	return (NULL);
 }

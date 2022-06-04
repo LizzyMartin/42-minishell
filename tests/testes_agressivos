@@ -1,3 +1,76 @@
+/bin/ls
+/bin/ls ~
+/bin/ls $HOME
+/bin/ls "$HOME"
+/bin/ls '$HOME'
+/bin/ls '"$HOME"'
+/bin/ls "'$HOME'"
+/bin/ls filethatdoesntexist
+
+echo
+echo $USER
+echo -n $USER
+echo "$USER"
+echo '$USER'
+echo '"$USER"'
+echo "'$USER'"
+echo hi "hi '$USER' bye" bye     #KO
+echo -n hi "hi '$USER' bye" bye  #KO
+echo hi 'hi "$USER" bye' bye
+
+exit
+exit 1 2 3
+exit miau auau
+exit 1234556778
+
+echo $?
+$? + $?
+
+echo "cat lol.c | cat > lol.c"
+echo "hi hi '$USER'" oi oi "bye '$PWD' aaaa" hi
+
+export
+export gato
+export gato=
+export gato==
+export gato===miau
+
+unset gato
+unset gato naoexisto
+
+env
+env 1244
+
+cd
+cd -
+cd .
+cd ..
+cd ~
+cd --
+
+pwd
+pwd 12456
+
+ls
+wc
+awk
+unset $PATH && ls
+export PATH=/newdir && ls
+
+< oi
+> tchau
+<< oi
+>> tchau
+
+cat file | grep bla | more
+ls filethatdoesntexist | grep bla | more
+cat | cat | ls
+
+cat file.txt | tr a b | grep a
+cat file.txt | tr a b | grep a > file2.txt
+cat file.txt | tr a b | grep a >> file2.txt
+<< FIM | tr a b | grep a >> file2.txt
+
 echo test tout
 echo test      tout
 echo -n test tout
