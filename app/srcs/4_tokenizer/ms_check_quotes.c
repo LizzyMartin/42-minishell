@@ -12,10 +12,28 @@
 
 #include <minishell.h>
 
+static int ms_count_char(char *str, char c)
+{
+	int count;
+	char *iter;
+
+	count = 0;
+	iter = ft_strdup(str);
+	while (*iter)
+	{
+		if (*iter == c)
+			count++;
+		iter++;
+	}
+	return (count);
+}
+
 void	ms_check_quotes(t_ms *ms)
 {
 	int i;
 
+	if (ms_count_char(ms->shell_line_tokenized, '"') == 1 || ms_count_char(ms->shell_line_tokenized, '\'') == 1 )
+		return ;
 	if (ft_strchr(ms->shell_line_tokenized, '\'') ||
 		ft_strchr(ms->shell_line_tokenized, '"'))
 	{

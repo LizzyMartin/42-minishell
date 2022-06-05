@@ -12,6 +12,22 @@
 
 #include <minishell.h>
 
+static int ms_count_char(char *str, char c)
+{
+	int count;
+	char *iter;
+
+	count = 0;
+	iter = ft_strdup(str);
+	while (*iter)
+	{
+		if (*iter == c)
+			count++;
+		iter++;
+	}
+	return (count);
+}
+
 static void ms_has_single_quotes(t_ms *ms, char *dolar_cmd, char *line)
 {
 	char *no_dolar;
@@ -53,6 +69,11 @@ void ms_expand_dolar(t_ms *ms)
 			ms->has_double_quotes = 1;
 		else if (index_single != -1 && index_double == -1)
 			ms->has_single_quotes = 1;
+
+		if (ms_count_char(line_splited[i], '\'') == 1)
+			ms->has_single_quotes = 0;
+		if (ms_count_char(line_splited[i], '"') == 1)
+			ms->has_double_quotes = 0;
 			
 		j = 0;
 		if (ft_strchr(line_splited[i], '$') == NULL || ms->has_single_quotes)
