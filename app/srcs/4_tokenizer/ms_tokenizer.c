@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:43:28 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/06 22:53:32 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/06 20:15:44 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int ms_tokenizer(t_ms *ms)
 		return (1);
 	ms_check_quotes(ms);
 	ms_expand_dolar(ms);
-	// lidando com casos gato==miau
 	if (ms->is_aux_env)
 	{
 		char *key = ft_substr(ms->shell_line_tokenized, 0, equal_index + 1);

@@ -28,7 +28,6 @@ void	print_banner(void)
 		free(line);
 		i++;
 	}
-	get_next_line(-1);
 	ft_printf(WHITE);
 	close(fd);
 }

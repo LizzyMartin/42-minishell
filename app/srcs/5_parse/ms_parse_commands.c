@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/06 21:42:56 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/06 19:34:34 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,6 @@ void	ms_parse_commands(t_ms *ms, \
 		if(is_input_command_alone(curr_command->cmd_line) && \
 		curr_prompt->args_amount == 1)
 			curr_command->can_execute = 0;
-		// ft_printf("%d", curr_prompt->args_amount);
 		c++;
 	}
 }

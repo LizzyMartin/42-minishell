@@ -14,8 +14,8 @@ echo "$USER"
 echo '$USER'
 echo '"$USER"'
 echo "'$USER'"
-echo hi "hi '$USER' bye" bye     #KO
-echo -n hi "hi '$USER' bye" bye  #KO
+echo hi "hi '$USER' bye" bye
+echo -n hi "hi '$USER' bye" bye
 echo hi 'hi "$USER" bye' bye
 
 exit

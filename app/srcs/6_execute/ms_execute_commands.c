@@ -59,15 +59,6 @@ static void	ms_execute_command(t_p *prompt, \
 	close(prompt->pipe[1]);
 }
 
-// static char* clean_spaces(char *str)
-// {
-// 	char	*trim;
-
-// 	while (ft_strchr(str, ' '))
-// 		trim = ft_strtrim(str, " ");
-// 	return (trim);
-// }
-
 void cat_ls_sc(t_p * curr_prompt)
 {
 		t_cmd *tmp;
@@ -79,7 +70,6 @@ void cat_ls_sc(t_p * curr_prompt)
 		trim = ft_strtrim(tmp->cmd_line, " ");
 		while (tmp->next != NULL)
 		{
-			trim = ft_strtrim(tmp->cmd_line, " ");
 			if (ft_strncmp(trim, "cat",
 				ft_strlen(trim)) == 0)
 				is_cat_sequence = 1;
