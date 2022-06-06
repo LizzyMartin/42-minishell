@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:55:14 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/31 22:10:48 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/06 15:47:02 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ void	ms_init_history(t_ms *ms)
 	{
 		add_history(trim);
 		ms_add_history(ms, line, NULL);
+		ft_free_ptr((void *) &line);
 		line = get_next_line(fd);
+		ft_free_ptr((void *) &trim);
 		trim = ft_strtrim(line, "\n");
 	}
 	get_next_line(-1);

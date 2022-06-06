@@ -3,30 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ms_expand_dolar.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 00:55:01 by argel             #+#    #+#             */
-/*   Updated: 2022/06/03 03:16:52 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/06 22:52:01 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-static int ms_count_char(char *str, char c)
-{
-	int count;
-	char *iter;
-
-	count = 0;
-	iter = ft_strdup(str);
-	while (*iter)
-	{
-		if (*iter == c)
-			count++;
-		iter++;
-	}
-	return (count);
-}
 
 static void ms_has_single_quotes(t_ms *ms, char *dolar_cmd, char *line)
 {
@@ -52,6 +36,7 @@ void ms_expand_dolar(t_ms *ms)
 	line_splited = ft_split(ms->shell_line_tokenized, ' ');
 	if (line_splited[1] && ft_strncmp(line_splited[1], "$?", 2) == 0)
 	    return ;
+	
 	ms->shell_line_tokenized = "";
 	while (line_splited[i])
 	{
@@ -70,16 +55,14 @@ void ms_expand_dolar(t_ms *ms)
 		else if (index_single != -1 && index_double == -1)
 			ms->has_single_quotes = 1;
 
-		if (ms_count_char(line_splited[i], '\'') == 1)
+		if (ft_count_chr(line_splited[i], '\'') == 1)
 			ms->has_single_quotes = 0;
-		if (ms_count_char(line_splited[i], '"') == 1)
+		if (ft_count_chr(line_splited[i], '"') == 1)
 			ms->has_double_quotes = 0;
 			
 		j = 0;
 		if (ft_strchr(line_splited[i], '$') == NULL || ms->has_single_quotes)
-		{
 			ms->shell_line_tokenized = ft_printf_to_var("%s %s", ms->shell_line_tokenized, line_splited[i]);
-		}
 		else
 		{
 			while (line_splited[i][j])
@@ -104,4 +87,5 @@ void ms_expand_dolar(t_ms *ms)
 	if (ms->has_single_quotes)
 		ft_remove_char(ms->shell_line_tokenized, '\'');
 	}
+	ft_mtx_free((void **) line_splited);
 }

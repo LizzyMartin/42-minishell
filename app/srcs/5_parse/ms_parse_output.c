@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse_output.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:19 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/03 17:49:11 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/06 19:42:46 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,5 @@ char	**ms_parse_output(t_p *curr_prompt)
 	curr_prompt->output_path = NULL;
 	update_current_prompt(curr_prompt, aux, output_s_by_space);
 	ft_mtx_free((void **) dup);
-
 	return (output_s_by_space);
 }

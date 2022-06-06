@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_free_prompt.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:54:01 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/04 03:55:49 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/06 21:50:02 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,16 @@
 
 void	ms_free_prompt(t_p *curr_prompt)
 {
-	t_p	*tmp;
-
-	while (curr_prompt)
-	{
-		tmp = curr_prompt;
-		ms_dll_cmd_free(tmp->cmds);
+	while (curr_prompt->next != NULL)
 		curr_prompt = curr_prompt->next;
-		ft_free_ptr((void *) &tmp);
+	while (curr_prompt->prev)
+	{
+		ms_dll_cmd_free(curr_prompt->next->cmds);
+		ft_free_ptr((void *) &curr_prompt->next->output_path);
+		ft_free_ptr((void *) &curr_prompt->next);
+		curr_prompt = curr_prompt->prev;
 	}
+	ms_dll_cmd_free(curr_prompt->cmds);
+	ft_free_ptr((void *) &curr_prompt->output_path);
+	ft_free_ptr((void *) &curr_prompt);
 }

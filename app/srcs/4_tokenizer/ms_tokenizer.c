@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_tokenizer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:43:28 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/03 20:40:06 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/06 22:53:32 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void ms_home_value(t_ms *ms)
 	tmp2 = ms_get_home_value(ms);
 	tmp = ft_str_replace_all(ms->shell_line_tokenized, chr_tmp, tmp2);
 	ms->shell_line_tokenized = ft_strdup(tmp);
+	ft_free_ptr((void *) &chr_tmp);
 }
 
 static void ms_basic_replaces(t_ms *ms)

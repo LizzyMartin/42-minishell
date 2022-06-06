@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse_commands.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/03 20:36:43 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/06 21:42:56 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,11 @@ int	is_input_command_alone(char *cmd_line)
 	split = ft_split(cmd_line, ' ');
 	if (is_input_command(split[0])
 		&& ft_mtx_size((void **) split) == 1)
-		return (1);
+		{
+			ft_mtx_free((void **) split);
+			return (1);
+		}
+	ft_mtx_free((void **) split);
 	return (0);
 }
 
@@ -105,6 +109,7 @@ static void	prepare_path_and_fd(t_ms *ms, t_p *curr_prompt, t_cmd *curr_command)
 				open(curr_command->cmd_splited_by_space[1], O_RDONLY);
 		}
 	}
+	ft_free_ptr((void *) &tmp);
 }
 
 static void	prepare_something(t_cmd *curr_command, \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_read_input.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:47 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/03 20:23:35 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/06 19:20:32 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ char	*ms_print_sh_name(void)
 
 int	ms_read_input(t_ms *ms)
 {
-	ms->readline_var = ms_print_sh_name();
+	ms->sh_name = ms_print_sh_name();
 	ms_read_input_signals();
-	ms->shell_line = readline(ms->readline_var);
+	ms->shell_line = readline(ms->sh_name);
+	ft_free_ptr((void *) &ms->sh_name);
 	if (!ms->shell_line)
 	{
 		ctrl_d_exit_shell(SIGQUIT);

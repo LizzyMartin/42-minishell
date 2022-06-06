@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_execute_commands.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:42:02 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/03 21:17:13 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/06 21:35:49 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void cat_ls_sc(t_p * curr_prompt)
 			}
 			tmp = tmp->next;
 		}
+		ft_free_ptr((void *) &trim);
 		while (cat-- > 0)
 			get_next_line(0);
 }

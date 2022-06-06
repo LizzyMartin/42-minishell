@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:51:51 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/31 21:52:07 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/06 18:45:07 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	ms_free_history(t_ms *ms)
 	head = ms->history;
 	while (head->next != NULL)
 		head = head->next;
-	while (head->prev != NULL)
+	while (head)
 	{
+		ft_free_ptr((void *) &head->line);
+		ft_free_ptr((void *) &head->next);
 		head = head->prev;
-		if (head->next != NULL)
-			ft_free_ptr((void *) &head->next);
 	}
-	if (head != NULL)
-		ft_free_ptr((void *) &head);
+	ft_free_ptr((void *) &ms->history->line);
+	ft_free_ptr((void *) &ms->history);
 }

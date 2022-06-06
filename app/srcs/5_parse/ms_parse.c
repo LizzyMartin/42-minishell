@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/03 21:00:35 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/06 19:47:22 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,8 +123,10 @@ int	ms_parse(t_ms *ms)
 		}
 		ft_mtx_free((void **) curr_prompt->this_p_line_splited_by_pipe);
 		ft_mtx_free((void **) input_s_by_space);
+		ft_mtx_free((void **) output_s_by_space);
 		i++;
 	}
-	ft_mtx_free((void **) output_s_by_space);
+	//ft_mtx_free((void **) input_s_by_space);
+	//ft_mtx_free((void **) output_s_by_space);
 	return (0);
 }
