@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:15 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/03 14:08:19 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/07 18:29:03 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ char	**init_current_prompt(t_p *curr_prompt)
 	curr_prompt->has_here_doc = 0;
 	curr_prompt->only_here_doc = 0;
 	curr_prompt->no_cmd_just_redirect = 0;
+	curr_prompt->input_redirected_to_file = 0;
+	curr_prompt->only_input_redirected_to_file = 0;
 	ft_free_ptr((void **) &strdup);
 	return (input_s_by_space);
 }
@@ -41,15 +43,15 @@ char	**ms_parse_input(t_p *curr_prompt)
 			input_s_by_space) == 2)
 			curr_prompt->only_here_doc = 1;
 	}
-	curr_prompt->input_redirected_to_file = 0;
-	curr_prompt->only_input_redirected_to_file = 0;
-	if (curr_prompt->has_here_doc == 0 && ft_strnstr(input_s_by_space[0], "<", 1))
+	if (curr_prompt->has_here_doc == 0 && \
+	ft_strnstr(input_s_by_space[0], "<", 1))
 	{
 		curr_prompt->input_redirected_to_file = 1;
 		curr_prompt->input_path = ft_strdup(input_s_by_space[1]);
 		curr_prompt->input_fd = open(curr_prompt->input_path, O_RDONLY);
 		if (curr_prompt->input_fd == -1)
-			ft_pf_error("bash: %s %s", curr_prompt->input_path, E_NOTDIR);
+			ft_pf_error("miniheaven: %s %s", \
+			curr_prompt->input_path, E_NOTDIR);
 		if (ft_mtx_size((void **) input_s_by_space) == 2)
 				curr_prompt->only_input_redirected_to_file = 1;
 	}

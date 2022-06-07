@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:07 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/03 19:36:39 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/07 19:10:12 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ void	update_env_value(t_ms *ms, char *key, char *value)
 }
 
 static void	update_env_values(t_ms *ms, t_cmd *current_cmd, \
-	char *pwd, char *const *cmd, int aux)
+	char **cmd, int aux)
 {
+	char		pwd[999];
 	char		*oldpwd;
 	char		*line;
 
@@ -37,7 +38,8 @@ static void	update_env_values(t_ms *ms, t_cmd *current_cmd, \
 	{
 		if (chdir(cmd[1]) == -1)
 		{
-			line = ft_printf_to_var("cd: %s: No such file or directory\n", cmd[1]);
+			line = ft_printf_to_var("cd: %s: \
+				No such file or directory\n", cmd[1]);
 			ft_putstr_fd(line, aux);
 			current_cmd->exit_code = 1;
 		}
@@ -50,23 +52,14 @@ static void	update_env_values(t_ms *ms, t_cmd *current_cmd, \
 	}
 }
 
-void	ms_cd(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
+static void	update_env_value_according_arg(t_ms *ms, \
+t_cmd *current_cmd, int aux)
 {
 	char		pwd[999];
-	char		**cmd;
 	char		*line;
-	int			aux;
-	int			tmp_fd[2];
+	char		**cmd;
 
-	pipe(tmp_fd);
-	prompt->input_fd = tmp_fd[0];
-	aux = tmp_fd[1];
 	cmd = current_cmd->cmd_splited_by_space;
-	if (current_cmd->index == prompt->args_amount - 1)
-		aux = 1;
-	current_cmd->exit_code = 0;
-	if (!ms_is_in_env(ms, "OLDPWD"))
-		ms_add_env(&ms->envs, "OLDPWD", ms_find_env_value(ms, "HOME"));
 	if (!cmd[1] || !ft_strncmp(cmd[1], "~", ft_strlen(cmd[1]))
 		|| !ft_strncmp(cmd[1], "--", 2))
 	{
@@ -83,7 +76,23 @@ void	ms_cd(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 		update_env_value(ms, "PWD", getcwd(pwd, 999));
 	}
 	else
-		update_env_values(ms, current_cmd, pwd, cmd, aux);
+		update_env_values(ms, current_cmd, cmd, aux);
+}
+
+void	ms_cd(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
+{
+	int			aux;
+	int			tmp_fd[2];
+
+	pipe(tmp_fd);
+	prompt->input_fd = tmp_fd[0];
+	aux = tmp_fd[1];
+	if (current_cmd->index == prompt->args_amount - 1)
+		aux = 1;
+	current_cmd->exit_code = 0;
+	if (!ms_is_in_env(ms, "OLDPWD"))
+		ms_add_env(&ms->envs, "OLDPWD", ms_find_env_value(ms, "HOME"));
+	update_env_value_according_arg(ms, current_cmd, aux);
 	if (aux != 1)
 		close(aux);
 }

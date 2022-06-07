@@ -3,42 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse_commands.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/06 19:34:34 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/07 18:51:50 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-int	is_input_command(char *name)
-{
-	if (ft_strnstr(name, "cat", ft_strlen(name)) || \
-		ft_strnstr(name, "more", ft_strlen(name)) || \
-		ft_strnstr(name, "less", ft_strlen(name)) || \
-		ft_strnstr(name, "tail", ft_strlen(name)) || \
-		ft_strnstr(name, "wc", ft_strlen(name)) || \
-		ft_strnstr(name, "touch", ft_strlen(name))
-	)
-		return (1);
-	return (0);
-}
-
-int	is_input_command_alone(char *cmd_line)
-{
-	char **split;
-
-	split = ft_split(cmd_line, ' ');
-	if (is_input_command(split[0])
-		&& ft_mtx_size((void **) split) == 1)
-		{
-			ft_mtx_free((void **) split);
-			return (1);
-		}
-	ft_mtx_free((void **) split);
-	return (0);
-}
 
 static void	prepare_cmd_line(const t_p *curr_prompt, \
 	char **input_s_by_space, int c, t_cmd *curr_command)
@@ -62,18 +34,18 @@ static void	prepare_cmd_line(const t_p *curr_prompt, \
 	}
 }
 
-char	*get_just_name(char *path)
+static void	treat_input_command(t_p *curr_prompt, t_cmd *curr_command)
 {
-	int	i;
-
-	i = ft_strlen(path);
-	while (i > 0)
+	if (is_input_command(curr_command->just_name) == 1)
 	{
-		if (path[i] == '/')
-			break ;
-		i--;
+		if (curr_command->args_amount >= 2 && curr_command->index == 0)
+		{
+			curr_prompt->input_path = \
+				ft_strdup(curr_command->cmd_splited_by_space[1]);
+			curr_prompt->input_fd = \
+				open(curr_command->cmd_splited_by_space[1], O_RDONLY);
+		}
 	}
-	return (ft_substr(path, i + 1, ft_strlen(path)));
 }
 
 static void	prepare_path_and_fd(t_ms *ms, t_p *curr_prompt, t_cmd *curr_command)
@@ -96,19 +68,8 @@ static void	prepare_path_and_fd(t_ms *ms, t_p *curr_prompt, t_cmd *curr_command)
 			curr_command->cmd_is_path_but_invalid = 1;
 	}
 	else
-	{
 		curr_command->path_and_name = ms_append_path_in_front(curr_command, ms);
-	}
-	if (is_input_command(curr_command->just_name) == 1)
-	{
-		if (curr_command->args_amount >= 2 && curr_command->index == 0)
-		{
-			curr_prompt->input_path = \
-				ft_strdup(curr_command->cmd_splited_by_space[1]);
-			curr_prompt->input_fd = \
-				open(curr_command->cmd_splited_by_space[1], O_RDONLY);
-		}
-	}
+	treat_input_command(curr_prompt, curr_command);
 	ft_free_ptr((void *) &tmp);
 }
 
@@ -153,7 +114,7 @@ void	ms_parse_commands(t_ms *ms, \
 		if (c == (curr_prompt->pipe_amount - 1) && curr_prompt->redirect > 0)
 			prepare_something(curr_command, curr_prompt, output_s_by_space);
 		prepare_path_and_fd(ms, curr_prompt, curr_command);
-		if(is_input_command_alone(curr_command->cmd_line) && \
+		if (is_input_command_alone(curr_command->cmd_line) && \
 		curr_prompt->args_amount == 1)
 			curr_command->can_execute = 0;
 		c++;

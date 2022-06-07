@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:42 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/04 11:35:26 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/07 19:04:13 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,19 @@ static void	add_env_by_key(t_ms *ms, const t_cmd *current_cmd)
 	char	*key;
 	char	*value;
 	int		equal_index;
+	int		i;
 
 	equal_index = ft_str_indexof(current_cmd->cmd_splited_by_space[1], \
 	"=", ft_strlen(current_cmd->cmd_splited_by_space[1]));
 	key = ft_substr(current_cmd->cmd_splited_by_space[1], 0, equal_index);
 	value = current_cmd->cmd_splited_by_space[1] + equal_index + 1;
-	int i = 0;
+	i = 0;
 	while (key[i])
 	{
-		if (!ft_isalpha(key[i])) {
-			ft_printf_to_fd(2, "miniheaven: export: `%s': not a valid identifier\n", key);
+		if (!ft_isalpha(key[i]))
+		{
+			ft_printf_to_fd(2, "miniheaven: export: `%s': \
+				not a valid identifier\n", key);
 			ms->p->cmds->exit_code = 1;
 			return ;
 		}
@@ -59,7 +62,7 @@ static void	print_sorted_env(t_ms *ms, int aux)
 {
 	t_env	*env;
 	char	**str;
-	char 	*line;
+	char	*line;
 	int		i;
 	t_qs	*qs;
 
@@ -83,46 +86,41 @@ static void	print_sorted_env(t_ms *ms, int aux)
 	}
 }
 
+static void	check_first_char(t_ms *ms, t_cmd *current_cmd, int aux)
+{
+	char	*line;
 
+	if (ft_isdigit(current_cmd->cmd_splited_by_space[1][0]))
+	{
+		line = ft_printf_to_var("miniheaven: export: `%s` \
+			not a valid identifier\n", current_cmd->cmd_splited_by_space[1]);
+		ft_putstr_fd(line, aux);
+		free(line);
+		ms->p->cmds->exit_code = 1;
+	}
+	add_env_by_key(ms, current_cmd);
+	ms->p->cmds->exit_code = 0;
+}
 
 void	ms_export(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 {
-	char	*line;
 	int		aux;
 	int		tmp_fd[2];
 
 	pipe(tmp_fd);
 	prompt->input_fd = tmp_fd[0];
 	aux = tmp_fd[1];
-	if ((current_cmd->index == (prompt->args_amount - 1)) && prompt->redirect <= 0)
+	if ((current_cmd->index == (prompt->args_amount - 1)) \
+			&& prompt->redirect <= 0)
 		aux = 1;
 	else
-	 	aux = prompt->output_fd;
+		aux = prompt->output_fd;
 	if (!current_cmd->cmd_splited_by_space[1]
 		|| *current_cmd->cmd_splited_by_space[1] == '\0'
 		|| *current_cmd->cmd_splited_by_space[1] == ' ')
 		print_sorted_env(ms, aux);
 	else
-	{
-		if (ft_isdigit(current_cmd->cmd_splited_by_space[1][0]))
-		{
-			line = ft_printf_to_var("miniheaven: export: `%s` not a valid identifier\n", current_cmd->cmd_splited_by_space[1]);
-			ft_putstr_fd(line, aux);
-			ms->p->cmds->exit_code = 1;
-			return ;
-		}
-		if (current_cmd->cmd_splited_by_space[1][0] == '$')
-		{
-			
-		}
-		else 
-		{
-		
-		}	
-		add_env_by_key(ms, current_cmd);
-		ms->p->cmds->exit_code = 0;
-		return ;
-	}
+		check_first_char(ms, current_cmd, aux);
 	if (aux != 1)
 		close(aux);
 }

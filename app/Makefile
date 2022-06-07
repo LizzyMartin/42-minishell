@@ -49,6 +49,7 @@ SRCS_FILES +=	4_tokenizer/ms_tokenizer.c \
 				4_tokenizer/ms_sintax.c
 
 SRCS_FILES +=	5_parse/ms_parse.c \
+				5_parse/ms_parse_prompts.c \
 				5_parse/ms_parse_commands.c \
 				5_parse/ms_parse_commands_utils.c \
 				5_parse/ms_append_path_in_front.c \
@@ -59,7 +60,8 @@ SRCS_FILES +=	5_parse/ms_parse.c \
 				5_parse/prompt/ms_free_prompt.c
 
 SRCS_FILES +=	6_execute/ms_execute_commands.c \
-				6_execute/ms_execute_commands_utils.c
+				6_execute/ms_execute_commands_utils_1.c \
+				6_execute/ms_execute_commands_utils_2.c
 
 SRCS_FILES +=	6_execute/builtins/ms_cd.c \
 				6_execute/builtins/ms_echo.c \
@@ -124,4 +126,4 @@ seg:	$(NAME)
 
 leak:	$(NAME)
 	@valgrind  --suppressions=./local.supp --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes ./minishell
-	
+

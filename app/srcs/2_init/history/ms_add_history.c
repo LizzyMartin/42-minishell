@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_add_history.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:55:36 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/06 18:28:04 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/07 15:38:39 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,13 @@ static void	ms_add_history_aux(t_ms *ms, t_history *aux,
 	aux->next->l_c_exit_code = e_code;
 }
 
+static void	reset_some_values(t_history *aux)
+{
+	aux->next = NULL;
+	aux->prev = NULL;
+	aux->l_c_exit_code = 0;
+}
+
 void	ms_add_history(t_ms *ms, char *line, t_cmd *cmds)
 {
 	t_history	*aux;
@@ -53,9 +60,7 @@ void	ms_add_history(t_ms *ms, char *line, t_cmd *cmds)
 		aux->index = ms->history_i;
 		if (line != NULL)
 			aux->line = ft_strdup(line);
-		aux->next = NULL;
-		aux->prev = NULL;
-		aux->l_c_exit_code = 0;
+		reset_some_values(aux);
 		ms->history = aux;
 	}
 	else
@@ -63,7 +68,7 @@ void	ms_add_history(t_ms *ms, char *line, t_cmd *cmds)
 		last_history = ms_last_history(aux);
 		if (!last_history->line && ms->shell_line)
 			add_history(ms->shell_line);
-		else if (last_history->line && ft_strncmp(ms->shell_line,
+		if (last_history->line && ft_strncmp(ms->shell_line,
 				last_history->line, ft_strlen(ms->shell_line)))
 			add_history(ms->shell_line);
 		ms_add_history_aux(ms, aux, line, cmds);

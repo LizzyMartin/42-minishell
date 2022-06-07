@@ -6,20 +6,37 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:39 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/03 19:44:18 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/07 18:48:04 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
+static void	ms_check_numeric_argument(t_cmd *current_cmd, int aux)
+{
+	char	*line;
+	int		i;
+
+	i = 0;
+	while (current_cmd->cmd_splited_by_space[1][i])
+	{
+		if (!ft_isdigit(current_cmd->cmd_splited_by_space[1][i]))
+		{
+			line = ft_printf_to_var("exit\nminiheaven: exit: %s: \
+				numeric argument required\n", \
+					current_cmd->cmd_splited_by_space[1]);
+			ft_putstr_fd(line, aux);
+			exit(current_cmd->exit_code);
+		}
+		i++;
+	}
+}
+
 void	ms_exit(t_cmd *current_cmd, t_p *prompt)
 {
-	int		i;
-	char	*line;
 	int		aux;
 	int		tmp_fd[2];
 
-	i = 0;
 	current_cmd->exit_code = 0;
 	pipe(tmp_fd);
 	prompt->input_fd = tmp_fd[0];
@@ -34,21 +51,10 @@ void	ms_exit(t_cmd *current_cmd, t_p *prompt)
 	}
 	else if (current_cmd->args_amount == 2)
 	{
-		while (current_cmd->cmd_splited_by_space[1][i])
-		{
-			if (!ft_isdigit(current_cmd->cmd_splited_by_space[1][i]))
-			{
-				line = ft_printf_to_var("exit\nminiheaven: exit: %s: numeric argument required\n", current_cmd->cmd_splited_by_space[1]);
-				ft_putstr_fd(line, aux);
-				exit(current_cmd->exit_code);
-			}
-			i++;
-		}
+		ms_check_numeric_argument(current_cmd, aux);
 		ctrl_d_exit_shell(SIGQUIT);
 	}
 	else
-	{
 		ctrl_d_exit_shell(SIGQUIT);
-	}
 	exit(current_cmd->exit_code);
 }

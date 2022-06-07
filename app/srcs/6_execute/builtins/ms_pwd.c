@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:45 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/04 04:18:02 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/07 18:07:20 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,11 @@ void	ms_pwd(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 	pipe(tmp_fd);
 	prompt->input_fd = tmp_fd[0];
 	aux = tmp_fd[1];
-	if ((current_cmd->index == (prompt->args_amount - 1)) && prompt->redirect <= 0)
+	if ((current_cmd->index == \
+			(prompt->args_amount - 1)) && prompt->redirect <= 0)
 		aux = 1;
 	else
-	 	aux = prompt->output_fd;
+		aux = prompt->output_fd;
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
 	{
 		ms->p->cmds->exit_code = 0;

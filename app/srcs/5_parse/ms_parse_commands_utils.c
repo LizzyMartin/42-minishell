@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse_commands_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/01 00:00:20 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/07 18:21:13 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,46 @@ void	reset_cmd(t_cmd **curr_command)
 	(*curr_command)->cmd_line = NULL;
 	(*curr_command)->cmd_splited_by_space = NULL;
 	(*curr_command)->can_execute = 1;
+}
+
+char	*get_just_name(char *path)
+{
+	int	i;
+
+	i = ft_strlen(path);
+	while (i > 0)
+	{
+		if (path[i] == '/')
+			break ;
+		i--;
+	}
+	return (ft_substr(path, i + 1, ft_strlen(path)));
+}
+
+int	is_input_command(char *name)
+{
+	if (ft_strnstr(name, "cat", ft_strlen(name)) || \
+		ft_strnstr(name, "more", ft_strlen(name)) || \
+		ft_strnstr(name, "less", ft_strlen(name)) || \
+		ft_strnstr(name, "tail", ft_strlen(name)) || \
+		ft_strnstr(name, "wc", ft_strlen(name)) || \
+		ft_strnstr(name, "touch", ft_strlen(name))
+	)
+		return (1);
+	return (0);
+}
+
+int	is_input_command_alone(char *cmd_line)
+{
+	char	**split;
+
+	split = ft_split(cmd_line, ' ');
+	if (is_input_command(split[0])
+		&& ft_mtx_size((void **) split) == 1)
+	{
+		ft_mtx_free((void **) split);
+		return (1);
+	}
+	ft_mtx_free((void **) split);
+	return (0);
 }

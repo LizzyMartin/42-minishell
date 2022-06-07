@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ms_execute_commands.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:42:02 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/06 21:35:49 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/07 19:45:39 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-#include <sys/wait.h>
 
 static int	get_child_process_id(const t_p *prompt, \
 	t_cmd *current_cmd, char **envp, const int *aux_fd)
 {
 	int	child_process_id;
+
 	child_process_id = fork();
 	ms_while_executing_commands_signals();
 	if (child_process_id == 0)
@@ -40,8 +40,8 @@ static int	get_child_process_id(const t_p *prompt, \
 	return (child_process_id);
 }
 
-static void	ms_execute_command(t_p *prompt, \
-	t_cmd *current_cmd, char **envp, int *aux_fd)
+void	ms_execute_command(t_p *prompt, \
+t_cmd *current_cmd, char **envp, int *aux_fd)
 {
 	int	child_process_id;
 
@@ -50,7 +50,7 @@ static void	ms_execute_command(t_p *prompt, \
 	if ((prompt->pipe_amount - 1) == current_cmd->index)
 	{
 		waitpid(child_process_id, &current_cmd->exit_code, 0);
-	    if (current_cmd->exit_code)
+		if (current_cmd->exit_code)
 		current_cmd->exit_code = WEXITSTATUS(current_cmd->exit_code);
 	}
 	if (*aux_fd > 2)
@@ -59,66 +59,16 @@ static void	ms_execute_command(t_p *prompt, \
 	close(prompt->pipe[1]);
 }
 
-void cat_ls_sc(t_p * curr_prompt)
-{
-		t_cmd *tmp;
-		int	is_cat_sequence = 0;
-		int cat = 0;
-		char *trim;
-
-		tmp = curr_prompt->cmds;
-		trim = ft_strtrim(tmp->cmd_line, " ");
-		while (tmp->next != NULL)
-		{
-			if (ft_strncmp(trim, "cat",
-				ft_strlen(trim)) == 0)
-				is_cat_sequence = 1;
-			if (is_cat_sequence)
-			{
-				while (tmp->next != NULL &&
-				ft_strncmp(trim, "cat", ft_strlen(trim)) == 0)
-				{
-					cat++;
-					tmp = tmp->next;
-				}
-				is_cat_sequence = 0;
-				break;
-			}
-			tmp = tmp->next;
-		}
-		ft_free_ptr((void *) &trim);
-		while (cat-- > 0)
-			get_next_line(0);
-}
-
-int		ms_execute_commands(t_ms *ms, t_p *curr_prompt)
+int	ms_execute_commands(t_ms *ms, t_p *curr_prompt)
 {
 	t_cmd	*current_cmd;
 
 	current_cmd = curr_prompt->cmds;
 	while (current_cmd)
 	{
-//		if (current_cmd->can_execute == 0)
-//		{
-//			current_cmd = current_cmd->next;
-//			continue;
-//		}
-		if (ft_strncmp(current_cmd->just_name, "history", 7) == 0)
-		{
-			ms_add_history(ms, NULL, curr_prompt->cmds);
-			ms_print_history(ms);
+		if (ms_which_command_type(curr_prompt, \
+		current_cmd, ms) == 1)
 			return (0);
-		}
-		else if (is_builtin(current_cmd->just_name) == 1)
-			execute_builtin(ms, current_cmd, curr_prompt);
-		else if (current_cmd->can_execute == 1)
-		{
-			ms_execute_command(curr_prompt, current_cmd, \
-				ms->envp, &(curr_prompt->input_fd));
-		}
-		else
-			ft_printf_to_fd(1, "miniheaven: %s %s", \
-				current_cmd->just_name, current_cmd->error_msg);
 		current_cmd = current_cmd->next;
 	}
 	cat_ls_sc(curr_prompt);
@@ -146,9 +96,9 @@ static void	print_fd_or_execute_cmd(t_ms *ms, t_p *curr_prompt)
 			if (ms->connectors_order != NULL)
 			{
 				if (ms->connectors_order[i] == 1 && exit_code != 0)
-					break;
+					break ;
 				else if (ms->connectors_order[i] == 2 && exit_code == 0)
-					break;
+					break ;
 			}
 			i++;
 			curr_prompt = curr_prompt->next;

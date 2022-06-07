@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_add_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:57:03 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/31 15:12:39 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/07 15:38:58 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ms_add_env(t_env **env, char *key, char *value)
 {
-	t_env *head;
+	t_env	*head;
 
 	head = *env;
 	if (head == NULL)

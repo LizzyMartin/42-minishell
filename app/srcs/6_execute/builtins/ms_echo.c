@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:25 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/04 04:17:30 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/07 18:51:16 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	last_cmd_exit_code(t_ms *ms)
 	ft_printf("%d", code->l_c_exit_code);
 }
 
-static void	ms_echo_having_flag(t_ms *ms, char	**cmd_splited,
-		t_cmd *current_cmd, t_p *prompt, int aux)
+static void	ms_echo_having_flag(t_ms *ms, char **cmd_splited, \
+	t_cmd *current_cmd, int aux)
 {
 	int		has_flag;
 
@@ -51,7 +51,7 @@ static void	ms_echo_having_flag(t_ms *ms, char	**cmd_splited,
 	print_cmd_content(ms, current_cmd, cmd_splited, aux);
 	if (has_flag)
 		ft_putstr_fd("\n", aux);
-	prompt->cmds->exit_code = 0;
+	ms->p->cmds->exit_code = 0;
 	if (aux != 1)
 		close(aux);
 }
@@ -66,10 +66,11 @@ void	ms_echo(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 	pipe(tmp_fd);
 	prompt->input_fd = tmp_fd[0];
 	aux = tmp_fd[1];
-	if ((current_cmd->index == (prompt->args_amount - 1)) && prompt->redirect <= 0)
+	if ((current_cmd->index == (prompt->args_amount - 1)) \
+			&& prompt->redirect <= 0)
 		aux = 1;
 	else
-	 	aux = prompt->output_fd;
+		aux = prompt->output_fd;
 	if (!cmd_splited[1])
 		ft_putstr_fd("\n", aux);
 	else if (ft_strncmp(cmd_splited[1], "$?", 2) == 0)
@@ -78,5 +79,5 @@ void	ms_echo(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 		ft_putstr_fd("\n", aux);
 	}
 	else
-		ms_echo_having_flag(ms, cmd_splited, current_cmd, prompt, aux);
+		ms_echo_having_flag(ms, cmd_splited, current_cmd, aux);
 }
