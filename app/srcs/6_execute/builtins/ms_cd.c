@@ -69,12 +69,18 @@ void	ms_cd(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 		ms_add_env(&ms->envs, "OLDPWD", ms_find_env_value(ms, "HOME"));
 	if (!cmd[1] || !ft_strncmp(cmd[1], "~", ft_strlen(cmd[1]))
 		|| !ft_strncmp(cmd[1], "--", 2))
+	{
 		chdir(getenv("HOME"));
+		update_env_value(ms, "OLDPWD", getenv("PWD"));
+		update_env_value(ms, "PWD", getenv("HOME"));
+	}
 	else if (!ft_strncmp(cmd[1], "-", ft_strlen(cmd[1])))
 	{
 		line = ft_printf_to_var("%s\n", ms_find_env_value(ms, "OLDPWD"));
 		ft_putstr_fd(line, aux);
 		chdir(ms_find_env_value(ms, "OLDPWD"));
+		update_env_value(ms, "OLDPWD", getenv("PWD"));
+		update_env_value(ms, "PWD", getcwd(pwd, 999));
 	}
 	else
 		update_env_values(ms, current_cmd, pwd, cmd, aux);
