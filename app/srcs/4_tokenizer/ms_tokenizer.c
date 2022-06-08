@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:43:28 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/07 18:17:36 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/07 21:57:52 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	ms_tokenizer(t_ms *ms)
 	if (ms_sintax(ms) == 1)
 		return (1);
 	if (ft_count_chr(ms->shell_line_tokenized, '"') != 1 \
-	&& ft_count_chr(ms->shell_line_tokenized, '\'') != 1)
+	|| ft_count_chr(ms->shell_line_tokenized, '\'') != 1)
 		ms_check_quotes(ms);
 	ms_expand_dolar(ms);
 	ms_aux_env(ms, equal_index);
