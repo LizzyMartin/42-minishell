@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse_commands.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/07 18:51:50 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/08 01:15:03 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void	prepare_cmd_line(const t_p *curr_prompt, \
 		aux = ft_strlen(input_s_by_space[0]) \
 			+ ft_strlen(input_s_by_space[1]) + 2;
 		tmp = curr_prompt->this_p_line_splited_by_pipe[c] + aux;
+		ft_free_ptr((void *) &curr_command->cmd_line);
 		curr_command->cmd_line = ft_substr(tmp, 0, ft_strlen(tmp));
 	}
 }

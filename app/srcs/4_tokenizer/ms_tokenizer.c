@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_tokenizer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:43:28 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/07 21:57:52 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/08 02:01:45 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	ms_tokenizer(t_ms *ms)
 	int	equal_index;
 	int	space_index;
 
-	ms->shell_line_tokenized = ft_strdup(ms->shell_line);
+	ms->shell_line_tokenized = ms->shell_line;
 	ms->is_aux_env = 0;
 	equal_index = ft_str_indexof(ms->shell_line_tokenized, \
 	"=", ft_strlen(ms->shell_line_tokenized));

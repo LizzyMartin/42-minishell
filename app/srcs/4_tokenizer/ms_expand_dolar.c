@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_expand_dolar.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 00:55:01 by argel             #+#    #+#             */
-/*   Updated: 2022/06/07 22:27:45 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/08 01:30:57 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ int i, char *dolar_cmd)
 	j = 0;
 	if (ft_strchr(line_splited[i], '$') == NULL || ms->has_single_quotes)
 	{
-		tmp = ft_strjoin(ft_strdup(ms->shell_line_tokenized), " ");
-		ms->shell_line_tokenized = ft_strjoin(tmp, ft_strdup(line_splited[i]));
+		tmp = ft_strjoin_free(ft_strdup(ms->shell_line_tokenized), " ");
+		ms->shell_line_tokenized = ft_strjoin_free(tmp, line_splited[i]);
 	}
 	else
 	{
@@ -83,7 +83,7 @@ int i, char *dolar_cmd)
 				while (valid_chr(line_splited[i][j + final]))
 					final++;
 				dolar_cmd = ft_substr((line_splited[i] + j), 0, final);
-				ms_has_single_quotes(ms, dolar_cmd, ft_strdup(line_splited[i]));
+				ms_has_single_quotes(ms, dolar_cmd, line_splited[i]);
 			}
 			j++;
 		}
