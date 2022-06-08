@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:06:23 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/07 15:29:04 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/07 23:06:43 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,10 @@ void	print_banner(void)
 	{
 		line = get_next_line(fd);
 		if (line != NULL)
-			ft_printf("%s%s", BOLD_YELLOW, line);
+			ft_printf("%s", line);
 		free(line);
 		i++;
 	}
 	get_next_line(-1);
-	ft_printf(WHITE);
 	close(fd);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_read_input.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:47 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/07 22:30:10 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/07 23:20:41 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ char	*ms_print_sh_name(void)
 	char	cwd[PATH_MAX];
 
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
-		return (ft_printf_to_var("%s%s%s%s ▸ %s", \
-			BOLD_BLUE, SHELL, BOLD_CYAN, cwd, WHITE));
+		return (ft_printf_to_var("%s%s", \
+			ESC_BLUE, SHELL, cwd, ESC_RESET_COLOR));
 	else
-		return (ft_printf_to_var("%s%s", SHELL, WHITE));
+		return (ft_printf_to_var("%s", SHELL));
 }
 
 int	ms_read_input(t_ms *ms)

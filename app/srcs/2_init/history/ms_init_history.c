@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_init_history.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:55:14 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/06 15:47:02 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/07 22:58:54 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	ms_init_history(t_ms *ms)
 	fd = open(path, O_RDONLY);
 	line = get_next_line(fd);
 	trim = ft_strtrim(line, "\n");
+	trim = ft_strtrim(trim, " ");
 	while (line)
 	{
 		add_history(trim);
