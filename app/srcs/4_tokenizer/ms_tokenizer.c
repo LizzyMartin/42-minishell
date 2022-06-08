@@ -77,8 +77,8 @@ int	ms_tokenizer(t_ms *ms)
 		ms->is_aux_env = 0;
 	if (ms_sintax(ms) == 1)
 		return (1);
-	if (ft_count_chr(ms->shell_line_tokenized, '"') != 1 \
-	|| ft_count_chr(ms->shell_line_tokenized, '\'') != 1)
+	if (ms_count_char(ms->shell_line_tokenized, '"') != 1 \
+	&& ms_count_char(ms->shell_line_tokenized, '\'') != 1)
 		ms_check_quotes(ms);
 	ms_expand_dolar(ms);
 	ms_aux_env(ms, equal_index);
