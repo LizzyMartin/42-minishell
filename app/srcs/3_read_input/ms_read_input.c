@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_read_input.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:47 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/07 23:20:41 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/08 00:54:14 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ char	*ms_print_sh_name(void)
 	char	cwd[PATH_MAX];
 
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
-		return (ft_printf_to_var("%s%s", \
-			ESC_BLUE, SHELL, cwd, ESC_RESET_COLOR));
+		return (ft_printf_to_var("%s%s%s%s%s%s ", \
+            BOLD_BLUE, SHELL, END_COLOR, BOLD_CYAN, cwd, END_COLOR));
 	else
 		return (ft_printf_to_var("%s", SHELL));
 }
