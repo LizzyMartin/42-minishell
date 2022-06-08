@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ms_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:07 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/07 19:10:12 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/07 22:34:08 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-void	update_env_value(t_ms *ms, char *key, char *value)
-{
-	t_env	*env;
-
-	env = ms->envs;
-	while (env)
-	{
-		if ((ft_strncmp(env->key, key, ft_strlen(env->key)) == 0) && \
-			(env->key != NULL && env->value != NULL))
-			env->value = value;
-		env = env->next;
-	}
-}
 
 static void	update_env_values(t_ms *ms, t_cmd *current_cmd, \
 	char **cmd, int aux)

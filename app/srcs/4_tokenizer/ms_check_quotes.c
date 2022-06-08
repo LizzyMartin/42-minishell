@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ms_check_quotes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:26 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/07 22:05:00 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/07 22:27:54 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+int	ms_count_char(char *str, char c)
+{
+	int		count;
+	char	*iter;
+
+	count = 0;
+	iter = ft_strdup(str);
+	while (*iter)
+	{
+		if (*iter == c)
+			count++;
+		iter++;
+	}
+	return (count);
+}
 
 static void	treat_having_quotes(t_ms *ms, char *tmp, int *i)
 {

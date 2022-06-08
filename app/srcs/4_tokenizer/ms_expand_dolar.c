@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_expand_dolar.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 00:55:01 by argel             #+#    #+#             */
-/*   Updated: 2022/06/07 16:28:19 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/07 22:27:45 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ static void	ms_quotes_something_1(t_ms *ms, char **line_splited, int i)
 		ms->has_double_quotes = 1;
 	else if (index_single != -1 && index_double == -1)
 		ms->has_single_quotes = 1;
-	if (ft_count_chr(line_splited[i], '\'') == 1)
+	if (ms_count_char(line_splited[i], '\'') == 1)
 		ms->has_single_quotes = 0;
-	if (ft_count_chr(line_splited[i], '"') == 1)
+	if (ms_count_char(line_splited[i], '"') == 1)
 		ms->has_double_quotes = 0;
 }
 
