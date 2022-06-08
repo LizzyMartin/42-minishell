@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:39 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/07 18:48:04 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/08 19:05:29 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,21 @@ static void	ms_check_numeric_argument(t_cmd *current_cmd, int aux)
 	}
 }
 
-void	ms_exit(t_cmd *current_cmd, t_p *prompt)
+void	ms_exit(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 {
 	int		aux;
 	int		tmp_fd[2];
+	int		exit_code;
 
 	current_cmd->exit_code = 0;
-	pipe(tmp_fd);
-	prompt->input_fd = tmp_fd[0];
-	aux = tmp_fd[1];
 	if (current_cmd->index == prompt->args_amount - 1)
 		aux = 1;
+	else
+	{
+		pipe(tmp_fd);
+		prompt->input_fd = tmp_fd[0];
+		aux = tmp_fd[1];
+	}
 	if (current_cmd->args_amount > 2)
 	{
 		ft_putstr_fd("exit\nminiheaven: exit: too many arguments\n", aux);
@@ -50,11 +54,13 @@ void	ms_exit(t_cmd *current_cmd, t_p *prompt)
 		return ;
 	}
 	else if (current_cmd->args_amount == 2)
-	{
 		ms_check_numeric_argument(current_cmd, aux);
-		ctrl_d_exit_shell(SIGQUIT);
+	exit_code = current_cmd->exit_code;
+	ms_finish(ms);
+	if (aux != 1)
+	{
+		close (tmp_fd[0]);
+		close (tmp_fd[1]);
 	}
-	else
-		ctrl_d_exit_shell(SIGQUIT);
-	exit(current_cmd->exit_code);
+	exit(exit_code);
 }

@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:15 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/07 18:29:03 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/08 12:57:27 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 char	**init_current_prompt(t_p *curr_prompt)
 {
 	char	**input_s_by_space;
-	char	*strdup;
 
-	strdup = ft_strdup(curr_prompt->this_p_line_splited_by_pipe[0]);
-	input_s_by_space = ft_split(strdup, ' ');
+	input_s_by_space = ft_split(curr_prompt->this_p_line_splited_by_pipe[0], ' ');
 	curr_prompt->input_fd = 0;
 	curr_prompt->input_path = NULL;
 	curr_prompt->has_here_doc = 0;
@@ -26,7 +24,6 @@ char	**init_current_prompt(t_p *curr_prompt)
 	curr_prompt->no_cmd_just_redirect = 0;
 	curr_prompt->input_redirected_to_file = 0;
 	curr_prompt->only_input_redirected_to_file = 0;
-	ft_free_ptr((void **) &strdup);
 	return (input_s_by_space);
 }
 

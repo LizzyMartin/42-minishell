@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/07 18:39:32 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/08 09:48:47 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	ms_parse(t_ms *ms)
 		if (curr_prompt->only_here_doc == 0 && \
 		curr_prompt->only_input_redirected_to_file == 0)
 			ms_parse_commands (ms, curr_prompt, output_s, input_s);
-		ft_mtx_free((void **) curr_prompt->this_p_line_splited_by_pipe);
 		ft_mtx_free((void **) input_s);
 		ft_mtx_free((void **) output_s);
 		i++;

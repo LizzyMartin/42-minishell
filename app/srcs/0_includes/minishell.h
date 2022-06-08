@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/07 22:28:13 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/08 14:23:50 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int			is_input_command(char *name);
 int			is_input_command_alone(char *cmd_line);
 
 // prompt
-void		ms_free_prompt(t_p *curr_prompt);
+void		ms_free_prompt(t_ms *ms, t_p *curr_prompt);
 
 // cmd
 t_cmd		*ms_dll_cmd_last(t_cmd *cmds);
@@ -122,7 +122,7 @@ t_cmd *current_cmd, t_ms *ms);
 void		ms_cd(t_ms *ms, t_cmd *current_cmd, t_p *prompt);
 void		ms_echo(t_ms *ms, t_cmd *current_cmd, t_p *prompt);
 void		ms_env(t_ms *ms, t_cmd *current_cmd, t_p *prompt);
-void		ms_exit(t_cmd *current_cmd, t_p *prompt);
+void		ms_exit(t_ms *ms, t_cmd *current_cmd, t_p *prompt);
 void		ms_export(t_ms *ms, t_cmd *current_cmd, t_p *prompt);
 void		quicksort(t_qs *qs, int left, int right, int (*comp)(void*, void*));
 int			cmpstr(void *v1, void *v2);

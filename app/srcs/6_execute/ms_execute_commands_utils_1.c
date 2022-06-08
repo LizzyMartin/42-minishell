@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:00 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/07 19:45:33 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/08 11:19:55 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	execute_builtin(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 		ft_putstr_fd(E_CMDNOTFOUND, 1);
 	}
 	else if (ft_strncmp(name, "exit", ft_strlen(name)) == 0)
-		ms_exit(current_cmd, prompt);
+		ms_exit(ms, current_cmd, prompt);
 	else if (ft_strncmp(name, "echo", ft_strlen(name)) == 0)
 		ms_echo(ms, current_cmd, prompt);
 	else if (ft_strncmp(name, "pwd", ft_strlen(name)) == 0)

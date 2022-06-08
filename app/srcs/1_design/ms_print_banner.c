@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_print_banner.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:06:23 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/08 00:52:47 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/08 13:11:18 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	print_banner(void)
 		line = get_next_line(fd);
 		if (line != NULL)
 			ft_printf("%s%s%s", BOLD_YELLOW, line, END_COLOR);
-		free(line);
+		ft_free_ptr((void *) &line);
 		i++;
 	}
 	get_next_line(-1);

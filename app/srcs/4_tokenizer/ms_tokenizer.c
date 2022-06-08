@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_tokenizer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:43:28 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/08 02:01:45 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/08 19:07:51 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,35 @@ static void	ms_home_value(t_ms *ms)
 
 	chr_tmp = ft_chr_to_str('~', 1);
 	tmp2 = ms_get_home_value(ms);
-	tmp = ft_str_replace_all(ms->shell_line_tokenized, chr_tmp, tmp2);
+	tmp = ft_str_replace_all(ft_strdup(ms->shell_line_tokenized), chr_tmp, tmp2);
+	ft_free_ptr((void *) &ms->shell_line_tokenized);
+	ft_free_ptr((void *) &chr_tmp);
+	ft_free_ptr((void *) &tmp2);
 	ms->shell_line_tokenized = ft_strdup(tmp);
 	ft_free_ptr((void *) &chr_tmp);
 }
 
 static void	ms_basic_replaces(t_ms *ms)
 {
-	ms->shell_line_tokenized = ft_str_replace_all(ms->shell_line_tokenized, \
-	"||", T_CONNECTOR);
-	ms->shell_line_tokenized = ft_str_replace_all(ms->shell_line_tokenized, \
-	"&&", T_CONNECTOR);
-	ms->shell_line_tokenized = ft_str_replace_all(ms->shell_line_tokenized, \
-	"|", T_PIPE);
+	if (ft_strnstr(ms->shell_line_tokenized, "||", ft_strlen(ms->shell_line_tokenized)))
+	{
+		if (ms->shell_line_tokenized)
+			ft_free_ptr((void *) &ms->shell_line_tokenized);
+		ms->shell_line_tokenized = ft_str_replace_all(ft_strdup(ms->shell_line_tokenized), \
+		"||", T_CONNECTOR);
+	}
+	if (ft_strnstr(ms->shell_line_tokenized, "&&", ft_strlen(ms->shell_line_tokenized)))
+	{
+		ft_free_ptr((void *) &ms->shell_line_tokenized);
+		ms->shell_line_tokenized = ft_str_replace_all(ft_strdup(ms->shell_line_tokenized), \
+		"&&", T_CONNECTOR);
+	}
+	if (ft_strnstr(ms->shell_line_tokenized, "|", ft_strlen(ms->shell_line_tokenized)))
+	{
+		ft_free_ptr((void *) &ms->shell_line_tokenized);
+		ms->shell_line_tokenized = ft_str_replace_all(ft_strdup(ms->shell_line_tokenized), \
+		"|", T_PIPE);
+	}
 }
 
 static void	ms_aux_env(t_ms *ms, int equal_index)
@@ -65,7 +81,7 @@ int	ms_tokenizer(t_ms *ms)
 	int	equal_index;
 	int	space_index;
 
-	ms->shell_line_tokenized = ms->shell_line;
+	ms->shell_line_tokenized = ft_strdup(ms->shell_line);
 	ms->is_aux_env = 0;
 	equal_index = ft_str_indexof(ms->shell_line_tokenized, \
 	"=", ft_strlen(ms->shell_line_tokenized));

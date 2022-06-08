@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_check_quotes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:26 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/08 01:29:44 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/08 12:43:21 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,13 @@ static void	treat_having_quotes(t_ms *ms, char *tmp, int *i)
 	0, *i), ms->shell_line[*i], ft_str_replace_all(line_inside_quotes, \
 	" ", T_SPACE), ms->shell_line[*i]);
 	*i += second + 1;
+	ft_free_ptr((void *) &ms->shell_line_tokenized);
 	ms->shell_line_tokenized = tmp;
 	final = ft_str_indexof(ms->shell_line + *i + 1, \
 	ft_chr_to_str(ms->shell_line[*i], 1), size);
 	tmp = ft_printf_to_var("%s %s", \
 	ms->shell_line_tokenized, ft_substr(ms->shell_line, *i + 1, final));
+	ft_free_ptr((void *) &ms->shell_line_tokenized);
 	ms->shell_line_tokenized = tmp;
 }
 
@@ -73,6 +75,7 @@ void	ms_check_quotes(t_ms *ms)
 		{
 			cmd = ft_split(ms->shell_line, ' ');
 			tmp = cmd[0];
+			ft_free_ptr((void *) &ms->shell_line_tokenized);
 			ms->shell_line_tokenized = tmp;
 			i = ft_str_indexof(ms->shell_line, ft_chr_to_str(' ', 1), size);
 		}

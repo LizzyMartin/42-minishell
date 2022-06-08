@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:06:41 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/07 18:50:52 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/08 12:37:30 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ typedef struct s_minishell
 	t_env					*envs;
 	t_env					*aux_envs;
 	int						is_aux_env;
+	char					*tmp;
 }	t_ms;
 
 #endif

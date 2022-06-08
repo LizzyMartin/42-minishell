@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_wildcard.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:53:50 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/31 22:29:17 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/08 14:29:17 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	ms_wildcard(t_ms *ms)
 	char	*replace;
 	char	*wildcard;
 
-	iterate_shell_line = ms->shell_line_tokenized;
+	iterate_shell_line = ft_strdup(ms->shell_line_tokenized);
 	while (ft_strrchr(iterate_shell_line, '*'))
 	{
 		replace = ft_strdup("");
@@ -93,11 +93,12 @@ void	ms_wildcard(t_ms *ms)
 		{
 			replace = ms_get_files_that_represent_wildcard(wildcard);
 			ms->shell_line_tokenized = \
-ft_str_replace(ms->shell_line_tokenized, wildcard, replace);
+ft_str_replace(ft_strdup(ms->shell_line_tokenized), wildcard, replace);
 		}
 		else
 			iterate_shell_line += start;
 		ft_free_ptr((void *) &replace);
 		ft_free_ptr((void *) &wildcard);
 	}
+	ft_free_ptr((void *) &iterate_shell_line);
 }

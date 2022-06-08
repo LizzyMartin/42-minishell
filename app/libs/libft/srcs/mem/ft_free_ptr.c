@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_ptr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 03:11:26 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/27 21:00:00 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/08 10:18:55 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_free_ptr(void **ptr)
 {
-	if (*ptr)
+	if (*ptr != NULL || *ptr)
 	{
 		free (*ptr);
 		*ptr = NULL;
