@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:39 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/08 19:05:29 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/08 21:00:21 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,13 @@ static void	ms_check_numeric_argument(t_cmd *current_cmd, int aux)
 	}
 }
 
+static int	pipe_fd(t_p *prompt, int tmp_fd[])
+{
+	pipe(tmp_fd);
+	prompt->input_fd = tmp_fd[0];
+	return (tmp_fd[1]);
+}
+
 void	ms_exit(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 {
 	int		aux;
@@ -42,11 +49,7 @@ void	ms_exit(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 	if (current_cmd->index == prompt->args_amount - 1)
 		aux = 1;
 	else
-	{
-		pipe(tmp_fd);
-		prompt->input_fd = tmp_fd[0];
-		aux = tmp_fd[1];
-	}
+		aux = pipe_fd(prompt, tmp_fd);
 	if (current_cmd->args_amount > 2)
 	{
 		ft_putstr_fd("exit\nminiheaven: exit: too many arguments\n", aux);

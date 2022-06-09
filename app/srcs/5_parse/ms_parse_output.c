@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse_output.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:19 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/08 12:58:15 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/08 20:41:21 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ char	**ms_parse_output(t_p *curr_prompt)
 	dup = NULL;
 	dup = ft_mtx_dup(curr_prompt->this_p_line_splited_by_pipe);
 	mtx_size = ft_mtx_size((void **) dup);
-	output_s_by_space = ft_split(curr_prompt->this_p_line_splited_by_pipe[mtx_size - 1], ' ');
+	output_s_by_space = \
+		ft_split(curr_prompt->this_p_line_splited_by_pipe[mtx_size - 1], ' ');
 	aux = ft_mtx_size((void **) output_s_by_space);
 	curr_prompt->redirect = 0;
 	curr_prompt->output_fd = 1;

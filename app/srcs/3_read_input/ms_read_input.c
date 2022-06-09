@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_read_input.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:47 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/08 00:54:14 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/08 20:38:50 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ms_print_sh_name(void)
 
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
 		return (ft_printf_to_var("%s%s%s%s%s%s ", \
-            BOLD_BLUE, SHELL, END_COLOR, BOLD_CYAN, cwd, END_COLOR));
+			BOLD_BLUE, SHELL, END_COLOR, BOLD_CYAN, cwd, END_COLOR));
 	else
 		return (ft_printf_to_var("%s", SHELL));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse_prompts.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:39:53 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/08 13:06:19 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/08 20:41:35 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ static void	ms_get_prompt_2(t_p *curr_prompt)
 	{
 		ft_mtx_free((void **) curr_prompt->this_p_line_splited_by_pipe);
 		curr_prompt->this_p_line_splited_by_pipe = \
-		ft_split_by_str (ft_str_replace_all(ft_strdup(curr_prompt->this_p_line)
-		, T_PIPE, "|"), "audklahdakjnfdakjbfak");
+		ft_split_by_str (ft_str_replace_all(ft_strdup(curr_prompt->this_p_line),
+					T_PIPE, "|"), "audklahdakjnfdakjbfak");
 		curr_prompt->args_amount = ft_mtx_size((void **) \
 		curr_prompt->this_p_line_splited_by_pipe);
 	}

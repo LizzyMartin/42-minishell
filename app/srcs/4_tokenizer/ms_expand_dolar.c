@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_expand_dolar.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 00:55:01 by argel             #+#    #+#             */
-/*   Updated: 2022/06/08 12:50:44 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/08 20:51:57 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,22 +52,31 @@ static void	ms_quotes_something_1(t_ms *ms, char **line_splited, int i)
 		ms->has_double_quotes = 0;
 }
 
-static int	valid_chr(char chr)
+static void	threat_dolar(t_ms *ms, char **line_splited, int i, char *dolar_cmd)
 {
-	if (chr != '\'' && chr != '\"' \
-		&& chr != '\0' && chr != ' ')
-		return (1);
-	return (0);
+	int		final;
+	int		j;
+
+	j = 0;
+	while (line_splited[i][j])
+	{
+		if (line_splited[i][j] == '$')
+		{
+			final = 0;
+			while (valid_chr(line_splited[i][j + final]))
+				final++;
+			dolar_cmd = ft_substr((line_splited[i] + j), 0, final);
+			ms_has_single_quotes(ms, dolar_cmd, line_splited[i]);
+		}
+		j++;
+	}
 }
 
 static void	ms_quotes_something_2(t_ms *ms, char **line_splited, \
 int i, char *dolar_cmd)
 {
-	int		j;
 	char	*tmp;
-	int		final;
 
-	j = 0;
 	if (ft_strchr(line_splited[i], '$') == NULL || ms->has_single_quotes)
 	{
 		tmp = ft_strjoin(ms->shell_line_tokenized, " ");
@@ -76,20 +85,7 @@ int i, char *dolar_cmd)
 		ft_free_ptr((void *) &tmp);
 	}
 	else
-	{
-		while (line_splited[i][j])
-		{
-			if (line_splited[i][j] == '$')
-			{
-				final = 0;
-				while (valid_chr(line_splited[i][j + final]))
-					final++;
-				dolar_cmd = ft_substr((line_splited[i] + j), 0, final);
-				ms_has_single_quotes(ms, dolar_cmd, line_splited[i]);
-			}
-			j++;
-		}
-	}
+		threat_dolar(ms, line_splited, i, dolar_cmd);
 }
 
 void	ms_expand_dolar(t_ms *ms)

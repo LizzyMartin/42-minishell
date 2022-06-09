@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/08 14:23:50 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/08 20:51:36 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ bool		get_boolean(const char *wildcard, const struct dirent *de, int all);
 void		update_tmp(char **replace, DIR *dr, struct dirent **de, char **tmp);
 void		ms_expand_dolar(t_ms *ms);
 int			ms_count_char(char *str, char c);
+int			valid_chr(char chr);
 
 /* parse */
 int			ms_parse(t_ms *ms);

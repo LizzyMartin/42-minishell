@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ms_update_env_value.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/08 20:39:40 by acapela-          #+#    #+#             */
+/*   Updated: 2022/06/08 20:39:40 by acapela-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 void	update_env_value(t_ms *ms, char *key, char *value)
@@ -9,10 +21,10 @@ void	update_env_value(t_ms *ms, char *key, char *value)
 	{
 		if ((ft_strncmp(env->key, key, ft_strlen(env->key)) == 0) && \
 			(env->key != NULL && env->value != NULL))
-            {
-                ft_free_ptr((void *) &env->value);
-			    env->value = ft_strdup(value);
-            }
+		{
+			ft_free_ptr((void *) &env->value);
+			env->value = ft_strdup(value);
+		}
 		env = env->next;
 	}
 }
