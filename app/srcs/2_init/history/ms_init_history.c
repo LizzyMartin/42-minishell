@@ -22,7 +22,7 @@ void	ms_init_history(t_ms *ms)
 
 	tmp = ms_find_env_value(ms, "USER");
 	ms->history_i = 1;
-	path = ft_printf_to_var("/mnt/z/ESTUDOS_DO_ARGEL/42/42-minishell/app/teste");
+	path = ft_printf_to_var("/home/%s/.bash_history", tmp);
 	fd = open(path, O_RDONLY);
 	line = get_next_line(fd);
 	trim = ft_strtrim(line, "\n");
