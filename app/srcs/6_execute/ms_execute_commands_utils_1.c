@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:00 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/08 11:19:55 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/09 22:56:18 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,19 @@ t_cmd *current_cmd, t_ms *ms)
 	if (ft_strncmp(current_cmd->just_name, "history", 7) == 0)
 	{
 		ms_add_history(ms, NULL, curr_prompt->cmds);
-		ms_print_history(ms);
-		return (1);
+		ms_print_history(ms, current_cmd, curr_prompt);
+		if (current_cmd->index == (curr_prompt->args_amount - 1))
+			return (1);
 	}
 	else if (is_builtin(current_cmd->just_name) == 1)
+	{
 		execute_builtin(ms, current_cmd, curr_prompt);
+	}
 	else if (current_cmd->can_execute == 1)
 	{
 		ms_execute_command(curr_prompt, current_cmd, \
 			ms->envp, &(curr_prompt->input_fd));
+
 	}
 	else
 		ft_printf_to_fd(1, "miniheaven: %s %s", \

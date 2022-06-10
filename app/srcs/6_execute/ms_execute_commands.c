@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_execute_commands.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:42:02 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/07 22:41:55 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/09 23:05:09 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ static int	get_child_process_id(const t_p *prompt, \
 	{
 		dup2(*aux_fd, 0);
 		if ((prompt->pipe_amount - 1) == current_cmd->index)
+		{
 			dup2(prompt->output_fd, 1);
+		}
 		else
 			dup2(prompt->pipe[1], 1);
 		if (execve(current_cmd->path_and_name, \
@@ -47,12 +49,12 @@ t_cmd *current_cmd, char **envp, int *aux_fd)
 
 	pipe(prompt->pipe);
 	child_process_id = get_child_process_id(prompt, current_cmd, envp, aux_fd);
-	if ((prompt->pipe_amount - 1) == current_cmd->index)
-	{
-		waitpid(child_process_id, &current_cmd->exit_code, 0);
-		if (current_cmd->exit_code)
-		current_cmd->exit_code = WEXITSTATUS(current_cmd->exit_code);
-	}
+	// if ((prompt->pipe_amount - 1) == current_cmd->index)
+	// {
+	// 	waitpid(child_process_id, &current_cmd->exit_code, -1);
+	// 	if (current_cmd->exit_code)
+	// 	current_cmd->exit_code = WEXITSTATUS(current_cmd->exit_code);
+	// }
 	if (*aux_fd > 2)
 		close (*aux_fd);
 	*aux_fd = prompt->pipe[0];

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_free_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:00:23 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/31 21:28:38 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/09 20:27:43 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ms_free_env(t_ms *ms)
 	if (head == NULL)
 		return ;
 	else
-	{		
+	{
 		head = ms_last_env(ms->envs);
 		while (head->prev != NULL)
 		{

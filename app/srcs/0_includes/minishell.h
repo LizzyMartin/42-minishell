@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/08 20:51:36 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/09 21:13:50 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void		ctrl_d_quit_process(int signal);
 /* history */
 void		ms_init_history(t_ms *ms);
 void		ms_add_history(t_ms *ms, char *line, t_cmd *cmds);
-void		ms_print_history(t_ms *ms);
+void		ms_print_history(t_ms *ms, t_cmd *current_cmd, t_p *prompt);
 
 /* tokenizer */
 int			ms_sintax(t_ms *ms);

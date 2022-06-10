@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:05:54 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/08 13:38:31 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/09 21:06:14 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@ void	ms_finish(t_ms *ms)
 	rl_clear_history();
 	ms_free_history(ms);
 	ms_free_env(ms);
-	ms_free_prompt(ms, ms->p);
 	if (ms->shell_line)
+	{
 		ft_free_ptr((void *) &ms->shell_line);
+		ms_free_prompt(ms, ms->p);
+	}
 	if (ms->shell_line_tokenized)
 		ft_free_ptr((void *) &ms->shell_line_tokenized);
 	if (ms->readline_var)

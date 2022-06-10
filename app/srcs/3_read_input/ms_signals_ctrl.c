@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ms_signals_ctrl.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:37:54 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/02 20:10:38 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/09 21:05:27 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-/*  
-	 SIGINT: CTRL + C 
+/*
+	 SIGINT: CTRL + C
     SIGQUIT: CTRL + D
 	SIG_IGN: ignore signal
 */

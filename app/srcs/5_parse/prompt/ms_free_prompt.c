@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_free_prompt.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:54:01 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/08 20:46:53 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/09 21:05:01 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static void	free_curr_prompt(t_p *curr_prompt)
 void	ms_free_prompt(t_ms *ms, t_p *curr_prompt)
 {
 	free_curr_prompt(curr_prompt);
+	if (ms->p == NULL)
+		return ;
 	if (ms->p->cmds != NULL)
 		ms_dll_cmd_free(ms->p->cmds);
 	if (ms->p->this_p_line != NULL)

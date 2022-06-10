@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:00 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/07 19:05:10 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/09 22:45:28 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,12 @@ void	cat_ls_sc(t_p *curr_prompt)
 	is_cat_sequence = 0;
 	tmp = curr_prompt->cmds;
 	trim = ft_strtrim(tmp->cmd_line, " ");
-	while (tmp->next != NULL)
+	while (tmp)
 	{
 		if (iterate_cmd_count_cat(trim, is_cat_sequence, \
 		tmp, cat) == 1)
 			break ;
+		tmp = tmp->next;
 	}
 	ft_free_ptr((void *) &trim);
 	while (cat-- > 0)
