@@ -27,7 +27,6 @@ SRCS_FILES +=	2_init/env/ms_add_env.c \
 				2_init/env/ms_free_env.c \
 				2_init/env/ms_is_in_env.c \
 				2_init/env/ms_last_env.c \
-				2_init/env/ms_parse_env.c \
 				2_init/env/ms_init_env.c \
 				2_init/env/ms_update_env_value.c
 
