@@ -24,6 +24,7 @@ static void	ms_print_env(t_ms *ms, int aux)
 		{
 			line = ft_printf_to_var("%s=%s\n", env->key, env->value);
 			ft_putstr_fd(line, aux);
+			ft_free_ptr((void *) &line);
 		}
 		env = env->next;
 	}

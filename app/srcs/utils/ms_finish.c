@@ -19,7 +19,8 @@ void	ms_finish(t_ms *ms)
 	clear_history();
 	rl_clear_history();
 	ms_free_history(ms);
-	ms_free_env(ms);
+	ms_free_env(ms->envs);
+	ms_free_env(ms->aux_envs);
 	if (ms->shell_line)
 	{
 		ft_free_ptr((void *) &ms->shell_line);

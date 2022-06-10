@@ -23,7 +23,7 @@ static void	ms_has_single_quotes(t_ms *ms, char *dolar_cmd, char *line)
 		value = ms_find_env_value(ms, no_dolar);
 		ms->shell_line_tokenized = ft_printf_to_var \
 		("%s %s", ms->shell_line_tokenized, \
-		ft_str_replace_all(line, dolar_cmd, value));
+		ft_str_replace_all(ft_strdup(line), dolar_cmd, value));
 	}
 }
 

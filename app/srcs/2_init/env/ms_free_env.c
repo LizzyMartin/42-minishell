@@ -12,18 +12,18 @@
 
 #include <minishell.h>
 
-void	ms_free_env(t_ms *ms)
+void	ms_free_env(t_env	*envs)
 {
 	t_env	*head;
 	t_env	*del;
 
 	del = NULL;
-	head = ms->envs;
+	head = envs;
 	if (head == NULL)
 		return ;
 	else
 	{
-		head = ms_last_env(ms->envs);
+		head = ms_last_env(envs);
 		while (head->prev != NULL)
 		{
 			head = head->prev;

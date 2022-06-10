@@ -80,14 +80,13 @@ static void	ms_aux_env(t_ms *ms, int equal_index)
 	char	*key;
 	char	*value;
 
-	if (ms->is_aux_env)
-	{
-		key = ft_substr(ms->shell_line_tokenized, 0, \
-		equal_index + 1);
-		value = ft_substr(ms->shell_line_tokenized, \
-		equal_index + 2, ft_strlen(ms->shell_line_tokenized));
-		ms_add_env(&ms->aux_envs, key, value);
-	}
+	key = ft_substr(ms->shell_line_tokenized, 0, \
+	equal_index + 1);
+	value = ft_substr(ms->shell_line_tokenized, \
+	equal_index + 2, ft_strlen(ms->shell_line_tokenized));
+	ms_add_env(&ms->aux_envs, key, value);
+	ft_free_ptr((void *) &key);
+	ft_free_ptr((void *) &value);
 }
 
 int	ms_tokenizer(t_ms *ms)
@@ -111,7 +110,11 @@ int	ms_tokenizer(t_ms *ms)
 	&& ms_count_char(ms->shell_line_tokenized, '\'') != 1)
 		ms_check_quotes(ms);
 	ms_expand_dolar(ms);
-	ms_aux_env(ms, equal_index);
+	if (ms->is_aux_env)
+	{
+		ms_aux_env(ms, equal_index);
+		return (1);
+	}
 	ms_basic_replaces(ms);
 	ms_home_value(ms);
 	ms_wildcard(ms);

@@ -40,10 +40,9 @@ void		ms_init_env(t_ms *ms);
 void		ms_add_env(t_env **env, char *key, char *value);
 void		ms_delete_env(t_ms *ms, char *key);
 char		*ms_find_env_value(t_ms *ms, char *key);
-void		ms_free_env(t_ms *ms);
+void		ms_free_env(t_env *envs);
 int			ms_is_in_env(t_ms *ms, const char *key);
 void		update_env_value(t_ms *ms, char *key, char *value);
-void		ms_parse_env(t_ms *ms);
 t_env		*ms_last_env(t_env *env);
 
 // history
