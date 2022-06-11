@@ -16,15 +16,20 @@ static void	ms_has_single_quotes(t_ms *ms, char *dolar_cmd, char *line)
 {
 	char	*no_dolar;
 	char	*value;
+	char	*aux;
 
 	no_dolar = ft_substr(dolar_cmd, 1, ft_strlen(dolar_cmd));
 	if (ms_is_in_env(ms, no_dolar))
 	{
 		value = ms_find_env_value(ms, no_dolar);
+		aux = ft_strdup(ms->shell_line_tokenized);
 		ms->shell_line_tokenized = ft_printf_to_var \
-		("%s %s", ms->shell_line_tokenized, \
-		ft_str_replace_all(ft_strdup(line), dolar_cmd, value));
+		("%s %s", aux, \
+		ft_str_replace_all(line, dolar_cmd, value));
+		ft_free_ptr((void *) &aux);
 	}
+	ft_free_ptr((void *) &no_dolar);
+	ft_free_ptr((void *) &dolar_cmd);
 }
 
 static void	ms_quotes_something_1(t_ms *ms, char **line_splited, int i)
@@ -66,7 +71,7 @@ static void	threat_dolar(t_ms *ms, char **line_splited, int i, char *dolar_cmd)
 			while (valid_chr(line_splited[i][j + final]))
 				final++;
 			dolar_cmd = ft_substr((line_splited[i] + j), 0, final);
-			ms_has_single_quotes(ms, dolar_cmd, line_splited[i]);
+			ms_has_single_quotes(ms, dolar_cmd, ft_strdup(line_splited[i]));
 		}
 		j++;
 	}
@@ -76,13 +81,16 @@ static void	ms_quotes_something_2(t_ms *ms, char **line_splited, \
 int i, char *dolar_cmd)
 {
 	char	*tmp;
+	char	*aux;
 
 	if (ft_strchr(line_splited[i], '$') == NULL || ms->has_single_quotes)
 	{
 		tmp = ft_strjoin(ms->shell_line_tokenized, " ");
 		ft_free_ptr((void *) &ms->shell_line_tokenized);
-		ms->shell_line_tokenized = ft_strjoin(tmp, line_splited[i]);
+		aux = ft_strdup(line_splited[i]);
+		ms->shell_line_tokenized = ft_strjoin(tmp, aux);
 		ft_free_ptr((void *) &tmp);
+		ft_free_ptr((void *) &aux);
 	}
 	else
 		threat_dolar(ms, line_splited, i, dolar_cmd);

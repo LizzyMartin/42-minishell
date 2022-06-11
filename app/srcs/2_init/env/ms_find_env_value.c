@@ -16,6 +16,7 @@ char	*ms_find_env_value(t_ms *ms, char *key)
 {
 	t_env	*env;
 	t_env	*aux_envs;
+	char 	*trim;
 
 	env = ms->envs;
 	aux_envs = ms->aux_envs;
@@ -28,10 +29,15 @@ char	*ms_find_env_value(t_ms *ms, char *key)
 	}
 	while (aux_envs)
 	{
-		if ((ft_strncmp(ft_strtrim(aux_envs->key, " "), \
+		trim = ft_strtrim(aux_envs->key, " ");
+		if ((ft_strncmp(trim, \
 				key, ft_strlen(aux_envs->key)) == 0)
 			&& (aux_envs->key != NULL && aux_envs->value != NULL))
+		{
+			ft_free_ptr((void *) &trim);
 			return (aux_envs->value);
+		}
+		ft_free_ptr((void *) &trim);
 		aux_envs = aux_envs->next;
 	}
 	return (NULL);

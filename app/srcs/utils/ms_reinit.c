@@ -16,7 +16,7 @@ void	ms_reinit(t_ms *ms)
 {
 	rl_clear_history();
 	ms->p_amount = 1;
-	//ms_free_prompt(ms, ms->p);
+	ms_free_prompt(ms, ms->p);
 	ft_free_ptr((void *) &ms->readline_var);
 	ft_free_ptr((void *) &ms->shell_line);
 	ft_free_ptr((void *) &ms->shell_line_tokenized);
