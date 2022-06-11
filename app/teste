@@ -1,0 +1,501 @@
+  1  cat | cat | ls
+  2  make
+  3  make t
+  4  make tv
+  5  make
+  6  make t
+  7  ake
+  8  maek t
+  9  make
+  10  make t
+  11  make t
+  12  make t
+  13  make
+  14  make t
+  15  make t
+  16  make t
+  17  make t
+  18  make t
+  19  make t
+  20  make
+  21  make t
+  22  make
+  23  make t
+  24  make t
+  25  make t
+  26  make t
+  27  make t
+  28  make t
+  29  cat | cat Makefile | ls
+  30  cat | cat | cat makefile | cat | ls
+  31  cat | cat Makefile | cat | ls
+  32  cat | cat | ls
+  33  make
+  34  make
+  35  make t
+  36  make t
+  37  make t
+  38  make t
+  39  make t
+  40  m
+  41  make t
+  42  make t
+  43  make tv
+  44  make t
+  45  make t
+  46  make t
+  47  make t
+  48  make t
+  49  make t
+  50  ls
+  51  cd 42/
+  52  ls
+  53  cd 42-minishell
+  54  cd app/
+  55  make t
+  56  make t
+  57  make t
+  58  make re
+  59  make t
+  60  make t
+  61  make t
+  62  make t
+  63  make
+  64  make t
+  65  make t
+  66  make t
+  67  make t
+  68  make t
+  69  make t
+  70  make t
+  71  make t
+  72  make t
+  73  make t
+  74  make t
+  75  make t
+  76  make t
+  77  make t
+  78  make t
+  79  cat | ls
+  80  make t
+  81  make
+  82  make
+  83  make t
+  84  make t
+  85  make t
+  86  make t
+  87  make
+  88  make t
+  89  ls
+  90  cd 42/
+  91  cd 42-minishell
+  92  ls
+  93  cd app/
+  94  ls
+  95  cd srcs/
+  96  ls
+  97  cd 4_tokenizer/
+  98  norminette
+  99  norminette
+  100  cd ..
+  101  cd ..
+  102  make
+  103  make
+  104  make
+  105  make t
+  106  make t
+  107  ls
+  108  cd 42/
+  109  cd 42-minishell
+  110  cd app/
+  111  make t
+  112  make t
+  113  make t
+  114  make t
+  115  make
+  116  make
+  117  make
+  118  make
+  119  make t
+  120  make t
+  121  make t
+  122  make t
+  123  make t
+  124  make t
+  125  make t
+  126  make
+  127  make t
+  128  make t
+  129  make t
+  130  make t
+  131  make t
+  132  make
+  133  make t
+  134  make
+  135  make t
+  136  make
+  137  make t
+  138  make t
+  139  python3 -m pip install norminette
+  140  ls
+  141  ls
+  142  make t
+  143  make t
+  144  make t
+  145  export $PATH="$PATH:/home/argel/.local/bin"
+  146  echo $PATH
+  147  bk=$PATH
+  148  export PATH="$bk:/home/argel/.local/bin"
+  149  norminette
+  150  ls
+  151  ls
+  152  cd srcs
+  153  ls
+  154  norminette
+  155  cd 4_tokenizer/
+  156  norminette ms_tokenizer.c 
+  157  norminette ms_tokenizer.c 
+  158  norminette ms_tokenizer.c 
+  159  clear && norminette ms_tokenizer.c 
+  160  clear && norminette ms_tokenizer.c 
+  161  clear && norminette ms_tokenizer.c 
+  162  clear && norminette ms_tokenizer.c 
+  163  clear && norminette ms_tokenizer.c 
+  164  make
+  165  cd ..
+  166  cd ..
+  167  make
+  168  make
+  169  make
+  170  make
+  171  make
+  172  make t
+  173  make re
+  174  make t
+  175  cd srcs
+  176  ls
+  177  cd 4_tokenizer/
+  178  norminette
+  179  make
+  180  norminette
+  181  norminette
+  182  clear && norminette
+  183  clear && norminette
+  184  clear && norminette
+  185  clear && norminette
+  186  clear && norminette
+  187  make
+  188  make t
+  189  clear && norminette
+  190  clear && norminette
+  191  clear && norminette
+  192  clear && norminette
+  193  clear && norminette
+  194  cd ..
+  195  ls
+  196  norminette 6_execute/
+  197  norminette 6_execute/
+  198  norminette 6_execute/ms_execute_commands.c
+  199  norminette 6_execute/ms_execute_commands.c
+  200  norminette 6_execute/ms_execute_commands.c
+  201  norminette 6_execute/ms_execute_commands.c
+  202  clear && norminette 6_execute/ms_execute_commands.c
+  203  clear && norminette 6_execute/ms_execute_commands_utils.c
+  204  ls
+  205  cd 6_execute/
+  206  ls
+  207  cd builtins/
+  208  norminette
+  209  norminette
+  210  clear && norminette
+  211  clear && norminette
+  212  clear && norminette
+  213  clear && norminette
+  214  make t
+  215  ls
+  216  cd ..
+  217  ls
+  218  norminette
+  219  norminette
+  220  cd ..
+  221  norminette
+  222  norminette
+  223  norminette
+  224  norminette
+  225  norminette
+  226  norminette
+  227  norminette
+  228  norminette
+  229  ls
+  230  norminette 0_includes/
+  231  norminette 0_includes/
+  232  norminette 0_includes/
+  233  norminette 0_includes/
+  234  norminette 0_includes/
+  235  norminette
+  236  ls
+  237  cd ..
+  238  norminette
+  239  ls
+  240  make fclean
+  241  git add .
+  242  git commit -m "a"
+  243  git push
+  244  make t
+  245  make t
+  246  make t
+  247  make t
+  248  make t
+  249  make t
+  250  make t
+  251  make t
+  252  make t
+  253  make t
+  254  make t
+  255  make t
+  256  make t
+  257  make t
+  258  make t
+  259  make t
+  260  make t
+  261  make t
+  262  make t
+  263  make t
+  264  make t
+  265  make t
+  266  make t
+  267  ls
+  268  git add .
+  269  git commit -m "a"
+  270  git push
+  271  ls
+  272  cd 42/
+  273  ls
+  274  cd 42-minishell
+  275  git pull
+  276  git status
+  277  git resto .
+  278  git restore .
+  279  git status
+  280  git pull
+  281  git pull
+  282  make t
+  283  cd app/
+  284  make t
+  285  make re
+  286  make
+  287  make t
+  288  git log
+  289  make t
+  290  echo '"$PWD"'
+  291  make t
+  292  make t
+  293  make t
+  294  make t
+  295  echo "'$PWD'"
+  296  echo '"$PWD"'
+  297  echo '"$PWD"'
+  298  /bin/ls ~
+  299  echo ~
+  300  ls
+  301  make t
+  302  git pull
+  303  make t
+  304  make t
+  305  make
+  306  make t
+  307  make t
+  308  make t
+  309  make t
+  310  make t
+  311  make re
+  312  make t
+  313  make t
+  314  make t
+  315  make t
+  316  make t
+  317  make t
+  318  make t
+  319  make t
+  320  make t
+  321  make t
+  322  make t
+  323  make t
+  324  make t
+  325  make t
+  326  make t
+  327  make t
+  328  make t
+  329  make t
+  330  make t
+  331  make t
+  332  make t
+  333  make t
+  334  make t
+  335  make t
+  336  make t
+  337  ls
+  338  cd 42/
+  339  ls
+  340  cd 42-minishell
+  341  ls
+  342  git add .
+  343  git commit -m "fixing here_doc and gnl bugs"
+  344  git push
+  345  git pull
+  346  git pull
+  347  git pull
+  348  ls
+  349  make t
+  350  make re
+  351  make t
+  352  make t
+  353  make t
+  354  make t
+  355  make t
+  356  export | d
+  357  export teste="argel capela dos santos"
+  358  env
+  359  export teste2="argel | capela | dos = santos"
+  360  env
+  361  echo $teste2
+  362  EXPORT_SHOW="export | sort | grep -v SHLVL | grep -v _= | grep -v OLDPWD"
+  363  make t
+  364  make t
+  365  make t
+  366  make t
+  367  make t
+  368  unset teste teste2
+  369  export
+  370  make t
+  371  make t
+  372  make tv
+  373  make tv
+  374  ls
+  375  cd 42/
+  376  ls
+  377  cd 42-minishell
+  378  ls
+  379  cd app/
+  380  ls
+  381  rm argel teste teste2 val val.txt vgcore.5303
+  382  ls
+  383  ls
+  384  rm -rfd teste_dir
+  385  ls
+  386  rm -rfd test_dir/
+  387  ls
+  388  make tv > val
+  389  make tv
+  390  make seg
+  391  make t
+  392  EXPORT_SHOW="export | sort | grep -v SHLVL | grep -v _= | grep -v OLDPWD"
+  393  export $EXPORT_SHOW
+  394  env
+  395  env | grep EXPORT
+  396  ls
+  397  export EXPORT_SHOW="export | sort | grep -v SHLVL | grep -v _= | grep -v OLDPWD"
+  398  env
+  399  env | grep EX
+  400  make t
+  401  ls
+  402  cd 42
+  403  ls
+  404  cd 42-minishell
+  405  cd app/
+  406  make t
+  407  make
+  408  make t
+  409  export $teste
+  410  export $teste
+  411  export $PWD
+  412  make t
+  413  &>
+  414  22222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+  415  #
+  416  #
+  417  $
+  418  %
+  419  ¨
+  420  &
+  421  *
+  422  ls
+  423  make fclean
+  424  ls
+  425  rm teste vgcore.5908 
+  426  ls
+  427  cd ..
+  428  ls
+  429  git add .
+  430  git commit -m "falta: export, sintax, leaks & norm and huge tests"
+  431  git push
+  432  ls
+  433  cd ..
+  434  ls
+  435  git pull
+  436  git pull
+  437  git log
+  438  cd app/
+  439  make t
+  440  make re
+  441  make t
+  442  git reset head~2
+  443  git reset --hard  head~2
+  444  git reset --hard  HEAD~2
+  445  git reset --hard  @{u}
+  446  make t
+  447  make t
+  448  make re
+  449  make t
+  450  make t
+  451  make t
+  452  make t
+  453  make t
+  454  make re && make t
+  455  make re && make t
+  456  make re && make t
+  457  ls
+  458  git add .
+  459  git commit -m "fixed color and history bug"
+  460  git push
+  461  make leak
+  462  make leak
+  463  make leak
+  464  make leak
+  465  make leak
+  466  make leak
+  467  make leak
+  468  make leak
+  469  make leak
+  470  make leak
+  471  make leak
+  472  make leak
+  473  make leak
+  474  make leak
+  475  clear && make leak
+  476  make re && make t
+  477  make leak
+  478  make leak
+  479  make leak
+  480  make leak
+  481  make leak
+  482  make leak
+  483  make leak
+  484  make leak
+  485  ls
+  486  ls
+  487  git add .
+  488  ls
+  489  cd ..
+  490  ls
+  491  git add .
+  492  git commit -m "fixing leaks, let's gooo"
+  493  make fclean
+  494  ls
+  495  cd app/
+  496  make fclean
+  497  cd ..
+  498  git add .
+  499  git commit -m "fixing leaks"
+  500  git push
+  501  history > teste

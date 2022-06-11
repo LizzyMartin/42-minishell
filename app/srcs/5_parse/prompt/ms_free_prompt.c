@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_free_prompt.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:54:01 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/09 21:05:01 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/11 15:28:19 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void	free_curr_prompt(t_p *curr_prompt)
 		curr_prompt = curr_prompt->next;
 	while (curr_prompt->prev)
 	{
+		curr_prompt = curr_prompt->prev;
 		if (curr_prompt->next->cmds != NULL)
 			ms_dll_cmd_free(curr_prompt->next->cmds);
 		if (curr_prompt->next->this_p_line != NULL)
@@ -29,7 +30,6 @@ static void	free_curr_prompt(t_p *curr_prompt)
 			ft_free_ptr((void *) &curr_prompt->next->output_path);
 		if (curr_prompt->next != NULL)
 			ft_free_ptr((void *) &curr_prompt->next);
-		curr_prompt = curr_prompt->prev;
 	}
 }
 

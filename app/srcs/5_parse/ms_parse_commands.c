@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse_commands.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/09 20:22:43 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/11 17:34:14 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,13 @@ static void	prepare_path_and_fd(t_ms *ms, t_p *curr_prompt, t_cmd *curr_command)
 		ft_split(curr_command->cmd_line, ' ');
 	curr_command->args_amount = \
 		ft_mtx_size((void **) curr_command->cmd_splited_by_space);
-	curr_command->just_name = ft_strdup(curr_command->cmd_splited_by_space[0]);
-	tmp = ft_strdup(curr_command->just_name);
+	ms->tmp = ft_strdup(curr_command->cmd_splited_by_space[0]);
+	curr_command->just_name = ms->tmp;
+	tmp = curr_command->just_name;
 	if (ft_strnstr(tmp, "/", ft_strlen(tmp)) != NULL)
 	{
 		curr_command->just_name = get_just_name(tmp);
-		curr_command->path_and_name = tmp;
+		curr_command->path_and_name = ft_strdup(tmp);
 		if (access(tmp, X_OK) == 0)
 			curr_command->cmd_is_path_but_invalid = 0;
 		else
@@ -73,7 +74,6 @@ static void	prepare_path_and_fd(t_ms *ms, t_p *curr_prompt, t_cmd *curr_command)
 	else
 		curr_command->path_and_name = ms_append_path_in_front(curr_command, ms);
 	treat_input_command(curr_prompt, curr_command);
-	ft_free_ptr((void *) &tmp);
 }
 
 static void	prepare_something(t_cmd *curr_command, \
