@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:47 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/08 20:38:50 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/11 19:20:38 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ms_print_sh_name(void)
 	char	cwd[PATH_MAX];
 
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
-		return (ft_printf_to_var("%s%s%s%s%s%s ", \
+		return (ft_printf_to_var("%s%s%s %s%s%s ", \
 			BOLD_BLUE, SHELL, END_COLOR, BOLD_CYAN, cwd, END_COLOR));
 	else
 		return (ft_printf_to_var("%s", SHELL));

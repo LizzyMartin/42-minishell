@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:06:41 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/08 12:37:30 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/11 21:28:09 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ typedef struct s_minishell
 	t_env					*aux_envs;
 	int						is_aux_env;
 	char					*tmp;
+	char					*tmp2;
 }	t_ms;
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_by_str.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 21:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/01 01:48:37 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/11 22:33:35 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	ft_wordlen(char *str, char *token)
 	int		len;
 
 	len = 0;
-	tmp = ft_strdup(str);
+	tmp = str;
 	tmp_free = tmp;
 	while (*tmp)
 	{
@@ -79,7 +79,7 @@ char	**ft_tosplit(char *s, char *token, char **split)
 		{
 			split[j] = ft_tosplit2(i, s, token);
 			tmp += ft_strlen(token);
-			s = ft_strdup(tmp);
+			s = tmp;
 			j++;
 		}
 		i++;

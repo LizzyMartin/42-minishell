@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_tokenizer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:43:28 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/09 21:32:21 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/11 22:52:29 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,40 +39,6 @@ static void	ms_home_value(t_ms *ms)
 	ft_free_ptr((void *) &tmp2);
 	ms->shell_line_tokenized = tmp;
 	ft_free_ptr((void *) &chr_tmp);
-}
-
-static void	ms_basic_replaces(t_ms *ms)
-{
-	char	*tmp;
-
-	if (ft_strnstr(ms->shell_line_tokenized, \
-		"||", ft_strlen(ms->shell_line_tokenized)))
-	{
-		tmp = ft_strdup(ms->shell_line_tokenized);
-		if (ms->shell_line_tokenized)
-			ft_free_ptr((void *) &ms->shell_line_tokenized);
-		ms->shell_line_tokenized = \
-			ft_str_replace_all(tmp, \
-		"||", T_CONNECTOR);
-	}
-	if (ft_strnstr(ms->shell_line_tokenized, \
-		"&&", ft_strlen(ms->shell_line_tokenized)))
-	{
-		tmp = ft_strdup(ms->shell_line_tokenized);
-		ft_free_ptr((void *) &ms->shell_line_tokenized);
-		ms->shell_line_tokenized = \
-			ft_str_replace_all(tmp, \
-		"&&", T_CONNECTOR);
-	}
-	if (ft_strnstr(ms->shell_line_tokenized, \
-		"|", ft_strlen(ms->shell_line_tokenized)))
-	{
-		tmp = ft_strdup(ms->shell_line_tokenized);
-		ft_free_ptr((void *) &ms->shell_line_tokenized);
-		ms->shell_line_tokenized = \
-			ft_str_replace_all(tmp, \
-		"|", T_PIPE);
-	}
 }
 
 static void	ms_aux_env(t_ms *ms, int equal_index)
@@ -115,7 +81,6 @@ int	ms_tokenizer(t_ms *ms)
 		ms_aux_env(ms, equal_index);
 		return (1);
 	}
-	ms_basic_replaces(ms);
 	ms_home_value(ms);
 	ms_wildcard(ms);
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/09 21:13:50 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/11 20:35:27 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ void		ms_execute(t_ms *ms);
 int			ms_execute_commands(t_ms *ms, t_p *curr_prompt);
 void		ms_execute_command(t_p *prompt, \
 t_cmd *current_cmd, char **envp, int *aux_fd);
+int			bridge_builtion_other_cmds(t_cmd *current_cmd, \
+t_p *prompt, int *clo);
 
 int			is_builtin(char *cmd);
 void		execute_builtin(t_ms *ms, t_cmd *current_cmd, t_p *prompt);

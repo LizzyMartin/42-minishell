@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse_commands.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/11 17:34:14 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/11 22:40:01 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,9 @@ static void	prepare_path_and_fd(t_ms *ms, t_p *curr_prompt, t_cmd *curr_command)
 		ft_split(curr_command->cmd_line, ' ');
 	curr_command->args_amount = \
 		ft_mtx_size((void **) curr_command->cmd_splited_by_space);
+	ft_free_ptr((void *) &ms->tmp);
 	ms->tmp = ft_strdup(curr_command->cmd_splited_by_space[0]);
-	curr_command->just_name = ms->tmp;
+	curr_command->just_name = ft_strdup(ms->tmp);
 	tmp = curr_command->just_name;
 	if (ft_strnstr(tmp, "/", ft_strlen(tmp)) != NULL)
 	{
@@ -70,6 +71,7 @@ static void	prepare_path_and_fd(t_ms *ms, t_p *curr_prompt, t_cmd *curr_command)
 			curr_command->cmd_is_path_but_invalid = 0;
 		else
 			curr_command->cmd_is_path_but_invalid = 1;
+		ft_free_ptr((void *) &tmp);
 	}
 	else
 		curr_command->path_and_name = ms_append_path_in_front(curr_command, ms);
@@ -93,6 +95,7 @@ static void	prepare_something(t_cmd *curr_command, \
 		|| ft_strnstr(curr_command->cmd_line, ">", \
 		ft_strlen(curr_command->cmd_line)))
 		curr_prompt->no_cmd_just_redirect = 1;
+	ft_free_ptr((void *) &tmp);
 }
 
 void	ms_parse_commands(t_ms *ms, \
@@ -111,8 +114,9 @@ void	ms_parse_commands(t_ms *ms, \
 			curr_command = update_cmd(curr_command);
 		curr_command->exit_code = 0;
 		curr_command->index = c;
-		curr_command->cmd_line = \
-		curr_prompt->this_p_line_splited_by_pipe[c];
+		ft_free_ptr((void *) &ms->tmp2);
+		ms->tmp2 = ft_strdup(curr_prompt->this_p_line_splited_by_pipe[c]);
+		curr_command->cmd_line = ft_strdup(ms->tmp2);
 		prepare_cmd_line(curr_prompt, input_s_by_space, c, curr_command);
 		if (c == (curr_prompt->pipe_amount - 1) && curr_prompt->redirect > 0)
 			prepare_something(curr_command, curr_prompt, output_s_by_space);

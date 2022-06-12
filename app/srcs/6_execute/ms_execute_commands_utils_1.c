@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_execute_commands_utils_1.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:00 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/09 22:56:18 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/11 20:35:47 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	execute_builtin(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 	name = current_cmd->just_name;
 	if (ft_strncmp(name, "$?", ft_strlen(name)) == 0)
 	{
-		ft_putstr_fd("bash: ", 1);
+		ft_putstr_fd("miniheaven: ", 1);
 		last_cmd_exit_code(ms);
 		ft_putstr_fd(E_CMDNOTFOUND, 1);
 	}
@@ -87,4 +87,29 @@ void	execute_builtin(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 		ms_unset(ms, current_cmd);
 	else if (ft_strncmp(name, "env", ft_strlen(name)) == 0)
 		ms_env(ms, current_cmd, prompt);
+}
+
+static int	pipe_fd(t_p *prompt, int tmp_fd[])
+{
+	pipe(tmp_fd);
+	prompt->input_fd = tmp_fd[0];
+	return (tmp_fd[1]);
+}
+
+int	bridge_builtion_other_cmds(t_cmd *current_cmd, t_p *prompt, int *clo)
+{
+	int		tmp_fd[2];
+	int		aux;
+
+	if ((current_cmd->index == prompt->args_amount - 1) \
+	&& prompt->output_fd > 0)
+		aux = prompt->output_fd;
+	else if (current_cmd->index == prompt->args_amount - 1)
+		aux = 1;
+	else
+	{
+		aux = pipe_fd(prompt, tmp_fd);
+		*clo = 1;
+	}
+	return (aux);	
 }

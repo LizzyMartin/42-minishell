@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:34 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/07 18:54:27 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/11 20:36:54 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,12 @@ static void	ms_print_env(t_ms *ms, int aux)
 void	ms_env(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 {
 	int		aux;
-	int		tmp_fd[2];
+	int		clo;
 
-	pipe(tmp_fd);
-	prompt->input_fd = tmp_fd[0];
-	aux = tmp_fd[1];
-	if ((current_cmd->index == (prompt->args_amount - 1)) \
-			&& prompt->redirect <= 0)
-		aux = 1;
-	else
-		aux = prompt->output_fd;
+	clo = 0;
+	aux = bridge_builtion_other_cmds(current_cmd, prompt, &clo);
 	ms_print_env(ms, aux);
 	ms->p->cmds->exit_code = EXIT_SUCCESS;
-	if (aux != 1)
+	if (clo)
 		close(aux);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_free_prompt.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:54:01 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/11 15:28:19 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/11 21:39:12 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ static void	free_curr_prompt(t_p *curr_prompt)
 		if (curr_prompt->next->this_p_line != NULL)
 			ft_free_ptr((void *) &curr_prompt->next->this_p_line);
 		if (curr_prompt->next->this_p_line_splited_by_pipe != NULL)
-			ft_free_ptr((void *) \
-				&curr_prompt->next->this_p_line_splited_by_pipe);
+			ft_mtx_free((void **) \
+				curr_prompt->next->this_p_line_splited_by_pipe);
 		if (curr_prompt->next->output_path != NULL)
 			ft_free_ptr((void *) &curr_prompt->next->output_path);
+		if (curr_prompt->output_fd != 1)
+			close(curr_prompt->output_fd);
 		if (curr_prompt->next != NULL)
 			ft_free_ptr((void *) &curr_prompt->next);
 	}
@@ -43,9 +45,11 @@ void	ms_free_prompt(t_ms *ms, t_p *curr_prompt)
 	if (ms->p->this_p_line != NULL)
 		ft_free_ptr((void *) &ms->p->this_p_line);
 	if (ms->p->this_p_line_splited_by_pipe != NULL)
-		ft_free_ptr((void *) &ms->p->this_p_line_splited_by_pipe);
+		ft_mtx_free((void **) ms->p->this_p_line_splited_by_pipe);
 	if (ms->p->output_path != NULL)
 		ft_free_ptr((void *) &ms->p->output_path);
+	if (ms->p->output_fd != 1)
+		close(ms->p->output_fd);
 	if (ms->p != NULL)
 		ft_free_ptr((void *) &ms->p);
 }
