@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:43:28 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/11 22:52:29 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/12 00:09:35 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,80 @@ static void	ms_aux_env(t_ms *ms, int equal_index)
 	ft_free_ptr((void *) &value);
 }
 
+static void	ms_basic_replaces(t_ms *ms, char *line)
+{
+	char	*tmp;
+	char	*aux;
+	int		i;
+	int 	i_aux;
+
+	i = 0;
+	int size = ft_strlen(line);
+	aux = ft_calloc(ft_strlen(line), sizeof(char));
+	while (line[i])
+	{
+		if (line[i] == '"' || line[i] == '\'')
+		{
+			int second = ft_str_indexof(line + i + 1, ft_chr_to_str(line[i], 1), size - i);
+			char *line_inside_quotes = ft_substr(line, i + 1, second);
+			i += second + 1;
+			aux = ft_printf_to_var("%s%c%s%c", aux, line[i], line_inside_quotes, line[i]);
+		}
+		else {
+			i_aux = ft_str_indexof(line + i, "\"", size);
+			if (i_aux != -1)
+			{
+				tmp = ft_substr(line + i, i, i_aux);
+				i += i_aux - 1;
+				aux = ft_printf_to_var("%s%s", aux, ft_str_replace_all(tmp, "&&", T_CONNECTOR));
+			}
+			else 
+			{
+				if (ft_strnstr(line, "&&", ft_strlen(line)))
+				{
+					tmp = ft_strdup(line);
+					ft_free_ptr((void *) &line);
+					ms->shell_line_tokenized = \
+						ft_str_replace_all(tmp, \
+					"&&", T_CONNECTOR);
+				}
+				return ;
+			}
+		}
+		i++;
+	}
+	// echo oi && echo "oi && tchau"
+	ms->shell_line_tokenized = aux;
+	// if (ft_strnstr(line, \
+	// 	"||", ft_strlen(line)))
+	// {
+	// 	tmp = ft_strdup(line);
+	// 	if (line)
+	// 		ft_free_ptr((void *) &line);
+	// 	line = \
+	// 		ft_str_replace_all(tmp, \
+	// 	"||", T_CONNECTOR);
+	// }
+	// if (ft_strnstr(line, \
+	// 	"&&", ft_strlen(line)))
+	// {
+	// 	tmp = ft_strdup(line);
+	// 	ft_free_ptr((void *) &line);
+	// 	line = \
+	// 		ft_str_replace_all(tmp, \
+	// 	"&&", T_CONNECTOR);
+	// }
+	// if (ft_strnstr(line, \
+	// 	"|", ft_strlen(line)))
+	// {
+	// 	tmp = ft_strdup(line);
+	// 	ft_free_ptr((void *) &line);
+	// 	line = \
+	// 		ft_str_replace_all(tmp, \
+	// 	"|", T_PIPE);
+	// }
+}
+
 int	ms_tokenizer(t_ms *ms)
 {
 	int	equal_index;
@@ -75,6 +149,7 @@ int	ms_tokenizer(t_ms *ms)
 	if (ms_count_char(ms->shell_line_tokenized, '"') != 1 \
 	&& ms_count_char(ms->shell_line_tokenized, '\'') != 1)
 		ms_check_quotes(ms);
+	ms_basic_replaces(ms, ms->shell_line_tokenized);
 	ms_expand_dolar(ms);
 	if (ms->is_aux_env)
 	{

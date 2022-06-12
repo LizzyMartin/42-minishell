@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:26 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/11 23:01:35 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/11 23:14:34 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,40 +90,6 @@ static int	get_index_before_space(t_ms *ms, int size, char **cmd)
 	return (index);
 }
 
-// static void	ms_basic_replaces(t_ms *ms)
-// {
-// 	char	*tmp;
-
-// 	if (ft_strnstr(ms->shell_line_tokenized, \
-// 		"||", ft_strlen(ms->shell_line_tokenized)))
-// 	{
-// 		tmp = ft_strdup(ms->shell_line_tokenized);
-// 		if (ms->shell_line_tokenized)
-// 			ft_free_ptr((void *) &ms->shell_line_tokenized);
-// 		ms->shell_line_tokenized = \
-// 			ft_str_replace_all(tmp, \
-// 		"||", T_CONNECTOR);
-// 	}
-// 	if (ft_strnstr(ms->shell_line_tokenized, \
-// 		"&&", ft_strlen(ms->shell_line_tokenized)))
-// 	{
-// 		tmp = ft_strdup(ms->shell_line_tokenized);
-// 		ft_free_ptr((void *) &ms->shell_line_tokenized);
-// 		ms->shell_line_tokenized = \
-// 			ft_str_replace_all(tmp, \
-// 		"&&", T_CONNECTOR);
-// 	}
-// 	if (ft_strnstr(ms->shell_line_tokenized, \
-// 		"|", ft_strlen(ms->shell_line_tokenized)))
-// 	{
-// 		tmp = ft_strdup(ms->shell_line_tokenized);
-// 		ft_free_ptr((void *) &ms->shell_line_tokenized);
-// 		ms->shell_line_tokenized = \
-// 			ft_str_replace_all(tmp, \
-// 		"|", T_PIPE);
-// 	}
-// }
-
 void	ms_check_quotes(t_ms *ms)
 {
 	int		i;
@@ -145,7 +111,6 @@ void	ms_check_quotes(t_ms *ms)
 		{
 			if (ms->shell_line[i] == '"' || ms->shell_line[i] == '\'')
 				treat_having_quotes(ms, tmp, &i);
-			// ms_basic_replaces(ms);
 			i++;
 		}
 	}
