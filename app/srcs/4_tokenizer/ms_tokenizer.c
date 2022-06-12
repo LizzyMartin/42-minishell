@@ -71,16 +71,19 @@ static void	ms_basic_replaces(t_ms *ms, char *line)
 		{
 			int second = ft_str_indexof(line + i + 1, ft_chr_to_str(line[i], 1), size - i);
 			char *line_inside_quotes = ft_substr(line, i + 1, second);
-			i += second + 1;
 			aux = ft_printf_to_var("%s%c%s%c", aux, line[i], line_inside_quotes, line[i]);
+			i += second + 1;
 		}
 		else {
 			i_aux = ft_str_indexof(line + i, "\"", size);
 			if (i_aux != -1)
 			{
-				tmp = ft_substr(line + i, i, i_aux);
+				tmp = ft_substr(line + i, 0, i_aux);
 				i += i_aux - 1;
-				aux = ft_printf_to_var("%s%s", aux, ft_str_replace_all(tmp, "&&", T_CONNECTOR));
+				tmp = ft_str_replace_all(tmp, "&&", T_CONNECTOR);
+				tmp = ft_str_replace_all(tmp, "||", T_CONNECTOR);
+				tmp = ft_str_replace_all(tmp, "|", T_PIPE);
+				aux = ft_printf_to_var("%s%s", aux, tmp);
 			}
 			else 
 			{
@@ -92,41 +95,28 @@ static void	ms_basic_replaces(t_ms *ms, char *line)
 						ft_str_replace_all(tmp, \
 					"&&", T_CONNECTOR);
 				}
+				if (ft_strnstr(line, "||", ft_strlen(line)))
+				{
+					tmp = ft_strdup(line);
+					ft_free_ptr((void *) &line);
+					ms->shell_line_tokenized = \
+						ft_str_replace_all(tmp, \
+					"||", T_CONNECTOR);
+				}
+				if (ft_strnstr(line, "|", ft_strlen(line)))
+				{
+					tmp = ft_strdup(line);
+					ft_free_ptr((void *) &line);
+					ms->shell_line_tokenized = \
+						ft_str_replace_all(tmp, \
+					"|", T_PIPE);
+				}
 				return ;
 			}
 		}
 		i++;
 	}
-	// echo oi && echo "oi && tchau"
 	ms->shell_line_tokenized = aux;
-	// if (ft_strnstr(line, \
-	// 	"||", ft_strlen(line)))
-	// {
-	// 	tmp = ft_strdup(line);
-	// 	if (line)
-	// 		ft_free_ptr((void *) &line);
-	// 	line = \
-	// 		ft_str_replace_all(tmp, \
-	// 	"||", T_CONNECTOR);
-	// }
-	// if (ft_strnstr(line, \
-	// 	"&&", ft_strlen(line)))
-	// {
-	// 	tmp = ft_strdup(line);
-	// 	ft_free_ptr((void *) &line);
-	// 	line = \
-	// 		ft_str_replace_all(tmp, \
-	// 	"&&", T_CONNECTOR);
-	// }
-	// if (ft_strnstr(line, \
-	// 	"|", ft_strlen(line)))
-	// {
-	// 	tmp = ft_strdup(line);
-	// 	ft_free_ptr((void *) &line);
-	// 	line = \
-	// 		ft_str_replace_all(tmp, \
-	// 	"|", T_PIPE);
-	// }
 }
 
 int	ms_tokenizer(t_ms *ms)

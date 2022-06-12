@@ -37,24 +37,11 @@ static void	reset_prompt(t_p **curr_prompt)
 
 static void	ms_get_prompt_2(t_p *curr_prompt)
 {
-	if (ft_strnstr(curr_prompt->this_p_line, T_SPACE, \
-		ft_strlen(curr_prompt->this_p_line)) == NULL)
-	{
-		ft_mtx_free((void **) curr_prompt->this_p_line_splited_by_pipe);
-		curr_prompt->this_p_line_splited_by_pipe = \
-		ft_split_by_str(curr_prompt->this_p_line, T_PIPE);
-		curr_prompt->args_amount = ft_mtx_size((void **) \
-		curr_prompt->this_p_line_splited_by_pipe);
-	}
-	else
-	{
-		ft_mtx_free((void **) curr_prompt->this_p_line_splited_by_pipe);
-		curr_prompt->this_p_line_splited_by_pipe = \
-		ft_split_by_str (ft_str_replace_all(ft_strdup(curr_prompt->this_p_line),
-					T_PIPE, "|"), "audklahdakj");
-		curr_prompt->args_amount = ft_mtx_size((void **) \
-		curr_prompt->this_p_line_splited_by_pipe);
-	}
+	ft_mtx_free((void **) curr_prompt->this_p_line_splited_by_pipe);
+	curr_prompt->this_p_line_splited_by_pipe = \
+	ft_split_by_str(curr_prompt->this_p_line, T_PIPE);
+	curr_prompt->args_amount = ft_mtx_size((void **) \
+	curr_prompt->this_p_line_splited_by_pipe);
 }
 
 t_p	*ms_get_prompt(t_ms *ms, t_p *curr_prompt, int i)
