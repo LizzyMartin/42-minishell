@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_print_banner.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:06:23 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/11 19:19:05 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/13 13:03:00 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,5 @@ void	print_banner(void)
 		ft_free_ptr((void *) &line);
 		i++;
 	}
-	get_next_line(-1);
 	close(fd);
 }

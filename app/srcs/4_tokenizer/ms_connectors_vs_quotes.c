@@ -6,7 +6,7 @@
 /*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 18:09:38 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 01:31:40 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/13 14:01:57 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static void	ms_replace_connectors_by_token(t_ms *ms, char *tmp)
 		ms->shell_line_tokenized = \
 			ft_str_replace_all(tmp, \
 		"&&", T_CONNECTOR);
-		ft_free_ptr((void *) &tmp);
 		//ms->connectors_order[ms->connectors_index++] = 1;
 	}
 	if (ft_strnstr(ms->shell_line_tokenized, "||", ft_strlen(ms->shell_line_tokenized)))
@@ -31,7 +30,6 @@ static void	ms_replace_connectors_by_token(t_ms *ms, char *tmp)
 		ms->shell_line_tokenized = \
 			ft_str_replace_all(tmp, \
 		"||", T_CONNECTOR);
-		ft_free_ptr((void *) &tmp);
 		//ms->connectors_order[ms->connectors_index++] = 2;
 	}
 }

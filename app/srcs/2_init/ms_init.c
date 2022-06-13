@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:55:07 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/12 21:36:25 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/13 15:46:47 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	ms_init(t_ms **ms, int argc, char **argv, char **envp)
 	(*ms)->connectors_index = 0;
 	(*ms)->connectors_amount = 0;
 	(*ms)->connectors_order = NULL;
+	(*ms)->here_doc_open = 0;
 	ms_init_env(*ms);
 	ms_init_history(*ms);
 	system("clear");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_expand_dolar.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 00:55:01 by argel             #+#    #+#             */
-/*   Updated: 2022/06/11 22:49:30 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/13 14:47:48 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ static void	ms_quotes_something_1(t_ms *ms, char **line_splited, int i)
 	if (ms_count_char(line_splited[i], '"') == 1)
 		ms->has_double_quotes = 0;
 }
+
+//&& \ (line_splited[i][j - 1] != '\\' && line_splited[i][j - 1] != ';')
 
 static void	threat_dolar(t_ms *ms, char **line_splited, int i, char *dolar_cmd)
 {

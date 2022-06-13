@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse_output.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:19 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/09 20:23:45 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/13 12:46:14 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,11 @@ void	update_current_prompt(t_p *curr_prompt, int aux, \
 			open(curr_prompt->output_path, O_CREAT | \
 				O_WRONLY | O_TRUNC, 0777);
 	}
-	if (curr_prompt->redirect > 0 && aux == 4 && curr_prompt->has_here_doc)
-		curr_prompt->only_input_redirected_to_file = 1;
+	if (aux == 4 && curr_prompt->redirect > 0)
+	{
+		if (curr_prompt->has_here_doc || curr_prompt->input_fd != -1)
+			curr_prompt->only_input_redirected_to_file = 1;
+	}
 }
 
 char	**ms_parse_output(t_p *curr_prompt)

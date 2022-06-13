@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_execute_commands.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:42:02 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/12 19:41:52 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/13 15:53:01 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ static int	get_child_process_id(const t_p *prompt, \
 				ft_pf_error("miniheaven: %s %s", \
 				current_cmd->path_and_name, E_NOTDIR);
 			else
-				perror("miniheaven: ");
+			{
+				perror("miniheaven: ");			
+			}
 			current_cmd->exit_code = 1;
 		}
 	}
@@ -117,7 +119,7 @@ void	ms_execute(t_ms *ms)
 	if (curr_prompt->has_here_doc == 1)
 	{
 		o_here_doc = curr_prompt->only_here_doc;
-		curr_prompt->input_fd = ms_here_doc(curr_prompt);
+		curr_prompt->input_fd = ms_here_doc(ms, curr_prompt);
 		if (o_here_doc == 1)
 		{
 			close(curr_prompt->input_fd);

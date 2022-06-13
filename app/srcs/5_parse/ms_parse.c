@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/08 09:48:47 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/13 14:15:48 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ int	ms_parse(t_ms *ms)
 	{
 		curr_prompt = ms_get_prompt(ms, curr_prompt, i);
 		input_s = ms_parse_input(curr_prompt);
+		if (input_s == NULL)
+		{
+			return (1);
+		}
 		output_s = ms_parse_output(curr_prompt);
 		curr_prompt->pipe_amount = ft_mtx_size((void **) \
 			curr_prompt->this_p_line_splited_by_pipe);

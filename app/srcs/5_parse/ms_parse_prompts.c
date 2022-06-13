@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse_prompts.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:39:53 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/11 22:43:46 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/13 15:46:21 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	reset_prompt(t_p **curr_prompt)
 	(*curr_prompt)->has_here_doc = 0;
 	(*curr_prompt)->only_here_doc = 0;
 	(*curr_prompt)->hd_limiter = NULL;
-	(*curr_prompt)->input_fd = 0;
+	(*curr_prompt)->input_fd = -1;
 	(*curr_prompt)->input_path = NULL;
 	(*curr_prompt)->input_redirected_to_file = 0;
 	(*curr_prompt)->only_input_redirected_to_file = 0;

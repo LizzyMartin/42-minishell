@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_signals.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:50 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/31 21:47:16 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/13 16:02:07 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,12 @@ void	ms_while_executing_commands_signals(void)
 {
 	signal(SIGINT, ctrl_c_interrupt_process);
 	signal(SIGQUIT, ctrl_d_quit_process);
+}
+
+void	ms_while_executing_commands_signals(t_sigaction *action, void (*handler)(int), int sig)
+{
+	action->sa_handler = handler;
+	action->sa_flags = SA_RESTART;
+	sigemptyset(&action->sa_mask);
+	sigaction(sig, action, NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:43:28 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 01:33:42 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/13 15:03:01 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,14 @@ int	ms_tokenizer(t_ms *ms)
 	if (ms_count_char(ms->shell_line_tokenized, '"') != 1 \
 	&& ms_count_char(ms->shell_line_tokenized, '\'') != 1)
 		ms_check_quotes(ms);
+	else
+	{
+		ft_putstr_fd("miniheaven: close your quotes\n", 1);
+		return (1);
+	}
 	ms_quotes_vs_connectors(ms, ms->shell_line_tokenized);
-	ms_expand_dolar(ms);
+	if (ft_strnstr(ms->shell_line_tokenized, "$?", 2) == NULL)
+		ms_expand_dolar(ms);
 	if (ms->is_aux_env)
 	{
 		ms_aux_env(ms, equal_index);
@@ -90,6 +96,6 @@ int	ms_tokenizer(t_ms *ms)
 	}
 	ms_home_value(ms);
 	if (ft_strrchr(ms->shell_line_tokenized, '*') != NULL)
-		ms_wildcard(ms);
+		ms_wildcard(ms);	
 	return (0);
 }

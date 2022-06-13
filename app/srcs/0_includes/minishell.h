@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/12 19:44:10 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/13 15:51:42 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void		ms_free_history(t_ms *ms);
 
 /* read_input */
 int			ms_read_input(t_ms *ms);
-int			ms_here_doc(t_p *p);
+int			ms_here_doc(t_ms *ms, t_p *p);
 
 // signals
 void		ms_read_input_signals(void);

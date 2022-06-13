@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_execute_commands_utils_1.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:00 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/12 19:42:19 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/13 15:38:42 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	execute_builtin(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 		ft_putstr_fd("miniheaven: ", 1);
 		last_cmd_exit_code(ms);
 		ft_putstr_fd(E_CMDNOTFOUND, 1);
+		ft_putstr_fd("\n", 1);
 	}
 	else if (ft_strncmp(name, "exit", ft_strlen(name)) == 0)
 		ms_exit(ms, current_cmd, prompt);

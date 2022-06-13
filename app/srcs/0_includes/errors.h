@@ -6,7 +6,7 @@
 /*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:06:31 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 00:57:30 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/13 15:49:57 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,8 @@
 /* exit */
 # define NUMERIC_ARG ": numeric argument required\n"
 # define MANY_ARG "exit: too many arguments\n"
+
+/* here_doc */
+# define CTRL_D_HD "bash: warning: here-document at line 5 delimited by end-of-file (wanted `FIM')\n"
 
 #endif

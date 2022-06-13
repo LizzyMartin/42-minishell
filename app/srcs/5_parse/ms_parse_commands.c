@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse_commands.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/11 22:40:01 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/13 13:27:45 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ static void	prepare_cmd_line(const t_p *curr_prompt, \
 	{
 		aux = ft_strlen(input_s_by_space[0]) \
 			+ ft_strlen(input_s_by_space[1]) + 2;
-		tmp = ft_strdup(curr_prompt->this_p_line_splited_by_pipe[c]) + aux;
+		tmp = ft_strdup(curr_prompt->this_p_line_splited_by_pipe[c]);
 		ft_free_ptr((void *) &curr_command->cmd_line);
-		curr_command->cmd_line = ft_substr(tmp, 0, ft_strlen(tmp));
+		curr_command->cmd_line = ft_substr(tmp + aux, 0, ft_strlen(tmp));
 		ft_free_ptr((void *) &tmp);
 	}
 }
@@ -59,7 +59,8 @@ static void	prepare_path_and_fd(t_ms *ms, t_p *curr_prompt, t_cmd *curr_command)
 		ft_split(curr_command->cmd_line, ' ');
 	curr_command->args_amount = \
 		ft_mtx_size((void **) curr_command->cmd_splited_by_space);
-	ft_free_ptr((void *) &ms->tmp);
+	if (ms->tmp)
+		ft_free_ptr((void *) &ms->tmp);
 	ms->tmp = ft_strdup(curr_command->cmd_splited_by_space[0]);
 	curr_command->just_name = ft_strdup(ms->tmp);
 	tmp = curr_command->just_name;
@@ -120,7 +121,8 @@ void	ms_parse_commands(t_ms *ms, \
 		prepare_cmd_line(curr_prompt, input_s_by_space, c, curr_command);
 		if (c == (curr_prompt->pipe_amount - 1) && curr_prompt->redirect > 0)
 			prepare_something(curr_command, curr_prompt, output_s_by_space);
-		prepare_path_and_fd(ms, curr_prompt, curr_command);
+		if (*curr_command->cmd_line != '\0')
+			prepare_path_and_fd(ms, curr_prompt, curr_command);
 		if (is_input_command_alone(curr_command->cmd_line) && \
 		curr_prompt->args_amount == 1)
 			curr_command->can_execute = 0;
