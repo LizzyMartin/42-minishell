@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:53:50 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 19:00:23 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/13 20:03:47 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,33 +74,42 @@ int	ms_exist_some_file_with_this_wildcard(char *wildcard)
 	return (exist);
 }
 
-void	ms_wildcard(t_ms *ms)
+static int	ms_wildcard_loop(t_ms *ms, char	**iterate_shell_line)
 {
-	char	*iterate_shell_line;
 	int		start;
 	int		end;
 	char	*replace;
 	char	*wildcard;
 
-	iterate_shell_line = ft_strdup(ms->shell_line_tokenized);
-	while (iterate_shell_line != NULL && ft_strrchr(iterate_shell_line, '*') != NULL)
+	replace = "";
+	start = ft_indexof(ms->shell_line_tokenized, '*') + 1;
+	end = next_space_index(ms, start) - 1;
+	wildcard = ft_substr(ms->shell_line_tokenized, start, end);
+	if (ms_exist_some_file_with_this_wildcard(wildcard) == 1)
 	{
-		replace = "";
-		start = ft_indexof(ms->shell_line_tokenized, '*') + 1;
-		end = next_space_index(ms, start) - 1;
-		wildcard = ft_substr(ms->shell_line_tokenized, start, end);
-		if (ms_exist_some_file_with_this_wildcard(wildcard) == 1)
-		{
-			replace = ms_get_files_that_represent_wildcard(wildcard);
-			ms->shell_line_tokenized = \
+		replace = ms_get_files_that_represent_wildcard(wildcard);
+		ms->shell_line_tokenized = \
 ft_str_replace(ft_strdup(ms->shell_line_tokenized), wildcard, replace);
-		}
-		else
-		{
-			iterate_shell_line += start;
+	}
+	else
+	{
+		*(iterate_shell_line) += start;
+		return (1);
+	}
+	ft_free_ptr((void *) &replace);
+	ft_free_ptr((void *) &wildcard);
+	return (0);
+}
+
+void	ms_wildcard(t_ms *ms)
+{
+	char	*iterate_shell_line;
+
+	iterate_shell_line = ft_strdup(ms->shell_line_tokenized);
+	while (iterate_shell_line != NULL \
+	&& ft_strrchr(iterate_shell_line, '*') != NULL)
+	{
+		if (ms_wildcard_loop(ms, &iterate_shell_line) == 1)
 			break ;
-		}
-		ft_free_ptr((void *) &replace);
-		ft_free_ptr((void *) &wildcard);
 	}
 }

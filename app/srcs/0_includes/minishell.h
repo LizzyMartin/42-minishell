@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 19:10:02 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/13 20:07:38 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ void		ms_expand_dolar(t_ms *ms);
 int			ms_count_char(char *str, char c);
 int			valid_chr(char chr);
 void		ms_quotes_vs_connectors(t_ms *ms, char *line);
+void		ms_check_quotes_aux(t_ms *ms, char **cmd, char *tmp, char *aux);
+void		ms_replace_connectors_by_token(t_ms *ms, char *tmp);
 
 /* parse */
 int			ms_parse(t_ms *ms);
@@ -90,6 +92,8 @@ char		**ms_parse_output(t_p *curr_prompt);
 void		ms_parse_commands(t_ms *ms,
 				t_p *curr_prompt, char **output_s_by_space,
 				char **input_s_by_space);
+void		ms_parse_commands2(t_ms *ms, const t_p *curr_prompt, \
+				int c, t_cmd *curr_command);
 char		*ms_append_path_in_front(t_cmd *current_cmd, t_ms *ms);
 char		*check_path(int i, t_cmd *current_cmd, char **path);
 void		reset_cmd(t_cmd **curr_command);

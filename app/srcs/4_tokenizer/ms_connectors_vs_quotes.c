@@ -6,13 +6,13 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 18:09:38 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 18:14:17 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/13 20:15:44 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	ms_replace_connectors_by_token(t_ms *ms, char *tmp)
+void	ms_replace_connectors_by_token(t_ms *ms, char *tmp)
 {
 	if (ft_strnstr(ms->shell_line_tokenized, \
 	"&&", ft_strlen(ms->shell_line_tokenized)))

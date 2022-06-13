@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:42 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 19:18:39 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/13 19:32:04 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,31 +86,7 @@ static void	print_sorted_env(t_ms *ms, int aux)
 	quicksort(ms->qs, 0, ft_mtx_size((void **) ms->str_export) - 1, \
 			(int (*)(void *, void *))(cmpstr));
 	curr_qs = ms->qs->free_qs;
-	while (curr_qs->next != NULL)
-		curr_qs = curr_qs->next;
-	while (curr_qs->prev)
-	{
-		curr_qs = curr_qs->prev;
-		if (curr_qs->next->buffer != NULL)
-			ft_free_ptr((void *) &curr_qs->next->buffer);
-		if (curr_qs->next != NULL)
-			ft_free_ptr((void *) &curr_qs->next);
-	}
-	if (curr_qs->buffer != NULL)
-		ft_free_ptr((void *) &curr_qs->buffer);
-	if (curr_qs != NULL)
-		ft_free_ptr((void *) &curr_qs);
-	i = 0;
-	while (ms->str_export[i])
-	{
-		if (ms->str_export[i])
-		{
-			line = ft_printf_to_var("declare -x %s\n", ms->str_export[i]);
-			ft_putstr_fd(line, aux);
-			ft_free_ptr((void *) &line);
-		}
-		i++;
-	}
+	ms_free_qs(ms, aux, &line, &curr_qs);
 }
 
 static void	check_first_char(t_ms *ms, t_cmd *current_cmd, int aux)

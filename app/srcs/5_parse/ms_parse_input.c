@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:15 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 18:28:51 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/13 20:01:50 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,9 @@ char	**init_current_prompt(t_p *curr_prompt)
 	return (input_s_by_space);
 }
 
-char	**ms_parse_input(t_p *curr_prompt)
+static void	ms_parse_input_aux(t_p *curr_prompt, \
+char **input_s_by_space, char *tmp)
 {
-	char	**input_s_by_space;
-	char	*tmp;
-
-	tmp = NULL;
-	input_s_by_space = init_current_prompt(curr_prompt);
 	if (input_s_by_space != NULL && ft_strnstr(input_s_by_space[0], "<<", 2))
 	{
 		curr_prompt->has_here_doc = 1;
@@ -45,6 +41,16 @@ char	**ms_parse_input(t_p *curr_prompt)
 		curr_prompt->only_here_doc = 1;
 		ft_free_ptr((void *) &tmp);
 	}
+}
+
+char	**ms_parse_input(t_p *curr_prompt)
+{
+	char	**input_s_by_space;
+	char	*tmp;
+
+	tmp = NULL;
+	input_s_by_space = init_current_prompt(curr_prompt);
+	ms_parse_input_aux(curr_prompt, input_s_by_space, tmp);
 	if (input_s_by_space != NULL && curr_prompt->has_here_doc == 0 && \
 	ft_strnstr(input_s_by_space[0], "<", 1))
 	{

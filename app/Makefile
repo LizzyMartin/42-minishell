@@ -54,6 +54,7 @@ SRCS_FILES +=	5_parse/ms_parse.c \
 				5_parse/ms_parse_prompts.c \
 				5_parse/ms_parse_commands.c \
 				5_parse/ms_parse_commands_utils.c \
+				5_parse/ms_parse_commands_utils2.c \
 				5_parse/ms_append_path_in_front.c \
 				5_parse/ms_parse_input.c \
 				5_parse/ms_parse_output.c \
