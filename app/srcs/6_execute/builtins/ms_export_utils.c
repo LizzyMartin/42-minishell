@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:25 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/12 23:00:50 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/13 19:09:07 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,33 @@ void	quicksort(t_qs *qs, int left, int right,
 	swap(qs, qs->vl, qs->v3, qs->size);
 	quicksort(qs, left, qs->last - 1, comp);
 	quicksort(qs, qs->last + 1, right, comp);
+}
+
+void	ms_free_qs(const t_ms *ms, int aux, char **line, t_free **curr_qs)
+{
+	int	i;
+
+	i = 0;
+	while ((*curr_qs)->prev)
+	{
+		(*curr_qs) = (*curr_qs)->prev;
+		if ((*curr_qs)->next->buffer != NULL)
+			ft_free_ptr((void *) &(*curr_qs)->next->buffer);
+		if ((*curr_qs)->next != NULL)
+			ft_free_ptr((void *) &(*curr_qs)->next);
+	}
+	if ((*curr_qs)->buffer != NULL)
+		ft_free_ptr((void *) &(*curr_qs)->buffer);
+	if ((*curr_qs) != NULL)
+		ft_free_ptr((void *) curr_qs);
+	while (ms->str_export[i])
+	{
+		if (ms->str_export[i])
+		{
+			(*line) = ft_printf_to_var("declare -x %s\n", ms->str_export[i]);
+			ft_putstr_fd((*line), aux);
+			ft_free_ptr((void *) line);
+		}
+		i++;
+	}
 }

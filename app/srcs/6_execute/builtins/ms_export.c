@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:42 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/12 23:50:58 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/13 19:18:39 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char	**env_to_array(t_ms *ms)
 	tmp_env = ms->envs;
 	while (tmp_env)
 	{
-		if(tmp_env->key != NULL && tmp_env->value != NULL)
+		if (tmp_env->key != NULL && tmp_env->value != NULL)
 		{
 			arr[i] = ft_printf_to_var("%s=%s", tmp_env->key, tmp_env->value);
 			i++;
@@ -85,7 +85,6 @@ static void	print_sorted_env(t_ms *ms, int aux)
 	ms->qs->size = sizeof(char *);
 	quicksort(ms->qs, 0, ft_mtx_size((void **) ms->str_export) - 1, \
 			(int (*)(void *, void *))(cmpstr));
-	// free
 	curr_qs = ms->qs->free_qs;
 	while (curr_qs->next != NULL)
 		curr_qs = curr_qs->next;

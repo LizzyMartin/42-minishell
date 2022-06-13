@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_check_quotes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:26 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 11:28:00 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/13 18:03:41 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static void	treat_having_quotes_2(t_ms *ms, char *tmp, int *i, int size)
 	int		final;
 	char	*aux;
 	char	*tmp2;
-
 
 	ft_free_ptr((void *) &ms->shell_line_tokenized);
 	ms->shell_line_tokenized = tmp;

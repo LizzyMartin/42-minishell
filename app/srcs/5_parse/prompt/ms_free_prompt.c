@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_free_prompt.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:54:01 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/11 21:39:12 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/13 18:29:50 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	free_curr_prompt(t_p *curr_prompt)
 				curr_prompt->next->this_p_line_splited_by_pipe);
 		if (curr_prompt->next->output_path != NULL)
 			ft_free_ptr((void *) &curr_prompt->next->output_path);
+		ft_free_ptr((void *) &curr_prompt->hd_limiter);
 		if (curr_prompt->output_fd != 1)
 			close(curr_prompt->output_fd);
 		if (curr_prompt->next != NULL)
@@ -48,6 +49,7 @@ void	ms_free_prompt(t_ms *ms, t_p *curr_prompt)
 		ft_mtx_free((void **) ms->p->this_p_line_splited_by_pipe);
 	if (ms->p->output_path != NULL)
 		ft_free_ptr((void *) &ms->p->output_path);
+	ft_free_ptr((void *) &ms->p->hd_limiter);
 	if (ms->p->output_fd != 1)
 		close(ms->p->output_fd);
 	if (ms->p != NULL)

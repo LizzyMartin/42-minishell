@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:06:41 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 15:45:05 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/13 19:02:37 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,16 @@ typedef struct s_sc
 typedef struct s_qs
 {
 	struct s_free	*free_qs;
-	void	*vt;
-	void	*v3;
-	void	*vr;
-	void	*vl;
-	int		last;
-	int		mid;
-	void	*v;
-	int		size;
-	int		left;
-	int		right;
+	void			*vt;
+	void			*v3;
+	void			*vr;
+	void			*vl;
+	int				last;
+	int				mid;
+	void			*v;
+	int				size;
+	int				left;
+	int				right;
 }	t_qs;
 
 typedef struct s_env
@@ -130,6 +130,7 @@ typedef struct s_minishell
 	int						is_aux_env;
 	char					*tmp;
 	char					*tmp2;
+	char					*tmp3;
 	char					*aux;
 	char					**str_export;
 	t_qs					*qs;

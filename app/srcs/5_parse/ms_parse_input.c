@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:15 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 14:58:18 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/13 18:28:51 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,17 @@ char	**ms_parse_input(t_p *curr_prompt)
 	char	**input_s_by_space;
 	char	*tmp;
 
+	tmp = NULL;
 	input_s_by_space = init_current_prompt(curr_prompt);
 	if (input_s_by_space != NULL && ft_strnstr(input_s_by_space[0], "<<", 2))
 	{
 		curr_prompt->has_here_doc = 1;
 		tmp = ft_strdup(input_s_by_space[1]);
-		curr_prompt->hd_limiter = tmp;
+		curr_prompt->hd_limiter = ft_strdup(tmp);
 		if (!input_s_by_space[2] || ft_mtx_size((void **) \
 			input_s_by_space) == 2)
-			curr_prompt->only_here_doc = 1;
+		curr_prompt->only_here_doc = 1;
+		ft_free_ptr((void *) &tmp);
 	}
 	if (input_s_by_space != NULL && curr_prompt->has_here_doc == 0 && \
 	ft_strnstr(input_s_by_space[0], "<", 1))
@@ -60,7 +62,6 @@ char	**ms_parse_input(t_p *curr_prompt)
 		}
 		if (ft_mtx_size((void **) input_s_by_space) == 2)
 				curr_prompt->only_input_redirected_to_file = 1;
-		ft_free_ptr((void *) &tmp);
 	}
 	return (input_s_by_space);
 }

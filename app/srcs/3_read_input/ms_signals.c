@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_signals.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:50 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 16:02:07 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/13 18:10:53 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,6 @@ void	ms_read_input_signals(void)
 /* Signals while some process is being executed  */
 void	ms_while_executing_commands_signals(void)
 {
-	signal(SIGINT, ctrl_c_interrupt_process);
+	signal(SIGINT, ctrl_c_redisplay_prompt);
 	signal(SIGQUIT, ctrl_d_quit_process);
-}
-
-void	ms_while_executing_commands_signals(t_sigaction *action, void (*handler)(int), int sig)
-{
-	action->sa_handler = handler;
-	action->sa_flags = SA_RESTART;
-	sigemptyset(&action->sa_mask);
-	sigaction(sig, action, NULL);
 }

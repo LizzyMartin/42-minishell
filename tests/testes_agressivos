@@ -1,6 +1,5 @@
+// para arrumar:
 echo *est* -> dois * não funciona
-echo '"oi"' -> funciona mas da invalid read
-testar \ ; na string
 rm *core
 
 

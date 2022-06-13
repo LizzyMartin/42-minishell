@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_wildcard.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:53:50 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 02:05:46 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/13 19:00:23 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ void	ms_wildcard(t_ms *ms)
 	char	*wildcard;
 
 	iterate_shell_line = ft_strdup(ms->shell_line_tokenized);
-	while (ft_strrchr(iterate_shell_line, '*') != NULL)
+	while (iterate_shell_line != NULL && ft_strrchr(iterate_shell_line, '*') != NULL)
 	{
-		replace = ft_strdup("");
+		replace = "";
 		start = ft_indexof(ms->shell_line_tokenized, '*') + 1;
 		end = next_space_index(ms, start) - 1;
 		wildcard = ft_substr(ms->shell_line_tokenized, start, end);
@@ -95,10 +95,12 @@ void	ms_wildcard(t_ms *ms)
 			ms->shell_line_tokenized = \
 ft_str_replace(ft_strdup(ms->shell_line_tokenized), wildcard, replace);
 		}
- 		else
+		else
+		{
 			iterate_shell_line += start;
- 		ft_free_ptr((void *) &replace);
- 		ft_free_ptr((void *) &wildcard);
+			break ;
+		}
+		ft_free_ptr((void *) &replace);
+		ft_free_ptr((void *) &wildcard);
 	}
-	//ft_free_ptr((void *) &iterate_shell_line);
 }

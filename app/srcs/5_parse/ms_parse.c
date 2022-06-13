@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 14:15:48 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/13 18:22:22 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,13 @@ int	ms_parse(t_ms *ms)
 	input_s = NULL;
 	output_s = NULL;
 	curr_prompt = parse_prompts(ms);
-	i = 0;
-	while (i < ms->p_amount)
+	i = -1;
+	while (++i < ms->p_amount)
 	{
 		curr_prompt = ms_get_prompt(ms, curr_prompt, i);
 		input_s = ms_parse_input(curr_prompt);
 		if (input_s == NULL)
-		{
 			return (1);
-		}
 		output_s = ms_parse_output(curr_prompt);
 		curr_prompt->pipe_amount = ft_mtx_size((void **) \
 			curr_prompt->this_p_line_splited_by_pipe);
@@ -39,7 +37,6 @@ int	ms_parse(t_ms *ms)
 			ms_parse_commands (ms, curr_prompt, output_s, input_s);
 		ft_mtx_free((void **) input_s);
 		ft_mtx_free((void **) output_s);
-		i++;
 	}
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_tokenizer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:43:28 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 15:03:01 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/13 18:19:15 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,6 @@ int	ms_tokenizer(t_ms *ms)
 	}
 	ms_home_value(ms);
 	if (ft_strrchr(ms->shell_line_tokenized, '*') != NULL)
-		ms_wildcard(ms);	
+		ms_wildcard(ms);
 	return (0);
 }

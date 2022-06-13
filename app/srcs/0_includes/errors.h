@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:06:31 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 15:49:57 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/13 18:01:59 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define MANY_ARG "exit: too many arguments\n"
 
 /* here_doc */
-# define CTRL_D_HD "bash: warning: here-document at line 5 delimited by end-of-file (wanted `FIM')\n"
+# define CTRL_D_HD "bash: warning: here-document \
+at line 5 delimited by end-of-file (wanted `FIM')\n"
 
 #endif
