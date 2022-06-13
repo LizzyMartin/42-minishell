@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_is_in_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:00:20 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/26 20:25:10 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/12 19:45:16 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ms_is_in_env(t_ms *ms, const char *key)
 {
 	t_env	*aux;
-	char 	*tmp;
+	char	*tmp;
 
 	aux = ms->envs;
 	while (aux)

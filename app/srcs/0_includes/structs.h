@@ -3,15 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:06:41 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/11 21:28:09 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/12 23:24:49 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+typedef struct s_free
+{
+	int				index;
+	char			*buffer;
+	struct s_free	*prev;
+	struct s_free	*next;
+}	t_free;
 
 typedef struct s_sc
 {
@@ -23,6 +31,7 @@ typedef struct s_sc
 
 typedef struct s_qs
 {
+	struct s_free	*free_qs;
 	void	*vt;
 	void	*v3;
 	void	*vr;
@@ -102,6 +111,8 @@ typedef struct s_minishell
 	char					**argv;
 	char					**envp;
 	int						*connectors_order;
+	int						connectors_index;
+	int						connectors_amount;
 	char					*shell_line;
 	char					*shell_line_tokenized;
 	char					**slt_splited_by_connectors;
@@ -119,6 +130,9 @@ typedef struct s_minishell
 	int						is_aux_env;
 	char					*tmp;
 	char					*tmp2;
+	char					*aux;
+	char					**str_export;
+	t_qs					*qs;
 }	t_ms;
 
 #endif

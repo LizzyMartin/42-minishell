@@ -12,9 +12,9 @@ OBJS_DIR =   	$(SRCS_DIR)/.objs
 HEADER =		$(HEADERS_DIR)/libft.h
 NAME =			libft.a
 
-SRCS_FILES+=    arr/ft_arr_free.c
+SRCS_FILES=     arr/ft_arr_free.c
 
-SRCS_FILES= 	chr/ft_isalnum.c \
+SRCS_FILES+= 	chr/ft_isalnum.c \
 				chr/ft_isascii.c \
 				chr/ft_isdigit.c \
 				chr/ft_isalpha.c \

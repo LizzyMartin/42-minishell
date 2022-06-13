@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:25 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/03 19:45:02 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/12 23:00:50 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	cmpstr(void *v1, void *v2)
 	return (ft_strncmp(a1, a2, ft_strlen(a1)));
 }
 
-static void	swap(void *v1, void *v2, int size)
+static void	swap(t_qs *qs, void *v1, void *v2, int size)
 {
 	char	*buffer;
 
@@ -30,6 +30,22 @@ static void	swap(void *v1, void *v2, int size)
 	ft_memcpy(buffer, v1, size);
 	ft_memcpy(v1, v2, size);
 	ft_memcpy(v2, buffer, size);
+	if (qs->free_qs == NULL)
+	{
+		qs->free_qs = malloc(1 * sizeof(t_qs));
+		qs->free_qs->prev = NULL;
+		qs->free_qs->next = NULL;
+		qs->free_qs->buffer = buffer;
+	}
+	else
+	{
+		while (qs->free_qs->next != NULL)
+			qs->free_qs = qs->free_qs->next;
+		qs->free_qs->next = malloc(1 * sizeof(t_qs));
+		qs->free_qs->next->prev = qs->free_qs;
+		qs->free_qs->next->next = NULL;
+		qs->free_qs->next->buffer = buffer;
+	}
 }
 
 void	quicksort(t_qs *qs, int left, int right,
@@ -42,7 +58,7 @@ void	quicksort(t_qs *qs, int left, int right,
 		return ;
 	qs->vl = (char *)(qs->v + (left * qs->size));
 	qs->vr = (char *)(qs->v + (qs->mid * qs->size));
-	swap(qs->vl, qs->vr, qs->size);
+	swap(qs, qs->vl, qs->vr, qs->size);
 	qs->last = left;
 	i = left;
 	while (i <= right)
@@ -52,12 +68,12 @@ void	quicksort(t_qs *qs, int left, int right,
 		{
 			++(qs->last);
 			qs->v3 = (char *)(qs->v + (qs->last * qs->size));
-			swap(qs->vt, qs->v3, qs->size);
+			swap(qs, qs->vt, qs->v3, qs->size);
 		}
 		i++;
 	}
 	qs->v3 = (char *)(qs->v + (qs->last * qs->size));
-	swap(qs->vl, qs->v3, qs->size);
+	swap(qs, qs->vl, qs->v3, qs->size);
 	quicksort(qs, left, qs->last - 1, comp);
 	quicksort(qs, qs->last + 1, right, comp);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_check_quotes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:26 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/11 23:14:34 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/12 22:29:12 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,35 @@ int	ms_count_char(char *str, char c)
 	return (count);
 }
 
-int	valid_chr(char chr)
+static void	treat_having_quotes_2(t_ms *ms, char *tmp, int *i, int size)
 {
-	if (chr != '\'' && chr != '\"' \
-		&& chr != '\0' && chr != ' ')
-		return (1);
-	return (0);
+	int		final;
+	char	*aux;
+	char	*tmp2;
+
+
+	ft_free_ptr((void *) &ms->shell_line_tokenized);
+	ms->shell_line_tokenized = tmp;
+	aux = ft_chr_to_str(ms->shell_line[*i], 1);
+	final = ft_str_indexof(ms->shell_line + *i + 1, aux, size);
+	ft_free_ptr((void *) &aux);
+	if (final != -1)
+	{
+		tmp2 = ft_substr(ms->shell_line, *i + 1, final);
+		tmp = ft_printf_to_var("%s %s", \
+		ms->shell_line_tokenized, tmp2);
+		ft_free_ptr((void *) &tmp2);
+		ft_free_ptr((void *) &ms->shell_line_tokenized);
+		ms->shell_line_tokenized = tmp;
+	}
 }
 
-static void	treat_having_quotes(t_ms *ms, char *tmp, int *i)
+static void	treat_having_quotes(t_ms *ms, char *tmp, int *i, char *aux)
 {
 	int		first;
 	int		second;
 	char	*line_inside_quotes;
-	int		final;
 	int		size;
-	char	*aux;
 	char	*aux2;
 
 	size = 0;
@@ -58,21 +71,12 @@ static void	treat_having_quotes(t_ms *ms, char *tmp, int *i)
 	line_inside_quotes = ft_substr(ms->shell_line, first + 1, second);
 	aux = ft_str_replace_all(line_inside_quotes, " ", T_SPACE);
 	aux2 = ft_substr(ms->shell_line, 0, *i);
-	tmp = ft_printf_to_var("%s %c%s%c", aux2, ms->shell_line[*i], aux, ms->shell_line[*i]);
+	tmp = ft_printf_to_var("%s %c%s%c", aux2, \
+	ms->shell_line[*i], aux, ms->shell_line[*i]);
 	*i += second + 1;
 	ft_free_ptr((void *) &aux);
 	ft_free_ptr((void *) &aux2);
-	ms->shell_line_tokenized = tmp;
-	aux = ft_chr_to_str(ms->shell_line[*i], 1);
-	final = ft_str_indexof(ms->shell_line + *i + 1, aux, size);
-	ft_free_ptr((void *) &aux);
-	if (final != -1)
-	{
-		tmp = ft_printf_to_var("%s %s", \
-		ms->shell_line_tokenized, ft_substr(ms->shell_line, *i + 1, final));
-		ft_free_ptr((void *) &ms->shell_line_tokenized);
-		ms->shell_line_tokenized = tmp;
-	}
+	treat_having_quotes_2(ms, tmp, i, size);
 }
 
 static int	get_index_before_space(t_ms *ms, int size, char **cmd)
@@ -83,7 +87,7 @@ static int	get_index_before_space(t_ms *ms, int size, char **cmd)
 
 	tmp = cmd[0];
 	ft_free_ptr((void *) &ms->shell_line_tokenized);
-	ms->shell_line_tokenized = tmp;
+	ms->shell_line_tokenized = ft_strdup(tmp);
 	aux = ft_chr_to_str(' ', 1);
 	index = ft_str_indexof(ms->shell_line, aux, size);
 	ft_free_ptr((void *) &aux);
@@ -96,9 +100,11 @@ void	ms_check_quotes(t_ms *ms)
 	char	**cmd;
 	char	*tmp;
 	int		size;
+	char	*aux;
 
+	aux = NULL;
 	cmd = ft_split(ms->shell_line, ' ');
-	tmp = cmd[0];
+	tmp = ft_strdup(cmd[0]);
 	if (ft_strchr(ms->shell_line_tokenized, '\'') || \
 		ft_strchr(ms->shell_line_tokenized, '"'))
 	{
@@ -110,9 +116,10 @@ void	ms_check_quotes(t_ms *ms)
 		while (ms->shell_line[i])
 		{
 			if (ms->shell_line[i] == '"' || ms->shell_line[i] == '\'')
-				treat_having_quotes(ms, tmp, &i);
+				treat_having_quotes(ms, tmp, &i, aux);
 			i++;
 		}
 	}
+	ft_free_ptr((void *) &tmp);
 	ft_mtx_free((void **) cmd);
 }

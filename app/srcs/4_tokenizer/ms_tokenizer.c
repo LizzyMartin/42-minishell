@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_tokenizer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:43:28 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/12 00:09:35 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/12 19:58:09 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,91 +55,33 @@ static void	ms_aux_env(t_ms *ms, int equal_index)
 	ft_free_ptr((void *) &value);
 }
 
-static void	ms_basic_replaces(t_ms *ms, char *line)
+static void	ms_is_aux_env(t_ms *ms, int *equal_index)
 {
-	char	*tmp;
-	char	*aux;
-	int		i;
-	int 	i_aux;
+	int	space_index;
 
-	i = 0;
-	int size = ft_strlen(line);
-	aux = ft_calloc(ft_strlen(line), sizeof(char));
-	while (line[i])
-	{
-		if (line[i] == '"' || line[i] == '\'')
-		{
-			int second = ft_str_indexof(line + i + 1, ft_chr_to_str(line[i], 1), size - i);
-			char *line_inside_quotes = ft_substr(line, i + 1, second);
-			aux = ft_printf_to_var("%s%c%s%c", aux, line[i], line_inside_quotes, line[i]);
-			i += second + 1;
-		}
-		else {
-			i_aux = ft_str_indexof(line + i, "\"", size);
-			if (i_aux != -1)
-			{
-				tmp = ft_substr(line + i, 0, i_aux);
-				i += i_aux - 1;
-				tmp = ft_str_replace_all(tmp, "&&", T_CONNECTOR);
-				tmp = ft_str_replace_all(tmp, "||", T_CONNECTOR);
-				tmp = ft_str_replace_all(tmp, "|", T_PIPE);
-				aux = ft_printf_to_var("%s%s", aux, tmp);
-			}
-			else 
-			{
-				if (ft_strnstr(line, "&&", ft_strlen(line)))
-				{
-					tmp = ft_strdup(line);
-					ft_free_ptr((void *) &line);
-					ms->shell_line_tokenized = \
-						ft_str_replace_all(tmp, \
-					"&&", T_CONNECTOR);
-				}
-				if (ft_strnstr(line, "||", ft_strlen(line)))
-				{
-					tmp = ft_strdup(line);
-					ft_free_ptr((void *) &line);
-					ms->shell_line_tokenized = \
-						ft_str_replace_all(tmp, \
-					"||", T_CONNECTOR);
-				}
-				if (ft_strnstr(line, "|", ft_strlen(line)))
-				{
-					tmp = ft_strdup(line);
-					ft_free_ptr((void *) &line);
-					ms->shell_line_tokenized = \
-						ft_str_replace_all(tmp, \
-					"|", T_PIPE);
-				}
-				return ;
-			}
-		}
-		i++;
-	}
-	ms->shell_line_tokenized = aux;
+	ms->shell_line_tokenized = ft_strdup(ms->shell_line);
+	ms->is_aux_env = 0;
+	*equal_index = ft_str_indexof(ms->shell_line_tokenized, \
+	"=", ft_strlen(ms->shell_line_tokenized));
+	space_index = ft_str_indexof(ms->shell_line_tokenized, \
+	" ", ft_strlen(ms->shell_line_tokenized));
+	if (*equal_index != -1 && ms->shell_line_tokenized[*equal_index - 1] != ' ')
+		ms->is_aux_env = 1;
+	if (space_index != -1 && space_index < *equal_index)
+		ms->is_aux_env = 0;
 }
 
 int	ms_tokenizer(t_ms *ms)
 {
 	int	equal_index;
-	int	space_index;
 
-	ms->shell_line_tokenized = ft_strdup(ms->shell_line);
-	ms->is_aux_env = 0;
-	equal_index = ft_str_indexof(ms->shell_line_tokenized, \
-	"=", ft_strlen(ms->shell_line_tokenized));
-	space_index = ft_str_indexof(ms->shell_line_tokenized, \
-	" ", ft_strlen(ms->shell_line_tokenized));
-	if (equal_index != -1 && ms->shell_line_tokenized[equal_index - 1] != ' ')
-		ms->is_aux_env = 1;
-	if (space_index != -1 && space_index < equal_index)
-		ms->is_aux_env = 0;
+	ms_is_aux_env(ms, &equal_index);
 	if (ms_sintax(ms) == 1)
 		return (1);
 	if (ms_count_char(ms->shell_line_tokenized, '"') != 1 \
 	&& ms_count_char(ms->shell_line_tokenized, '\'') != 1)
 		ms_check_quotes(ms);
-	ms_basic_replaces(ms, ms->shell_line_tokenized);
+	ms_quotes_vs_connectors(ms, ms->shell_line_tokenized);
 	ms_expand_dolar(ms);
 	if (ms->is_aux_env)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:55:07 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/11 21:36:02 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/12 21:36:25 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ void	ms_init(t_ms **ms, int argc, char **argv, char **envp)
 	(*ms)->slt_splited_by_connectors = NULL;
 	(*ms)->readline_var = NULL;
 	(*ms)->p = NULL;
+	(*ms)->connectors_index = 0;
+	(*ms)->connectors_amount = 0;
+	(*ms)->connectors_order = NULL;
 	ms_init_env(*ms);
 	ms_init_history(*ms);
 	system("clear");

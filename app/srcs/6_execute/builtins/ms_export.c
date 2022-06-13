@@ -6,24 +6,37 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:42 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/07 19:04:13 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/12 23:50:58 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	<minishell.h>
 
-static char	**env_to_array(t_env *env)
+static char	**env_to_array(t_ms *ms)
 {
 	char	**arr;
 	int		i;
+	int		count;
+	t_env	*tmp_env;
 
-	arr = malloc(sizeof(char *) * 500);
-	i = 0;
-	while (env)
+	tmp_env = ms->envs;
+	count = 0;
+	while (tmp_env)
 	{
-		arr[i] = ft_printf_to_var("%s=%s", env->key, env->value);
-		i++;
-		env = env->next;
+		count++;
+		tmp_env = tmp_env->next;
+	}
+	arr = ft_calloc(count + 1, sizeof(char *));
+	i = 0;
+	tmp_env = ms->envs;
+	while (tmp_env)
+	{
+		if(tmp_env->key != NULL && tmp_env->value != NULL)
+		{
+			arr[i] = ft_printf_to_var("%s=%s", tmp_env->key, tmp_env->value);
+			i++;
+		}
+		tmp_env = tmp_env->next;
 	}
 	return (arr);
 }
@@ -60,27 +73,42 @@ static void	add_env_by_key(t_ms *ms, const t_cmd *current_cmd)
 
 static void	print_sorted_env(t_ms *ms, int aux)
 {
-	t_env	*env;
-	char	**str;
 	char	*line;
 	int		i;
-	t_qs	*qs;
+	t_free	*curr_qs;
 
 	i = 0;
-	env = ms->envs;
-	str = env_to_array(env);
-	qs = ft_calloc (1, sizeof(t_qs));
-	qs->v = str;
-	qs->size = sizeof(char *);
-	quicksort(qs, 0, ft_mtx_size((void **) str) - 1, \
+	ms->str_export = env_to_array(ms);
+	ms->qs = ft_calloc (1, sizeof(t_qs));
+	ms->qs->free_qs = NULL;
+	ms->qs->v = ms->str_export;
+	ms->qs->size = sizeof(char *);
+	quicksort(ms->qs, 0, ft_mtx_size((void **) ms->str_export) - 1, \
 			(int (*)(void *, void *))(cmpstr));
-	i = 0;
-	while (str[i])
+	// free
+	curr_qs = ms->qs->free_qs;
+	while (curr_qs->next != NULL)
+		curr_qs = curr_qs->next;
+	while (curr_qs->prev)
 	{
-		if (str[i])
+		curr_qs = curr_qs->prev;
+		if (curr_qs->next->buffer != NULL)
+			ft_free_ptr((void *) &curr_qs->next->buffer);
+		if (curr_qs->next != NULL)
+			ft_free_ptr((void *) &curr_qs->next);
+	}
+	if (curr_qs->buffer != NULL)
+		ft_free_ptr((void *) &curr_qs->buffer);
+	if (curr_qs != NULL)
+		ft_free_ptr((void *) &curr_qs);
+	i = 0;
+	while (ms->str_export[i])
+	{
+		if (ms->str_export[i])
 		{
-			line = ft_printf_to_var("declare -x %s\n", str[i]);
+			line = ft_printf_to_var("declare -x %s\n", ms->str_export[i]);
 			ft_putstr_fd(line, aux);
+			ft_free_ptr((void *) &line);
 		}
 		i++;
 	}
@@ -105,22 +133,17 @@ static void	check_first_char(t_ms *ms, t_cmd *current_cmd, int aux)
 void	ms_export(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 {
 	int		aux;
-	int		tmp_fd[2];
+	int		clo;
 
-	pipe(tmp_fd);
-	prompt->input_fd = tmp_fd[0];
-	aux = tmp_fd[1];
-	if ((current_cmd->index == (prompt->args_amount - 1)) \
-			&& prompt->redirect <= 0)
-		aux = 1;
-	else
-		aux = prompt->output_fd;
+	clo = 0;
+	aux = bridge_builtion_other_cmds(current_cmd, prompt, &clo);
 	if (!current_cmd->cmd_splited_by_space[1]
 		|| *current_cmd->cmd_splited_by_space[1] == '\0'
 		|| *current_cmd->cmd_splited_by_space[1] == ' ')
 		print_sorted_env(ms, aux);
 	else
 		check_first_char(ms, current_cmd, aux);
-	if (aux != 1)
+	ft_mtx_free((void **) ms->str_export);
+	if (clo)
 		close(aux);
 }

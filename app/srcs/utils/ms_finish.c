@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_finish.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:05:54 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/11 22:38:09 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/12 23:26:42 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ms_finish(t_ms *ms)
 {
+
+	ft_free_ptr((void *) &ms->connectors_order);
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	clear_history();
@@ -25,6 +27,8 @@ void	ms_finish(t_ms *ms)
 		ft_free_ptr((void *) &ms->tmp);
 	if (ms->tmp2 != NULL)
 		ft_free_ptr((void *) &ms->tmp2);
+	 if (ms->aux != NULL)
+	 	ft_free_ptr((void *) &ms->aux);
 	if (ms->shell_line)
 		ft_free_ptr((void *) &ms->shell_line);
 	if (ms->p)
@@ -33,6 +37,8 @@ void	ms_finish(t_ms *ms)
 		ft_free_ptr((void *) &ms->shell_line_tokenized);
 	if (ms->readline_var)
 		ft_free_ptr((void *) &ms->readline_var);
+	if (ms->qs)
+	ft_free_ptr((void *) &ms->qs);
 	if (ms)
 		ft_free_ptr((void *) &ms);
 }

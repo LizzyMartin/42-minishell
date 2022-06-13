@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:25 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/11 20:34:07 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/12 19:40:33 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static void	print_cmd_content(t_ms *ms, \
 	i = 0;
 	if (ft_strncmp(cmd_splited[1], "-n", ft_strlen(cmd_splited[1])) == 0)
 		i = 1;
-	while (!ft_strncmp(cmd_splited[i], "-n", ft_strlen(cmd_splited[i])) && cmd_splited[i])
+	while (!ft_strncmp(cmd_splited[i], "-n", \
+	ft_strlen(cmd_splited[i])) && cmd_splited[i])
 		++i;
 	if (i != 0)
 		i--;

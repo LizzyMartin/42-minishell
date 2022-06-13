@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_execute_commands_utils_1.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:00 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/11 20:35:47 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/12 19:42:19 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ t_cmd *current_cmd, t_ms *ms)
 	{
 		ms_execute_command(curr_prompt, current_cmd, \
 			ms->envp, &(curr_prompt->input_fd));
-
 	}
 	else
 		ft_printf_to_fd(1, "miniheaven: %s %s\n", \
@@ -111,5 +110,5 @@ int	bridge_builtion_other_cmds(t_cmd *current_cmd, t_p *prompt, int *clo)
 		aux = pipe_fd(prompt, tmp_fd);
 		*clo = 1;
 	}
-	return (aux);	
+	return (aux);
 }
