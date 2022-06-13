@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ms_wildcard.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:53:50 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/08 14:29:17 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/13 02:05:46 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static char	*ms_get_files_that_represent_wildcard(char *wildcard)
+char	*ms_get_files_that_represent_wildcard(char *wildcard)
 {
 	char			*replace;
 	struct dirent	*de;
@@ -83,22 +83,22 @@ void	ms_wildcard(t_ms *ms)
 	char	*wildcard;
 
 	iterate_shell_line = ft_strdup(ms->shell_line_tokenized);
-	while (ft_strrchr(iterate_shell_line, '*'))
+	while (ft_strrchr(iterate_shell_line, '*') != NULL)
 	{
 		replace = ft_strdup("");
-		start = ft_indexof(ms->shell_line, '*') + 1;
+		start = ft_indexof(ms->shell_line_tokenized, '*') + 1;
 		end = next_space_index(ms, start) - 1;
-		wildcard = ft_substr(ms->shell_line, start, end);
+		wildcard = ft_substr(ms->shell_line_tokenized, start, end);
 		if (ms_exist_some_file_with_this_wildcard(wildcard) == 1)
 		{
 			replace = ms_get_files_that_represent_wildcard(wildcard);
 			ms->shell_line_tokenized = \
 ft_str_replace(ft_strdup(ms->shell_line_tokenized), wildcard, replace);
 		}
-		else
+ 		else
 			iterate_shell_line += start;
-		ft_free_ptr((void *) &replace);
-		ft_free_ptr((void *) &wildcard);
+ 		ft_free_ptr((void *) &replace);
+ 		ft_free_ptr((void *) &wildcard);
 	}
-	ft_free_ptr((void *) &iterate_shell_line);
+	//ft_free_ptr((void *) &iterate_shell_line);
 }

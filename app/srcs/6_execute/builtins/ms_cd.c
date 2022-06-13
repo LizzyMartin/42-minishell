@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:07 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/09 21:16:05 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/13 01:13:18 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,31 +65,16 @@ t_cmd *current_cmd, int aux)
 		update_env_values(ms, current_cmd, cmd, aux);
 }
 
-static int	pipe_fd(t_p *prompt, int tmp_fd[])
-{
-	pipe(tmp_fd);
-	prompt->input_fd = tmp_fd[0];
-	return (tmp_fd[1]);
-}
-
 void	ms_cd(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 {
-	int			aux;
-	int			tmp_fd[2];
+	int		aux;
+	int		clo;
 
-	if (current_cmd->index == prompt->args_amount - 1)
-		aux = 1;
-	else
-		aux = pipe_fd(prompt, tmp_fd);
-	current_cmd->exit_code = 0;
+	clo = 0;
+	aux = bridge_builtion_other_cmds(current_cmd, prompt, &clo);
 	if (!ms_is_in_env(ms, "OLDPWD"))
 		ms_add_env(&ms->envs, "OLDPWD", ms_find_env_value(ms, "HOME"));
 	update_env_value_according_arg(ms, current_cmd, aux);
-	if (aux != 1)
-	{
-		close (tmp_fd[0]);
-		close (tmp_fd[1]);
-	}
-	else if (aux == 1)
+	if (clo)
 		close(aux);
 }

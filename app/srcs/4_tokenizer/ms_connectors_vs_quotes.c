@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_connectors_vs_quotes.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 18:09:38 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/12 22:19:19 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/13 01:31:40 by argel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	ms_check_if_have_quotes(t_ms *ms, char *line)
 			ms->shell_line_tokenized = \
 				ft_str_replace_all(tmp, \
 			"|", T_PIPE);
-			ft_free_ptr((void *) &tmp);
+
 		}
 		return (1);
 	}
