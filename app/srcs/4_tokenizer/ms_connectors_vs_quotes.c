@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 18:09:38 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/14 13:53:29 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/14 14:17:51 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,13 @@ static void	ms_treating_having_quotes_3(t_ms *ms, int i, int size, char *line)
 {
 	char	*tmp;
 
+	ms->i = i;
 	if (ft_strnstr(line, "&&", ft_strlen(line)))
-	{
-		tmp = ft_substr(line, i, size - i);
-		char *tmp2 = \
-			ft_str_replace_all(tmp, \
-		"&&", T_CONNECTOR);
-		ms->aux = ft_strjoin_free(ms->aux, tmp2);
-	}
+		subs_replace_join_free("&&", T_CONNECTOR, ms, line);
 	if (ft_strnstr(line, "||", ft_strlen(line)))
-	{
-		tmp = ft_substr(line, i, size - i);
-		char *tmp2 = \
-			ft_str_replace_all(tmp, \
-		"||", T_CONNECTOR);
-		ms->aux = ft_strjoin_free(ms->aux, tmp2);
-	}
+		subs_replace_join_free("||", T_CONNECTOR, ms, line);
 	if (ft_strnstr(line, "|", ft_strlen(line)))
-	{
-		tmp = ft_substr(line, i, size - i);
-		char *tmp2 = \
-			ft_str_replace_all(tmp, \
-		"|", T_PIPE);
-		ms->aux = ft_strjoin_free(ms->aux, tmp2);
-	}
+		subs_replace_join_free("|", T_PIPE, ms, line);
 	else
 	{
 		tmp = ft_substr(line, i, size - i);
@@ -69,6 +52,21 @@ static void	ms_treating_having_quotes_2(t_ms *ms, int *i, char *line, int i_aux)
 	ft_free_ptr((void *) &tmp);
 }
 
+static void	ms_treating_having_quotes_1(int index_double, int index_single, \
+int *i_aux)
+{
+	if (index_double != -1 && index_single \
+		!= -1 && index_double < index_single)
+		*i_aux = index_double;
+	else if (index_double != -1 && index_single \
+		!= -1 && index_single < index_double)
+		*i_aux = index_single;
+	if (index_double != -1 && index_single == -1)
+		*i_aux = index_double;
+	else if (index_single != -1 && index_double == -1)
+		*i_aux = index_single;
+}
+
 static void	ms_treating_having_quotes(t_ms *ms, int *i, int size, char *line)
 {
 	int		index_double;
@@ -83,16 +81,7 @@ static void	ms_treating_having_quotes(t_ms *ms, int *i, int size, char *line)
 		index_single = ft_str_indexof(line + *i, "\'", size);
 		if (index_double != -1 || index_single != -1)
 		{
-			if (index_double != -1 && index_single \
-				!= -1 && index_double < index_single)
-				i_aux = index_double;
-			else if (index_double != -1 && index_single \
-				!= -1 && index_single < index_double)
-				i_aux = index_single;
-			if (index_double != -1 && index_single == -1)
-				i_aux = index_double;
-			else if (index_single != -1 && index_double == -1)
-				i_aux = index_single;
+			ms_treating_having_quotes_1(index_double, index_single, &i_aux);
 			ms_treating_having_quotes_2(ms, i, line, i_aux);
 		}
 		else

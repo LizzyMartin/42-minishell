@@ -3,7 +3,6 @@
 CC =            clang
 HEADERS_DIR =   ./srcs
 CFLAGS =		-I$(HEADERS_DIR) -Wall -Wextra -Werror -ggdb3
-#-ggdb3
 AR =            ar -rcs
 RM =            rm -rfd
 

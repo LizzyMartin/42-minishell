@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 18:09:38 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/14 13:53:40 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/14 14:13:49 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,15 @@ int	ms_jump_to_end_quote(t_ms *ms, char *line, int *i, int size)
 	ft_free_ptr((void *) &tmp2);
 	ft_free_ptr((void *) &line_inside_quotes);
 	return (second + 1);
+}
+
+void	subs_replace_join_free(char *find, char *replace, \
+t_ms *ms, char *line)
+{
+	char	*tmp;
+	char	*tmp2;
+
+	tmp = ft_substr(line, ms->i, ft_strlen(line) - ms->i);
+	tmp2 = ft_str_replace_all(tmp, find, replace);
+	ms->aux = ft_strjoin_free(ms->aux, tmp2);
 }
