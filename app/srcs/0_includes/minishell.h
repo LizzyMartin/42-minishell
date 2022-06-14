@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 20:07:38 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/13 21:24:57 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,9 @@ int			ms_sintax(t_ms *ms);
 int			ms_tokenizer(t_ms *ms);
 void		ms_wildcard(t_ms *ms);
 void		ms_check_quotes(t_ms *ms);
+int			ms_get_index(t_ms *ms, int size, char **cmd);
+int			ms_check_if_have_quotes(t_ms *ms, char *line);
+int			get_index_before_space(t_ms *ms, int size, char **cmd);
 bool		get_boolean(const char *wildcard, const struct dirent *de, int all);
 void		update_tmp(char **replace, DIR *dr, struct dirent **de, char **tmp);
 void		ms_expand_dolar(t_ms *ms);
@@ -92,8 +95,8 @@ char		**ms_parse_output(t_p *curr_prompt);
 void		ms_parse_commands(t_ms *ms,
 				t_p *curr_prompt, char **output_s_by_space,
 				char **input_s_by_space);
-void		ms_parse_commands2(t_ms *ms, const t_p *curr_prompt, \
-				int c, t_cmd *curr_command);
+void		prepare_cmd_line(const t_p *curr_prompt, \
+	char **input_s_by_space, int c, t_cmd *curr_command);
 char		*ms_append_path_in_front(t_cmd *current_cmd, t_ms *ms);
 char		*check_path(int i, t_cmd *current_cmd, char **path);
 void		reset_cmd(t_cmd **curr_command);

@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:26 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 18:03:41 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/13 20:42:39 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void	treat_having_quotes(t_ms *ms, char *tmp, int *i, char *aux)
 	treat_having_quotes_2(ms, tmp, i, size);
 }
 
-static int	get_index_before_space(t_ms *ms, int size, char **cmd)
+int	get_index_before_space(t_ms *ms, int size, char **cmd)
 {
 	char	*tmp;
 	char	*aux;
@@ -108,10 +108,7 @@ void	ms_check_quotes(t_ms *ms)
 		ft_strchr(ms->shell_line_tokenized, '"'))
 	{
 		size = (int) ft_strlen(ms->shell_line) - 1;
-		if (ms->is_aux_env)
-			i = 0;
-		else
-			i = get_index_before_space(ms, size, cmd);
+		i = ms_get_index(ms, size, cmd);
 		while (ms->shell_line[i])
 		{
 			if (ms->shell_line[i] == '"' || ms->shell_line[i] == '\'')

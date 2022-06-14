@@ -6,35 +6,11 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 19:51:42 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/13 21:25:42 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-static void	prepare_cmd_line(const t_p *curr_prompt, \
-	char **input_s_by_space, int c, t_cmd *curr_command)
-{
-	char	*tmp;
-	int		aux;
-
-	tmp = NULL;
-	if (curr_prompt->has_here_doc == 1)
-	{
-		aux = ft_strlen(input_s_by_space[0]) \
-			+ ft_strlen(input_s_by_space[1]) + 2;
-		tmp = ft_strdup(curr_prompt->this_p_line_splited_by_pipe[c]);
-		curr_command->cmd_line = ft_substr(tmp + aux, 0, ft_strlen(tmp));
-	}
-	else if (c == 0 && curr_prompt->input_redirected_to_file == 1)
-	{
-		aux = ft_strlen(input_s_by_space[0]) \
-			+ ft_strlen(input_s_by_space[1]) + 2;
-		tmp = ft_strdup(curr_prompt->this_p_line_splited_by_pipe[c]);
-		curr_command->cmd_line = ft_substr(tmp + aux, 0, ft_strlen(tmp));
-	}
-	ft_free_ptr((void *) &tmp);
-}
 
 static void	treat_input_command(t_p *curr_prompt, t_cmd *curr_command)
 {
@@ -98,6 +74,14 @@ static void	prepare_something(t_cmd *curr_command, \
 	ft_free_ptr((void *) &tmp);
 }
 
+void	ms_parse_commands2(t_ms *ms, \
+	t_p *curr_prompt, t_cmd *curr_command, int c)
+{
+	ms->tmp2 = ft_strdup(curr_prompt->this_p_line_splited_by_pipe[c]);
+	ft_free_ptr((void *) &curr_command->cmd_line);
+	curr_command->cmd_line = ft_strdup(ms->tmp2);
+}
+
 void	ms_parse_commands(t_ms *ms, \
 	t_p *curr_prompt, char **output_s_by_space, char **input_s_by_space)
 {
@@ -112,7 +96,10 @@ void	ms_parse_commands(t_ms *ms, \
 	{
 		if (c > 0)
 			curr_command = update_cmd(curr_command);
-		ms_parse_commands2(ms, curr_prompt, c, curr_command);
+		curr_command->exit_code = 0;
+		curr_command->index = c;
+		ft_free_ptr((void *) &ms->tmp2);
+		ms_parse_commands2(ms, curr_prompt, curr_command, c);
 		prepare_cmd_line(curr_prompt, input_s_by_space, c, curr_command);
 		if (c == (curr_prompt->pipe_amount - 1) && curr_prompt->redirect > 0)
 			prepare_something(curr_command, curr_prompt, output_s_by_space);
