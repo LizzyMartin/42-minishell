@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 21:25:42 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/13 23:22:57 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void	ms_parse_commands(t_ms *ms, \
 		prepare_cmd_line(curr_prompt, input_s_by_space, c, curr_command);
 		if (c == (curr_prompt->pipe_amount - 1) && curr_prompt->redirect > 0)
 			prepare_something(curr_command, curr_prompt, output_s_by_space);
+		ft_printf("\n#%s#\n", curr_command->cmd_line);
 		if (*curr_command->cmd_line != '\0')
 			prepare_path_and_fd(ms, curr_prompt, curr_command);
 		if (is_input_command_alone(curr_command->cmd_line) && \

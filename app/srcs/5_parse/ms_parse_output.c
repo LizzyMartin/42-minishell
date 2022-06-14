@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse_output.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:19 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 12:46:14 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/13 23:21:18 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	update_current_prompt(t_p *curr_prompt, int aux, \
 			open(curr_prompt->output_path, O_CREAT | \
 				O_WRONLY | O_APPEND, 0777);
 	}
-	else if (aux >= 3 && ft_strnstr(output_s_by_space[aux - 2], ">", 2) != NULL)
+	if (aux >= 3 && ft_strnstr(output_s_by_space[aux - 2], ">", 2) != NULL)
 	{
 		curr_prompt->redirect = 2;
 		curr_prompt->output_fd = \

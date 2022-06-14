@@ -6,9 +6,11 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 18:09:38 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 21:18:28 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/13 23:29:28 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <minishell.h>
 
 #include <minishell.h>
 
@@ -46,6 +48,11 @@ static void	ms_treating_having_quotes_3(t_ms *ms, int i, int size, char *line)
 			ft_str_replace_all(tmp, \
 		"&&", T_CONNECTOR);
 		ms->aux = ft_strjoin_free(ms->aux, tmp2);
+	}
+	else
+	{
+		tmp = ft_substr(line, i, size - i);
+		ms->aux = ft_strjoin_free(ms->aux, tmp);
 	}
 //	if (ft_strnstr(line, "||", ft_strlen(line)))
 //	{

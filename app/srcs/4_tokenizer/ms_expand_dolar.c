@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_expand_dolar.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 00:55:01 by argel             #+#    #+#             */
-/*   Updated: 2022/06/13 14:47:48 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/13 22:11:51 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,10 @@ void	ms_expand_dolar(t_ms *ms)
 	i = 0;
 	line_splited = ft_split(ms->shell_line_tokenized, ' ');
 	if (line_splited[1] && ft_strncmp(line_splited[1], "$?", 2) == 0)
+	{
+		ft_mtx_free((void **) line_splited);
 		return ;
+	}
 	ft_free_ptr((void *) &ms->shell_line_tokenized);
 	ms->shell_line_tokenized = ft_strdup("");
 	while (line_splited[i])
