@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:06:41 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 19:02:37 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/13 23:39:59 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ typedef struct s_prompt
 	char					*input_path;
 	int						input_redirected_to_file;
 	int						only_input_redirected_to_file;
+	int						only_redirect_to_file;
 	int						no_cmd_just_redirect;
 	int						pipe[2];
 	int						output_fd;

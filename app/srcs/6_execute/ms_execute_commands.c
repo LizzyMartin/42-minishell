@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:42:02 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 19:10:28 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/13 23:46:02 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ static void	print_fd_or_execute_cmd(t_ms *ms, t_p *curr_prompt)
 	int	exit_code;
 
 	i = 0;
-	if (curr_prompt->only_input_redirected_to_file == 1)
+	if (curr_prompt->only_input_redirected_to_file == 1 && \
+curr_prompt->only_redirect_to_file == 1)
 		return ;
 	else if (curr_prompt->no_cmd_just_redirect == 1)
 		ft_fd_dup2(curr_prompt->pipe_here_doc[0], curr_prompt->output_fd);

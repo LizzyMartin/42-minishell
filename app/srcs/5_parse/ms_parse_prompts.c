@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse_prompts.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:39:53 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 15:46:21 by argel            ###   ########.fr       */
+/*   Updated: 2022/06/13 23:44:21 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void	reset_prompt(t_p **curr_prompt)
 	(*curr_prompt)->input_path = NULL;
 	(*curr_prompt)->input_redirected_to_file = 0;
 	(*curr_prompt)->only_input_redirected_to_file = 0;
+	(*curr_prompt)->only_redirect_to_file = 0;
 	(*curr_prompt)->no_cmd_just_redirect = 0;
 	(*curr_prompt)->output_fd = 1;
 	(*curr_prompt)->output_path = NULL;
@@ -33,6 +34,7 @@ static void	reset_prompt(t_p **curr_prompt)
 	(*curr_prompt)->this_p_line = NULL;
 	(*curr_prompt)->this_p_line_splited_by_pipe = NULL;
 	(*curr_prompt)->args_amount = 0;
+
 }
 
 static void	ms_get_prompt_2(t_p *curr_prompt)
