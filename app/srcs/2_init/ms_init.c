@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:55:07 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 19:11:35 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/14 17:39:16 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,5 @@ void	ms_init(t_ms **ms, int argc, char **argv, char **envp)
 	ms_init_aux(ms);
 	ms_init_env(*ms);
 	ms_init_history(*ms);
-	system("clear");
 	print_banner();
 }

@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:00 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/09 22:45:28 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/14 17:56:32 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,45 +20,61 @@ void	ms_close_fds(t_p *curr_prompt)
 		close(curr_prompt->output_fd);
 }
 
-static int	iterate_cmd_count_cat(char *trim, int is_cat_sequence, \
-t_cmd *tmp, int cat)
+static int	iterate_cmd_count_cat(t_ms *ms, t_cmd **tmp)
 {
+	char	*trim;
+
+	trim = NULL;
+	trim = ft_strtrim((*tmp)->cmd_line, " ");
 	if (ft_strncmp(trim, "cat", ft_strlen(trim)) == 0)
-		is_cat_sequence = 1;
-	if (is_cat_sequence)
+		ms->is_cat_sequence = 1;
+	if (ms->is_cat_sequence)
 	{
-		while (tmp->next != NULL
-			&& ft_strncmp(trim, "cat", ft_strlen(trim)) == 0)
+		while (tmp && ft_strncmp(trim, "cat", ft_strlen(trim)) == 0)
 		{
-			cat++;
-			tmp = tmp->next;
+			ms->fake_cat_input++;
+			(*tmp) = (*tmp)->next;
+			ft_free_ptr((void *) &trim);
+			if ((*tmp) == NULL)
+				break ;
+			trim = ft_strtrim((*tmp)->cmd_line, " ");
 		}
-		is_cat_sequence = 0;
+		ft_free_ptr((void *) &trim);
 		return (1);
 	}
-	tmp = tmp->next;
+	ft_free_ptr((void *) &trim);
 	return (0);
 }
 
-void	cat_ls_sc(t_p *curr_prompt)
+void	pre_cat_ls_sc(t_ms *ms, t_p *curr_prompt)
 {
 	t_cmd	*tmp;
-	int		is_cat_sequence;
-	int		cat;
-	char	*trim;
 
-	cat = 0;
-	is_cat_sequence = 0;
+	if (curr_prompt->args_amount <= 1)
+		return ;
+	ms->fake_cat_input = 0;
+	ms->is_cat_sequence = 0;
 	tmp = curr_prompt->cmds;
-	trim = ft_strtrim(tmp->cmd_line, " ");
 	while (tmp)
 	{
-		if (iterate_cmd_count_cat(trim, is_cat_sequence, \
-		tmp, cat) == 1)
+		if (iterate_cmd_count_cat(ms, &tmp) == 1)
 			break ;
 		tmp = tmp->next;
 	}
-	ft_free_ptr((void *) &trim);
-	while (cat-- > 0)
-		get_next_line(0);
+	if (curr_prompt->args_amount == ms->fake_cat_input)
+	{
+		ms->is_cat_sequence = 0;
+		ms->fake_cat_input = 0;
+	}
+}
+
+void	exec_cat_ls_sc(t_ms *ms)
+{
+	char	*input;
+
+	while (ms->fake_cat_input-- > 0)
+	{
+		input = get_next_line(0);
+		ft_free_ptr((void *) &input);
+	}
 }

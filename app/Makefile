@@ -126,8 +126,8 @@ t:	$(NAME)
 	@./minishell
 
 seg:	$(NAME)
-	@valgrind  --suppressions=./local.supp --track-origins=yes ./minishell
+	@valgrind  --suppressions=../tests/minishell.supp --track-origins=yes ./minishell
 
 leak:	$(NAME)
-	@valgrind  --suppressions=./local.supp --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes ./minishell
+	@valgrind  --suppressions=../tests/minishell.supp --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes ./minishell
 

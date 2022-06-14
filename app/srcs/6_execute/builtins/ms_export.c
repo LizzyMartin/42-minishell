@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:42 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 19:32:04 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/14 18:00:39 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	add_env_by_key(t_ms *ms, const t_cmd *current_cmd)
 		if (!ft_isalpha(key[i]))
 		{
 			ft_printf_to_fd(2, "miniheaven: export: `%s': \
-				not a valid identifier\n", key);
+not a valid identifier\n", key);
 			ms->p->cmds->exit_code = 1;
 			return ;
 		}
@@ -96,7 +96,7 @@ static void	check_first_char(t_ms *ms, t_cmd *current_cmd, int aux)
 	if (ft_isdigit(current_cmd->cmd_splited_by_space[1][0]))
 	{
 		line = ft_printf_to_var("miniheaven: export: `%s` \
-			not a valid identifier\n", current_cmd->cmd_splited_by_space[1]);
+not a valid identifier\n", current_cmd->cmd_splited_by_space[1]);
 		ft_putstr_fd(line, aux);
 		free(line);
 		ms->p->cmds->exit_code = 1;

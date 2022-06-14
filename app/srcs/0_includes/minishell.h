@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/14 14:14:16 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/14 17:41:28 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,10 @@ void		reset_cmd(t_cmd **curr_command);
 t_cmd		*update_cmd(t_cmd *curr_command);
 char		*get_just_name(char *path);
 int			is_input_command(char *name);
-int			is_input_command_alone(char *cmd_line);
+int			is_input_command_alone(t_ms *ms, char *cmd_line);
 
 // prompt
-void		ms_free_prompt(t_ms *ms, t_p *curr_prompt);
+void		ms_free_prompt(t_ms *ms);
 
 // cmd
 t_cmd		*ms_dll_cmd_last(t_cmd *cmds);
@@ -128,7 +128,8 @@ int			is_builtin(char *cmd);
 void		execute_builtin(t_ms *ms, t_cmd *current_cmd, t_p *prompt);
 void		ms_close_fds(t_p *curr_prompt);
 void		last_cmd_exit_code(t_ms *ms);
-void		cat_ls_sc(t_p *curr_prompt);
+void		pre_cat_ls_sc(t_ms *ms, t_p *curr_prompt);
+void		exec_cat_ls_sc(t_ms *ms);
 int			ms_which_command_type(t_p *curr_prompt, \
 t_cmd *current_cmd, t_ms *ms);
 

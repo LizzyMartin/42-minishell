@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse_commands_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/11 17:41:00 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/14 17:41:46 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_cmd	*update_cmd(t_cmd *curr_command)
 	curr_command = curr_command->next;
 	curr_command->next = NULL;
 	curr_command->can_execute = 1;
+	curr_command->exit_code = 0;
 	curr_command->error_msg = NULL;
 	curr_command->just_name = NULL;
 	curr_command->path_and_name = NULL;
@@ -63,14 +64,18 @@ int	is_input_command(char *name)
 		ft_strnstr(name, "wc", ft_strlen(name)) || \
 		ft_strnstr(name, "touch", ft_strlen(name))
 	)
+	{
+		g_ms->input_command_open = 1;
 		return (1);
+	}
 	return (0);
 }
 
-int	is_input_command_alone(char *cmd_line)
+int	is_input_command_alone(t_ms *ms, char *cmd_line)
 {
 	char	**split;
 
+	ms->input_command_open = 1;
 	split = ft_split(cmd_line, ' ');
 	if (is_input_command(split[0])
 		&& ft_mtx_size((void **) split) == 1)

@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:42:02 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 23:46:02 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/14 16:41:56 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,21 @@ int	ms_execute_commands(t_ms *ms, t_p *curr_prompt)
 	t_cmd	*current_cmd;
 
 	current_cmd = curr_prompt->cmds;
+	pre_cat_ls_sc(ms, curr_prompt);
 	while (current_cmd)
 	{
+		if (ms->is_cat_sequence == 1 && ft_strnstr(current_cmd->just_name, \
+		"cat", ft_strlen(current_cmd->just_name)) != NULL)
+		{
+			current_cmd = current_cmd->next;
+			continue ;
+		}
 		if (ms_which_command_type(curr_prompt, \
 		current_cmd, ms) == 1)
 			return (0);
 		current_cmd = current_cmd->next;
 	}
-	cat_ls_sc(curr_prompt);
+	exec_cat_ls_sc(ms);
 	ms_add_history(ms, NULL, curr_prompt->cmds);
 	ms_close_fds(curr_prompt);
 	current_cmd = ms_dll_cmd_last(curr_prompt->cmds);
@@ -85,7 +92,7 @@ static void	print_fd_or_execute_cmd(t_ms *ms, t_p *curr_prompt)
 	int	exit_code;
 
 	i = 0;
-	if (curr_prompt->only_input_redirected_to_file == 1 && \
+	if (curr_prompt->only_input_redirected_to_file == 1 || \
 curr_prompt->only_redirect_to_file == 1)
 		return ;
 	else if (curr_prompt->no_cmd_just_redirect == 1)

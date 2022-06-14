@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:39 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/11 21:14:11 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/14 17:59:46 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	ms_check_numeric_argument(t_ms *ms, t_cmd *current_cmd, int aux)
 		if (!ft_isdigit(current_cmd->cmd_splited_by_space[1][i]))
 		{
 			line = ft_printf_to_var("exit\nminiheaven: exit: %s: \
-				numeric argument required\n", \
+numeric argument required\n", \
 					current_cmd->cmd_splited_by_space[1]);
 			ft_putstr_fd(line, aux);
 			ft_free_ptr((void *) &line);

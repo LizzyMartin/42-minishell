@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 18:09:38 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/14 14:13:49 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/14 17:28:27 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,12 @@ t_ms *ms, char *line)
 {
 	char	*tmp;
 	char	*tmp2;
+	char	*tmp3;
 
 	tmp = ft_substr(line, ms->i, ft_strlen(line) - ms->i);
 	tmp2 = ft_str_replace_all(tmp, find, replace);
-	ms->aux = ft_strjoin_free(ms->aux, tmp2);
+	tmp3 = ft_strdup(ms->aux);
+	ft_free_ptr((void *) &ms->aux);
+	ms->aux = ft_strjoin_free(tmp3, tmp2);
+	ft_free_ptr((void *) &tmp2);
 }

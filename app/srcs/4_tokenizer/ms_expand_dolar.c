@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 00:55:01 by argel             #+#    #+#             */
-/*   Updated: 2022/06/14 13:51:06 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/14 17:16:59 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int i, char *dolar_cmd)
 		tmp = ft_strjoin(ms->shell_line_tokenized, " ");
 		ft_free_ptr((void *) &ms->shell_line_tokenized);
 		aux = ft_strdup(line_splited[i]);
+		ft_free_ptr((void *) &ms->shell_line_tokenized);
 		ms->shell_line_tokenized = ft_strjoin(tmp, aux);
 		ft_free_ptr((void *) &tmp);
 		ft_free_ptr((void *) &aux);

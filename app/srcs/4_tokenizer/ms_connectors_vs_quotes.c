@@ -6,7 +6,11 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 18:09:38 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/14 14:17:51 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/14 17:07:38 by acapela-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/*   Updated: 2022/06/14 17:04:55 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +21,20 @@ static void	ms_treating_having_quotes_3(t_ms *ms, int i, int size, char *line)
 	char	*tmp;
 
 	ms->i = i;
+	if (!ft_strnstr(line, "&&", ft_strlen(line)) \
+	&& !ft_strnstr(line, "||", ft_strlen(line)) \
+	&& !ft_strnstr(line, "|", ft_strlen(line)))
+	{
+		tmp = ft_substr(line, i, size - i);
+		ms->aux = ft_strjoin_free(ms->aux, tmp);
+		return ;
+	}
 	if (ft_strnstr(line, "&&", ft_strlen(line)))
 		subs_replace_join_free("&&", T_CONNECTOR, ms, line);
 	if (ft_strnstr(line, "||", ft_strlen(line)))
 		subs_replace_join_free("||", T_CONNECTOR, ms, line);
 	if (ft_strnstr(line, "|", ft_strlen(line)))
 		subs_replace_join_free("|", T_PIPE, ms, line);
-	else
-	{
-		tmp = ft_substr(line, i, size - i);
-		ms->aux = ft_strjoin_free(ms->aux, tmp);
-	}
 }
 
 static void	ms_treating_having_quotes_2(t_ms *ms, int *i, char *line, int i_aux)

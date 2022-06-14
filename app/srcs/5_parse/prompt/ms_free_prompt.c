@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:54:01 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 18:29:50 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/14 17:30:05 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,19 @@ static void	free_curr_prompt(t_p *curr_prompt)
 				curr_prompt->next->this_p_line_splited_by_pipe);
 		if (curr_prompt->next->output_path != NULL)
 			ft_free_ptr((void *) &curr_prompt->next->output_path);
-		ft_free_ptr((void *) &curr_prompt->hd_limiter);
-		if (curr_prompt->output_fd != 1)
-			close(curr_prompt->output_fd);
+		ft_free_ptr((void *) &curr_prompt->next->hd_limiter);
+		if (curr_prompt->next->input_fd > 2)
+			close(curr_prompt->next->input_fd);
+		if (curr_prompt->next->output_fd > 2)
+			close(curr_prompt->next->output_fd);
 		if (curr_prompt->next != NULL)
 			ft_free_ptr((void *) &curr_prompt->next);
 	}
 }
 
-void	ms_free_prompt(t_ms *ms, t_p *curr_prompt)
+void	ms_free_prompt(t_ms *ms)
 {
-	free_curr_prompt(curr_prompt);
+	free_curr_prompt(ms->p);
 	if (ms->p == NULL)
 		return ;
 	if (ms->p->cmds != NULL)
@@ -50,7 +52,9 @@ void	ms_free_prompt(t_ms *ms, t_p *curr_prompt)
 	if (ms->p->output_path != NULL)
 		ft_free_ptr((void *) &ms->p->output_path);
 	ft_free_ptr((void *) &ms->p->hd_limiter);
-	if (ms->p->output_fd != 1)
+	if (ms->p->input_fd > 2)
+		close(ms->p->input_fd);
+	if (ms->p->output_fd > 2)
 		close(ms->p->output_fd);
 	if (ms->p != NULL)
 		ft_free_ptr((void *) &ms->p);

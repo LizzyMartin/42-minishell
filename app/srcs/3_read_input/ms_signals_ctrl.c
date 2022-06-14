@@ -6,14 +6,14 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:37:54 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 18:15:26 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/14 17:59:18 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
 /*
-	 SIGINT: CTRL + C
+	SIGINT: CTRL + C
     SIGQUIT: CTRL + D
 	SIG_IGN: ignore signal
 */
@@ -21,7 +21,8 @@ void	ctrl_c_redisplay_prompt(int signal)
 {
 	(void)signal;
 	ft_printf("\n");
-	if (g_ms->here_doc_open == 0)
+	if (g_ms->here_doc_open == 0 && \
+g_ms->input_command_open == 0)
 	{
 		rl_replace_line("", 0);
 		rl_on_new_line();

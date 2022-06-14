@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 23:32:39 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/14 17:43:20 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ static void	treat_input_command(t_p *curr_prompt, t_cmd *curr_command)
 	{
 		if (curr_command->args_amount >= 2 && curr_command->index == 0)
 		{
-			curr_prompt->input_path = \
-				ft_strdup(curr_command->cmd_splited_by_space[1]);
+			curr_prompt->input_path = curr_command->cmd_splited_by_space[1];
 			curr_prompt->input_fd = \
 				open(curr_command->cmd_splited_by_space[1], O_RDONLY);
 		}
@@ -65,6 +64,7 @@ static void	prepare_something(t_cmd *curr_command, \
 	aux = ft_strlen(output_s_by_space[length - 2])
 		+ ft_strlen(output_s_by_space[length - 1]) + 1;
 	tmp = ft_strdup(curr_command->cmd_line);
+	ft_free_ptr((void *) &curr_command->cmd_line);
 	curr_command->cmd_line = ft_substr(tmp, 0, ft_strlen(tmp) - aux - 1);
 	if (ft_strnstr(curr_command->cmd_line, ">>", \
 		ft_strlen(curr_command->cmd_line)) \
@@ -105,9 +105,9 @@ void	ms_parse_commands(t_ms *ms, \
 			prepare_something(curr_command, curr_prompt, output_s_by_space);
 		if (*curr_command->cmd_line != '\0')
 			prepare_path_and_fd(ms, curr_prompt, curr_command);
-		if (is_input_command_alone(curr_command->cmd_line) && \
+		if (is_input_command_alone(ms, curr_command->cmd_line) && \
 		curr_prompt->args_amount == 1)
-			curr_command->can_execute = 0;
+			curr_command->can_execute = 1;
 		c++;
 	}
 }
