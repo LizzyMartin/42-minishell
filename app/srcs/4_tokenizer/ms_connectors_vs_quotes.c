@@ -35,34 +35,35 @@ static int	ms_jump_to_end_quote(t_ms *ms, char *line, int *i, int size)
 	return (second + 1);
 }
 
-static void	ms_treating_having_quotes_3(t_ms *ms, char *line)
+static void	ms_treating_having_quotes_3(t_ms *ms, int i, int size, char *line)
 {
 	char	*tmp;
 
 	if (ft_strnstr(line, "&&", ft_strlen(line)))
 	{
-		tmp = ft_strdup(line);
-		ft_free_ptr((void *) &line);
-		ms->shell_line_tokenized = \
+		tmp = ft_substr(line, i, size - i);
+		char *tmp2 = \
 			ft_str_replace_all(tmp, \
 		"&&", T_CONNECTOR);
+		ms->aux = ft_strjoin_free(ms->aux, tmp2);
 	}
-	if (ft_strnstr(line, "||", ft_strlen(line)))
-	{
-		tmp = ft_strdup(line);
-		ft_free_ptr((void *) &line);
-		ms->shell_line_tokenized = \
-			ft_str_replace_all(tmp, \
-		"||", T_CONNECTOR);
-	}
-	if (ft_strnstr(line, "|", ft_strlen(line)))
-	{
-		tmp = ft_strdup(line);
-		ft_free_ptr((void *) &line);
-		ms->shell_line_tokenized = \
-			ft_str_replace_all(tmp, \
-		"|", T_PIPE);
-	}
+//	if (ft_strnstr(line, "||", ft_strlen(line)))
+//	{
+//		tmp = ft_strdup(line);
+//		ft_free_ptr((void *) &line);
+//		char *tmp2 = \
+//			ft_str_replace_all(tmp, \
+//		"||", T_CONNECTOR);
+//		ms->aux = ft_strjoin_free(ms->aux, tmp2);
+//	}
+//	if (ft_strnstr(line, "|", ft_strlen(line)))
+//	{
+//		tmp = ft_strdup(line);
+//		ft_free_ptr((void *) &line);
+//		ms->shell_line_tokenized = \
+//			ft_str_replace_all(tmp, \
+//		"|", T_PIPE);
+//	}
 }
 
 static void	ms_treating_having_quotes_2(t_ms *ms, int *i, char *line, int i_aux)
@@ -89,28 +90,34 @@ static void	ms_treating_having_quotes_2(t_ms *ms, int *i, char *line, int i_aux)
 
 static void	ms_treating_having_quotes(t_ms *ms, int *i, int size, char *line)
 {
-	int		d_i;
-	int		s_i;
+	int		index_double;
+	int		index_single;
 	int		i_aux;
 
 	if (line[*i] == '"' || line[*i] == '\'')
 		*i += ms_jump_to_end_quote(ms, line, i, size);
 	else
 	{
-		ft_printf("ENTREI\n");
-		d_i = ft_str_indexof(line + *i, "\"", size);
-		s_i = ft_str_indexof(line + *i, "\'", size);
-		if (d_i != -1 || s_i != -1)
+		index_double = ft_str_indexof(line + *i, "\"", size);
+		index_single = ft_str_indexof(line + *i, "\'", size);
+		if (index_double != -1 || index_single != -1)
 		{
-			if (d_i < s_i)
-				i_aux = d_i;
-			else
-				i_aux = s_i;
+			if (index_double != -1 && index_single \
+				!= -1 && index_double < index_single)
+				i_aux = index_double;
+			else if (index_double != -1 && index_single \
+				!= -1 && index_single < index_double)
+				i_aux = index_single;
+			if (index_double != -1 && index_single == -1)
+				i_aux = index_double;
+			else if (index_single != -1 && index_double == -1)
+				i_aux = index_single;
 			ms_treating_having_quotes_2(ms, i, line, i_aux);
 		}
 		else
 		{
-			ms_treating_having_quotes_3(ms, line);
+			ms_treating_having_quotes_3(ms, *i, size, line);
+			*i = size - 1;
 			return ;
 		}
 	}
