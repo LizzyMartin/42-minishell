@@ -49,28 +49,27 @@ static void	ms_treating_having_quotes_3(t_ms *ms, int i, int size, char *line)
 		"&&", T_CONNECTOR);
 		ms->aux = ft_strjoin_free(ms->aux, tmp2);
 	}
+	if (ft_strnstr(line, "||", ft_strlen(line)))
+	{
+		tmp = ft_substr(line, i, size - i);
+		char *tmp2 = \
+			ft_str_replace_all(tmp, \
+		"||", T_CONNECTOR);
+		ms->aux = ft_strjoin_free(ms->aux, tmp2);
+	}
+	if (ft_strnstr(line, "|", ft_strlen(line)))
+	{
+		tmp = ft_substr(line, i, size - i);
+		char *tmp2 = \
+			ft_str_replace_all(tmp, \
+		"|", T_PIPE);
+		ms->aux = ft_strjoin_free(ms->aux, tmp2);
+	}
 	else
 	{
 		tmp = ft_substr(line, i, size - i);
 		ms->aux = ft_strjoin_free(ms->aux, tmp);
 	}
-//	if (ft_strnstr(line, "||", ft_strlen(line)))
-//	{
-//		tmp = ft_strdup(line);
-//		ft_free_ptr((void *) &line);
-//		char *tmp2 = \
-//			ft_str_replace_all(tmp, \
-//		"||", T_CONNECTOR);
-//		ms->aux = ft_strjoin_free(ms->aux, tmp2);
-//	}
-//	if (ft_strnstr(line, "|", ft_strlen(line)))
-//	{
-//		tmp = ft_strdup(line);
-//		ft_free_ptr((void *) &line);
-//		ms->shell_line_tokenized = \
-//			ft_str_replace_all(tmp, \
-//		"|", T_PIPE);
-//	}
 }
 
 static void	ms_treating_having_quotes_2(t_ms *ms, int *i, char *line, int i_aux)
@@ -136,7 +135,7 @@ void	ms_quotes_vs_connectors(t_ms *ms, char *line)
 	int		size;
 
 	i = 0;
-	size = ft_strlen(line);
+	size = (int) ft_strlen(line);
 	if (ms_check_if_have_quotes(ms, line) == 1)
 		return ;
 	ms->aux = ft_strdup("");
