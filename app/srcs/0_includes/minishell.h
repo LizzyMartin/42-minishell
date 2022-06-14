@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 21:24:57 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/14 13:54:00 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ int			get_index_before_space(t_ms *ms, int size, char **cmd);
 bool		get_boolean(const char *wildcard, const struct dirent *de, int all);
 void		update_tmp(char **replace, DIR *dr, struct dirent **de, char **tmp);
 void		ms_expand_dolar(t_ms *ms);
+void		ms_has_single_quotes(t_ms *ms, char *dolar_cmd, char *line);
+int			ms_jump_to_end_quote(t_ms *ms, char *line, int *i, int size);
 int			ms_count_char(char *str, char c);
 int			valid_chr(char chr);
 void		ms_quotes_vs_connectors(t_ms *ms, char *line);

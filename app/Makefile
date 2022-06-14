@@ -46,6 +46,7 @@ SRCS_FILES +=	4_tokenizer/ms_tokenizer.c \
 				4_tokenizer/ms_wildcard_utils.c \
 				4_tokenizer/ms_check_quotes.c \
 				4_tokenizer/ms_expand_dolar.c \
+				4_tokenizer/ms_expand_dolar_utils.c \
 				4_tokenizer/ms_sintax.c \
 				4_tokenizer/ms_connectors_vs_quotes.c \
 				4_tokenizer/ms_connectors_vs_quotes_utils.c

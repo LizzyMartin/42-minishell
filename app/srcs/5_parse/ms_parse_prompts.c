@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:39:53 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 23:44:21 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/14 13:40:15 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static void	reset_prompt(t_p **curr_prompt)
 	(*curr_prompt)->this_p_line = NULL;
 	(*curr_prompt)->this_p_line_splited_by_pipe = NULL;
 	(*curr_prompt)->args_amount = 0;
-
 }
 
 static void	ms_get_prompt_2(t_p *curr_prompt)

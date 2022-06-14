@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 18:09:38 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 21:18:33 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/14 13:53:40 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,27 @@ int	ms_get_index(t_ms *ms, int size, char **cmd)
 	else
 		i = get_index_before_space(ms, size, cmd);
 	return (i);
+}
+
+int	ms_jump_to_end_quote(t_ms *ms, char *line, int *i, int size)
+{
+	int		second;
+	char	*line_inside_quotes;
+	char	*tmp;
+	char	*tmp2;
+
+	second = 0;
+	tmp = ft_chr_to_str(line[*i], 1);
+	second = ft_str_indexof(line + *i + 1, \
+	tmp, size - *i);
+	ft_free_ptr((void *) &tmp);
+	line_inside_quotes = ft_substr(line, *i + 1, second);
+	tmp2 = ft_strdup(ms->aux);
+	if (ms->aux)
+		ft_free_ptr((void *) &ms->aux);
+	ms->aux = ft_printf_to_var("%s%c%s%c", tmp2, line[*i], \
+	line_inside_quotes, line[*i]);
+	ft_free_ptr((void *) &tmp2);
+	ft_free_ptr((void *) &line_inside_quotes);
+	return (second + 1);
 }

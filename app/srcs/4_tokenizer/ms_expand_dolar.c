@@ -6,34 +6,11 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 00:55:01 by argel             #+#    #+#             */
-/*   Updated: 2022/06/13 22:11:51 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/14 13:51:06 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-static void	ms_has_single_quotes(t_ms *ms, char *dolar_cmd, char *line)
-{
-	char	*no_dolar;
-	char	*value;
-	char	*aux;
-	char	*aux2;
-
-	no_dolar = ft_substr(dolar_cmd, 1, ft_strlen(dolar_cmd));
-	if (ms_is_in_env(ms, no_dolar))
-	{
-		value = ms_find_env_value(ms, no_dolar);
-		aux = ft_strdup(ms->shell_line_tokenized);
-		aux2 = ft_str_replace_all(line, dolar_cmd, value);
-		ft_free_ptr((void *) &ms->shell_line_tokenized);
-		ms->shell_line_tokenized = ft_printf_to_var \
-		("%s %s", aux, aux2);
-		ft_free_ptr((void *) &aux);
-		ft_free_ptr((void *) &aux2);
-	}
-	ft_free_ptr((void *) &no_dolar);
-	ft_free_ptr((void *) &dolar_cmd);
-}
 
 static void	ms_quotes_something_1(t_ms *ms, char **line_splited, int i)
 {
@@ -59,8 +36,6 @@ static void	ms_quotes_something_1(t_ms *ms, char **line_splited, int i)
 	if (ms_count_char(line_splited[i], '"') == 1)
 		ms->has_double_quotes = 0;
 }
-
-//&& \ (line_splited[i][j - 1] != '\\' && line_splited[i][j - 1] != ';')
 
 static void	threat_dolar(t_ms *ms, char **line_splited, int i, char *dolar_cmd)
 {
@@ -101,14 +76,27 @@ int i, char *dolar_cmd)
 		threat_dolar(ms, line_splited, i, dolar_cmd);
 }
 
+void	ms_expand_dolar_loop(t_ms *ms, char **line_splited, int i)
+{
+	char	*dolar_cmd;
+
+	dolar_cmd = NULL;
+	ms->has_double_quotes = 0;
+	ms->has_single_quotes = 0;
+	ms_quotes_something_1(ms, line_splited, i);
+	ms_quotes_something_2(ms, line_splited, i, dolar_cmd);
+	if (ms->has_double_quotes)
+		ft_remove_char(ms->shell_line_tokenized, '"');
+	if (ms->has_single_quotes)
+		ft_remove_char(ms->shell_line_tokenized, '\'');
+}
+
 void	ms_expand_dolar(t_ms *ms)
 {
 	char	**line_splited;
-	char	*dolar_cmd;
 	int		i;
 
-	dolar_cmd = NULL;
-	i = 0;
+	i = -1;
 	line_splited = ft_split(ms->shell_line_tokenized, ' ');
 	if (line_splited[1] && ft_strncmp(line_splited[1], "$?", 2) == 0)
 	{
@@ -117,17 +105,7 @@ void	ms_expand_dolar(t_ms *ms)
 	}
 	ft_free_ptr((void *) &ms->shell_line_tokenized);
 	ms->shell_line_tokenized = ft_strdup("");
-	while (line_splited[i])
-	{
-		ms->has_double_quotes = 0;
-		ms->has_single_quotes = 0;
-		ms_quotes_something_1(ms, line_splited, i);
-		ms_quotes_something_2(ms, line_splited, i, dolar_cmd);
-		i++;
-		if (ms->has_double_quotes)
-			ft_remove_char(ms->shell_line_tokenized, '"');
-		if (ms->has_single_quotes)
-			ft_remove_char(ms->shell_line_tokenized, '\'');
-	}
+	while (line_splited[++i])
+		ms_expand_dolar_loop(ms, line_splited, i);
 	ft_mtx_free((void **) line_splited);
 }
