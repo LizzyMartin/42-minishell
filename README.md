@@ -30,14 +30,6 @@ $ make
 # executar vários comandos do bash.
 $ ./minishell
 	
-# 5) Compilar o bônus
-$ make bonus
-
-# 6) Executar o bônus
-# Ao executar a linha seguinte, o efeito será semelhante ao passo 4, a diferença é que
-# o bônus conta com uma série de comandos novos.
-$ ./minishell_b
-	
 ```
 	
 </div>
