@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:43:28 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/14 17:03:41 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/14 18:46:06 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,12 @@ static void	ms_home_value(t_ms *ms)
 
 	chr_tmp = ft_chr_to_str('~', 1);
 	tmp2 = ft_strdup(ms_get_home_value(ms));
-	dupped = ft_strdup(ms->shell_line_tokenized);
+	dupped = ms->shell_line_tokenized;
 	tmp = ft_str_replace_all(dupped \
 			, chr_tmp, tmp2);
-	ft_free_ptr((void *) &ms->shell_line_tokenized);
 	ft_free_ptr((void *) &chr_tmp);
 	ft_free_ptr((void *) &tmp2);
 	ms->shell_line_tokenized = tmp;
-	ft_free_ptr((void *) &chr_tmp);
 }
 
 static void	ms_aux_env(t_ms *ms, int equal_index)

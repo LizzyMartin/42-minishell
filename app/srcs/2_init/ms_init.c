@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:55:07 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/14 17:39:16 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/08/18 13:14:16 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	ms_init_aux(t_ms **ms)
 	(*ms)->connectors_amount = 0;
 	(*ms)->connectors_order = NULL;
 	(*ms)->here_doc_open = 0;
+	(*ms)->no_path = 0;
 }
 
 void	ms_init(t_ms **ms, int argc, char **argv, char **envp)

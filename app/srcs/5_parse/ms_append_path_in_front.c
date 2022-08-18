@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_append_path_in_front.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:09 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 15:34:24 by argel            ###   ########.fr       */
+/*   Updated: 2022/08/18 13:15:52 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,15 @@ char	*ms_append_path_in_front(t_cmd *current_cmd, t_ms *ms)
 
 	i = -1;
 	env_path = ms_find_env_value(ms, "PATH");
+	if (env_path == NULL)
+	{
+		ft_pf_error("miniheaven: %s %s", \
+				current_cmd->just_name, E_NOTDIR);
+		ms->no_path=1;
+		return (NULL);
+	}
+	else
+		ms->no_path=0;
 	path = ft_split(env_path, ':');
 	while (path[++i])
 	{

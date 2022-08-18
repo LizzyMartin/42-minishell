@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:37:54 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/14 17:59:18 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/14 19:01:36 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ctrl_d_exit_shell(int signal)
 {
 	(void)signal;
 	ms_finish(g_ms);
-	ft_printf_to_fd(1, "exit\n");
+	ft_printf_to_fd(1, "\n");
 }
 
 void	ctrl_d_quit_process(int signal)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/14 17:41:28 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/08/18 13:12:51 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include           "../1_design/design.h"
 # include           "errors.h"
 # include           "structs.h"
-# include           <stdbool.h>
 
 /*
 ** GLOBAL VARIABLE: pointer to ms struct, so we can
@@ -74,7 +73,7 @@ void		ms_check_quotes(t_ms *ms);
 int			ms_get_index(t_ms *ms, int size, char **cmd);
 int			ms_check_if_have_quotes(t_ms *ms, char *line);
 int			get_index_before_space(t_ms *ms, int size, char **cmd);
-bool		get_boolean(const char *wildcard, const struct dirent *de, int all);
+int			get_boolean(const char *wildcard, const struct dirent *de, int all);
 void		update_tmp(char **replace, DIR *dr, struct dirent **de, char **tmp);
 void		ms_expand_dolar(t_ms *ms);
 void		ms_has_single_quotes(t_ms *ms, char *dolar_cmd, char *line);
@@ -144,6 +143,8 @@ void		quicksort(t_qs *qs, int left, int right, int (*comp)(void*, void*));
 int			cmpstr(void *v1, void *v2);
 void		ms_pwd(t_ms *ms, t_cmd *current_cmd, t_p *prompt);
 void		ms_unset(t_ms *ms, t_cmd *current_cmd);
+void		print_sorted_env(t_ms *ms, int aux);
+char		**env_to_array(t_ms *ms);
 
 /* utils */
 void		ms_reinit(t_ms *ms);

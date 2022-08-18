@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:25 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 19:09:07 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/14 18:17:04 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,4 +105,22 @@ void	ms_free_qs(const t_ms *ms, int aux, char **line, t_free **curr_qs)
 		}
 		i++;
 	}
+}
+
+void	print_sorted_env(t_ms *ms, int aux)
+{
+	char	*line;
+	int		i;
+	t_free	*curr_qs;
+
+	i = 0;
+	ms->str_export = env_to_array(ms);
+	ms->qs = ft_calloc (1, sizeof(t_qs));
+	ms->qs->free_qs = NULL;
+	ms->qs->v = ms->str_export;
+	ms->qs->size = sizeof(char *);
+	quicksort(ms->qs, 0, ft_mtx_size((void **) ms->str_export) - 1, \
+			(int (*)(void *, void *))(cmpstr));
+	curr_qs = ms->qs->free_qs;
+	ms_free_qs(ms, aux, &line, &curr_qs);
 }

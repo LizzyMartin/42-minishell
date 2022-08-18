@@ -6,13 +6,13 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:42 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/14 18:00:39 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/06/14 18:20:45 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	<minishell.h>
 
-static char	**env_to_array(t_ms *ms)
+char	**env_to_array(t_ms *ms)
 {
 	char	**arr;
 	int		i;
@@ -41,16 +41,30 @@ static char	**env_to_array(t_ms *ms)
 	return (arr);
 }
 
+static void	add_env_by_key_2(t_ms *ms, char *key, char *value, char *tmp)
+{
+	if (ms_is_in_env(ms, key))
+		update_env_value(ms, key, value);
+	else
+		ms_add_env(&ms->envs, key, value);
+	ft_free_ptr((void *) &tmp);
+	ms->p->cmds->exit_code = 0;
+}
+
 static void	add_env_by_key(t_ms *ms, const t_cmd *current_cmd)
 {
 	char	*key;
 	char	*value;
 	int		equal_index;
 	int		i;
+	char	*tmp;
 
 	equal_index = ft_str_indexof(current_cmd->cmd_splited_by_space[1], \
 	"=", ft_strlen(current_cmd->cmd_splited_by_space[1]));
-	key = ft_substr(current_cmd->cmd_splited_by_space[1], 0, equal_index);
+	if (equal_index == -1)
+		return ;
+	tmp = ft_substr(current_cmd->cmd_splited_by_space[1], 0, equal_index);
+	key = tmp;
 	value = current_cmd->cmd_splited_by_space[1] + equal_index + 1;
 	i = 0;
 	while (key[i])
@@ -64,29 +78,7 @@ not a valid identifier\n", key);
 		}
 		i++;
 	}
-	if (ms_is_in_env(ms, key))
-		update_env_value(ms, key, value);
-	else
-		ms_add_env(&ms->envs, key, value);
-	ms->p->cmds->exit_code = 0;
-}
-
-static void	print_sorted_env(t_ms *ms, int aux)
-{
-	char	*line;
-	int		i;
-	t_free	*curr_qs;
-
-	i = 0;
-	ms->str_export = env_to_array(ms);
-	ms->qs = ft_calloc (1, sizeof(t_qs));
-	ms->qs->free_qs = NULL;
-	ms->qs->v = ms->str_export;
-	ms->qs->size = sizeof(char *);
-	quicksort(ms->qs, 0, ft_mtx_size((void **) ms->str_export) - 1, \
-			(int (*)(void *, void *))(cmpstr));
-	curr_qs = ms->qs->free_qs;
-	ms_free_qs(ms, aux, &line, &curr_qs);
+	add_env_by_key_2(ms, key, value, tmp);
 }
 
 static void	check_first_char(t_ms *ms, t_cmd *current_cmd, int aux)
@@ -100,6 +92,7 @@ not a valid identifier\n", current_cmd->cmd_splited_by_space[1]);
 		ft_putstr_fd(line, aux);
 		free(line);
 		ms->p->cmds->exit_code = 1;
+		return ;
 	}
 	add_env_by_key(ms, current_cmd);
 	ms->p->cmds->exit_code = 0;

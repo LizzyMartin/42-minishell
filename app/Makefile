@@ -122,12 +122,22 @@ re:
 	@make fclean && make all
 	@echo "\033[1;32mRE EXECUTED SUCCESFULY!\033[0m"
 
-t:	$(NAME)
+# //tests
+
+run:	$(NAME)
 	@./minishell
 
-seg:	$(NAME)
+runr:	$(NAME)
+	make re
+	@./minishell
+
+runs:	$(NAME)
 	@valgrind  --suppressions=../tests/minishell.supp --track-origins=yes ./minishell
 
-leak:	$(NAME)
+runl:	$(NAME)
+	@valgrind  --suppressions=../tests/minishell.supp --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes ./minishell
+
+runrl:	$(NAME)
+	make re
 	@valgrind  --suppressions=../tests/minishell.supp --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes ./minishell
 
