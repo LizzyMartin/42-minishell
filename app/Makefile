@@ -131,13 +131,15 @@ runr:	$(NAME)
 	make re
 	@./minishell
 
+SUPP="42-minishell-capela-tester/tests/suppression.supp"
+
 runs:	$(NAME)
-	@valgrind  --suppressions=../tests/minishell.supp --track-origins=yes ./minishell
+	@valgrind  --suppressions=$(SUPP) --track-origins=yes ./minishell
 
 runl:	$(NAME)
-	@valgrind  --suppressions=../tests/minishell.supp --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes ./minishell
+	@valgrind  --suppressions=$(SUPP) --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes ./minishell
 
 runrl:	$(NAME)
 	make re
-	@valgrind  --suppressions=../tests/minishell.supp --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes ./minishell
+	@valgrind  --suppressions=$(SUPP) --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes ./minishell
 

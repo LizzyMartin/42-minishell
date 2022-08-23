@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_print_banner.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:06:23 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 13:03:00 by argel            ###   ########.fr       */
+/*   Updated: 2022/08/24 00:30:52 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	print_banner(void)
 
 	i = 0;
 	fd = open("srcs/1_design/banner.txt", O_RDONLY);
-	while (i < 25)
+	while (i < 33)
 	{
 		line = get_next_line(fd);
 		if (line != NULL)
