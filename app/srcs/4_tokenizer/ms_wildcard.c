@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:53:50 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/01 16:37:48 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/01 20:46:18 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,13 @@ int	check_aste(char **wc_split, int i, char *wc, t_file *head)
 	after_aste = NULL;
 	after_aste = head->name + head->cursor;
 	len = ft_mtx_size((void **) wc_split);
-	if (i == 0 && wc[0] != '*' && ft_strncmp(wc_split[0],
+	if (i == 0 && wc[0] != '*' && ft_strncmp(wc_split[0], // [a]*
 			head->name, ft_strlen(wc_split[0])) != 0)
 		return (1);
-	else if (i == (len - 1) && wc[0] == '*' && ft_rev_strncmp(head->name,
-			wc_split[i], ft_strlen(wc_split[i])) != 0)
+	else if (i == (len - 1) && wc[0] == '*' && wc[ft_strlen(wc) - 1] != '*' // *[a]
+	&& ft_rev_strncmp(head->name, wc_split[i], ft_strlen(wc_split[i])) != 0)
 		return (1);
-	else if (i == (len - 1) && wc[ft_strlen(wc) - 1] != '*'
-		&& ft_rev_strncmp(head->name, wc_split[i], ft_strlen(wc_split[i])) != 0)
-		return (1);
-	else if (len > 2 && ft_strnstr(after_aste, wc_split[i],
+	else if (ft_strnstr(after_aste, wc_split[i], // *a*[g*]l
 			ft_strlen(head->name)) == NULL)
 		return (1);
 	return (0);
@@ -117,11 +114,11 @@ void	ms_wildcard(t_ms *ms)
 	i = 0;
 	files = NULL;
 	args = ft_split(ms->shell_line_tokenized, ' ');
-	files = ms_get_current_directory();
 	while (args[i])
 	{
 		if (ft_strnstr(args[i], "*", ft_strlen(args[i])))
 		{
+			files = ms_get_current_directory();
 			wc_files = ms_find_wc_files(args[i], &files);
 			tmp = ft_strdup(ms->shell_line_tokenized);
 			ft_free_ptr((void *) &ms->shell_line_tokenized);

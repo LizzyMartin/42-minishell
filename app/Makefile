@@ -116,6 +116,7 @@ clean:
 fclean:	clean
 	make fclean -C $(LIBFT_DIR)
 	find -name '$(NAME)' -delete
+	rm vg*
 	@echo "\033[1;32mFCLEAN EXECUTED SUCCESFULY!\033[0m"
 
 re:
