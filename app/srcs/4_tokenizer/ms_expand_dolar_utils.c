@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_expand_dolar_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 00:55:01 by argel             #+#    #+#             */
-/*   Updated: 2022/06/14 13:49:05 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/01 16:27:12 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	ms_has_single_quotes(t_ms *ms, char *dolar_cmd, char *line)
 		ft_free_ptr((void *) &aux);
 		ft_free_ptr((void *) &aux2);
 	}
+	else
+		ft_free_ptr((void *) &line);
 	ft_free_ptr((void *) &no_dolar);
 	ft_free_ptr((void *) &dolar_cmd);
 }

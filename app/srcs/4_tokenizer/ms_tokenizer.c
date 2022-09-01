@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_tokenizer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:43:28 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/14 18:46:06 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/01 16:27:30 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,12 @@ char	*ms_get_home_value(t_ms *ms)
 static void	ms_home_value(t_ms *ms)
 {
 	char	*chr_tmp;
-	char	*dupped;
 	char	*tmp;
 	char	*tmp2;
 
 	chr_tmp = ft_chr_to_str('~', 1);
 	tmp2 = ft_strdup(ms_get_home_value(ms));
-	dupped = ms->shell_line_tokenized;
-	tmp = ft_str_replace_all(dupped \
+	tmp = ft_str_replace_all(ms->shell_line_tokenized \
 			, chr_tmp, tmp2);
 	ft_free_ptr((void *) &chr_tmp);
 	ft_free_ptr((void *) &tmp2);
@@ -57,6 +55,7 @@ static void	ms_is_aux_env(t_ms *ms, int *equal_index)
 {
 	int	space_index;
 
+	ft_free_ptr((void *) &ms->shell_line_tokenized);
 	ms->shell_line_tokenized = ft_strdup(ms->shell_line);
 	ms->is_aux_env = 0;
 	*equal_index = ft_str_indexof(ms->shell_line_tokenized, \

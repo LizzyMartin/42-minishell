@@ -10,10 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/*   Updated: 2022/06/14 17:04:55 by acapela-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <minishell.h>
 
 static void	ms_treating_having_quotes_3(t_ms *ms, int i, int size, char *line)
@@ -27,6 +23,7 @@ static void	ms_treating_having_quotes_3(t_ms *ms, int i, int size, char *line)
 	{
 		tmp = ft_substr(line, i, size - i);
 		ms->aux = ft_strjoin_free(ms->aux, tmp);
+		free(tmp);
 		return ;
 	}
 	if (ft_strnstr(line, "&&", ft_strlen(line)))

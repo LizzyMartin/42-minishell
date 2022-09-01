@@ -6,12 +6,20 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:06:41 by acapela-          #+#    #+#             */
-/*   Updated: 2022/08/18 13:13:51 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/01 14:31:09 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+typedef struct s_file
+{
+	char			*name;
+	int				cursor;
+	struct s_file	*next;
+	struct s_file	*prev;
+}	t_file;
 
 typedef struct s_free
 {

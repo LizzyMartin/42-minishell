@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:09 by acapela-          #+#    #+#             */
-/*   Updated: 2022/08/18 13:15:52 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/01 17:08:17 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,21 @@ char	*check_path(int i, t_cmd *current_cmd, char **path)
 	return (NULL);
 }
 
+int	check_envpath(char *env_path, t_ms *ms,
+		t_cmd *current_cmd)
+{
+	if (env_path == NULL)
+	{
+		ft_pf_error("miniheaven: %s %s", \
+				current_cmd->just_name, E_NOTDIR);
+		ms->no_path = 1;
+		return (1);
+	}
+	else
+		ms->no_path = 0;
+	return (0);
+}
+
 char	*ms_append_path_in_front(t_cmd *current_cmd, t_ms *ms)
 {
 	char	**path;
@@ -37,15 +52,8 @@ char	*ms_append_path_in_front(t_cmd *current_cmd, t_ms *ms)
 
 	i = -1;
 	env_path = ms_find_env_value(ms, "PATH");
-	if (env_path == NULL)
-	{
-		ft_pf_error("miniheaven: %s %s", \
-				current_cmd->just_name, E_NOTDIR);
-		ms->no_path=1;
+	if (check_envpath(env_path, ms, current_cmd))
 		return (NULL);
-	}
-	else
-		ms->no_path=0;
 	path = ft_split(env_path, ':');
 	while (path[++i])
 	{

@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/08/18 13:12:51 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/01 14:30:40 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,11 @@ int			valid_chr(char chr);
 void		ms_quotes_vs_connectors(t_ms *ms, char *line);
 void		ms_check_quotes_aux(t_ms *ms, char **cmd, char *tmp, char *aux);
 void		ms_replace_connectors_by_token(t_ms *ms, char *tmp);
+void		print_lst(t_file *head);
+void		ms_free_files(t_file **files);
+t_file		*ms_get_current_directory(void);
+void		ms_file_delete(t_file **head);
+void		ms_go_start(t_file **files);
 
 /* parse */
 int			ms_parse(t_ms *ms);

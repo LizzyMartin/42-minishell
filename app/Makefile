@@ -122,24 +122,30 @@ re:
 	@make fclean && make all
 	@echo "\033[1;32mRE EXECUTED SUCCESFULY!\033[0m"
 
-# //tests
+
+# TEST
+SUPP="../../42-minishell-capela-tester/tests/suppression.supp"
 
 run:	$(NAME)
 	@./minishell
-
-runr:	$(NAME)
-	make re
-	@./minishell
-
-SUPP="42-minishell-capela-tester/tests/suppression.supp"
 
 runs:	$(NAME)
 	@valgrind  --suppressions=$(SUPP) --track-origins=yes ./minishell
 
 runl:	$(NAME)
+
 	@valgrind  --suppressions=$(SUPP) --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes ./minishell
+
+runr:	$(NAME)
+	make re
+	@./minishell
 
 runrl:	$(NAME)
 	make re
 	@valgrind  --suppressions=$(SUPP) --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes ./minishell
 
+n:
+	norminette *
+
+t:
+	bash test.sh

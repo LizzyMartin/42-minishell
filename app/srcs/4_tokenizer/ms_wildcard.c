@@ -3,118 +3,133 @@
 /*                                                        :::      ::::::::   */
 /*   ms_wildcard.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:53:50 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/14 18:59:46 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/01 16:37:48 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-char	*ms_get_files_that_represent_wildcard(char *wildcard)
+int	check_aste(char **wc_split, int i, char *wc, t_file *head)
 {
-	char			*replace;
-	struct dirent	*de;
-	int				all;
-	DIR				*dr;
-	char			*tmp;
+	int		len;
+	char	*after_aste;
 
-	all = 0;
-	replace = ft_strdup("");
-	dr = opendir(".");
-	if (ft_strncmp(wildcard, "*", ft_strlen(wildcard)) == 0)
-		all = 1;
-	de = readdir(dr);
-	while (de != NULL)
-	{
-		if (get_boolean(wildcard, de, all) == 1)
-		{
-			de = readdir(dr);
-			continue ;
-		}
-		update_tmp(&replace, dr, &de, &tmp);
-	}
-	closedir(dr);
-	return (tmp);
+	after_aste = NULL;
+	after_aste = head->name + head->cursor;
+	len = ft_mtx_size((void **) wc_split);
+	if (i == 0 && wc[0] != '*' && ft_strncmp(wc_split[0],
+			head->name, ft_strlen(wc_split[0])) != 0)
+		return (1);
+	else if (i == (len - 1) && wc[0] == '*' && ft_rev_strncmp(head->name,
+			wc_split[i], ft_strlen(wc_split[i])) != 0)
+		return (1);
+	else if (i == (len - 1) && wc[ft_strlen(wc) - 1] != '*'
+		&& ft_rev_strncmp(head->name, wc_split[i], ft_strlen(wc_split[i])) != 0)
+		return (1);
+	else if (len > 2 && ft_strnstr(after_aste, wc_split[i],
+			ft_strlen(head->name)) == NULL)
+		return (1);
+	return (0);
 }
 
-int	next_space_index(t_ms *ms, int after_asteristic_posi)
+static int	ms_file_match_wc2(int *z, char **wc_split, t_file **head, int i)
 {
+	int		nlen;
+	int		wcsplitlen;
+
+	wcsplitlen = ft_strlen(wc_split[i]);
+	nlen = ft_strlen((*head)->name);
+	(*head)->cursor = ft_str_indexof((*head)->name,
+			wc_split[i], nlen) + wcsplitlen;
+	(*head) = (*head)->next;
+	(void) z;
+	return (*z + 1);
+}
+
+static int	ms_file_match_wc(char *wc, t_file **files)
+{
+	int		i;
+	t_file	*head;
+	char	**wc_split;
+	int		z;
+	int		len;
+
+	i = -1;
+	wc_split = ft_split(wc, '*');
+	head = (*files);
+	len = ft_mtx_size((void **) wc_split);
+	while (++i < len)
+	{
+		z = 0;
+		while (head->next != NULL)
+			if (check_aste(wc_split, i, wc, head))
+				ms_file_delete(&head);
+		else
+			z = ms_file_match_wc2(&z, wc_split, &head, i);
+		ms_go_start(&head);
+	}
+	(*files) = head;
+	ft_mtx_free((void **) wc_split);
+	if (z == 0)
+		return (0);
+	return (1);
+}
+
+static char	*ms_find_wc_files(char *wc, t_file **files)
+{
+	char	*wc_files;
 	char	*tmp;
 
-	tmp = ms->shell_line;
-	while (tmp[after_asteristic_posi] != ' '
-		&& tmp[after_asteristic_posi] != '\0')
-		after_asteristic_posi++;
-	return (after_asteristic_posi);
-}
-
-int	ms_exist_some_file_with_this_wildcard(char *wildcard)
-{
-	DIR				*dr;
-	struct dirent	*de;
-	int				wd_f_o;
-	int				exist;
-
-	exist = 0;
-	dr = opendir(".");
-	de = readdir(dr);
-	if (ft_strncmp(wildcard, "*", ft_strlen(wildcard)) == 0)
-		return (1);
-	while (de != NULL)
-	{
-		wd_f_o = ft_str_indexof(de->d_name,
-				wildcard + 1, ft_strlen(de->d_name));
-		if (wd_f_o > 0)
-			exist = 1;
-		de = readdir(dr);
-	}
-	closedir(dr);
-	return (exist);
-}
-
-static int	ms_wildcard_loop(t_ms *ms, int *i)
-{
-	int		start;
-	int		end;
-	char	*replace;
-	char	*wildcard;
-
-	replace = ft_strdup("");
-	start = ft_indexof(ms->shell_line_tokenized, '*') + 1;
-	end = next_space_index(ms, start) - 1;
-	wildcard = ft_substr(ms->shell_line_tokenized, start, end);
-	if (ms_exist_some_file_with_this_wildcard(wildcard) == 1)
-	{
-		replace = ms_get_files_that_represent_wildcard(wildcard);
-		ms->shell_line_tokenized = \
-ft_str_replace(ft_strdup(ms->shell_line_tokenized), wildcard, replace);
-	}
+	tmp = NULL;
+	wc_files = ft_strdup("");
+	if (ft_strncmp(wc, "*", ft_strlen(wc)) != 0
+		&& ms_file_match_wc(wc, files) == 0)
+		return (ft_strdup(wc));
 	else
 	{
-		*i += start;
-		ft_free_ptr((void *) &replace);
-		ft_free_ptr((void *) &wildcard);
-		return (1);
+		while ((*files) != NULL && (*files)->name != NULL)
+		{
+			tmp = ft_strdup(wc_files);
+			ft_free_ptr((void *) &wc_files);
+			wc_files = ft_printf_to_var("%s%s ", tmp, (*files)->name);
+			(*files) = (*files)->next;
+			ft_free_ptr((void *) &(*files)->prev->name);
+			ft_free_ptr((void *) &(*files)->prev);
+			free(tmp);
+		}
 	}
-	ft_free_ptr((void *) &replace);
-	ft_free_ptr((void *) &wildcard);
-	return (0);
+	ft_free_ptr((void *) &(*files)->name);
+	ft_free_ptr((void *) &(*files));
+	return (wc_files);
 }
 
 void	ms_wildcard(t_ms *ms)
 {
-	char	*iterate_shell_line;
+	t_file	*files;
+	char	**args;
 	int		i;
+	char	*wc_files;
+	char	*tmp;
 
 	i = 0;
-	iterate_shell_line = ft_strdup(ms->shell_line_tokenized);
-	while (iterate_shell_line != NULL \
-	&& ft_strrchr(iterate_shell_line + i, '*') != NULL)
+	files = NULL;
+	args = ft_split(ms->shell_line_tokenized, ' ');
+	files = ms_get_current_directory();
+	while (args[i])
 	{
-		if (ms_wildcard_loop(ms, &i) == 1)
-			break ;
+		if (ft_strnstr(args[i], "*", ft_strlen(args[i])))
+		{
+			wc_files = ms_find_wc_files(args[i], &files);
+			tmp = ft_strdup(ms->shell_line_tokenized);
+			ft_free_ptr((void *) &ms->shell_line_tokenized);
+			ms->shell_line_tokenized = ft_str_replace(tmp,
+					args[i], wc_files);
+			ft_free_ptr((void *) &wc_files);
+		}
+		i++;
 	}
-	ft_free_ptr((void *) &iterate_shell_line);
+	ft_mtx_free((void **) args);
 }

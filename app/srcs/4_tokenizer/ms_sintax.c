@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_sintax.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 06:14:16 by argel             #+#    #+#             */
-/*   Updated: 2022/06/07 18:05:37 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/08/25 20:08:29 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	connectors_are_wrong(t_ms *ms)
 	{
 		if (c[i] == '&' || c[i] == '|' || c[i] == ';' || c[i] == '>')
 		{
-			if (c[i + 2] == c[i])
+			if (c[i + 2] == '\0' || c[i + 2] == c[i])
 			{
 				ft_pf_error("miniheaven:%s '%c'\n", E_BADSINTAX, c[i]);
 				return (1);
