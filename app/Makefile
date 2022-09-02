@@ -149,4 +149,4 @@ n:
 	norminette *
 
 t:
-	bash test.sh
+	bash 42-minishell-capela-tester/42-minishell-capela-tester.sh

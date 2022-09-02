@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_add_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:57:03 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/08 13:40:28 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/02 02:56:19 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	ms_add_env(t_env **env, char *key, char *value)
 	{
 		while (head->next != NULL)
 			head = head->next;
+		ft_free_ptr((void *) &head->next);
 		head->next = malloc (sizeof(t_env));
 		head->next->key = ft_strdup(key);
 		head->next->value = ft_strdup(value);

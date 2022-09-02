@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_connectors_vs_quotes.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 18:09:38 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/14 17:07:38 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/01 22:05:49 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void	ms_treating_having_quotes_3(t_ms *ms, int i, int size, char *line)
 {
 	char	*tmp;
+	char	*tmp2;
 
 	ms->i = i;
 	if (!ft_strnstr(line, "&&", ft_strlen(line)) \
@@ -22,7 +23,9 @@ static void	ms_treating_having_quotes_3(t_ms *ms, int i, int size, char *line)
 	&& !ft_strnstr(line, "|", ft_strlen(line)))
 	{
 		tmp = ft_substr(line, i, size - i);
-		ms->aux = ft_strjoin_free(ms->aux, tmp);
+		tmp2 = ft_strdup(ms->aux);
+		ft_free_ptr((void *) &ms->aux);
+		ms->aux = ft_strjoin_free(tmp2, tmp);
 		free(tmp);
 		return ;
 	}
