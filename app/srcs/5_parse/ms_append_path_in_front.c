@@ -50,6 +50,11 @@ char	*ms_append_path_in_front(t_cmd *current_cmd, t_ms *ms)
 	int		i;
 	char	*result;
 
+	if (is_builtin(current_cmd->just_name))
+	{
+		ms->no_path = 0;
+	 	return (NULL);
+	}
 	i = -1;
 	env_path = ms_find_env_value(ms, "PATH");
 	if (check_envpath(env_path, ms, current_cmd))

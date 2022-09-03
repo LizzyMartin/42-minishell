@@ -17,6 +17,8 @@ t_history	*ms_last_history(t_history *history)
 	t_history	*tmp;
 
 	tmp = history;
+	if (!tmp)
+		return (tmp);
 	while (tmp->next != NULL)
 		tmp = tmp->next;
 	return (tmp);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_read_input.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:47 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 18:11:55 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/03 13:30:56 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,38 @@ static void	ms_count_connectors(t_ms *ms)
 	ms->connectors_amount = j;
 }
 
+int	ft_is_empty(char *str)
+{
+	int	i;
+
+	if (!str)
+		return (0);
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != ' ' && str[i] != '\0')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int	ms_read_input(t_ms *ms)
 {
+	ms_init_signal_detection();
 	ms->sh_name = ms_print_sh_name();
-	ms_read_input_signals();
 	ms->shell_line = readline(ms->sh_name);
 	ft_free_ptr((void *) &ms->sh_name);
+	if (!ms->shell_line)
+	{
+		ctrl_d_exit_shell(SIGQUIT, NULL, NULL);
+		exit(0);
+	}
+	if (ft_is_empty(ms->shell_line))
+		return (1);
 	if (ft_strnstr(ms->shell_line, "&&", ft_strlen(ms->shell_line)) \
 	!= NULL || ft_strnstr(ms->shell_line, "||", ft_strlen(ms->shell_line)) \
 	!= NULL )
 		ms_count_connectors(ms);
-	if (!ms->shell_line)
-	{
-		ctrl_d_exit_shell(SIGQUIT);
-		exit(0);
-	}
-	else if (*(ms->shell_line) == '\0')
-		return (1);
 	return (0);
 }

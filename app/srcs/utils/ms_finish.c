@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:05:54 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/02 02:57:17 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/02 20:45:59 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ void	ms_finish(t_ms *ms)
 	ft_free_ptr((void *) &ms->connectors_order);
 	rl_replace_line("", 0);
 	rl_on_new_line();
+	ms_free_history(ms);
 	clear_history();
 	rl_clear_history();
-	ms_free_history(ms);
 	ms_free_env(ms->envs);
 	ms_free_env(ms->aux_envs);
 	ms_finish_aux(ms);

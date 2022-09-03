@@ -12,6 +12,13 @@
 
 #include	<minishell.h>
 
+void	free_aux(t_env **del)
+{
+	ft_free_ptr((void *) &(*del)->key);
+	ft_free_ptr((void *) &(*del)->value);
+	ft_free_ptr((void *) &(*del));
+}
+
 void	ms_delete_env(t_ms *ms, char *key)
 {
 	t_env	*env;
@@ -33,9 +40,7 @@ void	ms_delete_env(t_ms *ms, char *key)
 				}
 				else
 					env->prev->next = NULL;
-				ft_free_ptr((void *) &del->key);
-				ft_free_ptr((void *) &del->value);
-				ft_free_ptr((void *) &del);
+				free_aux(&del);
 				break ;
 			}
 		}

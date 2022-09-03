@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_here_doc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:42 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/13 19:54:36 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/03 03:54:53 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static void	ms_here_doc_loop(char **stdin_text, t_p *p)
 	ft_putstr_fd(*stdin_text, p->pipe_here_doc[1]);
 	if (*stdin_text)
 		ft_free_ptr((void *) &(*stdin_text));
-	ms_while_executing_commands_signals();
 	*stdin_text = get_next_line(0);
 }
 

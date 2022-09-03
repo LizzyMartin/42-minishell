@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/01 14:30:40 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/03 03:55:09 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,9 @@ int			ms_read_input(t_ms *ms);
 int			ms_here_doc(t_ms *ms, t_p *p);
 
 // signals
-void		ms_read_input_signals(void);
-void		ms_while_executing_commands_signals(void);
-void		ctrl_c_redisplay_prompt(int signal);
-void		ctrl_c_interrupt_process(int signal);
-void		ctrl_d_exit_shell(int signal);
-void		ctrl_d_quit_process(int signal);
+void		ms_init_signal_detection(void);
+void		ctrl_c_redisplay_prompt(int sig, siginfo_t *siginfo, void *context);
+void		ctrl_d_exit_shell(int sig, siginfo_t *siginfo, void *context);
 
 /* history */
 void		ms_init_history(t_ms *ms);

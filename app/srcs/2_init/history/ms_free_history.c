@@ -16,9 +16,9 @@ void	ms_free_history(t_ms *ms)
 {
 	t_history	*head;
 
-	head = ms->history;
-	while (head->next != NULL)
-		head = head->next;
+	head = ms_last_history(ms->history);
+	if (!head)
+		return ;
 	while (head)
 	{
 		ft_free_ptr((void *) &head->line);

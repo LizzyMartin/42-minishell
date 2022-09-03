@@ -38,8 +38,7 @@ SRCS_FILES +=	2_init/history/ms_add_history.c   \
 
 SRCS_FILES +=	3_read_input/ms_read_input.c \
 				3_read_input/ms_here_doc.c \
-				3_read_input/ms_signals.c \
-				3_read_input/ms_signals_ctrl.c
+				3_read_input/ms_signals.c
 
 SRCS_FILES +=	4_tokenizer/ms_tokenizer.c \
 				4_tokenizer/ms_wildcard.c \
@@ -116,7 +115,6 @@ clean:
 fclean:	clean
 	make fclean -C $(LIBFT_DIR)
 	find -name '$(NAME)' -delete
-	rm vg*
 	@echo "\033[1;32mFCLEAN EXECUTED SUCCESFULY!\033[0m"
 
 re:

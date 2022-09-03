@@ -20,13 +20,15 @@ int	check_aste(char **wc_split, int i, char *wc, t_file *head)
 	after_aste = NULL;
 	after_aste = head->name + head->cursor;
 	len = ft_mtx_size((void **) wc_split);
-	if (i == 0 && wc[0] != '*' && ft_strncmp(wc_split[0], // [a]*
+	if (i == 0 && wc[0] != '*' && ft_strncmp(wc_split[0],
 			head->name, ft_strlen(wc_split[0])) != 0)
 		return (1);
-	else if (i == (len - 1) && wc[0] == '*' && wc[ft_strlen(wc) - 1] != '*' // *[a]
-	&& ft_rev_strncmp(head->name, wc_split[i], ft_strlen(wc_split[i])) != 0)
+	else if (i == (len - 1) && wc[0] == '*'
+		&& wc[ft_strlen(wc) - 1] != '*'
+		&& ft_rev_strncmp(head->name, wc_split[i],
+			ft_strlen(wc_split[i])) != 0)
 		return (1);
-	else if (ft_strnstr(after_aste, wc_split[i], // *a*[g*]l
+	else if (ft_strnstr(after_aste, wc_split[i],
 			ft_strlen(head->name)) == NULL)
 		return (1);
 	return (0);
