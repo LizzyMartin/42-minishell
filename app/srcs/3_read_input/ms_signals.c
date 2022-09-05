@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:50 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/03 04:04:19 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/03 20:15:17 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ctrl_d_exit_shell(int sig, siginfo_t *siginfo, void *context)
 {
 	ms_finish(g_ms);
 	ft_printf_to_fd(1, "\n");
+	get_next_line(-1);
 	(void) siginfo;
 	(void) sig;
 	(void) context;

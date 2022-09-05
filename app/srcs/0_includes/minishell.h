@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/03 03:55:09 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/03 21:32:21 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,10 @@ void		ms_add_history(t_ms *ms, char *line, t_cmd *cmds);
 void		ms_print_history(t_ms *ms, t_cmd *current_cmd, t_p *prompt);
 
 /* tokenizer */
+void		ms_switch_subshell_output(t_ms *ms);
+int			ms_execute_prompt_in_subshell(t_ms *ms, t_p *curr_prompt, int *exit_code);
+void		ms_parse_subshells(t_ms *ms);
+
 int			ms_sintax(t_ms *ms);
 int			ms_tokenizer(t_ms *ms);
 void		ms_wildcard(t_ms *ms);

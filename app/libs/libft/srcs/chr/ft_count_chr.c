@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_count_chr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: argel <argel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 01:23:51 by argel             #+#    #+#             */
-/*   Updated: 2022/06/01 01:24:10 by argel            ###   ########.fr       */
+/*   Updated: 2022/09/03 18:01:51 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,16 @@
 
 int	ft_count_chr(char *str, char c)
 {
-	int	con;
+	int	n;
 	int	i;
-	int	w;
 
-	con = 0;
-	w = 0;
 	i = 0;
+	n = 0;
 	while (str[i])
 	{
-		if (str[i] != c && con == 0)
-		{
-			con = 1;
-			w++;
-		}
-		else if (str[i] == c)
-			con = 0;
+		if (str[i] == c)
+			n++;
 		i++;
 	}
-	return (w);
+	return (n);
 }

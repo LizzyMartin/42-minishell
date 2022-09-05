@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:06:41 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/01 14:31:09 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/03 21:16:43 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ typedef struct s_cmd
 	char					*error_msg;
 	int						cmd_is_path_but_invalid;
 	int						can_execute;
+	int						subshell;
 }	t_cmd;
 
 typedef struct s_prompt
@@ -149,6 +150,9 @@ typedef struct s_minishell
 	int						is_cat_sequence;
 	int						fake_cat_input;
 	int						no_path;
+	struct s_minishell		*subs;
+	int						n_subs;
+	int						i_subs;
 }	t_ms;
 
 #endif

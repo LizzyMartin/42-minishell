@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 06:44:31 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/26 20:25:09 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/03 16:27:36 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,5 @@ void	ft_dll_cmd_add_back(t_ms *ms, char **cmd_splited)
 	cmd->name_and_path = NULL;
 	cmd->index = 0;
 	cmd->std_in = 0;
+	cmd->subshell = 0;
 }

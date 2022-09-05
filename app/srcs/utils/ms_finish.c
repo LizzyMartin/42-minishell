@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:05:54 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/02 20:45:59 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/03 20:14:44 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,4 @@ void	ms_finish(t_ms *ms)
 	ms_free_env(ms->envs);
 	ms_free_env(ms->aux_envs);
 	ms_finish_aux(ms);
-	get_next_line(-1);
 }

@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:42:02 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/01 14:31:41 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/03 21:33:12 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,8 @@ curr_prompt->only_redirect_to_file == 1)
 	{
 		while (curr_prompt)
 		{
-			exit_code = ms_execute_commands(ms, curr_prompt);
+			if (ms_execute_prompt_in_subshell(ms, curr_prompt, &exit_code) == 0)
+				exit_code = ms_execute_commands(ms, curr_prompt);
 			if (ms->connectors_order != NULL)
 			{
 				if (ms->connectors_order[i] == 1 && exit_code != 0)

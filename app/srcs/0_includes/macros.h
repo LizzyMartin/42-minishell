@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:06:34 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/03 19:38:24 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/03 17:51:15 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,7 @@
 # define T_SPACE            "__[BANANA3]__"
 
 # define T_WILDCARD         "__[BANANA4]__"
+
+# define T_SUBSHELL         "__[BANANA5]__"
 
 #endif
