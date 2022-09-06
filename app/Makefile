@@ -65,7 +65,8 @@ SRCS_FILES +=	5_parse/ms_parse.c \
 
 SRCS_FILES +=	6_execute/ms_execute_commands.c \
 				6_execute/ms_execute_commands_utils_1.c \
-				6_execute/ms_execute_commands_utils_2.c
+				6_execute/ms_execute_commands_utils_2.c \
+				6_execute/ms_execute_commands_utils_3.c
 
 SRCS_FILES +=	6_execute/builtins/ms_cd.c \
 				6_execute/builtins/ms_echo.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse_commands_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/06/14 17:41:46 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/06 20:56:34 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	reset_cmd(t_cmd **curr_command)
 	(*curr_command)->cmd_line = NULL;
 	(*curr_command)->cmd_splited_by_space = NULL;
 	(*curr_command)->can_execute = 1;
+	(*curr_command)->subshell = 1;
 }
 
 char	*get_just_name(char *path)

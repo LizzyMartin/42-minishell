@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:43:28 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/03 18:03:11 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/07 00:41:49 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ static void	ms_home_value(t_ms *ms)
 	ft_free_ptr((void *) &chr_tmp);
 	ft_free_ptr((void *) &tmp2);
 	ms->shell_line_tokenized = tmp;
+	if (ft_strrchr(ms->shell_line_tokenized, '*') != NULL)
+		ms_wildcard(ms);
 }
 
 static void	ms_aux_env(t_ms *ms, int equal_index)
@@ -93,7 +95,5 @@ int	ms_tokenizer(t_ms *ms)
 		return (1);
 	}
 	ms_home_value(ms);
-	if (ft_strrchr(ms->shell_line_tokenized, '*') != NULL)
-		ms_wildcard(ms);
 	return (0);
 }

@@ -32,8 +32,11 @@ t_cmd *current_cmd, t_ms *ms)
 			ms->envp, &(curr_prompt->input_fd));
 	}
 	else
+	{
 		ft_printf_to_fd(1, "miniheaven: %s %s\n", \
 			current_cmd->just_name, current_cmd->error_msg);
+		return (1);
+	}
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:09 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/01 17:08:17 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/07 00:45:19 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*check_path(int i, t_cmd *current_cmd, char **path)
 }
 
 int	check_envpath(char *env_path, t_ms *ms,
-		t_cmd *current_cmd)
+		t_cmd *current_cmd, char ***path)
 {
 	if (env_path == NULL)
 	{
@@ -40,6 +40,7 @@ int	check_envpath(char *env_path, t_ms *ms,
 	}
 	else
 		ms->no_path = 0;
+	(*path) = ft_split(env_path, ':');
 	return (0);
 }
 
@@ -53,13 +54,12 @@ char	*ms_append_path_in_front(t_cmd *current_cmd, t_ms *ms)
 	if (is_builtin(current_cmd->just_name))
 	{
 		ms->no_path = 0;
-	 	return (NULL);
+		return (NULL);
 	}
 	i = -1;
 	env_path = ms_find_env_value(ms, "PATH");
-	if (check_envpath(env_path, ms, current_cmd))
+	if (check_envpath(env_path, ms, current_cmd, &path))
 		return (NULL);
-	path = ft_split(env_path, ':');
 	while (path[++i])
 	{
 		result = check_path(i, current_cmd, path);

@@ -6,11 +6,13 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:06:03 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/03 03:35:52 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/06 23:19:00 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include   <minishell.h>
+#include	<minishell.h>
+
+t_ms	*g_ms = NULL;
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -24,7 +26,10 @@ int	main(int argc, char **argv, char **envp)
 	}
 	else
 	{
-		ms_init(&ms, argc, argv, envp);
+		ms = ft_calloc(1, sizeof(t_ms));
+		g_ms = ms;
+		ms_init(ms, argc, argv, envp);
+		print_banner();
 		while (1)
 			minishell(ms);
 		ms_finish(ms);

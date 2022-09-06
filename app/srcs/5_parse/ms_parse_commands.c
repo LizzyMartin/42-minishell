@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/03 20:35:20 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/06 23:21:30 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,21 @@ static void	prepare_something(t_cmd *curr_command, \
 void	ms_parse_commands2(t_ms *ms, \
 	t_p *curr_prompt, t_cmd *curr_command, int c)
 {
+	char	*tmp;
+
 	ms->tmp2 = ft_strdup(curr_prompt->this_p_line_splited_by_pipe[c]);
 	ft_free_ptr((void *) &curr_command->cmd_line);
 	curr_command->cmd_line = ft_strdup(ms->tmp2);
+	tmp = ft_strtrim(curr_command->cmd_line, " ");
+	if ((ft_strncmp(tmp, T_SUBSHELL, ft_strlen(curr_command->cmd_line)) == 0)
+		&& curr_prompt->pipe_amount > 1)
+	{
+		curr_command->cmd_line = ft_str_replace(curr_command->cmd_line,
+				T_SUBSHELL, ms->subs[ms->i_subs].shell_line);
+		curr_command->subshell = 1;
+		ms->i_subs++;
+	}
+	ft_free_ptr((void *) &tmp);
 }
 
 void	ms_parse_commands(t_ms *ms, \
