@@ -6,82 +6,78 @@ RLFLAG =		-lreadline -ltinfo
 AR =            ar -rcs
 RM =            rm -rfd
 
-LIBFT_DIR = 	libs/libft
+LIBFT_DIR = 	srcs/1_libft
 LIBFT.A =       $(LIBFT_DIR)/libft.a
 
 # Mandatory
 
 SRCS_DIR =   	srcs
-OBJS_DIR =   	$(SRCS_DIR)/.objs
-HEADER_DIR =   ./srcs/0_includes
-HEADER =		$(HEADER_DIR)/minishell.h
+OBJS_DIR =   	.objs
+HEADER_DIR =   ./srcs/
+HEADER =		$(HEADER_DIR)/_minishell.h
 NAME =			minishell
 
-SRCS_FILES +=	1_design/ms_print_banner.c
+SRCS_FILES +=	2_utils/env/ms_add_env.c \
+				2_utils/env/ms_delete_env.c \
+				2_utils/env/ms_find_env_value.c \
+				2_utils/env/ms_free_env.c \
+				2_utils/env/ms_is_in_env.c \
+				2_utils/env/ms_last_env.c \
+				2_utils/env/ms_init_env.c \
+				2_utils/env/ms_update_env_value.c
 
-SRCS_FILES +=	2_init/ms_init.c
+SRCS_FILES +=	2_utils/history/ms_add_history.c   \
+				2_utils/history/ms_print_history.c \
+				2_utils/history/ms_last_history.c \
+				2_utils/history/ms_init_history.c \
+				2_utils/history/ms_free_history.c
 
-SRCS_FILES +=	2_init/env/ms_add_env.c \
-				2_init/env/ms_delete_env.c \
-				2_init/env/ms_find_env_value.c \
-				2_init/env/ms_free_env.c \
-				2_init/env/ms_is_in_env.c \
-				2_init/env/ms_last_env.c \
-				2_init/env/ms_init_env.c \
-				2_init/env/ms_update_env_value.c
+SRCS_FILES +=	2_utils/cmd/ms_dll_cmd_last.c \
+				2_utils/cmd/ms_dll_cmd_free.c \
+				2_utils/prompt/ms_free_prompt.c
 
-SRCS_FILES +=	2_init/history/ms_add_history.c   \
-				2_init/history/ms_print_history.c \
-				2_init/history/ms_last_history.c \
-				2_init/history/ms_init_history.c \
-				2_init/history/ms_free_history.c
+SRCS_FILES +=	4_init.c
 
-SRCS_FILES +=	3_read_input/ms_read_input.c \
-				3_read_input/ms_here_doc.c \
-				3_read_input/ms_signals.c
+SRCS_FILES +=	5_read_input.c \
+				6_read_input_here_doc.c \
+				7_read_input_signals.c
 
-SRCS_FILES +=	4_tokenizer/ms_tokenizer.c \
-				4_tokenizer/ms_wildcard.c \
-				4_tokenizer/ms_wildcard_utils.c \
-				4_tokenizer/ms_check_quotes.c \
-				4_tokenizer/ms_expand_dolar.c \
-				4_tokenizer/ms_expand_dolar_utils.c \
-				4_tokenizer/ms_sintax.c \
-				4_tokenizer/ms_check_subshell.c \
-				4_tokenizer/ms_connectors_vs_quotes.c \
-				4_tokenizer/ms_connectors_vs_quotes_utils.c
+SRCS_FILES +=	8_tokenizer.c \
+				9_tokenizer_sintax.c \
+				10_tokenizer_subshell.c \
+				11_tokenizer_check_quotes.c \
+				12_tokenizer_connectors_vs_quotes.c \
+				13_tokenizer_connectors_vs_quotes_utils.c \
+				14_tokenizer_expand_dolar.c \
+				15_tokenizer_expand_dolar_utils.c \
+				16_tokenizer_wildcard.c \
+				17_tokenizer_wildcard_utils.c
 
-SRCS_FILES +=	5_parse/ms_parse.c \
-				5_parse/ms_parse_prompts.c \
-				5_parse/ms_parse_commands.c \
-				5_parse/ms_parse_commands_utils.c \
-				5_parse/ms_parse_commands_utils2.c \
-				5_parse/ms_append_path_in_front.c \
-				5_parse/ms_parse_input.c \
-				5_parse/ms_parse_output.c \
-				5_parse/cmd/ms_dll_cmd_last.c \
-				5_parse/cmd/ms_dll_cmd_free.c \
-				5_parse/prompt/ms_free_prompt.c
+SRCS_FILES +=	18_parse.c \
+				19_parse_prompts.c \
+				20_parse_input.c \
+				21_parse_output.c \
+				22_parse_commands.c \
+				23_parse_commands_utils.c \
+				24_parse_commands_utils2.c \
+				25_parse_append_path_in_front.c \
 
-SRCS_FILES +=	6_execute/ms_execute_commands.c \
-				6_execute/ms_execute_commands_utils_1.c \
-				6_execute/ms_execute_commands_utils_2.c \
-				6_execute/ms_execute_commands_utils_3.c
+SRCS_FILES +=	26_execute_commands.c \
+				27_execute_commands_utils_1.c \
+				28_execute_commands_utils_2.c \
+				29_execute_commands_utils_3.c
 
-SRCS_FILES +=	6_execute/builtins/ms_cd.c \
-				6_execute/builtins/ms_echo.c \
-				6_execute/builtins/ms_env.c \
-				6_execute/builtins/ms_exit.c \
-				6_execute/builtins/ms_export.c \
-				6_execute/builtins/ms_export_utils.c \
-				6_execute/builtins/ms_pwd.c \
-				6_execute/builtins/ms_unset.c
+SRCS_FILES +=	30_builtin_echo.c \
+				31_builtin_cd.c \
+				32_builtin_env.c \
+				33_builtin_exit.c \
+				34_builtin_export.c \
+				35_builtin_export_utils.c \
+				36_builtin_pwd.c \
+				37_builtin_unset.c
 
-SRCS_FILES +=	utils/ms_reinit.c \
-				utils/ms_finish.c
-
-SRCS_FILES +=	minishell.c \
-				main.c
+SRCS_FILES +=	38_main.c \
+				39_deinit.c
 
 SRCS = 			$(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
 OBJS =          $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
@@ -97,18 +93,11 @@ $(NAME):	$(OBJS_DIR) $(OBJS) $(HEADER)
 
 $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)
-	mkdir -p $(OBJS_DIR)/1_design
-	mkdir -p $(OBJS_DIR)/2_init
-	mkdir -p $(OBJS_DIR)/2_init/env
-	mkdir -p $(OBJS_DIR)/2_init/history
-	mkdir -p $(OBJS_DIR)/3_read_input
-	mkdir -p $(OBJS_DIR)/4_tokenizer
-	mkdir -p $(OBJS_DIR)/5_parse
-	mkdir -p $(OBJS_DIR)/5_parse/prompt
-	mkdir -p $(OBJS_DIR)/5_parse/cmd
-	mkdir -p $(OBJS_DIR)/6_execute
-	mkdir -p $(OBJS_DIR)/6_execute/builtins
-	mkdir -p $(OBJS_DIR)/utils
+	mkdir -p $(OBJS_DIR)/2_utils
+	mkdir -p $(OBJS_DIR)/2_utils/env
+	mkdir -p $(OBJS_DIR)/2_utils/history
+	mkdir -p $(OBJS_DIR)/2_utils/prompt
+	mkdir -p $(OBJS_DIR)/2_utils/cmd
 
 clean:
 	$(RM) $(OBJS_DIR)

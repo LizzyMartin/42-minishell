@@ -1,0 +1,67 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    tmp                                                :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/09/19 21:45:28 by acapela-          #+#    #+#              #
+#    Updated: 2022/09/01 14:08:14 by acapela-         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+#include	<libft.h>
+
+static size_t	ft_max(char *s1, char *s2, char **ns1, char **ns2)
+{
+	char	*fill;
+	int		len1;
+	int		len2;
+	
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	if (len1 > len2)
+	{
+		(*ns1) = s1;
+		fill = ft_chr_to_str(' ', len1 - len2);
+		(*ns2) = ft_str_merge(fill, ft_strdup(s2));
+		return (len1);
+	}
+	else
+	{
+		(*ns2) = s2;
+		fill = ft_chr_to_str(' ', len2 - len1);
+		(*ns1) = ft_str_merge(fill, ft_strdup(s1));
+		return (len2);
+	}
+}
+
+
+int	ft_rev_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t	len;
+	size_t	i;
+	char	*ns1;
+	char	*ns2;
+
+	if (n == 0)
+		return (0);
+	ns1 = NULL;
+	ns2 = NULL;
+	len = ft_max((char *)s1, (char *)s2, &ns1, &ns2);
+	i = len - 1;
+	n = i - n;
+	while (i > n && ns1[i] == ns2[i])
+	{
+		if (i == (n + 1))
+		{
+			len = (unsigned char)ns1[i - 1] - (unsigned char)ns2[i - 1];
+			ft_printf("%d aaaaaa\n", len);
+			return (0);
+		}
+		i--;
+	}
+	i = (unsigned char)ns1[i] - (unsigned char)ns2[i];
+	ft_printf("%d bbbbbbbbb\n", i);
+	return ((int)i);
+}
