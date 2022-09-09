@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_echo.c                                          :+:      :+:    :+:   */
+/*   30_builtin_echo.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:25 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/09 17:15:31 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/09 20:31:26 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	print_cmd_content(t_ms *ms, \
 	while (i++ < current_cmd->args_amount - 1)
 	{
 		if (ms->has_single_quotes)
-			ft_remove_char(cmd_splited[i], '\'');
+			ft_chr_remove_all(cmd_splited[i], '\'');
 		cmd_splited[i] = ft_str_replace_all(cmd_splited[i], T_SPACE, " ");
 		ft_putstr_fd(cmd_splited[i], aux);
 		if (i != current_cmd->args_amount - 1)

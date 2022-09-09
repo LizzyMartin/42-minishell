@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_expand_dolar.c                                  :+:      :+:    :+:   */
+/*   14_tokenizer_expand_dolar.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 00:55:01 by argel             #+#    #+#             */
-/*   Updated: 2022/09/09 17:15:31 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/09 20:28:34 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ void	ms_expand_dolar_loop(t_ms *ms, char **line_splited, int i)
 	ms_quotes_something_1(ms, line_splited, i);
 	ms_quotes_something_2(ms, line_splited, i, dolar_cmd);
 	if (ms->has_double_quotes)
-		ft_remove_char(ms->shell_line_tokenized, '"');
+		ft_chr_remove_all(ms->shell_line_tokenized, '"');
 	if (ms->has_single_quotes)
-		ft_remove_char(ms->shell_line_tokenized, '\'');
+		ft_chr_remove_all(ms->shell_line_tokenized, '\'');
 }
 
 void	ms_expand_dolar(t_ms *ms)

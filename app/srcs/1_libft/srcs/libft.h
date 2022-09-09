@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 20:34:46 by acapela-          #+#    #+#             */
-/*   Updated: 2022/08/31 16:07:50 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/09 20:27:05 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int		ft_isprint(int c);
 int		ft_tolower(int c);
 char	ft_toupper(int c);
 void	ft_remove_char(char *s, char c);
+void	ft_chr_remove_all(char *s, char c);
 
 // cvt (convert)
 int		ft_atoi(const char *str);
