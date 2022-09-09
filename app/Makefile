@@ -62,10 +62,10 @@ SRCS_FILES +=	18_parse.c \
 				24_parse_commands_utils2.c \
 				25_parse_append_path_in_front.c \
 
-SRCS_FILES +=	26_execute_commands.c \
-				27_execute_commands_utils_1.c \
-				28_execute_commands_utils_2.c \
-				29_execute_commands_utils_3.c
+SRCS_FILES +=   26_execute_commands_utils_1.c \
+				27_execute_commands_utils_2.c \
+				28_execute_commands_utils_3.c \
+				29_execute_commands.c
 
 SRCS_FILES +=	30_builtin_echo.c \
 				31_builtin_cd.c \

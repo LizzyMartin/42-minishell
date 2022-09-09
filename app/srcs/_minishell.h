@@ -6,12 +6,12 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/09 18:02:49 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/09 19:45:07 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef _MINISHELL_H
+# define _MINISHELL_H
 
 /**************************************************************************** #
 #                               INCLUDES                                      #
@@ -74,7 +74,6 @@
 // here_doc errors
 # define CTRL_D_HD "bash: warning: here-document \
 at line 5 delimited by end-of-file (wanted `FIM')\n"
-
 
 /**************************************************************************** #
 #                                STRUCTS                                      #
