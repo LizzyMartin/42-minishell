@@ -12,7 +12,7 @@ LIBFT.A =       $(LIBFT_DIR)/libft.a
 # Mandatory
 
 SRCS_DIR =   	srcs
-OBJS_DIR =   	.objs
+OBJS_DIR =   	$(SRCS_DIR)/.objs
 HEADER_DIR =   ./srcs/
 HEADER =		$(HEADER_DIR)/_minishell.h
 NAME =			minishell

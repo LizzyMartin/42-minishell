@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_read_input.c                                    :+:      :+:    :+:   */
+/*   5_read_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:47 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/09 17:15:31 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/09 20:04:56 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ int	ms_read_input(t_ms *ms)
 	ms->sh_name = ms_print_sh_name();
 	ms->shell_line = readline(ms->sh_name);
 	ft_free_ptr((void *) &ms->sh_name);
-	if (!ms->shell_line)
+	if (ft_is_empty(ms->shell_line))
+		return (1);
+	else if (!ms->shell_line)
 	{
 		ctrl_d_exit_shell(SIGQUIT, NULL, NULL);
 		exit(0);
 	}
-	if (ft_is_empty(ms->shell_line))
-		return (1);
 	if (ft_strnstr(ms->shell_line, "&&", ft_strlen(ms->shell_line)) \
 	!= NULL || ft_strnstr(ms->shell_line, "||", ft_strlen(ms->shell_line)) \
 	!= NULL )

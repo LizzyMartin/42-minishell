@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:42:02 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/09 19:48:57 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/09 20:06:23 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ static void	print_fd_or_execute_cmd_loop(t_ms *ms, t_p *curr_prompt)
 			if ((ms->connectors_order[i] == 1 && exit_code != 0)
 				|| (ms->connectors_order[i] == 2 && exit_code == 0))
 				break ;
+		ft_free_ptr((void *) &tmp);
 		i++;
 		curr_prompt = curr_prompt->next;
 	}

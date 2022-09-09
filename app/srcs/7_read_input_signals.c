@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_signals.c                                       :+:      :+:    :+:   */
+/*   7_read_input_signals.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:50 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/09 17:15:31 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/09 20:08:53 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 void	ctrl_d_exit_shell(int sig, siginfo_t *siginfo, void *context)
 {
-	ms_finish(g_ms);
 	ft_printf_to_fd(1, "\n");
-	get_next_line(-1);
+	ms_finish(g_ms);
 	(void) siginfo;
 	(void) sig;
 	(void) context;
