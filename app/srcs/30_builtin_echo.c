@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:25 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/09 20:31:26 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/12 19:27:44 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ void	last_cmd_exit_code(t_ms *ms)
 	t_history	*code;
 
 	code = ms_last_history(ms->history);
-	ft_printf("%d", code->l_c_exit_code);
+	ft_printf("#%s#\n", code->line);
+	exit(0);
+	// ft_printf("%d", code->l_c_exit_code);
 }
 
 static void	ms_echo_having_flag(t_ms *ms, char **cmd_splited, \

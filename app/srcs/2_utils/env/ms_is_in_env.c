@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:00:20 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/09 17:15:31 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/12 19:20:18 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	ms_is_in_env(t_ms *ms, const char *key)
 			ft_free_ptr((void *) &tmp);
 			return (1);
 		}
+		ft_free_ptr((void *) &tmp);
 		aux = aux->next;
 	}
 	return (0);

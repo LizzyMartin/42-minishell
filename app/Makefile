@@ -114,7 +114,7 @@ re:
 
 
 # TEST
-SUPP="../../42-minishell-capela-tester/tests/suppression.supp"
+SUPP="test3/suppression.supp"
 
 run:	$(NAME)
 	@./minishell

@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 00:55:01 by argel             #+#    #+#             */
-/*   Updated: 2022/09/09 20:28:34 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/12 19:29:16 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ void	ms_expand_dolar(t_ms *ms)
 	if (line_splited[1] && ft_strncmp(line_splited[1], "$?", 2) == 0)
 	{
 		history_line = ms_last_history(ms->history);
+		ft_printf("#%s#\n", history_line->line);
+		exit(0);
 		tmp_exit_code = ft_itoa(history_line->l_c_exit_code);
 		ms->shell_line_tokenized = ft_str_replace_all(ms->shell_line_tokenized,
 				"$?", tmp_exit_code);

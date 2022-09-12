@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:55:14 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/09 17:15:31 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/12 20:15:54 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ void	ms_init_history(t_ms *ms)
 	ms->history_i = 1;
 	path = ft_printf_to_var("/home/%s/.bash_history", tmp);
 	fd = open(path, O_RDONLY);
+	if (fd == -1)
+	{
+			ft_printf_to_fd(2, "miniheaven: 1: history: not found\n");
+			ms->p->cmds->exit_code = 1;
+	}
 	line = get_next_line(fd);
 	trim = ft_strtrim(line, "\n");
 	while (line)

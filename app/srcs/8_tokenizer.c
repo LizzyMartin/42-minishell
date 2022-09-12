@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_tokenizer.c                                     :+:      :+:    :+:   */
+/*   8_tokenizer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:43:28 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/09 17:15:31 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/12 18:55:03 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,20 @@ static void	ms_home_value(t_ms *ms)
 	char	*chr_tmp;
 	char	*tmp;
 	char	*tmp2;
+	char	*tmp3;
 
 	chr_tmp = ft_chr_to_str('~', 1);
-	tmp2 = ft_strdup(ms_get_home_value(ms));
+	if (ms_is_in_env(ms, "HOME"))
+		tmp3 = ms_find_env_value(ms, "HOME");
+	else if (ms_is_in_env(ms, "USER"))
+		tmp3 = ft_printf_to_var("/home/%s", ms_find_env_value(ms, "USER"));
+	else
+		tmp3 = ft_strdup("/home");
+	tmp2 = ft_strdup(tmp3);
 	tmp = ft_str_replace_all(ms->shell_line_tokenized \
 			, chr_tmp, tmp2);
+	if(!ms_is_in_env(ms, "HOME"))
+		ft_free_ptr((void *) &tmp3);
 	ft_free_ptr((void *) &chr_tmp);
 	ft_free_ptr((void *) &tmp2);
 	ms->shell_line_tokenized = tmp;
