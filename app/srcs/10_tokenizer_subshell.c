@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_check_subshell.c                                :+:      :+:    :+:   */
+/*   10_tokenizer_subshell.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:26 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/09 17:15:31 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/14 23:53:10 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	ms_execute_prompt_in_subshell(t_ms *ms,
 		ms_subshell(current_sub);
 		exit(0);
 	}
+	ms_close_fds(curr_prompt);
 	waitpid(-1, exit_code, 0);
 	(void) ms;
 	(void) curr_prompt;
