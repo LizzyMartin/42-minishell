@@ -55,8 +55,11 @@ void	ms_parse_subshells(t_ms *ms)
 		ms->subs[i].shell_line = ft_substr(extract + 1, 0,
 				ft_strlen(extract) - 2);
 		tmp = ft_strdup(ms->shell_line_tokenized);
-		ft_free_ptr((void *) &ms->shell_line_tokenized);
-		ms->shell_line_tokenized = ft_str_replace(tmp, extract, T_SUBSHELL);
+		if (*ms->subs[i].shell_line != '\0')
+		{
+			ft_free_ptr((void *) &ms->shell_line_tokenized);
+			ms->shell_line_tokenized = ft_str_replace(tmp, extract, T_SUBSHELL);
+		}
 		ft_free_ptr((void *) &extract);
 	}
 }

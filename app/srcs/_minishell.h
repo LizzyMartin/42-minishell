@@ -60,6 +60,7 @@
 # define ENAMETOOLONG "cd: file name too long\n"
 # define ENOENT "cd: no such file or directory\n"
 # define ENOTDIR "cd: not a directory\n"
+# define EHNOTSET "miniheaven: cd: HOME not set\n"
 
 // unset errors
 # define EINVAL "unset: %s: invalid parameter name"

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   30_builtin_echo.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:25 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/12 19:27:44 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/14 13:42:34 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,7 @@ void	last_cmd_exit_code(t_ms *ms)
 	t_history	*code;
 
 	code = ms_last_history(ms->history);
-	ft_printf("#%s#\n", code->line);
-	exit(0);
-	// ft_printf("%d", code->l_c_exit_code);
+
 }
 
 static void	ms_echo_having_flag(t_ms *ms, char **cmd_splited, \
@@ -70,10 +68,7 @@ void	ms_echo(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 	if (!cmd_splited[1])
 		ft_putstr_fd("\n", aux);
 	else if (ft_strncmp(cmd_splited[1], "$?", 2) == 0)
-	{
-		last_cmd_exit_code(ms);
 		ft_putstr_fd("\n", aux);
-	}
 	else
 		ms_echo_having_flag(ms, cmd_splited, current_cmd, aux);
 	if (clo)
