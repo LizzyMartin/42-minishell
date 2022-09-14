@@ -69,7 +69,6 @@ char	*ms_append_path_in_front(t_cmd *current_cmd, t_ms *ms)
 	current_cmd->error_msg = ft_printf_to_var("%s", E_CMDNOTFOUND);
 	current_cmd->exit_code = 127;
 	current_cmd->can_execute = 0;
-	ft_printf("AAAAA\n");
 	ft_mtx_free((void **) path);
 	return (NULL);
 }

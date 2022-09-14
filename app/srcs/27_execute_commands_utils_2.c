@@ -26,7 +26,8 @@ static int	iterate_cmd_count_cat(t_ms *ms, t_cmd **tmp)
 
 	trim = NULL;
 	trim = ft_strtrim((*tmp)->cmd_line, " ");
-	if (ft_strncmp(trim, "cat", ft_strlen(trim)) == 0)
+	if (ft_strncmp(trim, "cat", ft_strlen(trim)) == 0
+		&& (*tmp)->index == 0)
 		ms->is_cat_sequence = 1;
 	if (ms->is_cat_sequence)
 	{
@@ -72,7 +73,7 @@ void	exec_cat_ls_sc(t_ms *ms)
 {
 	char	*input;
 
-	while (ms->fake_cat_input-- > 0)
+	while (ms->is_cat_sequence && ms->fake_cat_input-- > 0)
 	{
 		input = get_next_line(0);
 		ft_free_ptr((void *) &input);
