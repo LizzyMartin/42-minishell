@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:42:02 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/15 00:13:04 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/15 20:31:00 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	ms_execute_commands(t_ms *ms, t_p *curr_prompt)
 			continue ;
 		current_cmd = current_cmd->next;
 	}
+	update_exit_code_last_cmd(ms, curr_prompt->cmds);
 	exec_cat_ls_sc(ms);
 	ms_close_fds(curr_prompt);
 	current_cmd = ms_dll_cmd_last(curr_prompt->cmds);
@@ -60,7 +61,6 @@ static void	print_fd_or_execute_cmd_loop(t_ms *ms, t_p *curr_prompt)
 	i = 0;
 	while (curr_prompt)
 	{
-		ms_add_history(ms, NULL, curr_prompt->cmds);
 		tmp = ft_strtrim(curr_prompt->this_p_line, " ");
 		if (ft_strncmp(tmp, T_SUBSHELL,
 				ft_strlen(curr_prompt->this_p_line)) == 0)

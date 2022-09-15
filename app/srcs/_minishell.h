@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/15 00:15:39 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/15 20:28:39 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,7 +261,7 @@ void		ctrl_d_exit_shell(int sig, siginfo_t *siginfo, void *context);
 
 /* history */
 void		ms_init_history(t_ms *ms);
-void		ms_add_history(t_ms *ms, char *line, t_cmd *cmds);
+void		ms_add_history(t_ms *ms, char *line);
 void		ms_print_history(t_ms *ms, t_cmd *current_cmd, t_p *prompt);
 
 /* tokenizer */
@@ -294,6 +294,7 @@ void		ms_free_files(t_file **files);
 t_file		*ms_get_current_directory(void);
 void		ms_file_delete(t_file **head);
 void		ms_go_start(t_file **files);
+void		update_exit_code_last_cmd(t_ms *ms, t_cmd *cmds);
 
 /* parse */
 int			ms_parse(t_ms *ms);

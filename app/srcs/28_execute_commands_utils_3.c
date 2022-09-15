@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   28_execute_commands_utils_3.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:00 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/09 19:47:53 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/15 20:33:36 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_cmd *current_cmd, t_ms *ms)
 {
 	if (ft_strncmp(current_cmd->just_name, "history", 7) == 0)
 	{
-		ms_add_history(ms, NULL, curr_prompt->cmds);
+		ms_add_history(ms, curr_prompt->this_p_line);
 		ms_print_history(ms, current_cmd, curr_prompt);
 		if (current_cmd->index == (curr_prompt->args_amount - 1))
 			return (1);

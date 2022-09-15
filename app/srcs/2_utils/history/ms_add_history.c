@@ -6,17 +6,30 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:55:36 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/15 00:15:27 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/15 20:27:51 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <_minishell.h>
 
-static void	ms_add_history_aux(t_ms *ms, t_history *aux,
-	char *line, t_cmd *cmds)
+void		update_exit_code_last_cmd(t_ms *ms, t_cmd *cmds)
 {
 	t_cmd		*tmp;
 	int			e_code;
+	t_history	*aux;
+
+	aux = ms_last_history(ms->history);
+	tmp = ms_dll_cmd_last(cmds);
+	if (tmp)
+		e_code = tmp->exit_code;
+	else
+		e_code = 0;
+	aux->next->l_c_exit_code = e_code;
+}
+
+static void	ms_add_history_aux(t_ms *ms, t_history *aux,
+	char *line)
+{
 	char		*tmp2;
 
 	aux = ms_last_history(ms->history);
@@ -32,12 +45,7 @@ static void	ms_add_history_aux(t_ms *ms, t_history *aux,
 	}
 	aux->next->next = NULL;
 	aux->next->prev = aux;
-	tmp = ms_dll_cmd_last(cmds);
-	if (tmp)
-		e_code = tmp->exit_code;
-	else
-		e_code = 0;
-	aux->next->l_c_exit_code = e_code;
+	aux->next->l_c_exit_code = 2;
 }
 
 static void	reset_some_values(t_history *aux)
@@ -47,7 +55,7 @@ static void	reset_some_values(t_history *aux)
 	aux->l_c_exit_code = 0;
 }
 
-void	ms_add_history(t_ms *ms, char *line, t_cmd *cmds)
+void	ms_add_history(t_ms *ms, char *line)
 {
 	t_history	*aux;
 	t_history	*last_history;
@@ -71,6 +79,6 @@ void	ms_add_history(t_ms *ms, char *line, t_cmd *cmds)
 		if (last_history->line && ft_strncmp(ms->shell_line,
 				last_history->line, ft_strlen(ms->shell_line)))
 			add_history(ms->shell_line);
-		ms_add_history_aux(ms, aux, line, cmds);
+		ms_add_history_aux(ms, aux, line);
 	}
 }
