@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ms_add_history.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:55:36 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/15 20:27:51 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/15 15:44:17 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <_minishell.h>
 
-void		update_exit_code_last_cmd(t_ms *ms, t_cmd *cmds)
+void	update_exit_code_last_cmd(t_ms *ms, t_cmd *cmds)
 {
 	t_cmd		*tmp;
 	int			e_code;
@@ -24,7 +24,7 @@ void		update_exit_code_last_cmd(t_ms *ms, t_cmd *cmds)
 		e_code = tmp->exit_code;
 	else
 		e_code = 0;
-	aux->next->l_c_exit_code = e_code;
+	aux->l_c_exit_code = e_code;
 }
 
 static void	ms_add_history_aux(t_ms *ms, t_history *aux,

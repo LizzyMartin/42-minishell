@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   38_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:06:03 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/15 00:17:41 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/15 15:43:00 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ t_ms	*g_ms = NULL;
 
 void	ms_subshell(t_ms *ms)
 {
+	ms_add_history(ms, ms->shell_line_tokenized);
 	if (ms_tokenizer(ms) == 1)
 		return ;
 	if (ms_parse(ms) != 1 && ms->no_path == 0)
@@ -45,10 +46,6 @@ int	main(int argc, char **argv, char **envp)
 		ms = ft_calloc(1, sizeof(t_ms));
 		g_ms = ms;
 		ms_init(ms, argc, argv, envp);
-		// exit(0);
-		// t_history *h;
-		// h = ms_last_history(ms->history);
-		// ft_printf("#%s#\n", h->line);
 		print_banner();
 		while (1)
 			minishell(ms);

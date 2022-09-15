@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   34_builtin_export.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:42 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/14 14:00:28 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/15 15:50:29 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ static void	add_env_by_key(t_ms *ms, const t_cmd *current_cmd)
 	i = 0;
 	add_env_by_key_2(ms, key, value, tmp);
 }
-
 
 void	ms_export(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 {

@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:54:01 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/12 19:16:36 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/15 15:43:58 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	free_curr_prompt(t_p *curr_prompt)
 {
-	if(!curr_prompt)
+	if (!curr_prompt)
 		return ;
 	while (curr_prompt->next != NULL)
 		curr_prompt = curr_prompt->next;

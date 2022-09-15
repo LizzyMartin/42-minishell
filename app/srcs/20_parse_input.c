@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:15 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/12 18:43:49 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/15 15:56:33 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ char **input_s_by_space, char *tmp)
 		curr_prompt->has_here_doc = 1;
 		if (!input_s_by_space[1])
 			tmp = ft_substr(input_s_by_space[0],
-			ft_str_indexof(input_s_by_space[0], "<<",
-			ft_strlen(input_s_by_space[0])) + 2,
-			ft_strlen(input_s_by_space[0]));
+					ft_str_indexof(input_s_by_space[0], "<<",
+						ft_strlen(input_s_by_space[0])) + 2,
+					ft_strlen(input_s_by_space[0]));
 		else
 			tmp = ft_strdup(input_s_by_space[1]);
 		curr_prompt->hd_limiter = ft_strdup(tmp);
@@ -48,6 +48,21 @@ static char	**reset_split_prompt(t_p *curr_prompt)
 	return (input_s_by_space);
 }
 
+static char	*parse_input_aux(char **input_s_by_space)
+{
+	char	*tmp;
+
+	tmp = NULL;
+	if (!input_s_by_space[1])
+		tmp = ft_substr(input_s_by_space[0],
+				ft_str_indexof(input_s_by_space[0], "<",
+					ft_strlen(input_s_by_space[0])) + 1,
+				ft_strlen(input_s_by_space[0]));
+	else
+		tmp = ft_strdup(input_s_by_space[1]);
+	return (tmp);
+}
+
 char	**ms_parse_input(t_p *curr_prompt)
 {
 	char	**input_s_by_space;
@@ -60,13 +75,7 @@ char	**ms_parse_input(t_p *curr_prompt)
 	ft_strnstr(input_s_by_space[0], "<", 1))
 	{
 		curr_prompt->input_redirected_to_file = 1;
-		if (!input_s_by_space[1])
-			tmp = ft_substr(input_s_by_space[0],
-			ft_str_indexof(input_s_by_space[0], "<",
-			ft_strlen(input_s_by_space[0])) + 1,
-			ft_strlen(input_s_by_space[0]));
-		else
-			tmp = ft_strdup(input_s_by_space[1]);
+		tmp = parse_input_aux(input_s_by_space);
 		curr_prompt->input_path = tmp;
 		curr_prompt->input_fd = open(curr_prompt->input_path, O_RDONLY);
 		if (curr_prompt->input_fd == -1)

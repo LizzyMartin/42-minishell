@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:43:28 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/12 18:55:03 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/15 15:50:06 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	ms_home_value(t_ms *ms)
 	tmp2 = ft_strdup(tmp3);
 	tmp = ft_str_replace_all(ms->shell_line_tokenized \
 			, chr_tmp, tmp2);
-	if(!ms_is_in_env(ms, "HOME"))
+	if (!ms_is_in_env(ms, "HOME"))
 		ft_free_ptr((void *) &tmp3);
 	ft_free_ptr((void *) &chr_tmp);
 	ft_free_ptr((void *) &tmp2);

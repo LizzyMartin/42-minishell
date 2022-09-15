@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   29_execute_commands.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:42:02 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/15 20:31:00 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/15 15:51:46 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 int	ms_execv(t_ms *ms, t_p *curr_prompt, t_cmd **current_cmd)
 {
 	if (ft_strncmp((*current_cmd)->just_name, "cat",
-	ft_strlen((*current_cmd)->just_name)) == 0)
+			ft_strlen((*current_cmd)->just_name)) == 0)
+	{
 		if (ms->fake_cat_input > 0)
 		{
 			(*current_cmd) = (*current_cmd)->next;
 			return (1);
 		}
+	}
 	if (ms_which_command_type(curr_prompt, \
 	(*current_cmd), ms) == 1)
 		return (0);
