@@ -9,7 +9,7 @@ RM =            rm -rfd
 LIBFT_DIR = 	srcs/1_libft
 LIBFT.A =       $(LIBFT_DIR)/libft.a
 
-# Mandatory
+# Mandatory & Bonus
 
 SRCS_DIR =   	srcs
 OBJS_DIR =   	$(SRCS_DIR)/.objs
@@ -86,6 +86,8 @@ $(OBJS_DIR)/%.o:	$(SRCS_DIR)/%.c
 
 all:	$(NAME)
 
+bonus:	all
+
 $(NAME):	$(OBJS_DIR) $(OBJS) $(HEADER)
 	make -C $(LIBFT_DIR)
 	$(CC) -I$(HEADER_DIR) $(RLFLAG) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT.A)
@@ -136,6 +138,3 @@ runrl:	$(NAME)
 
 n:
 	norminette *
-
-t:
-	bash 42-minishell-capela-tester/42-minishell-capela-tester.sh

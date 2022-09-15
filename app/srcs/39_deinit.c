@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:05:54 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/09 20:02:58 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/15 19:20:43 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,4 @@ void	ms_reinit(t_ms *ms)
 	ft_free_ptr((void *) &ms->connectors_order);
 	ft_free_ptr((void *) &ms->shell_line_tokenized);
 	ft_mtx_free((void **) ms->slt_splited_by_connectors);
-	while (ms->n_subs > 0)
-	{
-		ms_finish(&ms->subs[i]);
-		ms->n_subs--;
-	}
 }

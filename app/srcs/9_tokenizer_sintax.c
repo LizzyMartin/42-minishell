@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 06:14:16 by argel             #+#    #+#             */
-/*   Updated: 2022/09/15 15:49:42 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/15 16:21:27 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ static int	subshell_wrong2( int i, char *c)
 	}
 	if (c[i] == ')' && i != len - 1)
 	{
-		if (ft_strnstr(c, "|", len) == NULL
-			|| ft_strnstr(c, "||", len) == NULL
-			|| ft_strnstr(c, "&&", len) == NULL)
+		if (ft_strnstr(c + i + 1, "|", len) == NULL
+			&& ft_strnstr(c + i + 1, "||", len) == NULL
+			&& ft_strnstr(c + i + 1, "&&", len) == NULL)
 		{
 			ft_pf_error("miniheaven:%s \n", E_BADSINTAX);
 			return (1);
