@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   34_builtin_export.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:42 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/15 15:50:29 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/15 19:23:00 by relizabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ not a valid identifier\n", check);
 		ft_putstr_fd(line, aux);
 		free(line);
 		ms->p->cmds->exit_code = 1;
-		return (1);
+		return (0);
 	}
-	return (0);
+	return (1);
 }
 
 char	**env_to_array(t_ms *ms)

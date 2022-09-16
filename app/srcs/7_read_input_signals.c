@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   7_read_input_signals.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:50 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/09 20:08:53 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/15 19:48:14 by relizabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,5 @@ void	ft_sigation(int signum, void (*f)(int, siginfo_t *, void *))
 void	ms_init_signal_detection(void)
 {
 	ft_sigation(SIGINT, &ctrl_c_redisplay_prompt);
-	ft_sigation(SIGQUIT, &ctrl_d_exit_shell);
+	signal(SIGQUIT, SIG_IGN);
 }

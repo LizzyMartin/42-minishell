@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   11_tokenizer_check_quotes.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:26 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/09 20:27:44 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/15 20:50:23 by relizabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
