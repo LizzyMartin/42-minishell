@@ -6,7 +6,7 @@
 /*   By: grupo_capela <grupo_capela@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:15 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/20 03:32:13 by grupo_capel      ###   ########.fr       */
+/*   Updated: 2022/09/20 04:25:41 by grupo_capel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,9 @@ char	**ms_parse_input(t_p *curr_prompt)
 	char	**splited_by_chr;
 	char 	**split_by_space;
 	char	*tmp;
-	// char	*divider;
 	int		len;
 
 	len = 0;
-	// divider = NULL;
 	tmp = NULL;
 	splited_by_chr = NULL;
 	split_by_space = NULL;
@@ -74,8 +72,6 @@ char	**ms_parse_input(t_p *curr_prompt)
 	curr_prompt->input_redirected_to_file = 0;
 	curr_prompt->only_input_redirected_to_file = 0;
 	len = ft_strlen(curr_prompt->this_p_line_splited_by_pipe[0]);
-
-
 	if (ft_strnstr(curr_prompt->this_p_line_splited_by_pipe[0], "<<", len))
 	{
 		curr_prompt->has_here_doc = 1;
@@ -124,8 +120,6 @@ char	**ms_parse_input(t_p *curr_prompt)
 		splited_by_chr = \
 			ft_split_by_str(curr_prompt->this_p_line_splited_by_pipe[0], "<");
 		split_by_space = ft_split(splited_by_chr[1], ' ');
-
-		// check file
 		tmp = ft_strdup(split_by_space[0]);
 		curr_prompt->input_path = ft_strdup(tmp);
 		
@@ -136,15 +130,8 @@ char	**ms_parse_input(t_p *curr_prompt)
 			ft_free_ptr((void *) &tmp);
 			return (NULL);
 		}
-		//if (ft_mtx_size((void **) input_s_by_space) <= 2)
-		//		curr_prompt->only_input_redirected_to_file = 1;
-
-		// ft_printf("#arquivo existe#\n");
-		// exit(0);
-		// continue
 		if (ft_strncmp(splited_by_chr[0], " ", ft_strlen(splited_by_chr[0])) == 0)
 		{
-			ft_printf("TEM NADA ANTES %s %s!\n", split_by_space[0], split_by_space[1]);
 			if (split_by_space[1] == NULL)
 			{
 				curr_prompt->only_input_redirected_to_file = 1;
@@ -161,7 +148,6 @@ char	**ms_parse_input(t_p *curr_prompt)
 		}
 		else
 		{
-			ft_printf("TEM ALGO ANTES!\n");
 			if (split_by_space[1] != NULL)
 			{
 				ft_free_ptr((void *) &tmp);
@@ -188,16 +174,5 @@ char	**ms_parse_input(t_p *curr_prompt)
 	}
 	else
 		split_by_space = ft_split(curr_prompt->this_p_line_splited_by_pipe[0], ' ');
-
 	return (split_by_space);
 }
-
-
-
-
-	// if (input_s_by_space != NULL && curr_prompt->has_here_doc == 0 && \
-	// ft_strnstr(input_s_by_space[0], "<", 1))
-	// {
-
-	// }
-	// ft_free_ptr((void *) &tmp);

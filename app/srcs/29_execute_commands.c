@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   29_execute_commands.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: grupo_capela <grupo_capela@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:42:02 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/19 21:27:31 by relizabe         ###   ########.fr       */
+/*   Updated: 2022/09/20 04:23:31 by grupo_capel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,12 @@ void	ms_execute(t_ms *ms)
 			close(curr_prompt->input_fd);
 			return ;
 		}
+	}
+	if (curr_prompt->only_input_redirected_to_file == 2)
+	{
+		ft_fd_print(curr_prompt->input_fd);
+		close(curr_prompt->input_fd);
+		return ;
 	}
 	print_fd_or_execute_cmd(ms, curr_prompt);
 }
