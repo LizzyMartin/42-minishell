@@ -116,7 +116,7 @@ re:
 
 
 # TEST
-SUPP="suppression.supp"
+SUPP="supp.supp"
 
 run:	$(NAME)
 	@./minishell

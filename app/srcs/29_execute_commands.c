@@ -6,7 +6,7 @@
 /*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:42:02 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/15 19:40:42 by relizabe         ###   ########.fr       */
+/*   Updated: 2022/09/19 21:27:31 by relizabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,12 @@ void	ms_execute(t_ms *ms)
 		curr_prompt->input_fd = ms_here_doc(ms, curr_prompt);
 		if (o_here_doc == 1)
 		{
+			close(curr_prompt->input_fd);
+			return ;
+		}
+		else if(o_here_doc == 2)
+		{
+			ft_fd_print(curr_prompt->input_fd);
 			close(curr_prompt->input_fd);
 			return ;
 		}

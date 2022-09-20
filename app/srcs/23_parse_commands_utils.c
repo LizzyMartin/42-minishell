@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_parse_commands_utils.c                          :+:      :+:    :+:   */
+/*   23_parse_commands_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/09 17:15:31 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/19 21:34:44 by relizabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int	is_input_command(char *name)
 		ft_strnstr(name, "more", ft_strlen(name)) || \
 		ft_strnstr(name, "less", ft_strlen(name)) || \
 		ft_strnstr(name, "tail", ft_strlen(name)) || \
-		ft_strnstr(name, "wc", ft_strlen(name)) || \
 		ft_strnstr(name, "touch", ft_strlen(name))
 	)
 	{
