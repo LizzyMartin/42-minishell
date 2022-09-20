@@ -6,7 +6,7 @@
 /*   By: grupo_capela <grupo_capela@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:00 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/20 03:33:09 by grupo_capel      ###   ########.fr       */
+/*   Updated: 2022/09/20 19:24:22 by grupo_capel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,41 @@ int	get_child_process_id(const t_p *prompt, \
 	return (child_process_id);
 }
 
+int	cmd_not_found(t_cmd *current_cmd)
+{
+	current_cmd->cmd_line = ft_str_replace_all(current_cmd->cmd_line, T_SPACE, " ");
+	ft_printf_to_fd(1, "miniheaven: %s %s\n", \
+		current_cmd->cmd_line, E_CMDNOTFOUND);
+	return (1);
+}
+
+int cmd_rounded_by_quote(t_ms *ms, t_p *curr_prompt)
+{
+	int 	len;
+	char	*tmp;
+	char	**split;
+
+	len = ft_strlen(ms->shell_line);
+	tmp = curr_prompt->this_p_line;
+	split = ft_split_by_str(tmp, T_SPACE);
+	// ft_printf("#%s#\n", curr_prompt->this_p_line);
+	if ((ms->shell_line[0] == '"' && ms->shell_line[len - 1] == '"')
+	|| (ms->shell_line[0] == '\'' && ms->shell_line[len - 1] == '\''))
+	{
+		len = ft_mtx_size((void **) split);
+		if (len <= 1)
+			return (0);
+		else
+			return (1);
+	}
+	return (0);
+}
+
 int	ms_which_command_type(t_p *curr_prompt, \
 t_cmd *current_cmd, t_ms *ms)
 {
+	if (cmd_rounded_by_quote(ms, curr_prompt))
+		return (cmd_not_found(current_cmd));
 	if (ft_strncmp(current_cmd->just_name, "history", 7) == 0)
 	{
 		ms_add_history(ms, curr_prompt->this_p_line);
@@ -49,7 +81,7 @@ t_cmd *current_cmd, t_ms *ms)
 		if (current_cmd->index == (curr_prompt->args_amount - 1))
 			return (1);
 	}
-	else if (is_builtin(current_cmd->just_name) == 1)
+	else if (is_builtin(current_cmd->just_name))
 	{
 		execute_builtin(ms, current_cmd, curr_prompt);
 	}
@@ -59,11 +91,7 @@ t_cmd *current_cmd, t_ms *ms)
 			ms->envp, &(curr_prompt->input_fd));
 	}
 	else
-	{
-		ft_printf_to_fd(1, "miniheaven: %s %s\n", \
-			current_cmd->just_name, current_cmd->error_msg);
-		return (1);
-	}
+		return (cmd_not_found(current_cmd));
 	return (0);
 }
 

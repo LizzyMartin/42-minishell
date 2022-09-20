@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   11_tokenizer_check_quotes.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: grupo_capela <grupo_capela@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:26 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/15 20:50:23 by relizabe         ###   ########.fr       */
+/*   Updated: 2022/09/20 17:51:38 by grupo_capel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static void	treat_having_quotes_2(t_ms *ms, char *tmp, int *i, int size)
 		ft_free_ptr((void *) &tmp2);
 		ft_free_ptr((void *) &ms->shell_line_tokenized);
 		ms->shell_line_tokenized = tmp;
+				
 	}
 }
 

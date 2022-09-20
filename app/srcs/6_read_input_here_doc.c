@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_here_doc.c                                      :+:      :+:    :+:   */
+/*   6_read_input_here_doc.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: grupo_capela <grupo_capela@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:42 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/09 17:15:31 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/20 17:23:04 by grupo_capel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	ms_here_doc_loop(char **stdin_text, t_p *p)
 	ft_putstr_fd(*stdin_text, p->pipe_here_doc[1]);
 	if (*stdin_text)
 		ft_free_ptr((void *) &(*stdin_text));
-	*stdin_text = get_next_line(0);
+	*stdin_text = readline(NULL);
 }
 
 static void	ms_create_here_doc_document(t_ms *ms, t_p *p)
@@ -36,7 +36,8 @@ static void	ms_create_here_doc_document(t_ms *ms, t_p *p)
 	line = 1;
 	ft_putstr_fd("> ", 0);
 	stdin_text = NULL;
-	stdin_text = get_next_line(0);
+	signal(SIGQUIT, SIG_IGN);
+	stdin_text = readline(NULL);
 	tmp = ft_printf_to_var("%s\n", p->hd_limiter);
 	while (ms->here_doc_open == 1 \
 	&& ft_strncmp(stdin_text, tmp, ft_strlen(stdin_text)) != 0)

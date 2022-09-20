@@ -1,1 +1,7 @@
-oiii
+Teste bin1 bin2
+
+export PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/grupo_capela/Dev/42-minishell/app/bin1:/home/grupo_capela/Dev/42-minishell/app/bin2
+bin #ola do bin1
+
+export PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/grupo_capela/Dev/42-minishell/app/bin2:/home/grupo_capela/Dev/42-minishell/app/bin1
+bin #ola do bin2

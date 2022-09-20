@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   13_tokenizer_connectors_vs_quotes_utils.c          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: grupo_capela <grupo_capela@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 18:09:38 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/15 20:46:09 by relizabe         ###   ########.fr       */
+/*   Updated: 2022/09/20 19:24:24 by grupo_capel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	ms_get_index(t_ms *ms, int size, char **cmd)
 
 	if (ms->is_aux_env)
 		i = 0;
-	else if (ms->shell_line[0] == '"')
+	else if (ms->shell_line[0] == '"' || ms->shell_line[0] == '\'')
 		i = 0;
 	else
 		i = get_index_before_space(ms, size, cmd);
