@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   28_execute_commands_utils_3.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: grupo_capela <grupo_capela@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:00 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/15 20:33:36 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/20 03:33:09 by grupo_capel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,6 @@ t_cmd *current_cmd, char **envp, int *aux_fd)
 	if (*aux_fd > 2)
 		close (*aux_fd);
 	*aux_fd = prompt->pipe[0];
+	(void) child_process_id;
 	close(prompt->pipe[1]);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   30_builtin_echo.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: grupo_capela <grupo_capela@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:25 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/15 15:51:04 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/20 03:33:44 by grupo_capel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	last_cmd_exit_code(t_ms *ms)
 	t_history	*code;
 
 	code = ms_last_history(ms->history);
+	(void) code;
 }
 
 static void	ms_echo_having_flag(t_ms *ms, char **cmd_splited, \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   10_tokenizer_subshell.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: grupo_capela <grupo_capela@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:26 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/15 16:04:13 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/20 03:31:41 by grupo_capel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ void	ms_parse_subshells(t_ms *ms)
 	char	*extract;
 	char	*tmp;
 	int		i;
-	t_ms	*current_sub;
+	// t_ms	*current_sub;
 
 	i = -1;
 	ms->n_subs = 0;
-	current_sub = NULL;
+	// current_sub = NULL;
 	ms->n_subs = ft_count_chr(ms->shell_line_tokenized, '(');
 	if (ms->n_subs == 0)
 		return ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   20_parse_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: grupo_capela <grupo_capela@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:15 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/19 22:15:33 by relizabe         ###   ########.fr       */
+/*   Updated: 2022/09/20 03:32:13 by grupo_capel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,11 @@ char	**ms_parse_input(t_p *curr_prompt)
 	char	**splited_by_chr;
 	char 	**split_by_space;
 	char	*tmp;
-	char	*divider;
+	// char	*divider;
 	int		len;
 
 	len = 0;
-	divider = NULL;
+	// divider = NULL;
 	tmp = NULL;
 	splited_by_chr = NULL;
 	split_by_space = NULL;
