@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   28_execute_commands_utils_3.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grupo_capela <grupo_capela@student.42.f    +#+  +:+       +#+        */
+/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:00 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/20 19:24:22 by grupo_capel      ###   ########.fr       */
+/*   Updated: 2022/09/20 20:48:49 by relizabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int cmd_rounded_by_quote(t_ms *ms, t_p *curr_prompt)
 	len = ft_strlen(ms->shell_line);
 	tmp = curr_prompt->this_p_line;
 	split = ft_split_by_str(tmp, T_SPACE);
-	// ft_printf("#%s#\n", curr_prompt->this_p_line);
 	if ((ms->shell_line[0] == '"' && ms->shell_line[len - 1] == '"')
 	|| (ms->shell_line[0] == '\'' && ms->shell_line[len - 1] == '\''))
 	{
@@ -72,6 +71,7 @@ int cmd_rounded_by_quote(t_ms *ms, t_p *curr_prompt)
 int	ms_which_command_type(t_p *curr_prompt, \
 t_cmd *current_cmd, t_ms *ms)
 {
+
 	if (cmd_rounded_by_quote(ms, curr_prompt))
 		return (cmd_not_found(current_cmd));
 	if (ft_strncmp(current_cmd->just_name, "history", 7) == 0)
@@ -104,7 +104,7 @@ t_cmd *current_cmd, char **envp, int *aux_fd)
 	child_process_id = get_child_process_id(prompt, current_cmd, envp, aux_fd);
 	if ((prompt->pipe_amount - 1) == current_cmd->index)
 	{
-		waitpid(-1, &current_cmd->exit_code, 0);
+		waitpid(child_process_id, &current_cmd->exit_code, 0);
 		if (current_cmd->exit_code)
 		current_cmd->exit_code = WEXITSTATUS(current_cmd->exit_code);
 	}
@@ -114,3 +114,8 @@ t_cmd *current_cmd, char **envp, int *aux_fd)
 	(void) child_process_id;
 	close(prompt->pipe[1]);
 }
+
+//1) primeiro errado, not found, 127 e fecha;
+//asdf | ls | grep a
+
+// 

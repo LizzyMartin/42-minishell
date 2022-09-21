@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_wildcard_utils.c                                :+:      :+:    :+:   */
+/*   17_tokenizer_wildcard_utils.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 22:26:04 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/09 17:15:31 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/20 20:35:43 by relizabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	ms_go_start(t_file **files)
 int	valid_chr(char chr)
 {
 	if (chr != '\'' && chr != '\"' \
-		&& chr != '\0' && chr != ' ')
+		&& chr != '\0' && chr != ' ' && chr != '$')
 		return (1);
 	return (0);
 }

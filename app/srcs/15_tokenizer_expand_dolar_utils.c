@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_expand_dolar_utils.c                            :+:      :+:    :+:   */
+/*   15_tokenizer_expand_dolar_utils.c                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 00:55:01 by argel             #+#    #+#             */
-/*   Updated: 2022/09/09 17:15:31 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/20 20:50:03 by relizabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <_minishell.h>
 
-void	ms_has_single_quotes(t_ms *ms, char *dolar_cmd, char *line)
+void	ms_has_single_quotes(t_ms *ms, char *dolar_cmd, char *line, int threated)
 {
 	char	*no_dolar;
 	char	*value;
@@ -26,8 +26,11 @@ void	ms_has_single_quotes(t_ms *ms, char *dolar_cmd, char *line)
 		aux = ft_strdup(ms->shell_line_tokenized);
 		aux2 = ft_str_replace_all(line, dolar_cmd, value);
 		ft_free_ptr((void *) &ms->shell_line_tokenized);
-		ms->shell_line_tokenized = ft_printf_to_var \
-		("%s %s", aux, aux2);
+		if (threated != 0)
+			ms->shell_line_tokenized = ft_strdup(aux2);
+		else
+			ms->shell_line_tokenized = ft_printf_to_var \
+			("%s %s", aux, aux2);
 		ft_free_ptr((void *) &aux);
 		ft_free_ptr((void *) &aux2);
 	}
