@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   38_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: grupo_capela <grupo_capela@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:06:03 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/15 15:43:00 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/20 23:12:24 by grupo_capel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	main(int argc, char **argv, char **envp)
 		ms = ft_calloc(1, sizeof(t_ms));
 		g_ms = ms;
 		ms_init(ms, argc, argv, envp);
+		ms_init_history(ms);
 		print_banner();
 		while (1)
 			minishell(ms);

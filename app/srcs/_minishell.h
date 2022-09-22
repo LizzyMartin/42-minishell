@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _minishell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: grupo_capela <grupo_capela@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/20 20:49:09 by relizabe         ###   ########.fr       */
+/*   Updated: 2022/09/20 23:28:57 by grupo_capel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,12 +147,14 @@ typedef struct s_cmd
 	char					*just_name;
 	char					*path_and_name;
 	char					**flags;
-	int						bridge_pipe[2];
 	int						exit_code;
 	char					*error_msg;
 	int						cmd_is_path_but_invalid;
 	int						can_execute;
 	int						subshell;
+	int						input;
+	int						output;
+	int						pipe[2];
 }	t_cmd;
 
 typedef struct s_prompt

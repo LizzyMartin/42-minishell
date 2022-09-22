@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   4_init.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: grupo_capela <grupo_capela@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:55:07 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/09 18:05:12 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/20 23:11:56 by grupo_capel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,4 @@ void	ms_init(t_ms *ms, int argc, char **argv, char **envp)
 	ms->has_single_quotes = 0;
 	ms_init_aux(ms);
 	ms_init_env(ms);
-	ms_init_history(ms);
 }

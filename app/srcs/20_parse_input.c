@@ -6,52 +6,11 @@
 /*   By: grupo_capela <grupo_capela@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:15 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/20 17:24:41 by grupo_capel      ###   ########.fr       */
+/*   Updated: 2022/09/21 23:32:17 by grupo_capel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <_minishell.h>
-
-// static void	ms_parse_input_aux(t_p *curr_prompt, \
-// char **input_s_by_space, char *tmp)
-// {
-
-
-// }
-
-// static char	**reset_split_prompt(t_p *curr_prompt)
-// {
-// 	char	**input_s_by_space;
-
-// 	return (input_s_by_space);
-// }
-
-// static char	*parse_input_aux(char **input_s_by_space)
-// {
-// 	char	*tmp;
-
-// 	if (!input_s_by_space[1])
-// 		tmp = ft_substr(input_s_by_space[0],
-// 				ft_str_indexof(input_s_by_space[0], "<",
-// 					ft_strlen(input_s_by_space[0])) + 1,
-// 				ft_strlen(input_s_by_space[0]));
-// 	else
-// 		tmp = ft_strdup(input_s_by_space[1]);
-// 	tmp = NULL;
-// 	return (tmp);
-// }
-
-
-// splited_by_chr
-// [0] cat 
-// [0] EOF | tr a b
-
-// split_by_space
-// EOF 
-//  tr 
-//  a 
-//  b
-
 
 char	**ms_parse_input(t_p *curr_prompt)
 {

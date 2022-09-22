@@ -6,7 +6,7 @@
 /*   By: grupo_capela <grupo_capela@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:42:02 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/20 04:23:31 by grupo_capel      ###   ########.fr       */
+/*   Updated: 2022/09/21 06:20:26 by grupo_capel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,13 @@ int	ms_execute_commands(t_ms *ms, t_p *curr_prompt)
 	res = -1;
 	while (current_cmd)
 	{
+		if (current_cmd->subshell)
+		{
+			current_cmd = current_cmd->next;
+			continue ;
+		}
 		res = ms_execv(ms, curr_prompt, &current_cmd);
-		if (res == 0)
-			return (0);
-		else if (res == 1)
+		if (res == 1)
 			continue ;
 		current_cmd = current_cmd->next;
 	}

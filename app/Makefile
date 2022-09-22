@@ -1,7 +1,7 @@
 .PHONY: all clean fclean re
 
-CC =            clang
-CFLAGS = 		-Wall -Wextra -Werror -ggdb3
+CC =            gcc
+CFLAGS = 		-Wall -Wextra -Werror
 RLFLAG =		-lreadline -ltinfo
 AR =            ar -rcs
 RM =            rm -rfd

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   28_execute_commands_utils_3.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: grupo_capela <grupo_capela@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:00 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/20 20:48:49 by relizabe         ###   ########.fr       */
+/*   Updated: 2022/09/21 06:22:33 by grupo_capel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,15 @@ t_cmd *current_cmd, t_ms *ms)
 	}
 	else if (current_cmd->can_execute == 1)
 	{
+		
 		ms_execute_command(curr_prompt, current_cmd, \
 			ms->envp, &(curr_prompt->input_fd));
 	}
 	else
+	{
+		ft_printf("asdfsadf\n");
 		return (cmd_not_found(current_cmd));
+	}
 	return (0);
 }
 

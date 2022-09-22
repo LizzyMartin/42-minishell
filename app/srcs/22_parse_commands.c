@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_parse_commands.c                                :+:      :+:    :+:   */
+/*   22_parse_commands.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: grupo_capela <grupo_capela@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/09 17:15:31 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/21 06:24:11 by grupo_capel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,29 @@ void	ms_parse_commands2(t_ms *ms, \
 	if ((ft_strncmp(tmp, T_SUBSHELL, ft_strlen(curr_command->cmd_line)) == 0)
 		&& curr_prompt->pipe_amount > 1)
 	{
-		curr_command->cmd_line = ft_str_replace(curr_command->cmd_line,
-				T_SUBSHELL, ms->subs[ms->i_subs].shell_line);
+		int subshell;
+		
+		pipe(curr_command->pipe);
+		subshell = fork();
+		if (subshell == 0)
+		{
+			// char *cmd = ms->subs[ms->i_subs].shell_line;
+			// ft_printf("#%s#\n", cmd);
+			t_ms *m = &(ms->subs[ms->i_subs]);
+			dup2(curr_command->pipe[1], 1);
+			ms_subshell(m);
+			// ms_reinit(ms);
+			exit(0);
+		}
+		wait(NULL);
 		curr_command->subshell = 1;
-		ms->i_subs++;
+		// curr_command->cmd_line = ft_str_replace(curr_command->cmd_line,
+		//  		T_SUBSHELL, " ");
+		// ms->i_subs++;
 	}
+	else
+		curr_command->can_execute = 1;
+	
 	ft_free_ptr((void *) &tmp);
 }
 
