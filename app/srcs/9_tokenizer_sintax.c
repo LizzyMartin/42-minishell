@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 06:14:16 by argel             #+#    #+#             */
-/*   Updated: 2022/09/23 04:17:20 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/23 06:25:01 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static int	subshell_wrong(t_ms *ms)
 	return (0);
 }
 
-static int	more_sintax_checks(t_ms *ms)
+int	more_sintax_checks(t_ms *ms)
 {
 	char	*c;
 	int		end;
@@ -92,8 +92,8 @@ static int	more_sintax_checks(t_ms *ms)
 int	ms_sintax(t_ms *ms)
 {
 	if (connectors_are_wrong(ms) \
-	|| subshell_wrong(ms)
-	|| more_sintax_checks(ms))
+	|| subshell_wrong(ms))
+	// || more_sintax_checks(ms))
 		return (1);
 	return (0);
 }
