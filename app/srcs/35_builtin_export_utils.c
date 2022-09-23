@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   35_builtin_export_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grupo_capela <grupo_capela@student.42.f    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:25 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/20 03:34:30 by grupo_capel      ###   ########.fr       */
+/*   Updated: 2022/09/23 21:14:57 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,10 +110,8 @@ void	ms_free_qs(const t_ms *ms, int aux, char **line, t_free **curr_qs)
 void	print_sorted_env(t_ms *ms, int aux)
 {
 	char	*line;
-	// int		i;
 	t_free	*curr_qs;
 
-	// i = 0;
 	ms->str_export = env_to_array(ms);
 	ms->qs = ft_calloc (1, sizeof(t_qs));
 	ms->qs->free_qs = NULL;

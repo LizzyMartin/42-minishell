@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:00 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/23 04:07:25 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/23 21:00:53 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,16 @@ int	get_child_process_id(const t_p *prompt, \
 
 int	cmd_not_found(t_cmd *current_cmd)
 {
-	current_cmd->cmd_line = ft_str_replace_all(current_cmd->cmd_line, T_SPACE, " ");
+	current_cmd->cmd_line = \
+ft_str_replace_all(current_cmd->cmd_line, T_SPACE, " ");
 	ft_printf_to_fd(1, "miniheaven: %s %s\n", \
 		ft_strtrim(current_cmd->cmd_line, " "), E_CMDNOTFOUND);
 	return (1);
 }
 
-int cmd_rounded_by_quote(t_ms *ms, t_p *curr_prompt)
+int	cmd_rounded_by_quote(t_ms *ms, t_p *curr_prompt)
 {
-	int 	len;
+	int		len;
 	char	*tmp;
 	char	**split;
 
@@ -57,7 +58,7 @@ int cmd_rounded_by_quote(t_ms *ms, t_p *curr_prompt)
 	tmp = curr_prompt->this_p_line;
 	split = ft_split_by_str(tmp, T_SPACE);
 	if ((ms->shell_line[0] == '"' && ms->shell_line[len - 1] == '"')
-	|| (ms->shell_line[0] == '\'' && ms->shell_line[len - 1] == '\''))
+		|| (ms->shell_line[0] == '\'' && ms->shell_line[len - 1] == '\''))
 	{
 		len = ft_mtx_size((void **) split);
 		if (len <= 1)
@@ -71,7 +72,6 @@ int cmd_rounded_by_quote(t_ms *ms, t_p *curr_prompt)
 int	ms_which_command_type(t_p *curr_prompt, \
 t_cmd *current_cmd, t_ms *ms)
 {
-
 	if (cmd_rounded_by_quote(ms, curr_prompt))
 		return (cmd_not_found(current_cmd));
 	if (ft_strncmp(current_cmd->just_name, "history", 7) == 0)

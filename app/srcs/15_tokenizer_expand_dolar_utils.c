@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   15_tokenizer_expand_dolar_utils.c                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 00:55:01 by argel             #+#    #+#             */
-/*   Updated: 2022/09/20 20:50:03 by relizabe         ###   ########.fr       */
+/*   Updated: 2022/09/23 21:04:00 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <_minishell.h>
 
-void	ms_has_single_quotes(t_ms *ms, char *dolar_cmd, char *line, int threated)
+void	ms_has_single_quotes(t_ms *ms, \
+char *dolar_cmd, char *line, int threated)
 {
 	char	*no_dolar;
 	char	*value;

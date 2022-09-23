@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   34_builtin_export.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grupo_capela <grupo_capela@student.42.f    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:42 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/20 03:34:14 by grupo_capel      ###   ########.fr       */
+/*   Updated: 2022/09/23 21:01:57 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ static void	add_env_by_key(t_ms *ms, const t_cmd *current_cmd)
 	char	*key;
 	char	*value;
 	int		equal_index;
-	// int		i;
 	char	*tmp;
 
 	equal_index = ft_str_indexof(current_cmd->cmd_splited_by_space[1], \
@@ -82,7 +81,6 @@ static void	add_env_by_key(t_ms *ms, const t_cmd *current_cmd)
 	tmp = ft_substr(current_cmd->cmd_splited_by_space[1], 0, equal_index);
 	key = tmp;
 	value = current_cmd->cmd_splited_by_space[1] + equal_index + 1;
-	// i = 0;
 	add_env_by_key_2(ms, key, value, tmp);
 }
 

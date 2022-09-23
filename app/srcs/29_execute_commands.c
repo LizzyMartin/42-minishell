@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:42:02 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/23 04:22:30 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/23 23:08:16 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,15 @@ int	ms_execute_commands(t_ms *ms, t_p *curr_prompt)
 	res = -1;
 	while (current_cmd)
 	{
-		if (current_cmd->subshell)
+		if (current_cmd->subshell && ((curr_prompt->pipe_amount - 1) == current_cmd->index))
 		{
-			if ((curr_prompt->pipe_amount - 1) == current_cmd->index)
-			{
-				ft_fd_print(curr_prompt->input_fd);
-				return (1);
-			}
-			else
-			{
-				current_cmd = current_cmd->next;
-				continue ;
-			}
+			ft_fd_print(curr_prompt->input_fd);
+			return (1);
+		}
+		else
+		{
+			current_cmd = current_cmd->next;
+			continue ;
 		}
 		res = ms_execv(ms, curr_prompt, &current_cmd);
 		if (res == 1)
@@ -112,14 +109,10 @@ void	ms_execute(t_ms *ms)
 	{
 		o_here_doc = curr_prompt->only_here_doc;
 		curr_prompt->input_fd = ms_here_doc(ms, curr_prompt);
-		if (o_here_doc == 1)
+		if (o_here_doc > 0)
 		{
-			close(curr_prompt->input_fd);
-			return ;
-		}
-		else if (o_here_doc == 2)
-		{
-			ft_fd_print(curr_prompt->input_fd);
+			if (o_here_doc == 2)
+				ft_fd_print(curr_prompt->input_fd);
 			close(curr_prompt->input_fd);
 			return ;
 		}

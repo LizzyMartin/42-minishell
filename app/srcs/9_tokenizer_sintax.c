@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 06:14:16 by argel             #+#    #+#             */
-/*   Updated: 2022/09/23 06:25:01 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/23 21:37:52 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	more_sintax_checks(t_ms *ms)
 
 	c = ms->shell_line;
 	end = ft_strlen(c) - 1;
-	if (c[end] == '|' || c[end] == '&' || !ft_isalpha(c[end]))
+	if (c[0] == '|' || c[end] == '|' || c[end] == '&')
 	{
 		ft_pf_error("miniheaven:%s '%s' \n", E_BADSINTAX, c[end]);
 		return (1);
@@ -92,8 +92,8 @@ int	more_sintax_checks(t_ms *ms)
 int	ms_sintax(t_ms *ms)
 {
 	if (connectors_are_wrong(ms) \
-	|| subshell_wrong(ms))
-	// || more_sintax_checks(ms))
+	|| subshell_wrong(ms)
+		|| more_sintax_checks(ms))
 		return (1);
 	return (0);
 }
