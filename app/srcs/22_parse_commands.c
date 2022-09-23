@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   22_parse_commands.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grupo_capela <grupo_capela@student.42.f    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/21 06:24:11 by grupo_capel      ###   ########.fr       */
+/*   Updated: 2022/09/23 03:13:00 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,16 +95,30 @@ void	ms_parse_commands2(t_ms *ms, \
 			// char *cmd = ms->subs[ms->i_subs].shell_line;
 			// ft_printf("#%s#\n", cmd);
 			t_ms *m = &(ms->subs[ms->i_subs]);
+		    
+	
+			// checa se o anterior é subshell tbm, se sim, redireciona para ele, se não continua, redirecionando
+			if (curr_prompt->input_fd > 0)
+			    dup2(curr_prompt->input_fd, 0);
 			dup2(curr_command->pipe[1], 1);
+			
 			ms_subshell(m);
 			// ms_reinit(ms);
 			exit(0);
 		}
-		wait(NULL);
+		
+					
+		waitpid(subshell, NULL, 0);
+		curr_prompt->input_fd = curr_command->pipe[0];
+		close(curr_command->pipe[1]);
 		curr_command->subshell = 1;
-		// curr_command->cmd_line = ft_str_replace(curr_command->cmd_line,
-		//  		T_SUBSHELL, " ");
-		// ms->i_subs++;
+		ms->i_subs++;
+		if ((curr_prompt->pipe_amount - 1) == curr_command->index)
+			{
+			
+				ft_fd_print(curr_prompt->input_fd);
+				ms->no_path = 1;
+			}
 	}
 	else
 		curr_command->can_execute = 1;

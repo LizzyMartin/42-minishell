@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   29_execute_commands.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grupo_capela <grupo_capela@student.42.f    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:42:02 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/21 06:20:26 by grupo_capel      ###   ########.fr       */
+/*   Updated: 2022/09/22 06:28:31 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,17 @@ int	ms_execute_commands(t_ms *ms, t_p *curr_prompt)
 	{
 		if (current_cmd->subshell)
 		{
+			
+			if ((curr_prompt->pipe_amount - 1) == current_cmd->index)
+			{
+				ft_fd_print(curr_prompt->input_fd);
+				return (1);
+			}
+			else
+			{
 			current_cmd = current_cmd->next;
 			continue ;
+			}
 		}
 		res = ms_execv(ms, curr_prompt, &current_cmd);
 		if (res == 1)

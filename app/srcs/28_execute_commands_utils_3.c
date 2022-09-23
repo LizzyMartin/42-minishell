@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   28_execute_commands_utils_3.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grupo_capela <grupo_capela@student.42.f    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:00 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/21 06:22:33 by grupo_capel      ###   ########.fr       */
+/*   Updated: 2022/09/23 04:07:25 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	cmd_not_found(t_cmd *current_cmd)
 {
 	current_cmd->cmd_line = ft_str_replace_all(current_cmd->cmd_line, T_SPACE, " ");
 	ft_printf_to_fd(1, "miniheaven: %s %s\n", \
-		current_cmd->cmd_line, E_CMDNOTFOUND);
+		ft_strtrim(current_cmd->cmd_line, " "), E_CMDNOTFOUND);
 	return (1);
 }
 
@@ -87,15 +87,11 @@ t_cmd *current_cmd, t_ms *ms)
 	}
 	else if (current_cmd->can_execute == 1)
 	{
-		
 		ms_execute_command(curr_prompt, current_cmd, \
 			ms->envp, &(curr_prompt->input_fd));
 	}
 	else
-	{
-		ft_printf("asdfsadf\n");
 		return (cmd_not_found(current_cmd));
-	}
 	return (0);
 }
 

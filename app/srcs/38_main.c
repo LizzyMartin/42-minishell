@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   38_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grupo_capela <grupo_capela@student.42.f    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:06:03 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/20 23:12:24 by grupo_capel      ###   ########.fr       */
+/*   Updated: 2022/09/23 03:08:22 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,16 @@ void	minishell(t_ms *ms)
 
 int	main(int argc, char **argv, char **envp)
 {
+	// char *str = ft_strdup("__[BANANA5]__|(grep a)|(wc -l)");
+
+	// ft_printf("#%d#\n", ft_first_ocurrence(str, '('));
+	// ft_printf("#%d#\n", ft_first_ocurrence(str, ')'));
+	
+	// char *cut = ft_substr(str + ft_first_ocurrence(str, '('), 0, ft_first_ocurrence(str + ft_first_ocurrence(str, '('), ')'));
+	// ft_printf("#%s#\n", cut);
+
+	// exit(0);
+	
 	t_ms	*ms;
 
 	ms = NULL;

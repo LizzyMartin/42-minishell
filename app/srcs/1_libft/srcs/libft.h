@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 20:34:46 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/09 20:27:05 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/22 22:45:45 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ char	*ft_strjoin_free(char *s1, char *s2);
 char	*ft_str_merge(char *s1, char *s2);
 char	*ft_str_replace(char *str, char *search, char *replace);
 char	*ft_str_replace_all(char *str, char *search, char *replace);
-int		ft_first_ocurrence(const char *str, int ch);
+int		ft_first_ocurrence(char *str, int ch);
 int		ft_last_ocurrence(const char *str, int ch);
 char	**ft_split(char *s, char c);
 char	**ft_split_by_str(char *s, char *token);

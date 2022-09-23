@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   9_tokenizer_sintax.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 06:14:16 by argel             #+#    #+#             */
-/*   Updated: 2022/09/15 16:21:27 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/23 04:17:20 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,26 @@ static int	subshell_wrong(t_ms *ms)
 	return (0);
 }
 
+static int	more_sintax_checks(t_ms *ms)
+{
+	char	*c;
+	int		end;
+
+	c = ms->shell_line;
+	end = ft_strlen(c) - 1;
+	if (c[end] == '|' || c[end] == '&' || !ft_isalpha(c[end]))
+	{
+		ft_pf_error("miniheaven:%s '%s' \n", E_BADSINTAX, c[end]);
+		return (1);
+	}
+	return (0);
+}
+
 int	ms_sintax(t_ms *ms)
 {
 	if (connectors_are_wrong(ms) \
-	|| subshell_wrong(ms))
+	|| subshell_wrong(ms)
+	|| more_sintax_checks(ms))
 		return (1);
 	return (0);
 }
