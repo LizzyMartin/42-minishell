@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/23 03:13:00 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/23 05:13:10 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ void	ms_parse_commands2(t_ms *ms, \
 	t_p *curr_prompt, t_cmd *curr_command, int c)
 {
 	char	*tmp;
+	int		subshell;
+	t_ms	*m;
 
 	ms->tmp2 = ft_strdup(curr_prompt->this_p_line_splited_by_pipe[c]);
 	ft_free_ptr((void *) &curr_command->cmd_line);
@@ -86,43 +88,31 @@ void	ms_parse_commands2(t_ms *ms, \
 	if ((ft_strncmp(tmp, T_SUBSHELL, ft_strlen(curr_command->cmd_line)) == 0)
 		&& curr_prompt->pipe_amount > 1)
 	{
-		int subshell;
-		
 		pipe(curr_command->pipe);
 		subshell = fork();
 		if (subshell == 0)
 		{
-			// char *cmd = ms->subs[ms->i_subs].shell_line;
-			// ft_printf("#%s#\n", cmd);
-			t_ms *m = &(ms->subs[ms->i_subs]);
-		    
-	
-			// checa se o anterior é subshell tbm, se sim, redireciona para ele, se não continua, redirecionando
+			m = &(ms->subs[ms->i_subs]);
 			if (curr_prompt->input_fd > 0)
-			    dup2(curr_prompt->input_fd, 0);
+				dup2(curr_prompt->input_fd, 0);
 			dup2(curr_command->pipe[1], 1);
-			
 			ms_subshell(m);
-			// ms_reinit(ms);
+			ms_reinit(m);
 			exit(0);
 		}
-		
-					
 		waitpid(subshell, NULL, 0);
 		curr_prompt->input_fd = curr_command->pipe[0];
 		close(curr_command->pipe[1]);
 		curr_command->subshell = 1;
 		ms->i_subs++;
 		if ((curr_prompt->pipe_amount - 1) == curr_command->index)
-			{
-			
-				ft_fd_print(curr_prompt->input_fd);
-				ms->no_path = 1;
-			}
+		{
+			ft_fd_print(curr_prompt->input_fd);
+			ms->no_path = 1;
+		}
 	}
 	else
 		curr_command->can_execute = 1;
-	
 	ft_free_ptr((void *) &tmp);
 }
 
