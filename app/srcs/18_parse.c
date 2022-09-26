@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   18_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/19 21:24:12 by relizabe         ###   ########.fr       */
+/*   Updated: 2022/09/26 21:35:55 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ int	ms_parse(t_ms *ms)
 			return (1);
 		output_s = ms_parse_output(curr_prompt);
 		curr_prompt->pipe_amount = ft_mtx_size((void **) \
-			curr_prompt->this_p_line_splited_by_pipe);
+curr_prompt->this_p_line_splited_by_pipe);
 		if (curr_prompt->only_here_doc == 0 && \
-		curr_prompt->only_input_redirected_to_file == 0)             
+curr_prompt->only_input_redirected_to_file == 0)
 			ms_parse_commands (ms, curr_prompt, output_s, input_s);
 		ft_mtx_free((void **) input_s);
 		ft_mtx_free((void **) output_s);

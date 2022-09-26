@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _minishell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grupo_capela <grupo_capela@student.42.f    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/20 23:28:57 by grupo_capel      ###   ########.fr       */
+/*   Updated: 2022/09/26 21:19:23 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,7 +282,8 @@ int			get_index_before_space(t_ms *ms, int size, char **cmd);
 int			get_boolean(const char *wildcard, const struct dirent *de, int all);
 void		update_tmp(char **replace, DIR *dr, struct dirent **de, char **tmp);
 void		ms_expand_dolar(t_ms *ms);
-void		ms_has_single_quotes(t_ms *ms, char *dolar_cmd, char *line, int threated);
+void		ms_has_single_quotes(t_ms *ms, \
+char *dolar_cmd, char *line, int threated);
 int			ms_jump_to_end_quote(t_ms *ms, char *line, int *i, int size);
 void		subs_replace_join_free(char *find, char *replace, \
 t_ms *ms, char *line);
