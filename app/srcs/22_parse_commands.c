@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   22_parse_commands.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/26 23:00:39 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/26 19:08:14 by relizabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,9 @@ void	ms_parse_commands2(t_ms *ms, \
 	if ((ft_strncmp(tmp, T_SUBSHELL, ft_strlen(curr_command->cmd_line)) == 0)
 		&& curr_prompt->pipe_amount > 1)
 	{
-		
+		curr_command->cmd_line = ft_str_replace(curr_command->cmd_line,
+				T_SUBSHELL, ms->subs[ms->i_subs].shell_line);
+		ms->i_subs++;
 		curr_command->subshell = 1;
 	}
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   18_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/26 21:35:55 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/26 19:08:41 by relizabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,6 @@ curr_prompt->only_input_redirected_to_file == 0)
 		ft_mtx_free((void **) input_s);
 		ft_mtx_free((void **) output_s);
 	}
+	ms->i_subs = 0;
 	return (0);
 }

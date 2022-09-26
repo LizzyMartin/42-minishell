@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   9_tokenizer_sintax.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 06:14:16 by argel             #+#    #+#             */
-/*   Updated: 2022/09/26 21:37:25 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/26 20:25:11 by relizabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,11 @@ static int	subshell_wrong(t_ms *ms)
 
 	i = 0;
 	c = ms->shell_line;
+	int size = ft_strlen(c);
 	while (c[i])
 	{
+		if (c[i] == '"' || c[i] == '\'')
+			i += ft_str_indexof(c, ft_chr_to_str(c[i], 1), size);
 		if (subshell_wrong2(i, c))
 			return (1);
 		i++;

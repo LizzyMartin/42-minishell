@@ -90,7 +90,7 @@ bonus:	all
 
 $(NAME):	$(OBJS_DIR) $(OBJS) $(HEADER)
 	make -C $(LIBFT_DIR)
-	$(CC) -I$(HEADER_DIR) $(RLFLAG) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT.A)
+	$(CC) -I$(HEADER_DIR) $(RLFLAG) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT.A) $(RLFLAG)
 	@echo "\033[1;32mMANDATORY COMPILED SUCCESFULY!\033[0m"
 
 $(OBJS_DIR):
