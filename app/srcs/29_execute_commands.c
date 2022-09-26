@@ -6,11 +6,14 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:42:02 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/23 04:22:30 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/26 23:01:43 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <_minishell.h>
+
+
+
 
 int	ms_execv(t_ms *ms, t_p *curr_prompt, t_cmd **current_cmd)
 {
@@ -24,7 +27,7 @@ int	ms_execv(t_ms *ms, t_p *curr_prompt, t_cmd **current_cmd)
 		}
 	}
 	if (ms_which_command_type(curr_prompt, \
-	(*current_cmd), ms) == 1)
+(*current_cmd), ms) == 1)
 		return (0);
 	return (-1);
 }
@@ -33,6 +36,8 @@ int	ms_execute_commands(t_ms *ms, t_p *curr_prompt)
 {
 	t_cmd	*current_cmd;
 	int		res;
+	int		subshell;
+	t_ms	*m;
 
 	current_cmd = NULL;
 	current_cmd = curr_prompt->cmds;
@@ -42,16 +47,29 @@ int	ms_execute_commands(t_ms *ms, t_p *curr_prompt)
 	{
 		if (current_cmd->subshell)
 		{
+			pipe(current_cmd->pipe);
+			subshell = fork();
+			if (subshell == 0)
+			{
+				m = &(ms->subs[ms->i_subs]);
+				if (curr_prompt->input_fd > 0)
+					dup2(curr_prompt->input_fd, 0);
+				dup2(current_cmd->pipe[1], 1);
+				ms_subshell(m);
+				ms_reinit(m);
+				exit(0);
+			}
+			waitpid(subshell, NULL, 0);
+			curr_prompt->input_fd = current_cmd->pipe[0];
+			close(current_cmd->pipe[1]);
+			ms->i_subs++;
 			if ((curr_prompt->pipe_amount - 1) == current_cmd->index)
 			{
 				ft_fd_print(curr_prompt->input_fd);
-				return (1);
+				ms->no_path = 1;
+				break ;
 			}
-			else
-			{
-				current_cmd = current_cmd->next;
-				continue ;
-			}
+			current_cmd = current_cmd->next;
 		}
 		res = ms_execv(ms, curr_prompt, &current_cmd);
 		if (res == 1)
@@ -112,14 +130,10 @@ void	ms_execute(t_ms *ms)
 	{
 		o_here_doc = curr_prompt->only_here_doc;
 		curr_prompt->input_fd = ms_here_doc(ms, curr_prompt);
-		if (o_here_doc == 1)
-		{
-			close(curr_prompt->input_fd);
-			return ;
-		}
-		else if (o_here_doc == 2)
-		{
-			ft_fd_print(curr_prompt->input_fd);
+		if (o_here_doc == 1 || o_here_doc == 2)
+		{		
+			if (o_here_doc == 2)
+				ft_fd_print(curr_prompt->input_fd);
 			close(curr_prompt->input_fd);
 			return ;
 		}
