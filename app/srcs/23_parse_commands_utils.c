@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   23_parse_commands_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: grupo_capela <grupo_capela@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/20 19:52:29 by relizabe         ###   ########.fr       */
+/*   Updated: 2022/09/26 18:47:56 by grupo_capel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

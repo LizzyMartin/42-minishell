@@ -2,7 +2,7 @@
 
 CC =            gcc
 CFLAGS = 		-Wall -Wextra -Werror -ggdb3
-RLFLAG =		-lreadline -ltinfo
+RLFLAG =		-lreadline -ltinfo -fPIE -fPIC -no-pie
 AR =            ar -rcs
 RM =            rm -rfd
 
