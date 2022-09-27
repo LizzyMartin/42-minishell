@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/28 01:29:47 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/28 01:35:12 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,7 +247,7 @@ void		ms_delete_env(t_ms *ms, char *key);
 char		*ms_find_env_value(t_ms *ms, char *key);
 void		ms_free_env(t_env *envs);
 int			ms_is_in_env(t_ms *ms, const char *key);
-void		update_env_value(t_ms *ms, char *key, char *value);
+void		update_env_value(t_env *env, char *key, char *value);
 t_env		*ms_last_env(t_env *env);
 
 // history

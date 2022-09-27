@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:43:28 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/27 16:07:10 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/28 01:35:47 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ static void	ms_aux_env(t_ms *ms, int equal_index)
 	equal_index + 1);
 	value = ft_substr(ms->shell_line_tokenized, \
 	equal_index + 2, ft_strlen(ms->shell_line_tokenized));
-	if (ms_is_in_env(ms, key)) // fix it
-		update_env_value(ms, key, value);
+	if (ms_is_in_env(ms, key))
+		update_env_value(ms->aux_envs, key, value);
 	else
 		ms_add_env(&ms->aux_envs, key, value);
 	ft_free_ptr((void *) &key);
