@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/27 10:51:49 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/27 21:09:42 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static void	treat_input_command(t_p *curr_prompt, t_cmd *curr_command)
 {
+	if (curr_prompt->has_here_doc || curr_prompt->input_redirected_to_file)
+		return ;
 	if (is_input_command(curr_command->just_name) == 1)
 	{
 		if (curr_command->args_amount >= 2 && curr_command->index == 0)
@@ -23,7 +25,7 @@ static void	treat_input_command(t_p *curr_prompt, t_cmd *curr_command)
 				open(curr_command->cmd_splited_by_space[1], O_RDONLY);
 			if (curr_prompt->input_fd == -1)
 			{
-				ft_printf("testeeeee!\n");
+				ft_pf_error("miniheaven: no such file or directory\n");
 			}
 		}
 	}
@@ -127,9 +129,11 @@ void	ms_parse_commands(t_ms *ms, \
 			prepare_something(curr_command, curr_prompt, output_s_by_space);
 		if (*curr_command->cmd_line != '\0')
 			prepare_path_and_fd(ms, curr_prompt, curr_command);
-		// if (is_input_command_alone(ms, curr_command->cmd_line) && \
-		// curr_prompt->args_amount == 1)
-		// 	curr_command->can_execute = 1;
+		if (curr_prompt->dont_execute_first)
+		{
+			curr_command->can_execute = 0;
+			curr_prompt->dont_execute_first = 0;
+		}
 		c++;
 	}
 }

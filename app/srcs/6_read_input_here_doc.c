@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   6_read_input_here_doc.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grupo_capela <grupo_capela@student.42.f    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:42 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/20 17:23:04 by grupo_capel      ###   ########.fr       */
+/*   Updated: 2022/09/27 20:17:08 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static void	ms_create_here_doc_document(t_ms *ms, t_p *p)
 		ms_here_doc_loop(&stdin_text, p);
 		line++;
 	}
+	ft_putstr_fd("\n", p->pipe_here_doc[1]);
 	if (stdin_text == NULL)
 	{
 		ft_printf_to_fd(1, "miniheaven: warning: \

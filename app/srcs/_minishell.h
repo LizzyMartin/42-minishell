@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _minishell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grupo_capela <grupo_capela@student.42.f    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/26 18:42:47 by grupo_capel      ###   ########.fr       */
+/*   Updated: 2022/09/27 20:46:00 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ typedef struct s_prompt
 	int						only_input_redirected_to_file;
 	int						only_redirect_to_file;
 	int						no_cmd_just_redirect;
+	int						dont_execute_first;
 	int						pipe[2];
 	int						output_fd;
 	char					*output_path;

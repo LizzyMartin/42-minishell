@@ -70,19 +70,3 @@ int	is_input_command(char *name)
 	}
 	return (0);
 }
-
-int	is_input_command_alone(t_ms *ms, char *cmd_line)
-{
-	char	**split;
-
-	ms->input_command_open = 1;
-	split = ft_split(cmd_line, ' ');
-	if (is_input_command(split[0])
-		&& ft_mtx_size((void **) split) == 1)
-	{
-		ft_mtx_free((void **) split);
-		return (1);
-	}
-	ft_mtx_free((void **) split);
-	return (0);
-}
