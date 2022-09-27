@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   28_execute_commands_utils_3.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:00 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/26 21:32:08 by relizabe         ###   ########.fr       */
+/*   Updated: 2022/09/27 10:52:52 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	get_child_process_id(const t_p *prompt, \
 			}
 			else
 				perror("miniheaven: ");
+			exit(127);
 		}
 	}
 	return (child_process_id);
@@ -43,17 +44,11 @@ int	get_child_process_id(const t_p *prompt, \
 
 int	cmd_not_found(t_cmd *current_cmd, t_p * curr_prompt)
 {
-	int		aux;
-	int		clo;
-
-	clo = 0;
-	aux = bridge_builtion_other_cmds(current_cmd, curr_prompt, &clo);
 	current_cmd->cmd_line = \
 ft_str_replace_all(current_cmd->cmd_line, T_SPACE, " ");
-	ft_printf_to_fd(aux, "miniheaven: %s %s\n", \
+	ft_pf_error("miniheaven: %s %s\n", \
 		ft_strtrim(current_cmd->cmd_line, " "), E_CMDNOTFOUND);
-	if (clo)
-		close(aux);
+	(void) curr_prompt;
 	return (1);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   22_parse_commands.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/26 19:08:14 by relizabe         ###   ########.fr       */
+/*   Updated: 2022/09/27 10:51:49 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ static void	treat_input_command(t_p *curr_prompt, t_cmd *curr_command)
 			curr_prompt->input_path = curr_command->cmd_splited_by_space[1];
 			curr_prompt->input_fd = \
 				open(curr_command->cmd_splited_by_space[1], O_RDONLY);
+			if (curr_prompt->input_fd == -1)
+			{
+				ft_printf("testeeeee!\n");
+			}
 		}
 	}
 }
@@ -123,9 +127,9 @@ void	ms_parse_commands(t_ms *ms, \
 			prepare_something(curr_command, curr_prompt, output_s_by_space);
 		if (*curr_command->cmd_line != '\0')
 			prepare_path_and_fd(ms, curr_prompt, curr_command);
-		if (is_input_command_alone(ms, curr_command->cmd_line) && \
-		curr_prompt->args_amount == 1)
-			curr_command->can_execute = 1;
+		// if (is_input_command_alone(ms, curr_command->cmd_line) && \
+		// curr_prompt->args_amount == 1)
+		// 	curr_command->can_execute = 1;
 		c++;
 	}
 }
