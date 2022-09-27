@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:42 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/27 22:59:52 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/28 01:28:41 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,11 @@ static void	ms_here_doc_loop(char **stdin_text, t_p *p)
 	ft_putstr_fd("\n", p->pipe_here_doc[1]);
 }
 
-static void	ms_create_here_doc_document(t_ms *ms, t_p *p)
+static void	ms_create_here_doc_document(t_ms *ms, t_p *p, int *hdoc)
 {
-	int		line;
 	char	*tmp;
 	char	*stdin_text;
 
-	line = 1;
 	ft_putstr_fd("> ", 0);
 	stdin_text = NULL;
 	signal(SIGQUIT, SIG_IGN);
@@ -44,20 +42,21 @@ static void	ms_create_here_doc_document(t_ms *ms, t_p *p)
 	&& ft_strncmp(stdin_text, tmp, ft_strlen(stdin_text)) != 0)
 	{
 		ms_here_doc_loop(&stdin_text, p);
-		line++;
+		*hdoc = *hdoc + 1;
 	}
 	if (stdin_text == NULL)
 	{
+		*hdoc = *hdoc + 1;
 		ft_printf_to_fd(1, "miniheaven: warning: \
 here-document at line %d delimited by end-of-file (wanted `%s')\n", \
-		line, p->hd_limiter);
+		*hdoc, p->hd_limiter);
 	}
 	ft_free_ptr((void *) &stdin_text);
 	ft_free_ptr((void *) &tmp);
 	ft_free_ptr((void *) &p->hd_limiter);
 }
 
-int	ms_here_doc(t_ms *ms, t_p *p)
+int	ms_here_doc(t_ms *ms, t_p *p, int *hdoc)
 {
 	int		here_doc_process;
 	int		exit_code;
@@ -68,7 +67,7 @@ int	ms_here_doc(t_ms *ms, t_p *p)
 	if (here_doc_process == 0)
 	{
 		signal(SIGINT, interrupt_here_doc);
-		ms_create_here_doc_document(ms, p);
+		ms_create_here_doc_document(ms, p, hdoc);
 		get_next_line(-1);
 		ms->here_doc_open = 0;
 		exit(0);

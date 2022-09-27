@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/27 20:46:00 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/28 01:29:47 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,6 +216,7 @@ typedef struct s_minishell
 	char					**str_export;
 	t_qs					*qs;
 	int						here_doc_open;
+	int						here_document;
 	int						input_command_open;
 	int						is_cat_sequence;
 	int						fake_cat_input;
@@ -255,7 +256,7 @@ void		ms_free_history(t_ms *ms);
 
 /* read_input */
 int			ms_read_input(t_ms *ms);
-int			ms_here_doc(t_ms *ms, t_p *p);
+int			ms_here_doc(t_ms *ms, t_p *p, int *hdoc);
 
 // signals
 void		ms_init_signal_detection(void);

@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:42:02 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/27 21:43:39 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/28 01:29:10 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void	ms_execute(t_ms *ms)
 	if (curr_prompt->has_here_doc == 1)
 	{
 		o_here_doc = curr_prompt->only_here_doc;
-		curr_prompt->input_fd = ms_here_doc(ms, curr_prompt);
+		curr_prompt->input_fd = ms_here_doc(ms, curr_prompt, &ms->here_document);
 		if (o_here_doc == 1 || o_here_doc == 2)
 		{		
 			if (o_here_doc == 2)

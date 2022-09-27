@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   4_init.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grupo_capela <grupo_capela@student.42.f    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:55:07 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/20 23:11:56 by grupo_capel      ###   ########.fr       */
+/*   Updated: 2022/09/28 01:26:05 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ static void	ms_init_aux(t_ms *ms)
 	ms->connectors_index = 0;
 	ms->connectors_amount = 0;
 	ms->connectors_order = NULL;
-	ms->here_doc_open = 0;
 	ms->no_path = 0;
 	ms->i_subs = 0;
+	ms->here_doc_open = 0;
 }
 
 void	ms_init(t_ms *ms, int argc, char **argv, char **envp)
