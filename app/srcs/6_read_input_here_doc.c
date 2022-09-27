@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:42 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/27 20:17:08 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/27 22:59:52 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void	ms_here_doc_loop(char **stdin_text, t_p *p)
 	if (*stdin_text)
 		ft_free_ptr((void *) &(*stdin_text));
 	*stdin_text = readline(NULL);
+	ft_putstr_fd("\n", p->pipe_here_doc[1]);
 }
 
 static void	ms_create_here_doc_document(t_ms *ms, t_p *p)
@@ -45,7 +46,6 @@ static void	ms_create_here_doc_document(t_ms *ms, t_p *p)
 		ms_here_doc_loop(&stdin_text, p);
 		line++;
 	}
-	ft_putstr_fd("\n", p->pipe_here_doc[1]);
 	if (stdin_text == NULL)
 	{
 		ft_printf_to_fd(1, "miniheaven: warning: \
