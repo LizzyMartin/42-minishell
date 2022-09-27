@@ -6,7 +6,7 @@
 /*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:26 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/26 19:53:26 by relizabe         ###   ########.fr       */
+/*   Updated: 2022/09/26 21:13:34 by relizabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ void	ms_parse_subshells(t_ms *ms)
 	tmp = ft_strdup(ms->shell_line_tokenized);
 	while (++i < ms->n_subs)
 	{
-		// if (tmp[i] == '"' || tmp[i] == '\'')
-		// 	i += ms_jump_to_end_quote(ms, tmp, &i, ft_strlen(tmp));
 		extract = ms_parse_subshells2(&tmp, i, ms);
 		ms->subs[i].shell_line = ft_substr(extract + 1, 0,
 				ft_strlen(extract) - 2);

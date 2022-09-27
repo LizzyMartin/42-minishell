@@ -6,14 +6,11 @@
 /*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:42:02 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/26 19:21:51 by relizabe         ###   ########.fr       */
+/*   Updated: 2022/09/26 21:17:41 by relizabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <_minishell.h>
-
-
-
 
 int	ms_execv(t_ms *ms, t_p *curr_prompt, t_cmd **current_cmd)
 {

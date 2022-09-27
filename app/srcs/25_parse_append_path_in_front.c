@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   25_parse_append_path_in_front.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grupo_capela <grupo_capela@student.42.f    +#+  +:+       +#+        */
+/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:09 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/20 17:56:23 by grupo_capel      ###   ########.fr       */
+/*   Updated: 2022/09/26 21:15:09 by relizabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*ms_append_path_in_front(t_cmd *current_cmd, t_ms *ms)
 		if (result != NULL)
 			return (result);
 	}
-	current_cmd->error_msg = ft_printf_to_var("%s", E_CMDNOTFOUND);
+	current_cmd->error_msg = ft_printf_to_var("%s", E_NOTDIR);
 	current_cmd->exit_code = 127;
 	current_cmd->can_execute = 0;
 	update_exit_code_last_cmd(ms, NULL, 127);

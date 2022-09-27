@@ -6,7 +6,7 @@
 /*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:00 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/26 19:45:32 by relizabe         ###   ########.fr       */
+/*   Updated: 2022/09/26 21:32:08 by relizabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,13 @@ int	get_child_process_id(const t_p *prompt, \
 			current_cmd->cmd_splited_by_space, envp) == -1)
 		{
 			if (current_cmd->cmd_is_path_but_invalid == 1)
+			{
 				ft_pf_error("miniheaven: %s %s", \
 				current_cmd->path_and_name, E_NOTDIR);
+				current_cmd->exit_code = 127;
+			}
 			else
 				perror("miniheaven: ");
-			current_cmd->exit_code = 1;
 		}
 	}
 	return (child_process_id);
@@ -99,7 +101,7 @@ t_cmd *current_cmd, t_ms *ms)
 			ms->envp, &(curr_prompt->input_fd));
 	}
 	else
-		return (cmd_not_found(current_cmd, curr_prompt));
+		cmd_not_found(current_cmd, curr_prompt);
 	return (0);
 }
 
@@ -113,8 +115,8 @@ t_cmd *current_cmd, char **envp, int *aux_fd)
 	if ((prompt->pipe_amount - 1) == current_cmd->index)
 	{
 		waitpid(child_process_id, &current_cmd->exit_code, 0);
-		if (current_cmd->exit_code)
-		current_cmd->exit_code = WEXITSTATUS(current_cmd->exit_code);
+		if (current_cmd->exit_code && current_cmd->exit_code != 127)
+			current_cmd->exit_code = WEXITSTATUS(current_cmd->exit_code);
 	}
 	if (*aux_fd > 2)
 		close (*aux_fd);
@@ -122,8 +124,3 @@ t_cmd *current_cmd, char **envp, int *aux_fd)
 	(void) child_process_id;
 	close(prompt->pipe[1]);
 }
-
-//1) primeiro errado, not found, 127 e fecha;
-//asdf | ls | grep a
-
-// 
