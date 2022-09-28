@@ -6,45 +6,11 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 00:55:01 by argel             #+#    #+#             */
-/*   Updated: 2022/09/28 03:13:19 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/28 19:57:52 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <_minishell.h>
-
-static void	threat_dolar(t_ms *ms, char **line_splited, int i, char *dolar_cmd)
-{
-	int		final;
-	int		j;
-	int		len;
-	int		threated;
-
-	j = 0;
-	threated = 0;
-	len = ft_strlen(line_splited[i]) - 1;
-	while (line_splited[i][j])
-	{
-		if (line_splited[i][j] == '$' && \
-j != len && line_splited[i][j + 1] != '$')
-		{
-			final = 1;
-			while (valid_chr(line_splited[i][j + final]))
-				final++;
-			dolar_cmd = ft_substr((line_splited[i] + j), 0, final);
-			if (threated != 0)
-				ms_has_single_quotes(ms, \
-dolar_cmd, ft_strdup(ms->shell_line_tokenized), threated);
-			else
-				ms_has_single_quotes(ms, \
-dolar_cmd, ft_strdup(line_splited[i]), threated);
-			threated = 1;
-		}
-		j++;
-	}
-	if (threated == 0)
-		ms->shell_line_tokenized = ft_printf_to_var("\
-%s %s", ms->shell_line_tokenized, line_splited[i]);
-}
 
 static void	ms_quotes_something_2(t_ms *ms, char **line_splited, \
 int i, char *dolar_cmd)

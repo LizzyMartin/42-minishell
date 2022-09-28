@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/28 02:51:21 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/28 20:04:30 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,8 @@ typedef struct s_minishell
 	char					*tmp;
 	char					*tmp2;
 	char					*tmp3;
+	char					**tmp4;
+	int						*tmp5;
 	char					*aux;
 	int						i;
 	char					**str_export;
@@ -285,6 +287,8 @@ int			get_index_before_space(t_ms *ms, int size, char **cmd);
 int			get_boolean(const char *wildcard, const struct dirent *de, int all);
 void		update_tmp(char **replace, DIR *dr, struct dirent **de, char **tmp);
 void		ms_expand_dolar(t_ms *ms);
+void		threat_dolar(t_ms *ms,
+				char **line_splited, int i, char *dolar_cmd);
 void		ms_has_single_quotes(t_ms *ms, \
 char *dolar_cmd, char *line, int threated);
 int			ms_jump_to_end_quote(t_ms *ms, char *line, int *i, int size);
