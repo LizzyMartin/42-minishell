@@ -3,30 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   25_parse_append_path_in_front.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:09 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/26 21:15:09 by relizabe         ###   ########.fr       */
+/*   Updated: 2022/09/28 03:18:06 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <_minishell.h>
-
-char	*check_path(int i, t_cmd *current_cmd, char **path)
-{
-	char	*path_plus_command;
-
-	path_plus_command = ft_printf_to_var("%s/%s",
-			path[i], current_cmd->just_name);
-	if (access(path_plus_command, X_OK) == 0)
-	{
-		ft_mtx_free((void **) path);
-		current_cmd->can_execute = 1;
-		return (path_plus_command);
-	}
-	ft_free_ptr((void *) &path_plus_command);
-	return (NULL);
-}
 
 int	check_envpath(char *env_path, t_ms *ms,
 		t_cmd *current_cmd, char ***path)
@@ -42,6 +26,25 @@ int	check_envpath(char *env_path, t_ms *ms,
 		ms->no_path = 0;
 	(*path) = ft_split(env_path, ':');
 	return (0);
+}
+
+char	*check_path(int i, t_cmd *current_cmd, char **path)
+{
+	char	*path_plus_command;
+
+	path_plus_command = ft_printf_to_var("%s/%s",
+			path[i], current_cmd->just_name);
+	if (access(path_plus_command, X_OK) == 0)
+	{
+		ft_mtx_free((void **) path);
+		current_cmd->can_execute = 1;
+		return (path_plus_command);
+	}
+	ft_free_ptr((void *) &path_plus_command);
+	current_cmd->error_msg = ft_printf_to_var("%s", E_NOTDIR);
+	current_cmd->exit_code = 127;
+	current_cmd->can_execute = 0;
+	return (NULL);
 }
 
 char	*ms_append_path_in_front(t_cmd *current_cmd, t_ms *ms)
@@ -66,9 +69,6 @@ char	*ms_append_path_in_front(t_cmd *current_cmd, t_ms *ms)
 		if (result != NULL)
 			return (result);
 	}
-	current_cmd->error_msg = ft_printf_to_var("%s", E_NOTDIR);
-	current_cmd->exit_code = 127;
-	current_cmd->can_execute = 0;
 	update_exit_code_last_cmd(ms, NULL, 127);
 	ft_mtx_free((void **) path);
 	return (NULL);

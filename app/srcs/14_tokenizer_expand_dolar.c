@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 00:55:01 by argel             #+#    #+#             */
-/*   Updated: 2022/09/26 21:23:28 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/28 03:13:19 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,8 @@ dolar_cmd, ft_strdup(line_splited[i]), threated);
 		j++;
 	}
 	if (threated == 0)
-	{
-		ms->shell_line_tokenized = ft_printf_to_var \
-					("%s %s", ms->shell_line_tokenized, line_splited[i]);
-	}
+		ms->shell_line_tokenized = ft_printf_to_var("\
+%s %s", ms->shell_line_tokenized, line_splited[i]);
 }
 
 static void	ms_quotes_something_2(t_ms *ms, char **line_splited, \

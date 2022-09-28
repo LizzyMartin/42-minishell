@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   7_read_input_signals.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grupo_capela <grupo_capela@student.42.f    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:50 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/26 18:47:51 by grupo_capel      ###   ########.fr       */
+/*   Updated: 2022/09/28 02:57:07 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ctrl_d_exit_shell(int sig, siginfo_t *siginfo, void *context)
 void	ctrl_c_redisplay_prompt(int sig, siginfo_t *siginfo, void *context)
 {
 	ft_printf("\n");
-	if (g_ms->here_doc_open == 0 && 
+	if (g_ms->here_doc_open == 0 && \
 g_ms->input_command_open == 0)
 	{
 		rl_replace_line("", 0);

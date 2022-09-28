@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/28 01:35:12 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/28 02:51:21 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -273,7 +273,8 @@ void		ms_switch_subshell_output(t_ms *ms);
 int			ms_execute_prompt_in_subshell(t_ms *ms, t_p *curr_prompt,
 				int *exit_code);
 void		ms_parse_subshells(t_ms *ms);
-
+int			execv_in_sub_shell(t_cmd **current_cmd, \
+t_p *curr_prompt, int subshell, t_ms *ms);
 int			ms_sintax(t_ms *ms);
 int			ms_tokenizer(t_ms *ms);
 void		ms_wildcard(t_ms *ms);

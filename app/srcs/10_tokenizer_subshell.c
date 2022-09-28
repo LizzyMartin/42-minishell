@@ -3,14 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   10_tokenizer_subshell.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:26 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/26 21:13:34 by relizabe         ###   ########.fr       */
+/*   Updated: 2022/09/28 02:55:06 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <_minishell.h>
+
+void	sub(t_ms *m, t_ms *ms, \
+t_p *curr_prompt, t_cmd **current_cmd)
+{
+	m = &(ms->subs[ms->i_subs]);
+	if (curr_prompt->input_fd > 0)
+		dup2(curr_prompt->input_fd, 0);
+	dup2((*current_cmd)->pipe[1], 1);
+	ms_subshell(m);
+	ms_reinit(m);
+	exit(0);
+}
+
+int	execv_in_sub_shell(t_cmd **current_cmd, \
+t_p *curr_prompt, int subshell, t_ms *ms)
+{
+	t_ms	*m;
+
+	m = NULL;
+	pipe((*current_cmd)->pipe);
+	subshell = fork();
+	if (subshell == 0)
+		sub(m, ms, curr_prompt, current_cmd);
+	waitpid(subshell, NULL, 0);
+	curr_prompt->input_fd = (*current_cmd)->pipe[0];
+	close((*current_cmd)->pipe[1]);
+	ms->i_subs++;
+	if ((curr_prompt->pipe_amount - 1) == (*current_cmd)->index)
+	{
+		ft_fd_print(curr_prompt->input_fd);
+		ms->no_path = 1;
+		return (2);
+	}
+	*current_cmd = (*current_cmd)->next;
+	return (0);
+}
 
 int	ms_execute_prompt_in_subshell(t_ms *ms,
 		t_p *curr_prompt, int *exit_code)

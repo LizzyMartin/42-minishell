@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/27 21:09:42 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/28 03:08:08 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,17 +78,18 @@ static void	prepare_something(t_cmd *curr_command, \
 		ft_strlen(curr_command->cmd_line)))
 		curr_prompt->no_cmd_just_redirect = 1;
 	ft_free_ptr((void *) &tmp);
+	if (curr_prompt->dont_execute_first)
+	{
+		curr_command->can_execute = 0;
+		curr_prompt->dont_execute_first = 0;
+	}
 }
 
 void	ms_parse_commands2(t_ms *ms, \
 	t_p *curr_prompt, t_cmd *curr_command, int c)
 {
 	char	*tmp;
-	// int		subshell;
-	// t_ms	*m;
-	(void) ms;
-	(void) curr_prompt;
-	(void) c;
+
 	ms->tmp2 = ft_strdup(curr_prompt->this_p_line_splited_by_pipe[c]);
 	ft_free_ptr((void *) &curr_command->cmd_line);
 	curr_command->cmd_line = ft_strdup(ms->tmp2);
@@ -103,11 +104,12 @@ void	ms_parse_commands2(t_ms *ms, \
 	}
 	else
 		curr_command->can_execute = 1;
+	(void) c;
 	ft_free_ptr((void *) &tmp);
 }
 
 void	ms_parse_commands(t_ms *ms, \
-	t_p *curr_prompt, char **output_s_by_space, char **input_s_by_space)
+t_p *curr_prompt, char **output_s_by_space, char **input_s_by_space)
 {
 	int		c;
 	t_cmd	*curr_command;
@@ -129,11 +131,6 @@ void	ms_parse_commands(t_ms *ms, \
 			prepare_something(curr_command, curr_prompt, output_s_by_space);
 		if (*curr_command->cmd_line != '\0')
 			prepare_path_and_fd(ms, curr_prompt, curr_command);
-		if (curr_prompt->dont_execute_first)
-		{
-			curr_command->can_execute = 0;
-			curr_prompt->dont_execute_first = 0;
-		}
 		c++;
 	}
 }
