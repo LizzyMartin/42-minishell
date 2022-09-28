@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:15 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/28 02:30:24 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/28 21:49:45 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,12 @@ char **split_by_space, char *arg, char *str_op)
 
 	if (split_by_space[1] != NULL) // cat << EOF tr a b // ft_printf("C\n");
 	{
-		tmp = ft_printf_to_var("%s %s", str_op, arg);
+		tmp = ft_substr(curr_prompt->this_p_line_splited_by_pipe[0], \
+ft_str_indexof(curr_prompt->this_p_line_splited_by_pipe[0], str_op, \
+ft_strlen(curr_prompt->this_p_line_splited_by_pipe[0])), \
+ft_str_indexof(curr_prompt->this_p_line_splited_by_pipe[0], arg, \
+ft_strlen(curr_prompt->this_p_line_splited_by_pipe[0])) - 1);
+		tmp = ft_strtrim(tmp, " ");
 		curr_prompt->this_p_line_splited_by_pipe[0] = \
 ft_str_replace(curr_prompt->this_p_line_splited_by_pipe[0], tmp, " ");
 		split_by_space = \
