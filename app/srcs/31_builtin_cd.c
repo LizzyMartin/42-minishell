@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   31_builtin_cd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:07 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/15 15:51:36 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/27 22:12:03 by relizabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static void	update_env_values(t_ms *ms, t_cmd *current_cmd, \
 		else
 		{
 			getcwd(pwd, 999);
-			update_env_value(ms, "OLDPWD", oldpwd);
-			update_env_value(ms, "PWD", pwd);
+			update_env_value(ms->envs, "OLDPWD", oldpwd);
+			update_env_value(ms->envs, "PWD", pwd);
 		}
 	}
 }
@@ -51,16 +51,16 @@ t_cmd *current_cmd, int aux)
 		|| !ft_strncmp(cmd[1], "--", 2))
 	{
 		chdir(getenv("HOME"));
-		update_env_value(ms, "OLDPWD", getenv("PWD"));
-		update_env_value(ms, "PWD", getenv("HOME"));
+		update_env_value(ms->envs, "OLDPWD", getenv("PWD"));
+		update_env_value(ms->envs, "PWD", getenv("HOME"));
 	}
 	else if (!ft_strncmp(cmd[1], "-", ft_strlen(cmd[1])))
 	{
 		line = ft_printf_to_var("%s\n", ms_find_env_value(ms, "OLDPWD"));
 		ft_putstr_fd(line, aux);
 		chdir(ms_find_env_value(ms, "OLDPWD"));
-		update_env_value(ms, "OLDPWD", getenv("PWD"));
-		update_env_value(ms, "PWD", getcwd(pwd, 999));
+		update_env_value(ms->envs, "OLDPWD", getenv("PWD"));
+		update_env_value(ms->envs, "PWD", getcwd(pwd, 999));
 		ft_free_ptr((void *) &line);
 	}
 	else

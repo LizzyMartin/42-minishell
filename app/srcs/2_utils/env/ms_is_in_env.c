@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_is_in_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:00:20 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/12 19:20:18 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/27 22:17:12 by relizabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ms_is_in_env(t_ms *ms, const char *key)
 	while (aux)
 	{
 		tmp = ft_strtrim(aux->key, " ");
-		if (!ft_strncmp(tmp, key, ft_strlen(aux->key)))
+		if (!ft_strncmp(tmp, ft_strtrim(key, " "), ft_strlen(aux->key)))
 		{
 			ft_free_ptr((void *) &tmp);
 			return (1);

@@ -3,20 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ms_update_env_value.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 20:39:40 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/09 17:15:31 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/27 22:11:35 by relizabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <_minishell.h>
 
-void	update_env_value(t_ms *ms, char *key, char *value)
+void	update_env_value(t_env *env, char *key, char *value)
 {
-	t_env	*env;
-
-	env = ms->envs;
 	while (env)
 	{
 		if ((ft_strncmp(env->key, key, ft_strlen(env->key)) == 0) && \
