@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   11_tokenizer_check_quotes.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:26 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/26 21:27:18 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/28 21:50:38 by relizabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	treat_having_quotes(t_ms *ms, char *tmp, int *i, char *aux)
 	line_inside_quotes = ft_substr(ms->shell_line, first + 1, second);
 	aux = ft_str_replace_all(line_inside_quotes, " ", T_SPACE);
 	aux2 = ft_substr(ms->shell_line, 0, *i);
-	tmp = ft_printf_to_var("%s %c%s%c", aux2, \
+	tmp = ft_printf_to_var("%s%c%s%c", aux2, \
 	ms->shell_line[*i], aux, ms->shell_line[*i]);
 	*i += second + 1;
 	ft_free_ptr((void *) &aux);
