@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   23_parse_commands_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grupo_capela <grupo_capela@student.42.f    +#+  +:+       +#+        */
+/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/26 18:47:56 by grupo_capel      ###   ########.fr       */
+/*   Updated: 2022/09/29 22:02:27 by relizabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,24 @@ char	*get_just_name(char *path)
 	return (ft_substr(path, i + 1, ft_strlen(path)));
 }
 
+int	is_input_command2(char *name)
+{
+	if (ft_strnstr(name, "grep", ft_strlen(name)) || \
+		ft_strnstr(name, "wc", ft_strlen(name)))
+	{
+		g_ms->input_command_open = 1;
+		return (1);
+	}
+	return (0);
+}
+
 int	is_input_command(char *name)
 {
 	if (ft_strnstr(name, "cat", ft_strlen(name)) || \
 		ft_strnstr(name, "more", ft_strlen(name)) || \
 		ft_strnstr(name, "less", ft_strlen(name)) || \
 		ft_strnstr(name, "tail", ft_strlen(name)) || \
-		ft_strnstr(name, "touch", ft_strlen(name))
-	)
+		ft_strnstr(name, "touch", ft_strlen(name)))
 	{
 		g_ms->input_command_open = 1;
 		return (1);

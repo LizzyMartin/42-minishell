@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   6_read_input_here_doc.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:42 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/28 01:28:41 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/29 21:48:21 by relizabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,9 @@ static void	ms_create_here_doc_document(t_ms *ms, t_p *p, int *hdoc)
 	tmp = ft_printf_to_var("%s\n", p->hd_limiter);
 	while (ms->here_doc_open == 1 \
 	&& ft_strncmp(stdin_text, tmp, ft_strlen(stdin_text)) != 0)
-	{
 		ms_here_doc_loop(&stdin_text, p);
-		*hdoc = *hdoc + 1;
-	}
 	if (stdin_text == NULL)
 	{
-		*hdoc = *hdoc + 1;
 		ft_printf_to_fd(1, "miniheaven: warning: \
 here-document at line %d delimited by end-of-file (wanted `%s')\n", \
 		*hdoc, p->hd_limiter);

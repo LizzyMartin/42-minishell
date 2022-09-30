@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   29_execute_commands.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:42:02 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/28 02:50:24 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/29 22:03:33 by relizabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	ms_execute_commands(t_ms *ms, t_p *curr_prompt)
 	res = -1;
 	while (current_cmd)
 	{
+		is_input_command2(current_cmd->just_name);
 		if (current_cmd->subshell)
 			if (execv_in_sub_shell(&current_cmd, \
 curr_prompt, subshell, ms) == 2)
@@ -104,6 +105,7 @@ void	ms_execute(t_ms *ms)
 	if (curr_prompt->has_here_doc == 1)
 	{
 		o_here_doc = curr_prompt->only_here_doc;
+		ms->here_document += 1;
 		curr_prompt->input_fd = \
 ms_here_doc(ms, curr_prompt, &ms->here_document);
 		if (o_here_doc == 1 || o_here_doc == 2)

@@ -6,13 +6,13 @@
 /*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 20:39:40 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/27 22:11:35 by relizabe         ###   ########.fr       */
+/*   Updated: 2022/09/29 20:46:20 by relizabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <_minishell.h>
 
-void	update_env_value(t_env *env, char *key, char *value)
+int	update_env_value(t_env *env, char *key, char *value)
 {
 	while (env)
 	{
@@ -21,7 +21,9 @@ void	update_env_value(t_env *env, char *key, char *value)
 		{
 			ft_free_ptr((void *) &env->value);
 			env->value = ft_strdup(value);
+			return (1);
 		}
 		env = env->next;
 	}
+	return (0);
 }

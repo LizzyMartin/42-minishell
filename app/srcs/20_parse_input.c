@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   20_parse_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:15 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/28 21:49:45 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/29 19:37:02 by relizabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <_minishell.h>
 
 char	**nothing_before(char *str_op, t_p *curr_prompt,
-char **split_by_space, char *arg)
+						char **split_by_space, char *arg)
 {
 	char	*tmp;
 	int		i;
 
 	i = 0;
 	tmp = NULL;
-	if (split_by_space[1] == NULL) // << EOF // ft_printf("A\n");
+	if (split_by_space[1] == NULL)
 	{
 		if (ft_strncmp(str_op, "<<", ft_strlen(str_op)) == 0)
 			curr_prompt->only_here_doc = 1;
@@ -28,7 +28,7 @@ char **split_by_space, char *arg)
 			curr_prompt->only_input_redirected_to_file = 1;
 		return (split_by_space);
 	}
-	else // << EOF tr a b // ft_printf("B\n");
+	else
 	{
 		tmp = ft_strdup(curr_prompt->this_p_line_splited_by_pipe[0]);
 		i += ft_str_indexof(tmp, arg, ft_strlen(tmp)) + ft_strlen(arg);
@@ -42,23 +42,9 @@ char **split_by_space, char *arg)
 char	**something_before(t_p *curr_prompt,
 char **split_by_space, char *arg, char *str_op)
 {
-	char	*tmp;
-
-	if (split_by_space[1] != NULL) // cat << EOF tr a b // ft_printf("C\n");
-	{
-		tmp = ft_substr(curr_prompt->this_p_line_splited_by_pipe[0], \
-ft_str_indexof(curr_prompt->this_p_line_splited_by_pipe[0], str_op, \
-ft_strlen(curr_prompt->this_p_line_splited_by_pipe[0])), \
-ft_str_indexof(curr_prompt->this_p_line_splited_by_pipe[0], arg, \
-ft_strlen(curr_prompt->this_p_line_splited_by_pipe[0])) - 1);
-		tmp = ft_strtrim(tmp, " ");
-		curr_prompt->this_p_line_splited_by_pipe[0] = \
-ft_str_replace(curr_prompt->this_p_line_splited_by_pipe[0], tmp, " ");
-		split_by_space = \
-ft_split(curr_prompt->this_p_line_splited_by_pipe[0], ' ');
-		return (split_by_space);
-	}
-	else // cat << EOF // ft_printf("D (%d)\n", n);
+	if (split_by_space[1] != NULL)
+		return (get_string(curr_prompt, split_by_space, arg, str_op));
+	else
 	{
 		if (ft_mtx_size((void **) \
 curr_prompt->this_p_line_splited_by_pipe) <= 1)
@@ -107,9 +93,7 @@ static char	**here_doc_input_file(int op, t_p *curr_prompt)
 	char	*str_op;
 	char	**splited_by_chr;
 	char	**split_by_space;
-	int		len;
 
-	len = 0;
 	splited_by_chr = NULL;
 	split_by_space = NULL;
 	if (op == 1)
@@ -122,7 +106,6 @@ static char	**here_doc_input_file(int op, t_p *curr_prompt)
 		str_op = ft_strdup("<");
 		curr_prompt->input_redirected_to_file = 1;
 	}
-	len = ft_strlen(curr_prompt->this_p_line_splited_by_pipe[0]);
 	splited_by_chr = \
 		ft_split_by_str(curr_prompt->this_p_line_splited_by_pipe[0], str_op);
 	split_by_space = ft_split(splited_by_chr[1], ' ');

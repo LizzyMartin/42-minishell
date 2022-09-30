@@ -3,20 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   9_tokenizer_sintax.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 06:14:16 by argel             #+#    #+#             */
-/*   Updated: 2022/09/28 03:02:05 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/29 21:42:19 by relizabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <_minishell.h>
 
-static int	connectors_are_wrong(t_ms *ms)
+static int	connectors_are_wrong(t_ms *ms) //
 {
 	int		i;
 	char	*c;
 
+	return (0);
 	i = 0;
 	c = ms->shell_line;
 	while (c[i])
@@ -78,27 +79,28 @@ static int	subshell_wrong(t_ms *ms)
 	return (0);
 }
 
-int	more_sintax_checks(t_ms *ms)
+int	dont_confuse_heredoc(t_ms *ms)
 {
 	char	*c;
-	int		end;
+	int		i;
 
-	return (0);
+	i = 0;
 	c = ms->shell_line;
-	end = ft_strlen(c) - 1;
-	if (c[end] == '|' || c[end] == '&' || !ft_isalpha(c[end]))
+	while (c[i])
 	{
-		ft_pf_error("miniheaven:%s '%s' \n", E_BADSINTAX, c[end]);
-		return (1);
+		if (c[i] != '<')
+			return (0);		
+		i++;
 	}
-	return (0);
+	ft_pf_error("miniheaven:%s \n", E_BADSINTAX);
+	return (1);
 }
 
 int	ms_sintax(t_ms *ms)
 {
-	if (connectors_are_wrong(ms) \
-	|| subshell_wrong(ms)
-		|| more_sintax_checks(ms))
+	if (dont_confuse_heredoc(ms)
+	|| connectors_are_wrong(ms)
+	|| subshell_wrong(ms))
 		return (1);
 	return (0);
 }

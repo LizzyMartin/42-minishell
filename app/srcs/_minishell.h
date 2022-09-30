@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _minishell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/28 20:04:30 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/09/29 22:03:09 by relizabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,7 +249,7 @@ void		ms_delete_env(t_ms *ms, char *key);
 char		*ms_find_env_value(t_ms *ms, char *key);
 void		ms_free_env(t_env *envs);
 int			ms_is_in_env(t_ms *ms, const char *key);
-void		update_env_value(t_env *env, char *key, char *value);
+int			update_env_value(t_env *env, char *key, char *value);
 t_env		*ms_last_env(t_env *env);
 
 // history
@@ -315,6 +315,8 @@ t_p			*ms_get_prompt(t_ms *ms, t_p *curr_prompt, int i);
 char		**ms_parse_input(t_p *curr_prompt);
 char		**ms_parse_output(t_p *curr_prompt);
 
+char		**get_string(t_p *curr_prompt, char **split_by_space, \
+				char *arg, char *str_op);
 void		ms_parse_commands(t_ms *ms,
 				t_p *curr_prompt, char **output_s_by_space,
 				char **input_s_by_space);
@@ -354,7 +356,7 @@ t_cmd *current_cmd, t_ms *ms);
 void		print_fd_or_execute_cmd(t_ms *ms, t_p *curr_prompt);
 int			get_child_process_id(const t_p *prompt, \
 				t_cmd *current_cmd, char **envp, const int *aux_fd);
-
+int			is_input_command2(char *name);
 // builtins
 void		ms_cd(t_ms *ms, t_cmd *current_cmd, t_p *prompt);
 void		ms_echo(t_ms *ms, t_cmd *current_cmd, t_p *prompt);
