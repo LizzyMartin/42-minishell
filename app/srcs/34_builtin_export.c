@@ -6,7 +6,7 @@
 /*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:42 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/29 21:24:30 by relizabe         ###   ########.fr       */
+/*   Updated: 2022/09/30 20:33:07 by relizabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,10 @@ static void	add_env_by_key_2(t_ms *ms, char *key, char *value, char *tmp)
 
 	value_replaced = ft_str_replace_all(ft_strdup(value), T_SPACE, " ");
 	if (ms_is_in_env(ms, key))
-		update_env_value(ms->envs, key, value_replaced);
+	{
+		if (!update_env_value(ms->envs, key, value_replaced))
+			ms_add_env(&ms->envs, key, value_replaced);
+	}
 	else
 		ms_add_env(&ms->envs, key, value_replaced);
 	ft_free_ptr((void *) &tmp);
