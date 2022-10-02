@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   24_parse_commands_utils2.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/29 19:37:05 by relizabe         ###   ########.fr       */
+/*   Updated: 2022/10/02 03:53:03 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ void	prepare_cmd_line(const t_p *curr_prompt, \
 }
 
 char	**get_string(t_p *curr_prompt, char **split_by_space, \
-	char *arg, char *str_op)
+	char *arg, char **str_op)
 {
 	char	*tmp;
 
 	tmp = ft_substr(curr_prompt->this_p_line_splited_by_pipe[0], \
-ft_str_indexof(curr_prompt->this_p_line_splited_by_pipe[0], str_op, \
+ft_str_indexof(curr_prompt->this_p_line_splited_by_pipe[0], *str_op, \
 ft_strlen(curr_prompt->this_p_line_splited_by_pipe[0])), \
 ft_str_indexof(curr_prompt->this_p_line_splited_by_pipe[0], arg, \
 ft_strlen(curr_prompt->this_p_line_splited_by_pipe[0])) - 1);
@@ -56,5 +56,6 @@ ft_strlen(curr_prompt->this_p_line_splited_by_pipe[0])) - 1);
 ft_str_replace(curr_prompt->this_p_line_splited_by_pipe[0], tmp, " ");
 	split_by_space = \
 ft_split(curr_prompt->this_p_line_splited_by_pipe[0], ' ');
+	ft_free_ptr((void *) &(*str_op));
 	return (split_by_space);
 }

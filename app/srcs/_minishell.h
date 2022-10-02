@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _minishell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/29 22:03:09 by relizabe         ###   ########.fr       */
+/*   Updated: 2022/10/02 03:52:20 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -316,7 +316,7 @@ char		**ms_parse_input(t_p *curr_prompt);
 char		**ms_parse_output(t_p *curr_prompt);
 
 char		**get_string(t_p *curr_prompt, char **split_by_space, \
-				char *arg, char *str_op);
+				char *arg, char **str_op);
 void		ms_parse_commands(t_ms *ms,
 				t_p *curr_prompt, char **output_s_by_space,
 				char **input_s_by_space);
