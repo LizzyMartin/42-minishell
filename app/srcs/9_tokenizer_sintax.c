@@ -6,7 +6,7 @@
 /*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 06:14:16 by argel             #+#    #+#             */
-/*   Updated: 2022/09/29 21:42:19 by relizabe         ###   ########.fr       */
+/*   Updated: 2022/10/01 22:02:32 by relizabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static int	subshell_wrong2( int i, char *c)
 			&& ft_strnstr(c + i + 1, "||", len) == NULL
 			&& ft_strnstr(c + i + 1, "&&", len) == NULL)
 		{
+			printf("AAAAAAAAAAAA\n");
 			ft_pf_error("miniheaven:%s \n", E_BADSINTAX);
 			return (1);
 		}
@@ -59,7 +60,7 @@ static int	subshell_wrong2( int i, char *c)
 	return (0);
 }
 
-static int	subshell_wrong(t_ms *ms)
+static int	subshell_wrong(t_ms *ms) //echo "&&||()"
 {
 	int		i;
 	int		size;
@@ -70,8 +71,10 @@ static int	subshell_wrong(t_ms *ms)
 	size = ft_strlen(c);
 	while (c[i])
 	{
-		if (c[i] == '"' || c[i] == '\'')
+		if (c[i] == '"' || c[i] == '\'') {
+			i++;
 			i += ft_str_indexof(c, ft_chr_to_str(c[i], 1), size);
+		}
 		if (subshell_wrong2(i, c))
 			return (1);
 		i++;
