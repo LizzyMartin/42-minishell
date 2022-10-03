@@ -16,10 +16,12 @@ char	**nothing_before(char **str_op, t_p *curr_prompt,
 						char **split_by_space, char *arg)
 {
 	char	*tmp;
+	char	*tmp2;
 	int		i;
 
 	i = 0;
 	tmp = NULL;
+	tmp2 = NULL;
 	if (split_by_space[1] == NULL)
 	{
 		if (ft_strncmp(*str_op, "<<", ft_strlen(*str_op)) == 0)
@@ -32,12 +34,14 @@ char	**nothing_before(char **str_op, t_p *curr_prompt,
 	{
 		tmp = ft_strdup(curr_prompt->this_p_line_splited_by_pipe[0]);
 		i += ft_str_indexof(tmp, arg, ft_strlen(tmp)) + ft_strlen(arg);
-		tmp = ft_substr(tmp, i, ft_strlen(tmp));
-		curr_prompt->this_p_line_splited_by_pipe[0] = tmp;
-		split_by_space = ft_split(tmp, ' ');
+		tmp2 = ft_substr(tmp, i, ft_strlen(tmp));
+		ft_free_ptr((void *) &tmp);
+		ft_free_ptr((void *) &curr_prompt->this_p_line_splited_by_pipe[0]);
+		curr_prompt->this_p_line_splited_by_pipe[0] = tmp2;
+		ft_mtx_free((void **) split_by_space);
+		split_by_space = ft_split(tmp2, ' ');
 		return (split_by_space);
 	}
-	ft_free_ptr((void *) &(*str_op));
 }
 
 char	**something_before(t_p *curr_prompt,
@@ -57,7 +61,6 @@ curr_prompt->this_p_line_splited_by_pipe) <= 1)
 		}
 		else
 			curr_prompt->dont_execute_first = 1;
-		ft_free_ptr((void *) &(*str_op));
 		return (split_by_space);
 	}
 }
@@ -85,15 +88,9 @@ char **split_by_space, char **splited_by_chr)
 	}
 	if (ft_strncmp(splited_by_chr[0], \
 " ", ft_strlen(splited_by_chr[0])) == 0)
-	{
-		ft_mtx_free((void **) splited_by_chr);
 		return (nothing_before(str_op, curr_prompt, split_by_space, arg));
-	}
 	else
-	{
-		ft_mtx_free((void **) splited_by_chr);
 		return (something_before(curr_prompt, split_by_space, arg, str_op));
-	}
 }
 
 static char	**here_doc_input_file(int op, t_p *curr_prompt)
@@ -101,24 +98,29 @@ static char	**here_doc_input_file(int op, t_p *curr_prompt)
 	char	*str_op;
 	char	**splited_by_chr;
 	char	**split_by_space;
+	char	**tmp;
 
+	tmp = NULL;
 	splited_by_chr = NULL;
 	split_by_space = NULL;
 	if (op == 1)
 	{
-		str_op = ft_strdup("<<");
+		str_op = "<<";
 		curr_prompt->has_here_doc = 1;
 	}
 	else
 	{
-		str_op = ft_strdup("<");
+		str_op = "<";
 		curr_prompt->input_redirected_to_file = 1;
 	}
 	splited_by_chr = \
 		ft_split_by_str(curr_prompt->this_p_line_splited_by_pipe[0], str_op);
 	split_by_space = ft_split(splited_by_chr[1], ' ');
-	return (here_doc_input_file_2(&str_op, curr_prompt, \
-split_by_space, splited_by_chr));
+	tmp = here_doc_input_file_2(&str_op, curr_prompt, \
+split_by_space, splited_by_chr);
+	ft_mtx_free((void **) splited_by_chr);
+	ft_mtx_free((void **) split_by_space);
+	return (tmp);
 }
 
 char	**ms_parse_input(t_p *curr_prompt)

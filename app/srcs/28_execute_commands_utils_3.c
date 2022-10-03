@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:00 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/28 02:32:55 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/10/03 20:39:40 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,13 @@ int	cmd_rounded_by_quote(t_ms *ms, t_p *curr_prompt)
 		ms->shell_line[len - 1] == '\''))
 	{
 		len = ft_mtx_size((void **) split);
+		ft_mtx_free((void **) split);
 		if (len <= 1)
 			return (0);
 		else
 			return (1);
 	}
+	ft_mtx_free((void **) split);
 	return (0);
 }
 

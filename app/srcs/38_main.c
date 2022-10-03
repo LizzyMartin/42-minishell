@@ -54,6 +54,7 @@ int	main(int argc, char **argv, char **envp)
 		while (1)
 			minishell(ms);
 		ms_finish(ms);
+		get_next_line(-1);
 	}
 	return (0);
 }

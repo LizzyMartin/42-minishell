@@ -41,7 +41,6 @@ char	*check_path(int i, t_cmd *current_cmd, char **path)
 		return (path_plus_command);
 	}
 	ft_free_ptr((void *) &path_plus_command);
-	current_cmd->error_msg = ft_printf_to_var("%s", E_NOTDIR);
 	current_cmd->exit_code = 127;
 	current_cmd->can_execute = 0;
 	return (NULL);
@@ -69,6 +68,7 @@ char	*ms_append_path_in_front(t_cmd *current_cmd, t_ms *ms)
 		if (result != NULL)
 			return (result);
 	}
+	current_cmd->error_msg = ft_printf_to_var("%s", E_NOTDIR);
 	update_exit_code_last_cmd(ms, NULL, 127);
 	ft_mtx_free((void **) path);
 	return (NULL);

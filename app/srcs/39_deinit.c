@@ -35,18 +35,28 @@ static void	ms_finish_aux(t_ms *ms)
 		ft_free_ptr((void *) &ms);
 }
 
+
+static void	ms_free_subshells(t_ms *ms)
+{
+	int	i;
+
+	i = 0;
+	while (i < ms->n_subs)
+	{
+		ms_finish((void *) &ms->subs[i]);
+		i++;
+	}
+}
+
 void	ms_finish(t_ms *ms)
 {
 	ft_free_ptr((void *) &ms->connectors_order);
-	rl_replace_line("", 0);
-	rl_on_new_line();
 	ms_free_history(ms);
-	clear_history();
-	rl_clear_history();
 	ms_free_env(ms->envs);
 	ms_free_env(ms->aux_envs);
 	ms_finish_aux(ms);
-	get_next_line(-1);
+	clear_history();
+	rl_clear_history();
 }
 
 void	ms_reinit(t_ms *ms)
@@ -64,4 +74,5 @@ void	ms_reinit(t_ms *ms)
 	ft_free_ptr((void *) &ms->connectors_order);
 	ft_free_ptr((void *) &ms->shell_line_tokenized);
 	ft_mtx_free((void **) ms->slt_splited_by_connectors);
+	ms_free_subshells(ms);
 }

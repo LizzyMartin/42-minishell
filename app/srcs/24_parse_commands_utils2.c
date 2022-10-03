@@ -56,6 +56,5 @@ ft_strlen(curr_prompt->this_p_line_splited_by_pipe[0])) - 1);
 ft_str_replace(curr_prompt->this_p_line_splited_by_pipe[0], tmp, " ");
 	split_by_space = \
 ft_split(curr_prompt->this_p_line_splited_by_pipe[0], ' ');
-	ft_free_ptr((void *) &(*str_op));
 	return (split_by_space);
 }

@@ -16,6 +16,7 @@ void	ctrl_d_exit_shell(int sig, siginfo_t *siginfo, void *context)
 {
 	ft_printf_to_fd(1, "\n");
 	ms_finish(g_ms);
+	get_next_line(-1);
 	(void) siginfo;
 	(void) sig;
 	(void) context;

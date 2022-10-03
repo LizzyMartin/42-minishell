@@ -126,7 +126,7 @@ runs:	$(NAME)
 
 runl:	$(NAME)
 
-	@valgrind  --suppressions=$(SUPP) --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes ./minishell
+	@valgrind  --suppressions=$(SUPP) --leak-check=full --show-leak-kinds=all --show-reachable=yes --track-fds=yes --track-origins=yes ./minishell
 
 runr:	$(NAME)
 	make re

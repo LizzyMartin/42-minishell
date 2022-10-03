@@ -35,7 +35,9 @@ curr_prompt->this_p_line_splited_by_pipe);
 		if (curr_prompt->only_here_doc == 0 && \
 curr_prompt->only_input_redirected_to_file == 0)
 			ms_parse_commands (ms, curr_prompt, output_s, input_s);
-		ft_mtx_free((void **) input_s);
+		if (!curr_prompt->has_here_doc
+		&& !curr_prompt->input_redirected_to_file)
+			ft_mtx_free((void **) input_s);
 		ft_mtx_free((void **) output_s);
 	}
 	return (0);
