@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   23_parse_commands_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/29 22:02:27 by relizabe         ###   ########.fr       */
+/*   Updated: 2022/10/08 17:53:06 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,17 @@ char	*get_just_name(char *path)
 	return (ft_substr(path, i + 1, ft_strlen(path)));
 }
 
-int	is_input_command2(char *name)
+int	is_input_command2(char *name, t_cmd **current_cmd, t_p *curr_prompt)
 {
-	if (ft_strnstr(name, "grep", ft_strlen(name)) || \
-		ft_strnstr(name, "wc", ft_strlen(name)))
+	if (curr_prompt->dont_execute_first)
 	{
-		g_ms->input_command_open = 1;
+		curr_prompt->dont_execute_first = 0;
+		(*current_cmd) = (*current_cmd)->next;
 		return (1);
 	}
+	if (ft_strnstr(name, "grep", ft_strlen(name)) || \
+		ft_strnstr(name, "wc", ft_strlen(name)))
+		g_ms->input_command_open = 1;
 	return (0);
 }
 

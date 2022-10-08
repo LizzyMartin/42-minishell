@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:42:02 by acapela-          #+#    #+#             */
-/*   Updated: 2022/10/08 16:03:14 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/10/08 18:06:01 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,18 @@ int	ms_execute_commands(t_ms *ms, t_p *curr_prompt)
 {
 	t_cmd	*current_cmd;
 	int		res;
-	int		subshell;
 
-	subshell = 0;
 	current_cmd = curr_prompt->cmds;
 	pre_cat_ls_sc(ms, curr_prompt);
 	res = -1;
 	while (current_cmd)
 	{
-		is_input_command2(current_cmd->just_name);
+		if (is_input_command2(current_cmd->just_name, \
+&current_cmd, curr_prompt))
+			continue ;
 		if (current_cmd->subshell)
 			if (execv_in_sub_shell(&current_cmd, \
-curr_prompt, subshell, ms) == 2)
+curr_prompt, ms) == 2)
 				break ;
 		res = ms_execv(ms, curr_prompt, &current_cmd);
 		if (res == 1)
@@ -115,11 +115,7 @@ ms_here_doc(ms, curr_prompt, &ms->here_document);
 			return ;
 		}
 	}
-	if (curr_prompt->only_input_redirected_to_file == 2)
-	{
-		ft_fd_print(curr_prompt->input_fd);
-		close(curr_prompt->input_fd);
+	if (ms_execute_in_redi(curr_prompt))
 		return ;
-	}
 	print_fd_or_execute_cmd(ms, curr_prompt);
 }

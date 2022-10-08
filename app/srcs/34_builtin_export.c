@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   34_builtin_export.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:42 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/30 20:33:07 by relizabe         ###   ########.fr       */
+/*   Updated: 2022/10/08 16:26:45 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ static void	add_env_by_key_2(t_ms *ms, char *key, char *value, char *tmp)
 	}
 	else
 		ms_add_env(&ms->envs, key, value_replaced);
+	ft_free_ptr((void *) &value_replaced);
 	ft_free_ptr((void *) &tmp);
 	ms->p->cmds->exit_code = 0;
 }

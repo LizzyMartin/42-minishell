@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   26_execute_commands_utils_1.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:00 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/26 20:18:08 by relizabe         ###   ########.fr       */
+/*   Updated: 2022/10/08 17:59:22 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,17 @@ int	bridge_builtion_other_cmds(t_cmd *current_cmd, t_p *prompt, int *clo)
 		*clo = 1;
 	}
 	return (aux);
+}
+
+int	ms_execute_in_redi(t_p *curr_prompt)
+{
+	if (curr_prompt->only_input_redirected_to_file == 1
+		|| curr_prompt->only_input_redirected_to_file == 2)
+	{
+		if (curr_prompt->only_input_redirected_to_file == 2)
+			ft_fd_print(curr_prompt->input_fd);
+		close(curr_prompt->input_fd);
+		return (1);
+	}
+	return (0);
 }

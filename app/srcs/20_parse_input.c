@@ -6,13 +6,13 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:15 by acapela-          #+#    #+#             */
-/*   Updated: 2022/10/08 16:01:14 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/10/08 17:55:04 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <_minishell.h>
 
-char	**nothing_before(char **str_op, t_p *curr_prompt,
+char	**nothing_before(char **str_op, t_p **curr_prompt,
 						char **split_by_space, char *arg)
 {
 	char	*tmp;
@@ -23,18 +23,18 @@ char	**nothing_before(char **str_op, t_p *curr_prompt,
 	if (split_by_space[1] == NULL)
 	{
 		if (ft_strncmp(*str_op, "<<", ft_strlen(*str_op)) == 0)
-			curr_prompt->only_here_doc = 1;
-		else if (ft_strncmp(*str_op, "<", ft_strlen(*str_op)) == 0)
-			curr_prompt->only_input_redirected_to_file = 1;
+			(*curr_prompt)->only_here_doc = 1;
+		if (ft_strncmp(*str_op, "<", ft_strlen(*str_op)) == 0)
+			(*curr_prompt)->only_input_redirected_to_file = 1;
 	}
 	else
 	{
-		tmp = ft_strdup(curr_prompt->this_p_line_splited_by_pipe[0]);
+		tmp = ft_strdup((*curr_prompt)->this_p_line_splited_by_pipe[0]);
 		i += ft_str_indexof(tmp, arg, ft_strlen(tmp)) + ft_strlen(arg);
 		tmp2 = ft_substr(tmp, i, ft_strlen(tmp));
 		ft_free_ptr((void *) &tmp);
-		ft_free_ptr((void *) &curr_prompt->this_p_line_splited_by_pipe[0]);
-		curr_prompt->this_p_line_splited_by_pipe[0] = tmp2;
+		ft_free_ptr((void *) &(*curr_prompt)->this_p_line_splited_by_pipe[0]);
+		(*curr_prompt)->this_p_line_splited_by_pipe[0] = tmp2;
 		ft_mtx_free((void **) split_by_space);
 		split_by_space = ft_split(tmp2, ' ');
 	}
@@ -53,7 +53,7 @@ curr_prompt->this_p_line_splited_by_pipe) <= 1)
 		{
 			if (ft_strncmp(*str_op, "<<", ft_strlen(*str_op)) == 0)
 				curr_prompt->only_here_doc = 2;
-			else if (ft_strncmp(*str_op, "<", ft_strlen(*str_op)) == 0)
+			if (ft_strncmp(*str_op, "<", ft_strlen(*str_op)) == 0)
 				curr_prompt->only_input_redirected_to_file = 2;
 		}
 		else
@@ -72,7 +72,7 @@ char **split_by_space, char **splited_by_chr)
 		curr_prompt->hd_limiter = ft_strdup(split_by_space[0]);
 		arg = curr_prompt->hd_limiter;
 	}
-	else
+	if (ft_strncmp(*str_op, "<", ft_strlen(*str_op)) == 0)
 	{
 		curr_prompt->input_path = ft_strdup(split_by_space[0]);
 		arg = curr_prompt->input_path;
@@ -80,12 +80,14 @@ char **split_by_space, char **splited_by_chr)
 		if (curr_prompt->input_fd == -1)
 		{
 			ft_pf_error("miniheaven: %s %s", curr_prompt->input_path, E_NOTDIR);
+			ft_free_ptr((void *) &curr_prompt->input_path);
 			return (NULL);
 		}
+		ft_free_ptr((void *) &curr_prompt->input_path);
 	}
 	if (ft_strncmp(splited_by_chr[0], \
 " ", ft_strlen(splited_by_chr[0])) == 0)
-		return (nothing_before(str_op, curr_prompt, split_by_space, arg));
+		return (nothing_before(str_op, &curr_prompt, split_by_space, arg));
 	else
 		return (something_before(curr_prompt, split_by_space, arg, str_op));
 }

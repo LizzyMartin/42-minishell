@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   6_read_input_here_doc.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:42 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/29 21:48:21 by relizabe         ###   ########.fr       */
+/*   Updated: 2022/10/08 16:21:35 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	interrupt_here_doc(int signal)
 {
 	(void)signal;
+	ft_printf("\n");
 	exit(0);
 }
 

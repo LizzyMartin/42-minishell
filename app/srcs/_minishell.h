@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _minishell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/10/02 03:52:20 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/10/08 18:02:08 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -276,7 +276,7 @@ int			ms_execute_prompt_in_subshell(t_ms *ms, t_p *curr_prompt,
 				int *exit_code);
 void		ms_parse_subshells(t_ms *ms);
 int			execv_in_sub_shell(t_cmd **current_cmd, \
-t_p *curr_prompt, int subshell, t_ms *ms);
+t_p *curr_prompt, t_ms *ms);
 int			ms_sintax(t_ms *ms);
 int			ms_tokenizer(t_ms *ms);
 void		ms_wildcard(t_ms *ms);
@@ -356,7 +356,10 @@ t_cmd *current_cmd, t_ms *ms);
 void		print_fd_or_execute_cmd(t_ms *ms, t_p *curr_prompt);
 int			get_child_process_id(const t_p *prompt, \
 				t_cmd *current_cmd, char **envp, const int *aux_fd);
-int			is_input_command2(char *name);
+int			is_input_command2(char *name, t_cmd **current_cmd, \
+t_p *curr_prompt);
+int			ms_execute_in_redi(t_p *curr_prompt);
+
 // builtins
 void		ms_cd(t_ms *ms, t_cmd *current_cmd, t_p *prompt);
 void		ms_echo(t_ms *ms, t_cmd *current_cmd, t_p *prompt);

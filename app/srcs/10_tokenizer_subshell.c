@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   10_tokenizer_subshell.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:54:26 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/28 02:55:06 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/10/08 18:01:30 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ t_p *curr_prompt, t_cmd **current_cmd)
 }
 
 int	execv_in_sub_shell(t_cmd **current_cmd, \
-t_p *curr_prompt, int subshell, t_ms *ms)
+t_p *curr_prompt, t_ms *ms)
 {
 	t_ms	*m;
+	int		subshell;
 
 	m = NULL;
 	pipe((*current_cmd)->pipe);

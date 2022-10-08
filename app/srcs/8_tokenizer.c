@@ -6,7 +6,7 @@
 /*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:43:28 by acapela-          #+#    #+#             */
-/*   Updated: 2022/10/08 16:04:53 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/10/08 16:28:34 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,22 @@ static void	ms_home_value(t_ms *ms)
 static void	ms_aux_env(t_ms *ms, int equal_index)
 {
 	char	*key;
+	char	*key2;
 	char	*value;
 
 	key = ft_substr(ms->shell_line_tokenized, 0, \
 	equal_index + 1);
 	value = ft_substr(ms->shell_line_tokenized, \
 	equal_index + 2, ft_strlen(ms->shell_line_tokenized));
-	key = ft_strtrim(key, " ");
-	if (ms_is_in_env(ms, key))
+	key2 = ft_strtrim(key, " ");
+	if (ms_is_in_env(ms, key2))
 	{
-		if (!update_env_value(ms->aux_envs, key, value))
-			update_env_value(ms->envs, key, value);
+		if (!update_env_value(ms->aux_envs, key2, value))
+			update_env_value(ms->envs, key2, value);
 	}
 	else
-		ms_add_env(&ms->aux_envs, key, value);
+		ms_add_env(&ms->aux_envs, key2, value);
+	ft_free_ptr((void *) &key2);
 	ft_free_ptr((void *) &key);
 	ft_free_ptr((void *) &value);
 }
