@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   28_execute_commands_utils_3.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:00 by acapela-          #+#    #+#             */
-/*   Updated: 2022/10/03 20:39:40 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/10/08 14:54:52 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,15 @@ int	get_child_process_id(const t_p *prompt, \
 
 int	cmd_not_found(t_cmd *current_cmd, t_p *curr_prompt)
 {
+	char	*tmp;
+
 	if (current_cmd->index == 0 && curr_prompt->has_here_doc)
 		return (1);
+	tmp = ft_strtrim(current_cmd->cmd_line, " ");
 	current_cmd->cmd_line = \
 ft_str_replace_all(current_cmd->cmd_line, T_SPACE, " ");
-	ft_pf_error("miniheaven: %s %s\n", \
-		ft_strtrim(current_cmd->cmd_line, " "), E_CMDNOTFOUND);
+	ft_pf_error("miniheaven: %s %s\n", tmp, E_CMDNOTFOUND);
+	ft_free_ptr((void *) &tmp);
 	(void) curr_prompt;
 	return (1);
 }

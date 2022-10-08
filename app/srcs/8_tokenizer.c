@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   8_tokenizer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:43:28 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/29 20:45:48 by relizabe         ###   ########.fr       */
+/*   Updated: 2022/10/08 16:04:53 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ static void	ms_aux_env(t_ms *ms, int equal_index)
 	value = ft_substr(ms->shell_line_tokenized, \
 	equal_index + 2, ft_strlen(ms->shell_line_tokenized));
 	key = ft_strtrim(key, " ");
-	if (ms_is_in_env(ms, key)) {
+	if (ms_is_in_env(ms, key))
+	{
 		if (!update_env_value(ms->aux_envs, key, value))
 			update_env_value(ms->envs, key, value);
 	}

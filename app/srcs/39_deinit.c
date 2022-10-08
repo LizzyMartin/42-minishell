@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   39_deinit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:05:54 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/28 20:02:18 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/10/08 16:06:43 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static void	ms_finish_aux(t_ms *ms)
 	if (ms)
 		ft_free_ptr((void *) &ms);
 }
-
 
 static void	ms_free_subshells(t_ms *ms)
 {

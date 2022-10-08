@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   30_builtin_echo.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:25 by acapela-          #+#    #+#             */
-/*   Updated: 2022/10/01 21:56:04 by relizabe         ###   ########.fr       */
+/*   Updated: 2022/10/08 16:03:50 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	print_cmd_content(t_ms *ms, \
 		if (ms->has_single_quotes)
 			ft_chr_remove_all(cmd_splited[i], '\'');
 		cmd_splited[i] = ft_str_replace_all(cmd_splited[i], T_SPACE, " ");
-		cmd_splited[i] = ft_str_replace_all(cmd_splited[i], T_SUBSHELL, "()"); //leak
+		cmd_splited[i] = ft_str_replace_all(cmd_splited[i], T_SUBSHELL, "()");
 		ft_putstr_fd(cmd_splited[i], aux);
 		if (i != current_cmd->args_amount - 1)
 			ft_putstr_fd(" ", aux);

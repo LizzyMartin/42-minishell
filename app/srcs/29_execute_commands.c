@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   29_execute_commands.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:42:02 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/29 22:03:33 by relizabe         ###   ########.fr       */
+/*   Updated: 2022/10/08 16:03:14 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	ms_execute_commands(t_ms *ms, t_p *curr_prompt)
 	int		subshell;
 
 	subshell = 0;
-	current_cmd = NULL;
 	current_cmd = curr_prompt->cmds;
 	pre_cat_ls_sc(ms, curr_prompt);
 	res = -1;
@@ -109,7 +108,7 @@ void	ms_execute(t_ms *ms)
 		curr_prompt->input_fd = \
 ms_here_doc(ms, curr_prompt, &ms->here_document);
 		if (o_here_doc == 1 || o_here_doc == 2)
-		{		
+		{
 			if (o_here_doc == 2)
 				ft_fd_print(curr_prompt->input_fd);
 			close(curr_prompt->input_fd);
