@@ -1,0 +1,5 @@
+run:	$(NAME)
+runs:	$(NAME)
+runl:	$(NAME)
+runr:	$(NAME)
+runrl:	$(NAME)
