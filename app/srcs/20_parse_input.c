@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   20_parse_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:15 by acapela-          #+#    #+#             */
-/*   Updated: 2022/10/08 17:55:04 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/10/10 18:14:53 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ char	**something_before(t_p *curr_prompt,
 char **split_by_space, char *arg, char **str_op)
 {
 	if (split_by_space[1] != NULL)
+	{
+		curr_prompt->mtx_free = 1;
 		return (get_string(curr_prompt, split_by_space, arg, str_op));
+	}
 	else
 	{
 		if (ft_mtx_size((void **) \

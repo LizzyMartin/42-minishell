@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   22_parse_commands.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/29 21:54:49 by relizabe         ###   ########.fr       */
+/*   Updated: 2022/10/10 18:06:29 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,6 @@ static void	prepare_something(t_cmd *curr_command, \
 		ft_strlen(curr_command->cmd_line)))
 		curr_prompt->no_cmd_just_redirect = 1;
 	ft_free_ptr((void *) &tmp);
-	if (curr_prompt->dont_execute_first)
-	{
-		curr_command->can_execute = 0;
-		curr_prompt->dont_execute_first = 0;
-	}
 }
 
 void	ms_parse_commands2(t_ms *ms, \

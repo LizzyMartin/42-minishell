@@ -182,6 +182,7 @@ typedef struct s_prompt
 	char					*this_p_line;
 	char					**this_p_line_splited_by_pipe;
 	int						args_amount;
+	int						mtx_free;
 	t_sc					*sc;
 }	t_p;
 
