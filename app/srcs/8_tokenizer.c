@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   8_tokenizer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 21:43:28 by acapela-          #+#    #+#             */
-/*   Updated: 2022/10/08 16:28:34 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/10/10 23:11:51 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,7 @@ int	ms_tokenizer(t_ms *ms)
 		return (1);
 	}
 	ms_quotes_vs_connectors(ms, ms->shell_line_tokenized);
-	if (ft_strnstr(ms->shell_line_tokenized, "$?", 2) == NULL)
-		ms_expand_dolar(ms);
+	ms_expand_dolar(ms);
 	if (ms->is_aux_env)
 	{
 		ms_aux_env(ms, equal_index);
