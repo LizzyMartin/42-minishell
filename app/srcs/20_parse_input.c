@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:15 by acapela-          #+#    #+#             */
-/*   Updated: 2022/10/10 18:14:53 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/10/10 22:02:23 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ char	**nothing_before(char **str_op, t_p **curr_prompt,
 	char	*tmp2;
 	int		i;
 
+	tmp = NULL;
 	i = 0;
 	if (split_by_space[1] == NULL)
 	{
@@ -86,7 +87,6 @@ char **split_by_space, char **splited_by_chr)
 			ft_free_ptr((void *) &curr_prompt->input_path);
 			return (NULL);
 		}
-		ft_free_ptr((void *) &curr_prompt->input_path);
 	}
 	if (ft_strncmp(splited_by_chr[0], \
 " ", ft_strlen(splited_by_chr[0])) == 0)
@@ -102,8 +102,6 @@ static char	**here_doc_input_file(int op, t_p *curr_prompt)
 	char	**split_by_space;
 	char	**tmp;
 
-	splited_by_chr = NULL;
-	split_by_space = NULL;
 	if (op == 1)
 	{
 		str_op = "<<";
@@ -120,7 +118,9 @@ static char	**here_doc_input_file(int op, t_p *curr_prompt)
 	tmp = here_doc_input_file_2(&str_op, curr_prompt, \
 split_by_space, splited_by_chr);
 	ft_mtx_free((void **) splited_by_chr);
-	ft_mtx_free((void **) split_by_space);
+	if (curr_prompt->mtx_free)
+		ft_mtx_free((void **) split_by_space);
+	ft_free_ptr((void *) &curr_prompt->input_path);
 	return (tmp);
 }
 
