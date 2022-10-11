@@ -44,14 +44,14 @@ SRCS_FILES +=	5_read_input.c \
 
 SRCS_FILES +=	8_tokenizer.c \
 				9_tokenizer_sintax.c \
-				10_tokenizer_subshell.c \
+				10_tokenizer_subshell_bonus.c \
 				11_tokenizer_check_quotes.c \
-				12_tokenizer_connectors_vs_quotes.c \
+				12_tokenizer_connectors_vs_quotes_bonus.c \
 				13_tokenizer_connectors_vs_quotes_utils.c \
 				14_tokenizer_expand_dolar.c \
 				15_tokenizer_expand_dolar_utils.c \
-				16_tokenizer_wildcard.c \
-				17_tokenizer_wildcard_utils.c
+				16_tokenizer_wildcard_bonus.c \
+				17_tokenizer_wildcard_utils_bonus.c
 
 SRCS_FILES +=	18_parse.c \
 				19_parse_prompts.c \
@@ -137,4 +137,4 @@ runrl:	$(NAME)
 	@valgrind  --suppressions=$(SUPP) --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes ./minishell
 
 n:
-	norminette *
+	norminette srcs

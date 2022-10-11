@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:00 by acapela-          #+#    #+#             */
-/*   Updated: 2022/10/10 23:12:35 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/10/11 21:22:13 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	is_builtin(char *current_cmd)
 {
 	if (current_cmd == NULL)
 		return (0);
-	else if (ft_strncmp(current_cmd, "exit ", 5) == 0)
+	else if (ft_strncmp(current_cmd, "exit", 4) == 0)
 		return (1);
 	else if (ft_strncmp(current_cmd, "echo ", 5) == 0)
 		return (1);

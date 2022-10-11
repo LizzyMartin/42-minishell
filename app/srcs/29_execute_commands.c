@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   29_execute_commands.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:42:02 by acapela-          #+#    #+#             */
-/*   Updated: 2022/10/08 18:06:01 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/10/11 21:19:38 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,10 @@ static void	print_fd_or_execute_cmd_loop(t_ms *ms, t_p *curr_prompt)
 				ft_strlen(curr_prompt->this_p_line)) == 0)
 			ms_execute_prompt_in_subshell(ms, curr_prompt, &exit_code);
 		else
+		{
+			ft_free_ptr((void *) &tmp);
 			exit_code = ms_execute_commands(ms, curr_prompt);
+		}
 		ft_free_ptr((void *) &tmp);
 		if (ms->connectors_order != NULL)
 			if ((ms->connectors_order[i] == 1 && exit_code != 0)

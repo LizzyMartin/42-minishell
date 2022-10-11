@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_exit.c                                          :+:      :+:    :+:   */
+/*   33_builtin_exit.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:39 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/09 17:15:31 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/10/11 21:26:53 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ numeric argument required\n", \
 			ft_free_ptr((void *) &line);
 			exit_code = current_cmd->exit_code;
 			ms_finish(ms);
+			get_next_line(-1);
 			exit(exit_code);
 		}
 		i++;
@@ -61,6 +62,7 @@ void	ms_exit(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 		exit_code = current_cmd->exit_code;
 		ft_putstr_fd("exit\n", aux);
 		ms_finish(ms);
+		get_next_line(-1);
 		exit(exit_code);
 	}
 }
