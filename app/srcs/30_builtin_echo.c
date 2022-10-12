@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:25 by acapela-          #+#    #+#             */
-/*   Updated: 2022/10/11 22:50:11 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/10/13 00:07:12 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static void	print_cmd_content(t_ms *ms, \
 		if (ms->has_single_quotes)
 			ft_chr_remove_all(cmd_splited[i], '\'');
 		cmd_splited[i] = ft_str_replace_all(cmd_splited[i], T_SPACE, " ");
+		cmd_splited[i] = ft_str_replace_all(cmd_splited[i], T_HC1, "<<");
+		cmd_splited[i] = ft_str_replace_all(cmd_splited[i], T_HC2, "<");
 		cmd_splited[i] = ft_str_replace_all(cmd_splited[i], T_SUBSHELL, "()");
 		ft_putstr_fd(cmd_splited[i], aux);
 		if (i != current_cmd->args_amount - 1)

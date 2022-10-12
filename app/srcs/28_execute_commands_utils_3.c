@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:00 by acapela-          #+#    #+#             */
-/*   Updated: 2022/10/12 21:51:49 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/10/13 00:14:11 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,13 @@ int	get_child_process_id(const t_p *prompt, \
 			dup2(prompt->output_fd, 1);
 		else
 			dup2(prompt->pipe[1], 1);
-		if (execve(current_cmd->path_and_name, \
-ft_mtx_replace_all(current_cmd->cmd_splited_by_space, \
-T_SPACE, " "), envp) == -1)
+		if (execve(current_cmd->path_and_name, ft_mtx_replace_all(\
+			current_cmd->cmd_splited_by_space, T_SPACE, " "), envp) == -1)
 		{
 			if (current_cmd->cmd_is_path_but_invalid == 1)
 			{
 				ft_pf_error("miniheaven: %s %s", \
-				current_cmd->path_and_name, E_NOTDIR);
+current_cmd->path_and_name, E_NOTDIR);
 				current_cmd->exit_code = 127;
 			}
 			else

@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/10/12 21:38:52 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/10/13 00:37:00 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,15 @@
 # ****************************************************************************/
 
 // tokens
-# define T_CONNECTOR    "__[BANANA0]__"
+# define T_CONNECTOR        "__[BANANA0]__"
 # define T_CONNECTOR_AND    "__[BANANA1]__"
 # define T_CONNECTOR_OR     "__[BANANA12]__"
 # define T_PIPE             "__[BANANA2]__"
 # define T_SPACE            "__[BANANA3]__"
 # define T_WILDCARD         "__[BANANA4]__"
 # define T_SUBSHELL         "__[BANANA5]__"
+# define T_HC1              "__[BANANA6]__"
+# define T_HC2              "__[BANANA7]__"
 
 // all errors
 # define E_CMDNOTFOUND ": command not found"
@@ -246,7 +248,7 @@ void		ms_init(t_ms *ms, int argc, char **argv, char **envp);
 // env
 void		ms_init_env(t_ms *ms);
 void		ms_add_env(t_env **env, char *key, char *value);
-void		ms_delete_env(t_ms *ms, char *key);
+void		ms_delete_env(t_env **envs, char *key);
 char		*ms_find_env_value(t_ms *ms, char *key);
 void		ms_free_env(t_env *envs);
 int			ms_is_in_env(t_ms *ms, const char *key);

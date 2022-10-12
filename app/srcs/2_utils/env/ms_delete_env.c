@@ -6,44 +6,43 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:57:45 by acapela-          #+#    #+#             */
-/*   Updated: 2022/10/12 20:24:37 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/10/13 00:36:35 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	<_minishell.h>
 
-void	free_aux(t_env **del)
+void	ms_delete_env(t_env **envs, char *key)
 {
-	ft_free_ptr((void *) &(*del)->key);
-	ft_free_ptr((void *) &(*del)->value);
-	ft_free_ptr((void *) &(*del));
-}
-
-void	ms_delete_env(t_ms *ms, char *key)
-{
-	t_env	*env;
-	t_env	*del;
-
-	del = NULL;
-	env = ms->envs;
-	while (env)
+	t_env	*aux;
+	t_env	*delete;
+	
+	aux = (*envs);
+	while (aux)
 	{
-		if ((env->key != NULL && env->value != NULL))
+		if (ft_strncmp(aux->key, key, ft_strlen(aux->key)) == 0)
 		{
-			if (ft_strncmp(env->key, key, ft_strlen(env->key)) == 0)
+			delete = aux;
+			if (aux->next != NULL && aux->prev == NULL) // primeiro
 			{
-				del = env;
-				if (env->next != NULL)
-				{
-					env->prev->next = env->next;
-					env->next->prev = env->prev;
-				}
-				else
-					env->prev->next = NULL;
-				free_aux(&del);
-				break ;
+				aux = aux->next;
+				aux->prev = NULL;
+				*envs = aux;
 			}
+			else if (aux->next != NULL && aux->prev != NULL) // meio
+			{
+				aux->prev->next = aux->next;
+				aux->next->prev = aux->prev;
+			}
+			else if (aux->next == NULL && aux->prev != NULL) // ultimo
+				aux->prev = NULL;
+			else
+				*envs = NULL;
+			free(delete->key);
+			free(delete->value);
+			free(delete);
+			break ;
 		}
-		env = env->next;
+		aux = aux->next;
 	}
 }
