@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:25 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/26 14:20:35 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/10/12 00:03:25 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static void	swap(t_qs *qs, void *v1, void *v2, int size)
 	{
 		while (qs->free_qs->next != NULL)
 			qs->free_qs = qs->free_qs->next;
+		ft_free_ptr((void *) &qs->free_qs->next);
 		qs->free_qs->next = malloc(1 * sizeof(t_qs));
 		qs->free_qs->next->prev = qs->free_qs;
 		qs->free_qs->next->next = NULL;
@@ -121,4 +122,6 @@ void	print_sorted_env(t_ms *ms, int aux)
 			(int (*)(void *, void *))(cmpstr));
 	curr_qs = ms->qs->free_qs;
 	ms_free_qs(ms, aux, &line, &curr_qs);
+	(void) aux;
+	(void) line;
 }

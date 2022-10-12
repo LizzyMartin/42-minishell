@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/10/10 19:55:04 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/10/12 02:47:04 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,38 @@ void	prepare_cmd_line(const t_p *curr_prompt, \
 	ft_free_ptr((void *) &tmp);
 }
 
+char	*ft_cut_arround(char *str, char *str1, char *str2)
+{
+	char	*tmp;
+	char	*tmp2;
+	int		start;
+	int		end;
+
+	end = 0;
+	start = ft_str_indexof(str, str1, ft_strlen(str));
+	tmp = ft_substr(str, start, ft_strlen(str));
+	while (end < (int)ft_strlen(tmp))
+	{
+		if (ft_strncmp(tmp + end, str2, ft_strlen(str2)) == 0)
+		{
+			end += ft_strlen(str2);
+			break ;
+		}
+		end++;
+	}
+	tmp2 = ft_substr(tmp, 0, end);
+	ft_free_ptr((void *) &tmp);
+	return (tmp2);
+}
+
 char	**get_string(t_p *curr_prompt, char **split_by_space, \
 	char *arg, char **str_op)
 {
 	char	*tmp;
 	char	*tmp2;
 
-	tmp = ft_substr(curr_prompt->this_p_line_splited_by_pipe[0], \
-ft_str_indexof(curr_prompt->this_p_line_splited_by_pipe[0], *str_op, \
-ft_strlen(curr_prompt->this_p_line_splited_by_pipe[0])), \
-ft_str_indexof(curr_prompt->this_p_line_splited_by_pipe[0], arg, \
-ft_strlen(curr_prompt->this_p_line_splited_by_pipe[0])) - 1);
+	tmp = ft_cut_arround(curr_prompt->this_p_line_splited_by_pipe[0],
+	*str_op, arg);
 	tmp2 = ft_strtrim(tmp, " ");
 	curr_prompt->this_p_line_splited_by_pipe[0] = \
 ft_str_replace(curr_prompt->this_p_line_splited_by_pipe[0], tmp2, " ");

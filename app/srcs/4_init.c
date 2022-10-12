@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   4_init.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relizabe <relizabe@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:55:07 by acapela-          #+#    #+#             */
-/*   Updated: 2022/09/29 21:45:50 by relizabe         ###   ########.fr       */
+/*   Updated: 2022/10/11 23:33:21 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static void	ms_init_aux(t_ms *ms)
 	ms->i_subs = 0;
 	ms->here_doc_open = 0;
 	ms->here_document = 0;
+	ms->str_export = NULL;
 }
 
 void	ms_init(t_ms *ms, int argc, char **argv, char **envp)

@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:19 by acapela-          #+#    #+#             */
-/*   Updated: 2022/10/10 18:14:22 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/10/12 02:56:17 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	update_current_prompt(t_p *curr_prompt, int aux, \
 	char *const *output_s_by_space)
 {
+	if (aux <= 1)
+		return ;
 	curr_prompt->output_path = ft_strdup(output_s_by_space[aux - 1]);
 	if (aux >= 3 && ft_strnstr(output_s_by_space[aux - 2], ">>", 2) != NULL)
 	{

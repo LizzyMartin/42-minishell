@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:00 by acapela-          #+#    #+#             */
-/*   Updated: 2022/10/11 21:22:13 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/10/12 00:09:24 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@ int	is_builtin(char *current_cmd)
 		return (0);
 	else if (ft_strncmp(current_cmd, "exit", 4) == 0)
 		return (1);
-	else if (ft_strncmp(current_cmd, "echo ", 5) == 0)
+	else if (ft_strncmp(current_cmd, "echo", 4) == 0)
 		return (1);
-	else if (ft_strncmp(current_cmd, "pwd ", 4) == 0)
+	else if (ft_strncmp(current_cmd, "pwd", 3) == 0)
 		return (1);
-	else if (ft_strncmp(current_cmd, "cd ", 3) == 0)
+	else if (ft_strncmp(current_cmd, "cd", 2) == 0)
 		return (1);
-	else if (ft_strncmp(current_cmd, "export ", 7) == 0)
+	else if (ft_strncmp(current_cmd, "export", 6) == 0)
 		return (1);
-	else if (ft_strncmp(current_cmd, "unset ", 6) == 0)
+	else if (ft_strncmp(current_cmd, "unset", 5) == 0)
 		return (1);
-	else if (ft_strncmp(current_cmd, "env ", 4) == 0)
+	else if (ft_strncmp(current_cmd, "env", 3) == 0)
 		return (1);
 	else
 		return (0);
