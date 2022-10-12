@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:12 by acapela-          #+#    #+#             */
-/*   Updated: 2022/10/12 02:47:04 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/10/12 19:30:53 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	**get_string(t_p *curr_prompt, char **split_by_space, \
 	char	*tmp2;
 
 	tmp = ft_cut_arround(curr_prompt->this_p_line_splited_by_pipe[0],
-	*str_op, arg);
+			*str_op, arg);
 	tmp2 = ft_strtrim(tmp, " ");
 	curr_prompt->this_p_line_splited_by_pipe[0] = \
 ft_str_replace(curr_prompt->this_p_line_splited_by_pipe[0], tmp2, " ");

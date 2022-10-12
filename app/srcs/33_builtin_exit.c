@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:39 by acapela-          #+#    #+#             */
-/*   Updated: 2022/10/11 22:15:47 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/10/12 19:29:40 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,11 @@ void	ms_exit(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 	}
 	else if (current_cmd->args_amount == 2)
 		ms_check_numeric_argument(ms, current_cmd, aux);
-	exit_code = current_cmd->exit_code;
 	if (clo)
 		close(aux);
+	exit_code = current_cmd->exit_code;
 	if (current_cmd->index == (prompt->args_amount - 1))
 	{
-		exit_code = current_cmd->exit_code;
 		ft_putstr_fd("exit\n", aux);
 		ms_finish(ms);
 		get_next_line(-1);

@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:13:24 by acapela-          #+#    #+#             */
-/*   Updated: 2022/10/11 22:08:13 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/10/12 21:38:52 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -306,6 +306,7 @@ t_file		*ms_get_current_directory(void);
 void		ms_file_delete(t_file **head);
 void		ms_go_start(t_file **files);
 void		update_exit_code_last_cmd(t_ms *ms, t_cmd *cmds, int code);
+int			all_equal(t_ms *ms);
 
 /* parse */
 int			ms_parse(t_ms *ms);

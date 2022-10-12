@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:00 by acapela-          #+#    #+#             */
-/*   Updated: 2022/10/12 01:22:03 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/10/12 21:51:49 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	get_child_process_id(const t_p *prompt, \
 	t_cmd *current_cmd, char **envp, const int *aux_fd)
 {
-	int	child_process_id;
+	int		child_process_id;
 
 	child_process_id = fork();
 	if (child_process_id == 0)
@@ -26,7 +26,8 @@ int	get_child_process_id(const t_p *prompt, \
 		else
 			dup2(prompt->pipe[1], 1);
 		if (execve(current_cmd->path_and_name, \
-			current_cmd->cmd_splited_by_space, envp) == -1)
+ft_mtx_replace_all(current_cmd->cmd_splited_by_space, \
+T_SPACE, " "), envp) == -1)
 		{
 			if (current_cmd->cmd_is_path_but_invalid == 1)
 			{
@@ -45,14 +46,14 @@ int	get_child_process_id(const t_p *prompt, \
 int	cmd_not_found(t_cmd *current_cmd, t_p *curr_prompt)
 {
 	char	*tmp;
+	char	*tmp2;
 
 	if (current_cmd->index == 0 && curr_prompt->has_here_doc)
 		return (1);
 	tmp = ft_strtrim(current_cmd->cmd_line, " ");
-	current_cmd->cmd_line = \
-ft_str_replace_all(current_cmd->cmd_line, T_SPACE, " ");
-	ft_pf_error("miniheaven: %s %s\n", tmp, E_CMDNOTFOUND);
-	ft_free_ptr((void *) &tmp);
+	tmp2 = ft_str_replace_all(tmp, T_SPACE, " ");
+	ft_pf_error("miniheaven: %s %s\n", tmp2, E_CMDNOTFOUND);
+	ft_free_ptr((void *) &tmp2);
 	(void) curr_prompt;
 	return (1);
 }
@@ -94,14 +95,10 @@ t_cmd *current_cmd, t_ms *ms)
 			return (1);
 	}
 	else if (is_builtin(current_cmd->just_name))
-	{
 		execute_builtin(ms, current_cmd, curr_prompt);
-	}
 	else if (current_cmd->can_execute == 1)
-	{
 		ms_execute_command(curr_prompt, current_cmd, \
 			ms->envp, &(curr_prompt->input_fd));
-	}
 	else
 		cmd_not_found(current_cmd, curr_prompt);
 	return (0);

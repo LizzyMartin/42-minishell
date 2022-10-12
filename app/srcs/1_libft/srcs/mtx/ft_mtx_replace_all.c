@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_mtx_replace_all.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 21:47:50 by acapela-          #+#    #+#             */
-/*   Updated: 2022/05/16 21:37:00 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/10/12 20:08:24 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 char	**ft_mtx_replace_all(char **matrix, char *search, char *replace)
 {
-	char	**start_of_matrix;
 	char	*tmp;
+	int		i;
 
-	start_of_matrix = matrix;
-	while (*(matrix))
+	i = 0;
+	while (i < ft_mtx_size((void **) matrix))
 	{
-		if (ft_strnstr(*(matrix), search, sizeof(*(matrix))) != NULL)
+		if (ft_strnstr(matrix[i], search, ft_strlen(matrix[i])) != NULL)
 		{
-			tmp = ft_strdup(*(matrix));
-			ft_free_ptr((void *) &(*(matrix)));
-			*(matrix) = ft_str_replace_all(tmp, search, replace);
+			tmp = ft_strdup(matrix[i]);
+			ft_free_ptr((void *) &(matrix[i]));
+			matrix[i] = ft_str_replace_all(tmp, search, replace);
 		}
-		matrix++;
+		i++;
 	}
-	return (start_of_matrix);
+	return (matrix);
 }

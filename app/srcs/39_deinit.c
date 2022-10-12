@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   39_deinit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:05:54 by acapela-          #+#    #+#             */
-/*   Updated: 2022/10/08 16:06:43 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/10/12 19:33:40 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ void	ms_finish(t_ms *ms)
 	ms_free_env(ms->envs);
 	ms_free_env(ms->aux_envs);
 	ms_finish_aux(ms);
-	clear_history();
-	rl_clear_history();
 }
 
 void	ms_reinit(t_ms *ms)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   9_tokenizer_sintax.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acapela- < acapela-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 06:14:16 by argel             #+#    #+#             */
-/*   Updated: 2022/10/08 16:07:12 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/10/12 19:28:09 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,8 @@ int	ms_sintax(t_ms *ms)
 {
 	if (dont_confuse_heredoc(ms)
 		|| connectors_are_wrong(ms)
-		|| subshell_wrong(ms))
+		|| subshell_wrong(ms)
+		|| all_equal(ms))
 		return (1);
 	return (0);
 }

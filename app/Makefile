@@ -44,6 +44,7 @@ SRCS_FILES +=	5_read_input.c \
 
 SRCS_FILES +=	8_tokenizer.c \
 				9_tokenizer_sintax.c \
+				9b_tokenizer_sintax_utils.c \
 				10_tokenizer_subshell_bonus.c \
 				11_tokenizer_check_quotes.c \
 				12_tokenizer_connectors_vs_quotes_bonus.c \
