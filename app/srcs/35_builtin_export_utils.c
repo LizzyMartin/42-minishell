@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:41:25 by acapela-          #+#    #+#             */
-/*   Updated: 2022/10/12 00:03:25 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/10/13 01:27:18 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	swap(t_qs *qs, void *v1, void *v2, int size)
 	ft_memcpy(v2, buffer, size);
 	if (qs->free_qs == NULL)
 	{
-		qs->free_qs = malloc(1 * sizeof(t_qs));
+		qs->free_qs = malloc(sizeof(t_qs));
 		qs->free_qs->prev = NULL;
 		qs->free_qs->next = NULL;
 		qs->free_qs->buffer = buffer;
@@ -42,7 +42,7 @@ static void	swap(t_qs *qs, void *v1, void *v2, int size)
 		while (qs->free_qs->next != NULL)
 			qs->free_qs = qs->free_qs->next;
 		ft_free_ptr((void *) &qs->free_qs->next);
-		qs->free_qs->next = malloc(1 * sizeof(t_qs));
+		qs->free_qs->next = malloc(sizeof(t_qs));
 		qs->free_qs->next->prev = qs->free_qs;
 		qs->free_qs->next->next = NULL;
 		qs->free_qs->next->buffer = buffer;
@@ -85,17 +85,17 @@ void	ms_free_qs(const t_ms *ms, int aux, char **line, t_free **curr_qs)
 
 	i = 0;
 	while ((*curr_qs)->prev)
-	{
 		(*curr_qs) = (*curr_qs)->prev;
-		if ((*curr_qs)->next->buffer != NULL)
-			ft_free_ptr((void *) &(*curr_qs)->next->buffer);
-		if ((*curr_qs)->next != NULL)
-			ft_free_ptr((void *) &(*curr_qs)->next);
+	while ((*curr_qs)->next)
+	{
+		(*curr_qs) = (*curr_qs)->next;
+		if ((*curr_qs)->prev->buffer != NULL)
+			ft_free_ptr((void *) &(*curr_qs)->prev->buffer);
+		if ((*curr_qs)->prev != NULL)
+			ft_free_ptr((void *) &(*curr_qs)->prev);
 	}
-	if ((*curr_qs)->buffer != NULL)
-		ft_free_ptr((void *) &(*curr_qs)->buffer);
-	if ((*curr_qs) != NULL)
-		ft_free_ptr((void *) curr_qs);
+	ft_free_ptr((void *) &(*curr_qs)->buffer);
+	ft_free_ptr((void *) &(*curr_qs));
 	while (ms->str_export[i])
 	{
 		if (ms->str_export[i])

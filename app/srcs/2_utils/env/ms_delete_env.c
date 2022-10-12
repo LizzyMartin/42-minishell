@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:57:45 by acapela-          #+#    #+#             */
-/*   Updated: 2022/10/13 00:36:35 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/10/13 01:31:04 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,19 @@ void	ms_delete_env(t_env **envs, char *key)
 		if (ft_strncmp(aux->key, key, ft_strlen(aux->key)) == 0)
 		{
 			delete = aux;
-			if (aux->next != NULL && aux->prev == NULL) // primeiro
+			if (aux->next != NULL && aux->prev == NULL)
 			{
 				aux = aux->next;
 				aux->prev = NULL;
 				*envs = aux;
 			}
-			else if (aux->next != NULL && aux->prev != NULL) // meio
+			else if (aux->next != NULL && aux->prev != NULL)
 			{
 				aux->prev->next = aux->next;
 				aux->next->prev = aux->prev;
 			}
-			else if (aux->next == NULL && aux->prev != NULL) // ultimo
-				aux->prev = NULL;
+			else if (aux->next == NULL && aux->prev != NULL)
+				aux->prev->next = NULL;
 			else
 				*envs = NULL;
 			free(delete->key);
