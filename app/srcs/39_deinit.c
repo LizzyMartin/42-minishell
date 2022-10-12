@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:05:54 by acapela-          #+#    #+#             */
-/*   Updated: 2022/10/12 19:33:40 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/10/12 22:59:24 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	ms_reinit(t_ms *ms)
 	ms->p_amount = 1;
 	ms->input_command_open = 0;
 	ms->i_subs = 0;
+	ms->no_path = 0;
 	ms_free_prompt(ms);
 	ft_free_ptr((void *) &ms->tmp);
 	ft_free_ptr((void *) &ms->tmp2);
