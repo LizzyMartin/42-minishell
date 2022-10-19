@@ -1,6 +1,6 @@
 .PHONY: all clean fclean re
 
-CC =            clang
+CC =            clang-12
 HEADERS_DIR =   ./srcs
 CFLAGS =		-I$(HEADERS_DIR) -Wall -Wextra -Werror -ggdb3
 AR =            ar -rcs
@@ -38,7 +38,8 @@ SRCS_FILES+=	dll/ft_dll_is_sorted.c \
 				dll/ft_dll_prev_index.c
 
 SRCS_FILES+=	fd/ft_fd_print.c \
-				fd/ft_fd_dup2.c
+				fd/ft_fd_dup2.c \
+				fd/ft_is_dir.c
 
 SRCS_FILES+=	lst/ft_lstadd_front.c \
 				lst/ft_lstadd_back.c \

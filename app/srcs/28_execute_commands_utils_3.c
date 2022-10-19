@@ -27,17 +27,7 @@ int	get_child_process_id(const t_p *prompt, \
 			dup2(prompt->pipe[1], 1);
 		if (execve(current_cmd->path_and_name, ft_mtx_replace_all(\
 			current_cmd->cmd_splited_by_space, T_SPACE, " "), envp) == -1)
-		{
-			if (current_cmd->cmd_is_path_but_invalid == 1)
-			{
-				ft_pf_error("miniheaven: %s %s", \
-current_cmd->path_and_name, E_NOTDIR);
-				current_cmd->exit_code = 127;
-			}
-			else
-				perror("miniheaven: ");
-			exit(127);
-		}
+			get_child_process_id_aux(current_cmd);
 	}
 	return (child_process_id);
 }

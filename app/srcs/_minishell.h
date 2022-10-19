@@ -55,6 +55,7 @@
 # define E_CMDNOTFOUND ": command not found"
 # define E_BADSINTAX " syntax error near unexpected token "
 # define E_NOTDIR ": No such file or directory\n"
+# define E_ISDIR ": Is directory\n"
 
 // cd errors
 # define EACCES "cd: permission denied\n"
@@ -340,6 +341,7 @@ void		ms_free_prompt(t_ms *ms);
 // cmd
 t_cmd		*ms_dll_cmd_last(t_cmd *cmds);
 void		ms_dll_cmd_free(t_cmd *cmds);
+void		get_child_process_id_aux(t_cmd *current_cmd);
 
 /* execute */
 void		ms_execute(t_ms *ms);
