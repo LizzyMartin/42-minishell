@@ -41,11 +41,9 @@ void	ms_exit(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 {
 	int		aux;
 	int		exit_code;
-	int		clo;
 
-	clo = 0;
-	aux = bridge_builtion_other_cmds(current_cmd, prompt, &clo);
-	current_cmd->exit_code = 0;
+	aux = 0;
+	exit_code = 0;
 	if (current_cmd->args_amount > 2)
 	{
 		ft_putstr_fd("exit\nminiheaven: exit: too many arguments\n", aux);
@@ -53,10 +51,10 @@ void	ms_exit(t_ms *ms, t_cmd *current_cmd, t_p *prompt)
 		return ;
 	}
 	else if (current_cmd->args_amount == 2)
+	{
 		ms_check_numeric_argument(ms, current_cmd, aux);
-	if (clo)
-		close(aux);
-	exit_code = current_cmd->exit_code;
+		exit_code = ft_atoi(current_cmd->cmd_splited_by_space[1]);
+	}
 	if (current_cmd->index == (prompt->args_amount - 1))
 	{
 		ft_putstr_fd("exit\n", aux);

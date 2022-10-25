@@ -53,7 +53,7 @@ char	*ms_append_path_in_front(t_cmd *current_cmd, t_ms *ms)
 	int		i;
 	char	*result;
 
-	if (is_builtin(current_cmd->cmd_line))
+	if (is_builtin(ft_strtrim(current_cmd->cmd_line, " ")))
 	{
 		ms->no_path = 0;
 		return (NULL);
