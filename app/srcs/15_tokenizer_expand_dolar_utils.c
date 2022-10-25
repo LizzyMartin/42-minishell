@@ -40,6 +40,7 @@ char **line_splited, int i, char *dolar_cmd)
 {
 	int		j;
 	int		threated;
+	char	*tmp;
 
 	j = 0;
 	threated = 0;
@@ -52,8 +53,12 @@ char **line_splited, int i, char *dolar_cmd)
 		j++;
 	}
 	if (threated == 0)
-		ms->shell_line_tokenized = ft_printf_to_var("\
+	{
+		tmp = ft_printf_to_var("\
 %s %s", ms->shell_line_tokenized, line_splited[i]);
+		ft_free_ptr((void *) &ms->shell_line_tokenized);
+		ms->shell_line_tokenized = tmp;
+	}
 }
 
 void	ms_has_single_quotes(t_ms *ms, \

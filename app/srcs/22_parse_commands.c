@@ -48,10 +48,7 @@ static void	prepare_path_and_fd(t_ms *ms, t_p *curr_prompt, t_cmd *curr_command)
 	{
 		curr_command->just_name = get_just_name(tmp);
 		curr_command->path_and_name = ft_strdup(tmp);
-		if (access(tmp, X_OK) == 0)
-			curr_command->cmd_is_path_but_invalid = 0;
-		else
-			curr_command->cmd_is_path_but_invalid = 1;
+		curr_command->cmd_is_path_but_invalid = access(tmp, X_OK);
 		ft_free_ptr((void *) &tmp);
 	}
 	else

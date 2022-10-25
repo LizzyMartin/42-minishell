@@ -41,6 +41,9 @@
 /* ft_printf resources */
 # include "rw/ft_printf/ft_printf.h"
 
+/* stat */
+# include <sys/stat.h>
+
 // arr (array)
 void	ft_arr_free(void **array);
 
@@ -84,6 +87,7 @@ int		ft_dll_prev_index(t_dll *a, t_dll *a_iterator);
 // fd
 void	ft_fd_print(int fd);
 void	ft_fd_dup2(int read_from, int write_in);
+int		ft_is_dir(const char *path);
 
 // lst (list)
 typedef struct s_list

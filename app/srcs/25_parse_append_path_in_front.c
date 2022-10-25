@@ -6,7 +6,7 @@
 /*   By: acapela- <acapela-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:44:09 by acapela-          #+#    #+#             */
-/*   Updated: 2022/10/12 22:58:29 by acapela-         ###   ########.fr       */
+/*   Updated: 2022/10/25 01:04:13 by acapela-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*ms_append_path_in_front(t_cmd *current_cmd, t_ms *ms)
 	int		i;
 	char	*result;
 
-	if (is_builtin(current_cmd->just_name))
+	if (is_builtin(current_cmd->cmd_line))
 	{
 		ms->no_path = 0;
 		return (NULL);

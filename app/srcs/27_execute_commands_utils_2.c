@@ -79,3 +79,19 @@ void	exec_cat_ls_sc(t_ms *ms)
 		ft_free_ptr((void *) &input);
 	}
 }
+
+void	get_child_process_id_aux(t_cmd *current_cmd)
+{
+	if (ft_is_dir(current_cmd->path_and_name) != 0)
+	{
+		ft_pf_error("miniheaven: %s %s", \
+current_cmd->path_and_name, E_ISDIR);
+		exit(126);
+	}
+	else if (current_cmd->cmd_is_path_but_invalid != 0)
+		ft_pf_error("miniheaven: %s %s", \
+current_cmd->path_and_name, E_NOTDIR);
+	else
+		perror("miniheaven: ");
+	exit(127);
+}

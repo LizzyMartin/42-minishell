@@ -16,14 +16,17 @@ static int	connectors_are_wrong(t_ms *ms)
 {
 	int		i;
 	char	*c;
+	int		len;
 
 	i = 0;
 	c = ms->shell_line;
+	len = ft_strlen(ms->shell_line);
 	while (c[i])
 	{
 		if (c[i] == '&' || c[i] == '|' || c[i] == ';' || c[i] == '>')
 		{
-			if (c[i + 2] == '\0' || c[i + 2] == c[i])
+			if ((c[len - 1] == c[i])
+				|| ((i + 2 <= (len - 1)) && (c[i + 2] == c[i])))
 			{
 				ft_pf_error("miniheaven:%s '%c'\n", E_BADSINTAX, c[i]);
 				return (1);
